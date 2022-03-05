@@ -8,7 +8,7 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
-  
+
 CREATE TABLE "contacts" (
     "id" SERIAL PRIMARY KEY,
     "firstName" VARCHAR(255),
@@ -25,13 +25,13 @@ CREATE TABLE "contacts" (
     "livesClose" BOOLEAN,
     "willTravel" BOOLEAN
 );  
-  
-  CREATE TABLE "animals" (
+
+CREATE TABLE "animals" (
     "id" SERIAL PRIMARY KEY,
     "contactsId" INT REFERENCES "contacts",
     "name" VARCHAR(255),
     "color" VARCHAR(255),
-    "breed" INTEGER,
+    "breed" INTEGER, --Int?
     "sex" VARCHAR(255),
     "notes" VARCHAR(255),
     "birthday" DATE,
@@ -59,7 +59,7 @@ CREATE TABLE "contacts" (
     "mark" BOOLEAN,
     "loudNoiseLights" BOOLEAN
 );  
-  
+
 CREATE TABLE "auditions" (
     "id" SERIAL PRIMARY KEY,
     "animalsId" INT REFERENCES "animals",
