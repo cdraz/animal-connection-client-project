@@ -92,7 +92,6 @@ CREATE TABLE "jobsJunction" (
     "id" SERIAL PRIMARY KEY,
     "animalsId" INT REFERENCES "animals",
     "jobId" INT REFERENCES "jobs",
-    "workedJob" BOOLEAN,
     "paid" BOOLEAN, -- Have they been paid yet
     "checkNumber" VARCHAR(255), -- if paid, what is check number
     "checkAmount" FLOAT, -- if paid, what is check amount
