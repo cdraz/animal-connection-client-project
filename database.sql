@@ -11,6 +11,7 @@ CREATE TABLE "user" (
   
 CREATE TABLE "contacts" (
     "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR(255), -- Animal Owner, Client, Crew
     "firstName" VARCHAR(255),
     "lastName" VARCHAR(255),
     "primaryNumber" INTEGER,
@@ -21,14 +22,14 @@ CREATE TABLE "contacts" (
     "website" VARCHAR(255),
     "address" VARCHAR(255),
     "notes" VARCHAR(20000),
-    "shortNotice" BOOLEAN,
-    "livesClose" BOOLEAN,
-    "willTravel" BOOLEAN
 );  
   
   CREATE TABLE "animals" (
     "id" SERIAL PRIMARY KEY,
     "contactsId" INT REFERENCES "contacts",
+    "animalType" VARCHAR(255), -- Dog, Cat, Rabbit, Horse, Other
+    "otherTypeDetail" VARCHAR(255), -- If animalType is Other, this text field is used to describe what it is exactly (Lizard, Kangaroo, Parrot, etc.)
+    "image" VARCHAR(2500), -- From audition form will be uploaded by user, can be overwritten by Barbara
     "name" VARCHAR(255),
     "color" VARCHAR(255),
     "breed" INTEGER,
@@ -36,7 +37,7 @@ CREATE TABLE "contacts" (
     "notes" VARCHAR(255),
     "birthday" DATE,
     "active" BOOLEAN,
-    "rating" INTEGER,
+    "rating" INTEGER, -- 1 to 5, chosen by Barbara
     "height" FLOAT,
     "weight" FLOAT,
     "length" FLOAT,
@@ -56,8 +57,13 @@ CREATE TABLE "contacts" (
     "smallAnimals" BOOLEAN,
     "atDistanceFromTrainer" BOOLEAN,
     "silentCommands" BOOLEAN,
-    "mark" BOOLEAN,
-    "loudNoiseLights" BOOLEAN
+    "mark" BOOLEAN, -- Can move to a mark on command
+    "loudNoiseLights" BOOLEAN, -- Fear of loud noises, true if afraid, false if unafraid
+    "shortNotice" BOOLEAN,
+    "livesClose" BOOLEAN,
+    "overnight" BOOLEAN, -- True if animal can stay overnight for shoot, false if not
+    "strangerHandle" BOOLEAN, -- Whether or not a stranger can handle the animal
+    "strangerDress" BOOLEAN -- Whether or not a stranger can dress the animal in clothes
 );  
   
 CREATE TABLE "auditions" (
@@ -76,8 +82,19 @@ CREATE TABLE "jobs" (
     "jobNumber" VARCHAR(255)
 );
 
+CREATE TABLE "jobContacts" ( -- This is a junction table that will allow Barbara to associate certain contacts with a job, whether they are crew or client
+    "id" SERIAL PRIMARY KEY,
+    "jobId" INT REFERENCES "jobs",
+    "contactId" INT REFERENCES "contacts"
+);
+
 CREATE TABLE "jobsJunction" (
     "id" SERIAL PRIMARY KEY,
     "animalsId" INT REFERENCES "animals",
-    "jobId" INT REFERENCES "jobs"
+    "jobId" INT REFERENCES "jobs",
+    "workedJob" BOOLEAN,
+    "paid" BOOLEAN, -- Have they been paid yet
+    "checkNumber" VARCHAR(255), -- if paid, what is check number
+    "checkAmount" FLOAT, -- if paid, what is check amount
+    "checkDate" DATE -- if paid, what is check date
 );
