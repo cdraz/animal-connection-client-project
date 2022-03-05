@@ -3,13 +3,23 @@ import { useDispatch } from 'react-redux';
 
 function SearchBar() {
     const dispatch = useDispatch();
-    const filter = {};
+    const filter = {
+        isActive: true,
+        isInactive: true,
+        audition: '',
+        breed:'',
+        maxD: '',
+        maxW: '',
+        minD: '',
+        minW: '',
+        type: '',
+    };
     function filterAnimals(event){
         event.preventDefault();
         console.log(filter);
         dispatch({
             type: "FILTER_ANIMALS",
-            action: filter,
+            payload: filter,
         })
     }
     return (
