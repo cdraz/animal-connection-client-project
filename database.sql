@@ -8,7 +8,7 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
-  
+
 CREATE TABLE "contacts" (
     "id" SERIAL PRIMARY KEY,
     "type" VARCHAR(255), -- Animal Owner, Client, Crew
@@ -23,8 +23,8 @@ CREATE TABLE "contacts" (
     "address" VARCHAR(255),
     "notes" VARCHAR(20000),
 );  
-  
-  CREATE TABLE "animals" (
+
+CREATE TABLE "animals" (
     "id" SERIAL PRIMARY KEY,
     "contactsId" INT REFERENCES "contacts",
     "animalType" VARCHAR(255), -- Dog, Cat, Rabbit, Horse, Other
@@ -32,7 +32,7 @@ CREATE TABLE "contacts" (
     "image" VARCHAR(2500), -- From audition form will be uploaded by user, can be overwritten by Barbara
     "name" VARCHAR(255),
     "color" VARCHAR(255),
-    "breed" INTEGER,
+    "breed" INTEGER, --Int?
     "sex" VARCHAR(255),
     "notes" VARCHAR(255),
     "birthday" DATE,
@@ -65,7 +65,7 @@ CREATE TABLE "contacts" (
     "strangerHandle" BOOLEAN, -- Whether or not a stranger can handle the animal
     "strangerDress" BOOLEAN -- Whether or not a stranger can dress the animal in clothes
 );  
-  
+
 CREATE TABLE "auditions" (
     "id" SERIAL PRIMARY KEY,
     "animalsId" INT REFERENCES "animals",
