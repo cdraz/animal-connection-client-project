@@ -20,7 +20,7 @@ CREATE TABLE "contacts" (
     "email" VARCHAR(255),
     "website" VARCHAR(255),
     "address" VARCHAR(255),
-    "notes" VARCHAR(20000),
+    "notes" VARCHAR(20000)
 );  
 
 CREATE TABLE "animals" (
@@ -31,7 +31,7 @@ CREATE TABLE "animals" (
     "image" VARCHAR(2500), -- From audition form will be uploaded by user, can be overwritten by Barbara
     "name" VARCHAR(255),
     "color" VARCHAR(255),
-    "breed" INTEGER, --Int?
+    "breed" VARCHAR(255), --Int?
     "sex" VARCHAR(255),
     "notes" VARCHAR(255),
     "birthday" DATE,
