@@ -8,11 +8,11 @@ router.get('/', (req, res) => {
     console.log(req.body);
     const qFilter = req.query
     let queryText = `
-        SELECT * FROM "animals" 
+        SELECT * FROM "animals"
         ` + queryGen(qFilter);
     console.log(queryText);
     pool.query(queryText)
-        .then(() => res.sendStatus(201))
+        .then( dbRes => res.send(dbRes.rows))
         .catch((err) => {
         console.log('User registration failed: ', err);
         res.sendStatus(500);
