@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // React components
 import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
+import AnimalBehaviorTrainingTable from '../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable';
 
 // MUI imports
 import Box from '@mui/material/Box';
@@ -14,6 +15,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
 import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -67,29 +69,31 @@ function AnimalCard({ animal }) {
                 onClose={() => setOpen(false)}
             >
                 <Box key={animal.id} sx={style}>
-                    <Grid container spacing={2}>
-                        <Grid item columns={4}>
-                            <Grid container spacing={2}>
-                                <Grid item>
-                                    <img
-                                        height="50%"
-                                        src="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
-                                    />
-                                </Grid>
-                                <Grid item columns={12}>
-                                    <Typography variant="h3">
-                                        {animal.name}
-                                    </Typography>
-                                    <Rating value={animal.rating} readOnly />
-                                </Grid>
-                            </Grid>
+                    <Grid container spacing={5}>
+                        <Grid item xs={4}>
+                            <Stack spacing={2}>
+                                <img
+                                    width="auto"
+                                    src="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
+                                />
+                                <Typography variant="h3">
+                                    {animal.name}
+                                </Typography>
+                                <Rating value={animal.rating} readOnly />
+                            </Stack>
                         </Grid>
-                        <Grid item columns={8}>
-                            <Grid container spacing={2}>
-                                <Grid item columns={12}>
-                                        <AnimalWorkHistoryTable animal={animal} />
-                                </Grid>
-                            </Grid>
+                        <Grid item xs={8}>
+                            <Stack spacing={2}>
+                                <Typography variant="h5">
+                                    Work History
+                                </Typography>
+                                <AnimalWorkHistoryTable animal={animal} />
+                                <Typography variant="h5">
+                                    Behavior, Training, Availability
+                                </Typography>
+                                <AnimalBehaviorTrainingTable animal={animal} />
+                                <Button variant="contained">Add to Job</Button>
+                            </Stack>
                         </Grid>
                     </Grid>
                 </Box>
