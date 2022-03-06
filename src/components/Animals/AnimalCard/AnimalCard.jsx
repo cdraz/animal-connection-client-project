@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+// React components
+import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
+
 // MUI imports
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,6 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
+import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -30,11 +34,10 @@ function AnimalCard({ animal }) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 300,
-        minHeight: 400,
-        maxHeight: 650,
         bgcolor: 'background.paper',
         boxShadow: 24,
+        width: '80%',
+        height: '80%',
         p: 4,
         overflow: 'scroll',
         padding: 3
@@ -42,91 +45,55 @@ function AnimalCard({ animal }) {
 
     return (
         <>
-        <button onClick={() => console.log(animal)}>Log animal</button>
-            {/* <Card key={animal.id} sx={{ maxWidth: 345 }}>
+            <Card key={animal.id} sx={{ maxWidth: 345 }}>
                 <CardActionArea onClick={() => {
                     setOpen(true);
-                    console.log(details);
                 }}>
                     <CardMedia
-                        className="recipeImage"
                         component="img"
                         height="140"
-                        image={recipe.strDrinkThumb}
+                        image="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
                         alt={animal.name}
                     />
                     <CardContent>
                         <Typography gutterBottom noWrap variant="h6" component="div">
-                            {recipe.strDrink}
+                            {animal.name}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
             </Card>
             <Modal
                 open={open}
+                onClose={() => setOpen(false)}
             >
-                <Box key={recipe.idDrink} sx={style}>
-                    {
-                        details.fullDetails ?
-                            <Card sx={{ padding: 0, margin: 0, border: 'none', boxShadow: 'none' }}>
-                                <CardMedia
-                                    component="img"
-                                    height="250"
-                                    width="200"
-                                    image={recipe.strDrinkThumb}
-                                    alt={recipe.strDrink}
-                                />
-                                <CardContent>
-                                    <Typography variant="h6" component="h2">
-                                        {details.fullDetails.strDrink}
+                <Box key={animal.id} sx={style}>
+                    <Grid container spacing={2}>
+                        <Grid item columns={4}>
+                            <Grid container spacing={2}>
+                                <Grid item>
+                                    <img
+                                        height="50%"
+                                        src="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
+                                    />
+                                </Grid>
+                                <Grid item columns={12}>
+                                    <Typography variant="h3">
+                                        {animal.name}
                                     </Typography>
-                                    <Grid container spacing={1} columns={3}>
-                                        <Grid item>
-                                            <Typography component="p">
-                                                <ul>
-                                                    {details.ingredients.map(ingredient => (
-                                                        ingredient.i ?
-                                                            <li key={ingredient.i} className={bar.some(barIngredient => barIngredient.apiString.toLowerCase() === ingredient.i.toLowerCase()) ? 'ownedIngredient' : 'unownedIngredient'}>
-                                                                {ingredient.m + ' ' + ingredient.i}
-                                                            </li>
-                                                            : null
-                                                    ))}
-                                                </ul>
-                                            </Typography>
-                                            <Typography component="p">
-                                                {details.fullDetails.strInstructions}
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                </CardContent>
-                                <CardActions>
-                                {savedRecipes.some(savedRecipe => savedRecipe.idDrink === recipe.idDrink) ?
-                                    <Button
-                                        onClick={onRemove}
-                                        variant="outlined"
-                                    >
-                                        Unsave
-                                    </Button>
-                                    :
-                                    <Button
-                                        onClick={onSave}
-                                        variant="contained"
-                                    >
-                                        Save
-                                    </Button>
-                                }
-                                <Button
-                                    variant="text"
-                                    onClick={handleClose}
-                                >
-                                    Close
-                                </Button>
-                                </CardActions>
-                            </Card>
-                : <CircularProgress />
-                    }
-            </Box>
-        </Modal> */}
+                                    <Rating value={animal.rating} readOnly />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item columns={8}>
+                            <Grid container spacing={2}>
+                                <Grid item columns={12}>
+                                        <AnimalWorkHistoryTable animal={animal} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Modal>
         </>
     )
 };
