@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
+    console.log('******* GET ANIMALS *******');
     const qFilter = req.params
 
     // actFilter: "all",
@@ -29,17 +30,9 @@ router.get('/', (req, res) => {
 
     const queryText = `
         SELECT * FROM "animals" 
-        WHERE "breed" = ${qFilter.breed}
-        WHERE "type" = ${qFilter.type}
-        WHERE "date" > ${qFilter.minA} AND "date" < ${qFilter.maxA}
-        WHERE "length" > ${qFilter.minL} AND "length" < ${qFilter.maxL}
-        WHERE "height" > ${qFilter.minH} AND "height" < ${qFilter.maxH}
-        WHERE "neck" > ${qFilter.minN} AND "neck" < ${qFilter.maxN}
-        WHERE "belly" > ${qFilter.minB} AND "belly" < ${qFilter.maxB}
-        WHERE "weight" > ${qFilter.minW} AND "weight" < ${qFilter.maxW}
         `;
 
-    pool.query(queryText, [username, password])
+    pool.query(queryText)
         .then(() => res.sendStatus(201))
         .catch((err) => {
         console.log('User registration failed: ', err);
@@ -55,3 +48,31 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
+function queryGen(qFilter){
+    let sqlString = '';
+    if(qFilter.breed !== ''){
+        sqlString += `WHERE "breed" = ${qFilter.breed}`;
+    }
+    if(qFilter.breed !== ''){
+        `WHERE "type" = ${qFilter.type}`
+    }
+    if(qFilter.minA !== ''){
+        `WHERE "date" > ${qFilter.minA} AND "date" < ${qFilter.maxA}`
+    }
+    if(qFilter.minL !== ''){
+        `WHERE "length" > ${qFilter.minL} AND "length" < ${qFilter.maxL}`
+    }
+    if(qFilter.minH !== ''){
+        `WHERE "height" > ${qFilter.minH} AND "height" < ${qFilter.maxH}`
+    }
+    if(qFilter.minN !== ''){
+        `WHERE "neck" > ${qFilter.minN} AND "neck" < ${qFilter.maxN}`
+    }
+    if(qFilter.minB !== ''){
+        `WHERE "belly" > ${qFilter.minB} AND "belly" < ${qFilter.maxB}`
+    }
+    if(qFilter.minW !== ''){
+        `WHERE "weight" > ${qFilter.minW} AND "weight" < ${qFilter.maxW}`
+    }
+}

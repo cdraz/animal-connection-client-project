@@ -23,10 +23,17 @@ export default animalSaga;
 
 function createQuery(obj){
     let str = `?act=${obj.actFilter}`; //active filter (all, active, inactive)
-    if(obj.audition !== '') str += '&aud=' + obj.audition;
+    if(obj.minA !== '') str += '&aud=' + obj.minA;
+    if(obj.maxA !== '') str += '&aud=' + obj.maxA;
     if(obj.breed !== '') str += '&breed=' + obj.breed;
-    if(obj.maxD !== '') str += '&maxd=' + obj.maxD;
-    if(obj.minD !== '') str += '&mind=' + obj.minD;
+    if(obj.maxL !== '') str += '&maxd=' + obj.maxL;
+    if(obj.minL !== '') str += '&mind=' + obj.minL;
+    if(obj.maxH !== '') str += '&maxd=' + obj.maxH;
+    if(obj.minH !== '') str += '&mind=' + obj.minH;
+    if(obj.maxN !== '') str += '&maxd=' + obj.maxN;
+    if(obj.minN !== '') str += '&mind=' + obj.minN;
+    if(obj.maxB !== '') str += '&maxd=' + obj.maxB;
+    if(obj.minB !== '') str += '&mind=' + obj.minB;
     if(obj.maxW !== '') str += '&maxw=' + obj.maxW;
     if(obj.minW !== '') str += '&minw=' + obj.minW;
     if(obj.type !== '') str += '&typ=' + obj.type;

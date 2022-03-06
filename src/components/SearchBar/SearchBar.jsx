@@ -22,7 +22,6 @@ function SearchBar() {
     };
     function filterAnimals(event){
         event.preventDefault();
-        console.log(qFilter);
         dispatch({
             type: "FILTER_ANIMALS",
             payload: qFilter,
