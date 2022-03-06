@@ -96,7 +96,7 @@ function SearchBar() {
                     onChange={(evt) => qFilter.maxA = evt.target.value} 
                     type="date" 
                 />
-                <button type="submit">submit</button>
+                <button type="submit">update</button>
             </form>
         </div>
     );
