@@ -2,25 +2,41 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
 router.get('/', (req, res) => {
+    const qFilter = req.params
 
     // actFilter: "all",
     // audition: "",
     // breed:'',
-    // maxD: '',
-    // maxW: '',
-    // minD: '',
+
+    // maxL: '',
+    // minL: '',
+
+    // maxH: '',
+    // minH: '',
+
+    // maxN: '',
+    // minN: '',
+
+    // maxB: '',
+    // minB: '',
+
     // minW: '',
+    // maxW: '',
+
     // type: '',
 
     const queryText = `
         SELECT * FROM "animals" 
-        WHERE "breed"=${req.params.breed}
-        WHERE "breed"=${req.params.breed}
-        WHERE "type"=${req.params.type}
+        WHERE "breed" = ${qFilter.breed}
+        WHERE "type" = ${qFilter.type}
+        WHERE "date" > ${qFilter.minA} AND "date" < ${qFilter.maxA}
+        WHERE "length" > ${qFilter.minL} AND "length" < ${qFilter.maxL}
+        WHERE "height" > ${qFilter.minH} AND "height" < ${qFilter.maxH}
+        WHERE "neck" > ${qFilter.minN} AND "neck" < ${qFilter.maxN}
+        WHERE "belly" > ${qFilter.minB} AND "belly" < ${qFilter.maxB}
+        WHERE "weight" > ${qFilter.minW} AND "weight" < ${qFilter.maxW}
         `;
 
     pool.query(queryText, [username, password])

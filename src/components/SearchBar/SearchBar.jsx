@@ -5,8 +5,9 @@ function SearchBar() {
     const dispatch = useDispatch();
     const qFilter = {
         actFilter: "all",
-        audition: "",
         breed:'',
+        minA: "",
+        maxA: "",
         maxL: '',
         minL: '',
         maxH: '',
@@ -89,7 +90,11 @@ function SearchBar() {
                     type="number" placeholder='max weight'
                 />
                 <input 
-                    onChange={(evt) => qFilter.audition = evt.target.value} 
+                    onChange={(evt) => qFilter.minA = evt.target.value} 
+                    type="date" 
+                />
+                <input 
+                    onChange={(evt) => qFilter.maxA = evt.target.value} 
                     type="date" 
                 />
                 <button type="submit">submit</button>
