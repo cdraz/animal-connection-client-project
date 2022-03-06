@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         .catch((err) => {
         console.log('User registration failed: ', err);
         res.sendStatus(500);
-    });;
+    });
 });
 
 /**
