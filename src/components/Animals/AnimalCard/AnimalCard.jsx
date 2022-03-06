@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // React components
+import AnimalSummary from '../AnimalSummary/AnimalSummary';
 import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
 import AnimalBehaviorTrainingTable from '../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable';
 
@@ -14,7 +15,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Modal from '@mui/material/Modal';
-import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
@@ -72,14 +72,7 @@ function AnimalCard({ animal }) {
                     <Grid container spacing={5}>
                         <Grid item xs={4}>
                             <Stack spacing={2}>
-                                <img
-                                    width="auto"
-                                    src="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
-                                />
-                                <Typography variant="h3">
-                                    {animal.name}
-                                </Typography>
-                                <Rating value={animal.rating} readOnly />
+                                <AnimalSummary animal={animal} />
                             </Stack>
                         </Grid>
                         <Grid item xs={8}>
@@ -88,10 +81,18 @@ function AnimalCard({ animal }) {
                                     Work History
                                 </Typography>
                                 <AnimalWorkHistoryTable animal={animal} />
-                                <Typography variant="h5">
-                                    Behavior, Training, Availability
-                                </Typography>
-                                <AnimalBehaviorTrainingTable animal={animal} />
+                                {
+                                    // If animalType is dog, show behavior/training (we only track this for dogs)
+                                    animal.animalType.toLowerCase() === 'dog' ?
+                                        <>
+                                            <Typography variant="h5">
+                                                Behavior, Training, Availability
+                                            </Typography>
+                                            <AnimalBehaviorTrainingTable animal={animal} />
+                                        </>
+                                        : null
+                                }
+
                                 <Button variant="contained">Add to Job</Button>
                             </Stack>
                         </Grid>
