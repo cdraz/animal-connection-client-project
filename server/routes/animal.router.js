@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log('******* GET ANIMALS *******');
-    console.log(req.body);
+    console.log('body is', req.body);
     const qFilter = req.query
     let queryText = `
         SELECT * FROM "animals" 
