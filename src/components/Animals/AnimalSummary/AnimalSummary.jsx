@@ -24,7 +24,7 @@ function AnimalDescriptionTable({ animal }) {
             <Typography variant="h3">
                 {animal.name}
             </Typography>
-            <Rating value={animal.rating} readOnly />
+            <Rating value={animal.rating} />
             <TableContainer component={Paper}>
                 <Table aria-label="training table">
                     <TableBody>
@@ -32,6 +32,12 @@ function AnimalDescriptionTable({ animal }) {
                             <TableCell align="left">
                                 Type: {animal.animalType}
                             </TableCell>
+                            {/* Show other animal type detail if type is other */}
+                            {animal.animalType.toLowerCase() === 'other' ?
+                                <TableCell align="left">
+                                    Other type: {animal.otherTypeDetail}
+                                </TableCell>
+                                : null}
                         </TableRow>
                         <TableRow>
                             <TableCell align="left">

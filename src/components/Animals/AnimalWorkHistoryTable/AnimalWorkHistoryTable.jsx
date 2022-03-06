@@ -33,6 +33,7 @@ function AnimalWorkHistoryTable({ animal }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {/* TODO: make the table row a link to the job detail when jobs are set up */}
                     {jobs.map( job => (
                         <TableRow
                             key={job.id}
