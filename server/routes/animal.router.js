@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
 module.exports = router;
 
 
-//how secure is this? couldnt someone just add sql into the url? fuck
+// how secure is this? couldnt someone just add sql into the url?
 function queryGen(qFilter){
     console.log('#####################', qFilter);
     let sqlString = '';
