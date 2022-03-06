@@ -22,7 +22,7 @@ function* animalSaga() {
 export default animalSaga;
 
 function createQuery(obj){
-    let str = `?${obj.actFilter}`;
+    let str = `?act=${obj.actFilter}`; //active filter (all, active, inactive)
     if(obj.audition !== '') str += '&aud=' + obj.audition;
     if(obj.breed !== '') str += '&breed=' + obj.breed;
     if(obj.maxD !== '') str += '&maxd=' + obj.maxD;
@@ -34,6 +34,7 @@ function createQuery(obj){
     return str
 }
 // audition:
+// actFilter
 // breed:
 // isActive: 
 // isInactive:
