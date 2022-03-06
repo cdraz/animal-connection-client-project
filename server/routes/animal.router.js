@@ -18,11 +18,11 @@ router.get('/', (req, res) => {
     console.log(queryText);
     let parameters = qFilter
     pool.query(queryText)
-        .then(() => res.sendStatus(201))
+        .then( dbRes => res.send(dbRes.rows))
         .catch((err) => {
         console.log('User registration failed: ', err);
         res.sendStatus(500);
-    });;
+    });
 });
 
 /**
