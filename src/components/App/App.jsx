@@ -71,7 +71,7 @@ function App() {
             <Contacts />
           </ProtectedRoute>
 
-
+          <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage
             exact
             path="/animals"
