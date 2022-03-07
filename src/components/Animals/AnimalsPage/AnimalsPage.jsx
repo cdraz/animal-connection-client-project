@@ -13,7 +13,7 @@ function AnimalsPage() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ANIMALS' });
-      }, []);
+    }, []);
 
 
     return(
