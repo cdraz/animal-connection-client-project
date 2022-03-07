@@ -43,11 +43,7 @@ function JobCard({ job }) {
 
   return (
     <Card key={job.id} sx={{ maxWidth: 345 }}>
-      <CardActionArea
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
+      <CardActionArea>
         <CardContent>
           <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
             {job.client}-{job.jobNumber}
