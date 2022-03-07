@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // React components
-import AnimalSummary from '../AnimalSummary/AnimalSummary';
-import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
-import AnimalBehaviorTrainingTable from '../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable';
+
 
 // MUI imports
 import Box from '@mui/material/Box';
@@ -59,7 +57,7 @@ function JobCard({ job }) {
                     />
                     <CardContent>
                         <Typography gutterBottom noWrap variant="h6" component="div">
-                            {job.name}
+                            {job.description}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

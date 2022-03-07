@@ -9,7 +9,7 @@ function JobPage() {
 
     // Dispatch hook, store access
     const dispatch = useDispatch();
-    // const animals = useSelector(store => store.animals);
+    const jobs = useSelector(store => store.jobs);
 
     useEffect(() => {
         dispatch({ type: 'FETCH_JOBS' });
@@ -26,4 +26,4 @@ function JobPage() {
     )
 }
 
-export default AnimalsPage;
+export default JobPage;

@@ -15,6 +15,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import AnimalsPage from '../Animals/AnimalsPage/AnimalsPage';
+import JobPage from '../Job/JobsPage/JobsPage';
+
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
@@ -77,6 +79,14 @@ function App() {
             path="/animals"
           >
             <AnimalsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AnimalPage else shows LoginPage
+            exact
+            path="/jobs"
+          >
+            <JobPage />
           </ProtectedRoute>
 
           <ProtectedRoute
