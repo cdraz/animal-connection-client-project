@@ -20,13 +20,18 @@ CREATE TABLE "contacts" (
     "email" VARCHAR(255),
     "website" VARCHAR(255),
     "address" VARCHAR(255),
-    "notes" VARCHAR(20000),
+    "notes" VARCHAR(20000)
 );  
+
+CREATE TABLE "animalTypes" (
+    "id" SERIAL PRIMARY KEY,
+    "type" VARCHAR(255)
+);
 
 CREATE TABLE "animals" (
     "id" SERIAL PRIMARY KEY,
     "contactsId" INT REFERENCES "contacts",
-    "animalType" VARCHAR(255), -- Dog, Cat, Rabbit, Horse, Other
+    "animalType" INT REFERENCES "animalTypes", -- Dog, Cat, Rabbit, Horse, Other
     "otherTypeDetail" VARCHAR(255), -- If animalType is Other, this text field is used to describe what it is exactly (Lizard, Kangaroo, Parrot, etc.)
     "image" VARCHAR(2500), -- From audition form will be uploaded by user, can be overwritten by Barbara
     "name" VARCHAR(255),
