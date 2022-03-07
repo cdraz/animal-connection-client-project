@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import animals from './animal.reducer';
+import jobs from './job.reducer';
 import errors from './errors.reducer';
 import user from './user.reducer';
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   animals, // contains list of current filtered animals
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
+  jobs, // contains list of current filtered jobs
 });
 
 export default rootReducer;

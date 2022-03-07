@@ -20,7 +20,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function AnimalCard({ job }) {
+function JobCard({ job }) {
 
     // Dispatch hook
     const dispatch = useDispatch();
