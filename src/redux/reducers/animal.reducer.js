@@ -7,4 +7,4 @@ const animalReducer = (state = {}, action) => {
     }
 };
 
-export default userReducer;
+export default animalReducer;

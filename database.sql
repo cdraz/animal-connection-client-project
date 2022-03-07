@@ -18,7 +18,6 @@ CREATE TABLE "contacts" (
     "secondaryNumber" INTEGER,
     "text" BOOLEAN,
     "email" VARCHAR(255),
-    "type" VARCHAR(255),
     "website" VARCHAR(255),
     "address" VARCHAR(255),
     "notes" VARCHAR(20000),

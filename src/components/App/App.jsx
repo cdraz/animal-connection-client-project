@@ -14,6 +14,7 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
+import AnimalsPage from '../Animals/AnimalsPage/AnimalsPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
@@ -62,11 +63,20 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+
             // logged in shows UserPage else shows LoginPage
             exact
             path="/contacts"
           >
             <Contacts />
+          </ProtectedRoute>
+
+
+            // logged in shows AnimalPage else shows LoginPage
+            exact
+            path="/animals"
+          >
+            <AnimalsPage />
           </ProtectedRoute>
 
           <ProtectedRoute
