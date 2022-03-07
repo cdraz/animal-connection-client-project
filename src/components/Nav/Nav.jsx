@@ -32,6 +32,10 @@ function Nav() {
               Animals
             </Link>
 
+            <Link className="navLink" to="/jobs">
+              Jobs
+            </Link>
+
             <Link className="navLink" to="/info">
               Info Page
             </Link>
