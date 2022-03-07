@@ -20,6 +20,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Contacts from '../Contacts/Contacts'
 
 import './App.css';
 
@@ -62,12 +63,22 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/contacts"
+          >
+            <Contacts />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage
             exact
             path="/animals"
           >
             <AnimalsPage />
           </ProtectedRoute>
+
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
