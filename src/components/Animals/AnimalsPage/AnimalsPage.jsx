@@ -11,10 +11,6 @@ function AnimalsPage() {
   const dispatch = useDispatch();
   const animals = useSelector((store) => store.animals);
 
-    // Dispatch hook, store access
-    const dispatch = useDispatch();
-    const animals = useSelector(store => store.animals);
-
     useEffect(() => {
         dispatch({ type: 'FETCH_ANIMALS' });
     }, []);
