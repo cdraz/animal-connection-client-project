@@ -10,7 +10,7 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
 
-function AnimalDescriptionTable({ animal }) {
+function AnimalSummary({ animal }) {
 
     // TODO: Calculate animal age
     let age = 2
@@ -19,7 +19,7 @@ function AnimalDescriptionTable({ animal }) {
         <>
             <img
                 width="auto"
-                src="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
+                src={animal.image}
             />
             <Typography variant="h3">
                 {animal.name}
@@ -33,7 +33,7 @@ function AnimalDescriptionTable({ animal }) {
                                 Type: {animal.animalType}
                             </TableCell>
                             {/* Show other animal type detail if type is other */}
-                            {animal.animalType.toLowerCase() === 'other' ?
+                            {animal.animalType === 'other' ?
                                 <TableCell align="left">
                                     Other type: {animal.otherTypeDetail}
                                 </TableCell>
@@ -81,4 +81,4 @@ function AnimalDescriptionTable({ animal }) {
     )
 }
 
-export default AnimalDescriptionTable;
+export default AnimalSummary;

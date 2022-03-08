@@ -26,12 +26,24 @@ function* fetchAnimals() {
     }
 }
 
+function* fetchSelectedAnimal(action) {
+    try {
+        const response = yield axios.get(`/api/animal/${action.payload}`);
+        yield put({ type: 'SET_SELECTED_ANIMAL', payload: response.data });
+    }
+    catch (error) {
+        console.error('fetchSelectedAnimal failed', error);
+    }
+}
+
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
 
     // For development and testing we will use this to get all animals
     // For final product we should be able to put all get requests through the filter saga & endpoint
     yield takeLatest('FETCH_ANIMALS', fetchAnimals);
+
+    yield takeLatest('FETCH_SELECTED_ANIMAL', fetchSelectedAnimal);
 }
 
 export default animalSaga;

@@ -4,6 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
+  useParams
 } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import AnimalsPage from '../Animals/AnimalsPage/AnimalsPage';
+import AnimalDetail from '../Animals/AnimalDetail/AnimalDetail';
 import JobPage from '../Job/JobsPage/JobsPage';
 
 import UserPage from '../UserPage/UserPage';
@@ -81,6 +83,13 @@ function App() {
             <AnimalsPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows AnimalDetail else shows LoginPage
+            exact
+            path="/animals/:id"
+          >
+            <AnimalDetail />
+          </ProtectedRoute>
           <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage
             exact

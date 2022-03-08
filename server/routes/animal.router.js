@@ -12,8 +12,7 @@ router.get('/', (req, res) => {
     const sqlQuery = queryGen(qFilter)
     let queryText = `
         SELECT * FROM "animals" 
-        JOIN "auditions"
-            ON "auditions"."animalsId" = "animals"."id"
+
         ${sqlQuery.sqlString};`
     console.log(queryText);
     let parameters = qFilter
@@ -24,6 +23,27 @@ router.get('/', (req, res) => {
         res.sendStatus(500);
     });
 });
+
+router.get('/:id', async (req, res) => {
+    try {
+        const queryText = `
+            SELECT * FROM "animals"
+            JOIN "contacts"
+                ON "animals"."contactsId" = "contacts"."id"
+            WHERE "animals"."id" = $1;
+        `;
+        const queryParams= [
+            req.params.id
+        ];
+        const dbRes = await pool.query(queryText, queryParams);
+        console.log(dbRes.rows);
+        res.send(dbRes.rows);
+    }
+    catch(error) {
+        console.error('error in GET /api/animal/:id');
+        res.sendStatus(500);
+    }
+})
 
 /**
  * POST route template
