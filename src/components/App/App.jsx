@@ -16,6 +16,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import AboutPage from "../AboutPage/AboutPage";
 import AnimalsPage from "../Animals/AnimalsPage/AnimalsPage";
 import JobPage from "../Job/JobsPage/JobsPage";
+import JobDetail from "../Job/JobDetail/JobDetail";
 
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -81,11 +82,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows AnimalPage else shows LoginPage
+            // logged in shows JobPage else shows LoginPage
             exact
             path="/jobs"
           >
             <JobPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows JobDetailPage else shows LoginPage
+            exact
+            path="/jobDetail"
+          >
+            <JobDetail />
           </ProtectedRoute>
 
           <ProtectedRoute
