@@ -29,31 +29,35 @@ router.post('/', (req, res) => {
 module.exports = router;
 
 function queryGen(qFilter){
+    switch (qFilter.isActive) {
+        // case 'all':
+        //     sqlQuery.sqlString += `AND "animals"."active"`
+        //     break;
+        case 'true':
+            sqlQuery.sqlString += `AND "animals"."active" = true`
+            break;
+        case 'false':
+            sqlQuery.sqlString += `AND "animals"."active" = false`
+            break;
+        default:
+            break;
+    }
     console.log('#####################', qFilter);
     let sqlString = '';
     if(qFilter.breed){
-        sqlString += `WHERE "breed" = ${qFilter.breed}`;
+        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.breed);
+        paramNumber++;
     }
     if(qFilter.breed){
-        sqlString += `WHERE "type" = ${qFilter.type}`
+        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.breed);
+        paramNumber++;
     }
-    if(qFilter.minA){
-        sqlString += `WHERE "date" > ${qFilter.minA} AND "date" < ${qFilter.maxA}`
-    }
-    if(qFilter.minL){
-        sqlString += `WHERE "length" > ${qFilter.minL} AND "length" < ${qFilter.maxL}`
-    }
-    if(qFilter.minH){
-        sqlString += `WHERE "height" > ${qFilter.minH} AND "height" < ${qFilter.maxH}`
-    }
-    if(qFilter.minN){
-        sqlString += `WHERE "neck" > ${qFilter.minN} AND "neck" < ${qFilter.maxN}`
-    }
-    if(qFilter.minB){
-        sqlString += `WHERE "belly" > ${qFilter.minB} AND "belly" < ${qFilter.maxB}`
-    }
-    if(qFilter.minW){
-        sqlString += `WHERE "weight" > ${qFilter.minW} AND "weight" < ${qFilter.maxW}`
+    if(qFilter.breed && qFilter.breed !== ''){
+        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.breed);
+        paramNumber++;
     }
     return sqlString
 }

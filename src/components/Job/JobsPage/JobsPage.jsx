@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // React components
 import JobCard from '../JobCard/JobCard';
+import JobSearchBar from '../../SearchBar/JobSearchBar'
 
 function JobPage() {
 
@@ -13,11 +14,12 @@ function JobPage() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_JOBS' });
-      }, []);
+    }, []);
 
 
     return(
         <>
+        <JobSearchBar />
         {Array.isArray(jobs) ?
             jobs.map( job => (
             <JobCard job={job} />
