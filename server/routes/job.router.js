@@ -66,6 +66,25 @@ router.post("/", (req, res, next) => {
       });
   });
 
+  
+/**
+ * Delete an Job 
+ */
+router.delete("/:id", (req, res) => {
+    // endpoint functionality
+  
+    const queryText = "DELETE FROM jobs WHERE id=$1";
+    pool
+      .query(queryText, [req.params.id])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log("Error completing Delete job query", err);
+        res.sendStatus(500);
+      });
+  });
+
 module.exports = router;
 
 function queryGen(qFilter){
