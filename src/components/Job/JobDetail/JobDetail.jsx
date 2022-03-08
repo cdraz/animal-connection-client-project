@@ -15,8 +15,11 @@ function JobDetail() {
   // Dispatch hook, store access
   const dispatch = useDispatch();
   const jobs = useSelector((store) => store.jobs);
+  const selectedJob = useSelector((store) => store.selectedJob);
 
-  
+  useEffect(() => {
+    console.log("selected job is", selectedJob);
+  }, []);
 
   return (
     <>
