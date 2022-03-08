@@ -19,7 +19,7 @@ function JobSearchBar() {
     function filterAnimals(event){
         event.preventDefault();
         console.log(qFilter);
-        dispatch({ type: 'FETCH_JOBS', payload: qFilter });
+        dispatch({ type: 'FILTER_JOBS', payload: qFilter });
     }
     return (
         <div  className="container">
@@ -50,11 +50,11 @@ function JobSearchBar() {
 
                 <input 
                     onChange={(evt) => setqFilter({...qFilter, client: evt.target.value})}
-                    type="text" placeholder='min length' 
+                    type="text" placeholder='client' 
                 />
                 <input 
                     onChange={(evt) => setqFilter({...qFilter, jobNumber: evt.target.value})}
-                    type="text" placeholder='max length'
+                    type="text" placeholder='job number'
                 />
                 <div>
                 <input 

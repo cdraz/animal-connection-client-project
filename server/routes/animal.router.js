@@ -36,8 +36,6 @@ module.exports = router;
 
 function queryGen(qFilter){
     console.log('#####################', qFilter);
-    //add params counter, add counter to query 
-    //add item to params
     let paramNumber = 1;
     let sqlQuery = { // will contain sqlString, plus params
         sqlString: '',
