@@ -41,7 +41,7 @@ function JobDetail() {
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire("Job has been Deleted!", "", "success");
-            dispatch({ type: "DELETE_Job", payload: selectedJob.id });
+            dispatch({ type: "DELETE_JOB", payload: selectedJob.id });
             history.push("/jobs");
           } else if (result.isDenied) {
             Swal.fire("Job Safe", "", "info");
