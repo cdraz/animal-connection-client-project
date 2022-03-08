@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // React components
 import AnimalCard from '../AnimalCard/AnimalCard';
+import SearchBar from '../../SearchBar/SearchBar'
 
 function AnimalsPage() {
 
@@ -18,6 +19,7 @@ function AnimalsPage() {
 
     return(
         <>
+        <SearchBar />
         {Array.isArray(animals) ?
             animals.map( animal => (
             <AnimalCard animal={animal} />
