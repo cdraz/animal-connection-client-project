@@ -5,14 +5,20 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log('******* GET ANIMALS *******');
-    console.log(req.body);
+    console.log('body is', req.body);
     const qFilter = req.query
+    //the silly where id > 0 is just to add a where statement
+    //that way i can chain a bunch of AND statement for filtering
+    const sqlQuery = queryGen(qFilter)
     let queryText = `
-        SELECT * FROM "animals"
-        ` + queryGen(qFilter);
+        SELECT * FROM "animals" 
+        JOIN "auditions"
+            ON "auditions"."animalsId" = "animals"."id"
+        ${sqlQuery.sqlString};`
     console.log(queryText);
-    pool.query(queryText)
-        .then( dbRes => res.send(dbRes.rows))
+    let parameters = qFilter
+    pool.query(queryText, sqlQuery.sqlParams)
+        .then( dbRes => {res.send(dbRes.rows); console.log(dbRes.rows)})
         .catch((err) => {
         console.log('User registration failed: ', err);
         res.sendStatus(500);
@@ -28,34 +34,123 @@ router.post('/', (req, res) => {
 
 module.exports = router;
 
-
-// how secure is this? couldnt someone just add sql into the url?
 function queryGen(qFilter){
     console.log('#####################', qFilter);
-    let sqlString = '';
-    if(qFilter.breed){
-        sqlString += `WHERE "breed" = ${qFilter.breed}`;
+    //add params counter, add counter to query 
+    //add item to params
+    let paramNumber = 1;
+    let sqlQuery = { // will contain sqlString, plus params
+        sqlString: '',
+        sqlParams: [],
     }
-    if(qFilter.breed){
-        sqlString += `WHERE "type" = ${qFilter.type}`
+    switch (qFilter.hasWorked) {
+        case 'all':
+            sqlQuery.sqlString += `WHERE "animals"."id" >= 0`
+            break;
+        case 'true':
+            sqlQuery.sqlString += `WHERE EXISTS (SELECT * FROM "auditions" WHERE "auditions"."animalsId" = "animals"."id" )`
+            break;
+        case 'false':
+            sqlQuery.sqlString += `WHERE NOT EXISTS (SELECT * FROM "auditions" WHERE "auditions"."animalsId" = "animals"."id" )`
+            break;
+        default:
+            break;
     }
-    if(qFilter.minA){
-        sqlString += `WHERE "date" > ${qFilter.minA} AND "date" < ${qFilter.maxA}`
+
+    switch (qFilter.isActive) {
+        // case 'all':
+        //     sqlQuery.sqlString += `AND "animals"."active"`
+        //     break;
+        case 'true':
+            sqlQuery.sqlString += `AND "animals"."active" = true`
+            break;
+        case 'false':
+            sqlQuery.sqlString += `AND "animals"."active" = false`
+            break;
+        default:
+            break;
     }
-    if(qFilter.minL){
-        sqlString += `WHERE "length" > ${qFilter.minL} AND "length" < ${qFilter.maxL}`
+
+    if(qFilter.breed && qFilter.breed !== ''){
+        console.log('breed');
+        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.breed);
+        paramNumber++;
     }
-    if(qFilter.minH){
-        sqlString += `WHERE "height" > ${qFilter.minH} AND "height" < ${qFilter.maxH}`
+    if(qFilter.type && qFilter.type !== ''){
+        console.log('type');
+        sqlQuery.sqlString += ` AND "type" = $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.type);
+        paramNumber++;
     }
-    if(qFilter.minN){
-        sqlString += `WHERE "neck" > ${qFilter.minN} AND "neck" < ${qFilter.maxN}`
+    if(qFilter.minA && qFilter.minA !== ''){
+        console.log('minA');
+        sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.minA);
+        paramNumber++;
     }
-    if(qFilter.minB){
-        sqlString += `WHERE "belly" > ${qFilter.minB} AND "belly" < ${qFilter.maxB}`
+    if(qFilter.maxA && qFilter.maxA !== ''){
+        console.log('maxA');
+        sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.minA);
+        paramNumber++;
     }
-    if(qFilter.minW){
-        sqlString += `WHERE "weight" > ${qFilter.minW} AND "weight" < ${qFilter.maxW}`
+    if(qFilter.minL && qFilter.minL !== ''){
+        console.log('minL');
+        sqlQuery.sqlString += ` AND "length" >= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.minL);
+        paramNumber++;
     }
-    return sqlString
+    if(qFilter.maxL && qFilter.maxL !== ''){
+        console.log('maxL');
+        sqlQuery.sqlString += ` AND "length" <= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.maxL);
+        paramNumber++;
+    }
+    if(qFilter.minH && qFilter.minH !== ''){
+        console.log('minH');
+        sqlQuery.sqlString += ` AND "height" >= $${paramNumber}}`
+        sqlQuery.sqlParams.push(qFilter.minH);
+        paramNumber++;
+    }
+    if(qFilter.maxH && qFilter.maxH !== ''){
+        console.log('maxH');
+        sqlQuery.sqlString += ` AND "height" <= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.maxH);
+        paramNumber++;
+    }
+    if(qFilter.minN && qFilter.minN !== ''){
+        console.log('minN');
+        sqlQuery.sqlString += ` AND "neckGirth" >= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.minN);
+        paramNumber++;
+    }
+    if(qFilter.maxN && qFilter.maxN !== ''){
+        console.log('maxN');
+        sqlQuery.sqlString += ` AND "neckGirth" <= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.maxN);
+        paramNumber++;
+    }
+    if(qFilter.minB && qFilter.minB !== ''){
+        sqlQuery.sqlString += ` AND "bellyGirth" >= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.minB);
+        paramNumber++;
+    }
+    if(qFilter.maxB && qFilter.maxB !== ''){
+        sqlQuery.sqlString += ` AND "bellyGirth" <= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.maxB);
+        paramNumber++;
+    }
+    if(qFilter.minW && qFilter.minW !== ''){
+        sqlQuery.sqlString += ` AND "weight" >= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.minW);
+        paramNumber++;
+    }
+    if(qFilter.maxW && qFilter.maxW !== ''){
+        sqlQuery.sqlString += ` AND "weight" <= $${paramNumber}`
+        sqlQuery.sqlParams.push(qFilter.maxW);
+        paramNumber++;
+    }
+    console.log(sqlQuery);
+    return sqlQuery
 }
