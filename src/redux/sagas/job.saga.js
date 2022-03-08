@@ -26,12 +26,39 @@ function* fetchJobs() {
     }
 }
 
+function* addJob(action) {
+    try {
+        console.log('job post action.payload',action.payload);
+        
+        const response = yield axios.post(`/api/job`, action.payload);
+        yield put({ type: 'FETCH_JOBS',});
+    }
+    catch (error) {
+        console.error('fetchJobs failed', error);
+    }
+}
+
+function* fetchJobDetails(action) {
+    try {
+        const response = yield axios.get(`/api/job/${action.payload}`);
+        console.log('response.data for set selected job details is ',response.data);
+        
+        yield put({ type: 'SET_SELECTED_JOB_DETAILS', payload: response.data[0] });
+    }
+    catch (error) {
+        console.error('fetchSelectedJob failed', error);
+    }
+}
+
 function* jobSaga() {
     yield takeLatest('FILTER_JOBS', filterJobs);
 
     // For development and testing we will use this to get all animals
     // For final product we should be able to put all get requests through the filter saga & endpoint
     yield takeLatest('FETCH_JOBS', fetchJobs);
+    yield takeLatest('ADD_JOB', addJob);
+    yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
+    
 }
 
 export default jobSaga;
