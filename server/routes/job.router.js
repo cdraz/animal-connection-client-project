@@ -42,6 +42,30 @@ router.post("/", (req, res, next) => {
     });
 });
 
+/**
+ * Get all of the animals that work the job by ID
+ */
+ router.get("/:id", (req, res) => {
+     console.log('req.params is',req.params);
+     
+    const queryText = `SELECT * FROM "jobsJunction" 
+    JOIN "animals" 
+    ON "jobsJunction"."animalsId" = animals.id 
+    JOIN "contacts"
+    ON "animals"."contactsId" = contacts.id
+    WHERE "jobId"=$1`;
+    pool
+      .query(queryText, [req.params.id])
+  
+      .then((dbRes) => {
+        res.send(dbRes.rows);
+      })
+      .catch((err) => {
+        console.error("err in get jobDetails ", err);
+        console.log("req.params.id", req.params);
+      });
+  });
+
 module.exports = router;
 
 function queryGen(qFilter) {

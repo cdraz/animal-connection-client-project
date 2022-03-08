@@ -16,14 +16,29 @@ function JobDetail() {
   const dispatch = useDispatch();
   const jobs = useSelector((store) => store.jobs);
   const selectedJob = useSelector((store) => store.selectedJob);
+  const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
 
   useEffect(() => {
     console.log("selected job is", selectedJob);
+    console.log("selected job  DETAILS is", selectedJobDetails);
+    dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id});
   }, []);
 
   return (
     <>
-     <h1>hello</h1>
+     <div>
+         {selectedJob.client}
+         <br></br>
+         {selectedJob.date}
+         <br></br>
+         {selectedJob.jobNumber}
+         <br></br>
+         {selectedJob.notes}
+         <br></br>
+         {selectedJob.description}
+         <br></br>
+         {selectedJobDetails.checkAmount}
+     </div>
     </>
   );
 }

@@ -38,6 +38,18 @@ function* addJob(action) {
     }
 }
 
+function* fetchJobDetails(action) {
+    try {
+        const response = yield axios.get(`/api/job/${action.payload}`);
+        console.log('response.data for set selected job details is ',response.data);
+        
+        yield put({ type: 'SET_SELECTED_JOB_DETAILS', payload: response.data[0] });
+    }
+    catch (error) {
+        console.error('fetchSelectedJob failed', error);
+    }
+}
+
 function* jobSaga() {
     yield takeLatest('FILTER_JOBS', filterJobs);
 
@@ -45,6 +57,8 @@ function* jobSaga() {
     // For final product we should be able to put all get requests through the filter saga & endpoint
     yield takeLatest('FETCH_JOBS', fetchJobs);
     yield takeLatest('ADD_JOB', addJob);
+    yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
+    
 }
 
 export default jobSaga;
