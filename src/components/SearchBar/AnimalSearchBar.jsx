@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import './AnimalSearch.css'
 
-function SearchBar() {
+function AnimalSearchBar() {
     const dispatch = useDispatch();
     const [qFilter, setqFilter] = useState({ // -------->>> needs to be saved to state
         hasWorked: 'all',
@@ -37,7 +37,7 @@ function SearchBar() {
     }
     return (
         <div  className="container">
-            <button onClick={() => console.log(qFilter)}></button>
+            {/* <button onClick={() => console.log(qFilter)}></button> */}
             <form id="animalSearch" onSubmit={(evt) => filterAnimals(evt)}>
             <div>
                 <FormLabel id="demo-radio-buttons-group-label">Active?</FormLabel>
@@ -147,4 +147,4 @@ function SearchBar() {
     );
 }
 
-export default SearchBar;
+export default AnimalSearchBar;
