@@ -3,19 +3,17 @@ import { put, takeLatest } from "redux-saga/effects";
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* filterJobs(action) {
-  const thing = action.payload;
-  try {
-    const config = {
-      headers: { "Content-Type": "application/json" },
-      withCredentials: true,
-    };
-    const response = yield axios.get(`/api/job${createQuery(action.payload)}`, {
-      params: { ...thing },
-    });
-    //yield put({ type: 'SET_JOBS', payload: response.data });
-  } catch (error) {
-    console.log("User get request failed", error);
-  }
+    const thing = action.payload
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        };
+        const response = yield axios.get(`/api/job`, {params: thing});
+        yield put({ type: 'SET_JOBS', payload: response.data });
+    } catch (error) {
+        console.log('User get request failed', error);
+    }
 }
 
 function* fetchJobs() {
