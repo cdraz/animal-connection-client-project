@@ -42,7 +42,7 @@ function AnimalWorkHistoryTable({ animal }) {
                                 {job.description}
                             </TableCell>
                         </TableRow>
-                    )) : 'Loading jobs...'}
+                    )) : <TableRow><TableCell>'No job history.'</TableCell></TableRow>}
                 </TableBody>
             </Table>
         </TableContainer>
