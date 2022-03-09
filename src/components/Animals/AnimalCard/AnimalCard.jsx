@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
 
 // React components
 import AnimalSummary from "../AnimalSummary/AnimalSummary";
@@ -44,59 +45,25 @@ function AnimalCard({ animal }) {
     padding: 3,
   };
 
-  return (
-    <>
-      <Card key={animal.id} sx={{ maxWidth: 345 }}>
-        <CardActionArea
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <CardMedia
-            component="img"
-            height="140"
-            image="https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg"
-            alt={animal.name}
-          />
-          <CardContent>
-            <Typography gutterBottom noWrap variant="h6" component="div">
-              {animal.name}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <Box key={animal.id} sx={style}>
-          <Grid container spacing={5}>
-            <Grid item xs={4}>
-              <Stack spacing={2}>
-                <AnimalSummary animal={animal} />
-              </Stack>
-            </Grid>
-            <Grid item xs={8}>
-              <Stack spacing={2}>
-                <Typography variant="h5">Work History</Typography>
-                <AnimalWorkHistoryTable animal={animal} />
-                {
-                  // If animalType is dog, show behavior/training (we only track this for dogs)
-                  animal.animalType.toLowerCase() === "dog" ? (
-                    <>
-                      <Typography variant="h5">
-                        Behavior, Training, Availability
-                      </Typography>
-                      <AnimalBehaviorTrainingTable animal={animal} />
-                    </>
-                  ) : null
-                }
-
-                <Button variant="contained">Add to Job</Button>
-              </Stack>
-            </Grid>
-          </Grid>
-        </Box>
-      </Modal>
-    </>
-  );
-}
+    return (
+        <Card key={animal.id} sx={{ maxWidth: 345 }}>
+            <Link to={`/animals/${animal.id}`}>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        height="140"
+                        image={animal.image}
+                        alt={animal.name}
+                    />
+                    <CardContent>
+                        <Typography gutterBottom noWrap variant="h6" component="div">
+                            {animal.name}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Link>
+        </Card>
+    )
+};
 
 export default AnimalCard;

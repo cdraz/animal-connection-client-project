@@ -4,27 +4,27 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   console.log("******* GET JOBS *******");
-  console.log(req.body);
   const qFilter = req.query;
+  const sqlQuery = queryGen(qFilter)
+  console.log(qFilter);
   let queryText =
     `
         SELECT * FROM "jobs"
-        ` + queryGen(qFilter);
+        ${sqlQuery.sqlString};`;
   console.log(queryText);
   pool
-    .query(queryText)
-    .then((dbRes) => res.send(dbRes.rows))
-    .catch((err) => {
-      console.log("User registration failed: ", err);
-      res.sendStatus(500);
-    });
+    .query(queryText, sqlQuery.sqlParams)
+      .then((dbRes) => res.send(dbRes.rows))
+      .catch((err) => {
+        console.log("User registration failed: ", err);
+        res.sendStatus(500);
+      });
 });
 
 /**
  * POST route template
  */
 router.post("/", (req, res, next) => {
-
   const client = req.body.client;
   const jobNumber = req.body.jobNumber;
   const jobDate = req.body.jobDate;
@@ -45,78 +45,110 @@ router.post("/", (req, res, next) => {
 /**
  * Get all of the animals that work the job by ID
  */
- router.get("/:id", (req, res) => {
-     console.log('req.params is',req.params);
-     
-    const queryText = `SELECT * FROM "jobsJunction" 
-    JOIN "animals" 
-    ON "jobsJunction"."animalsId" = animals.id 
-    JOIN "contacts"
-    ON "animals"."contactsId" = contacts.id
-    WHERE "jobId"=$1`;
-    pool
-      .query(queryText, [req.params.id])
-  
-      .then((dbRes) => {
-        res.send(dbRes.rows);
-      })
-      .catch((err) => {
-        console.error("err in get jobDetails ", err);
-        console.log("req.params.id", req.params);
-      });
-  });
+router.get("/:id", (req, res) => {
+  console.log("req.params is", req.params);
 
-  
+  const queryText = `SELECT * FROM "jobsJunction" 
+    JOIN "animals" 
+      ON "jobsJunction"."animalsId" = animals.id 
+    JOIN "contacts"
+      ON "animals"."contactsId" = contacts.id
+    WHERE "jobId"=$1`;
+  pool
+    .query(queryText, [req.params.id])
+
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error("err in get jobDetails ", err);
+      console.log("req.params.id", req.params);
+    });
+});
+
 /**
- * Delete an Job 
+ * Delete an Job
  */
 router.delete("/:id", (req, res) => {
-    // endpoint functionality
-  
-    const queryText = "DELETE FROM jobs WHERE id=$1";
-    pool
-      .query(queryText, [req.params.id])
-      .then(() => {
-        res.sendStatus(200);
-      })
-      .catch((err) => {
-        console.log("Error completing Delete job query", err);
-        res.sendStatus(500);
-      });
-  });
+  // endpoint functionality
+
+  const queryText = "DELETE FROM jobs WHERE id=$1";
+  pool
+    .query(queryText, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing Delete job query", err);
+      res.sendStatus(500);
+    });
+});
+
+/**
+ * PUT to set job to Inactive an Job
+ */
+router.put("/:id", (req, res) => {
+  // endpoint functionality
+
+  const queryText = `UPDATE jobs
+    SET active = NOT active
+    WHERE id = $1
+    `;
+  pool
+    .query(queryText, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing put job query", err);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
 
+
 function queryGen(qFilter){
+    console.log('#####################', qFilter);
+  let paramNumber = 1;
+  let sqlQuery = { // will contain sqlString, plus params
+      sqlString: '',
+      sqlParams: [],
+    }
     switch (qFilter.isActive) {
-        // case 'all':
-        //     sqlQuery.sqlString += `AND "animals"."active"`
-        //     break;
+        case 'all':
+            sqlQuery.sqlString += ` WHERE "id" > 0`
+            break;
         case 'true':
-            sqlQuery.sqlString += `AND "animals"."active" = true`
+            sqlQuery.sqlString += ` WHERE "active" = 'true'`
             break;
         case 'false':
-            sqlQuery.sqlString += `AND "animals"."active" = false`
+            sqlQuery.sqlString += ` WHERE "active" = false`
             break;
         default:
             break;
     }
-    console.log('#####################', qFilter);
     let sqlString = '';
-    if(qFilter.breed){
-        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.breed);
+    if(qFilter.client){
+        sqlQuery.sqlString += ` AND LOWER("client") ~ $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.client);
         paramNumber++;
     }
-    if(qFilter.breed){
-        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.breed);
+    if(qFilter.jobNumber){
+        sqlQuery.sqlString += ` AND "jobNumber" = $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.jobNumber);
         paramNumber++;
     }
-    if(qFilter.breed && qFilter.breed !== ''){
-        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.breed);
+    if(qFilter.minD && qFilter.minD !== ''){
+        sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.minD);
         paramNumber++;
     }
-    return sqlString
+    if(qFilter.maxD && qFilter.maxD !== ''){
+        sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.maxD);
+        paramNumber++;
+    }
+    console.log(sqlQuery);
+    return sqlQuery
 }
