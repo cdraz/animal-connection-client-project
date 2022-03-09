@@ -23,14 +23,11 @@ router.post('/', (req, res, next) => {
         req.body.notes
     ]
     pool.query(sqlText, sqlParams)
-    .then((result) => {
-        console.log('this is the result', result.rows[0]);
-        res.send(result.rows[0])
-    })
-    .catch((error) => {
-        console.log('failed', error);
-        res.sendStatus(500);
-    })
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log("project creation failed: ", err);
+      res.sendStatus(500);
+    });
 })
 
 module.exports = router;
