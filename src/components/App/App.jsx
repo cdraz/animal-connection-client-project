@@ -25,7 +25,7 @@ import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import Contacts from "../Contacts/ContactTable/ContactTable";
+import Contacts from "../Contacts/ContactPage/ContactPage";
 //import ContactForm from "../Contacts/contactForm/contactForm";
 
 import "./App.css";
