@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 // React components
 import AnimalSummary from '../AnimalSummary/AnimalSummary';
+import AnimalAuditionHistoryTable from '../AnimalAuditionHistoryTable/AnimalAuditionHistoryTable';
 import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
 import AnimalBehaviorTrainingTable from '../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable';
 
@@ -25,7 +26,7 @@ function AnimalDetail() {
 
     // Dispatch hook, store access
     const dispatch = useDispatch();
-    const animal = useSelector(store => store.selectedAnimal);
+    const animal = useSelector(store => store.selectedAnimal.animalDetails);
 
     // Set id from URL parameters
     const { id } = useParams();
@@ -47,6 +48,10 @@ function AnimalDetail() {
                         Work History
                     </Typography>
                     <AnimalWorkHistoryTable animal={animal} />
+                    <Typography variant="h5">
+                        Audition History
+                    </Typography>
+                    <AnimalAuditionHistoryTable animal={animal} />
                     {
                         // If animalType is dog, show behavior/training (we only track this for dogs)
                         // animal.animalType.toLowerCase() === 'dog' ?

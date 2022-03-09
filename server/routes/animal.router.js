@@ -17,29 +17,52 @@ router.get('/', (req, res) => {
     console.log(queryText);
     let parameters = qFilter
     pool.query(queryText, sqlQuery.sqlParams)
-        .then( dbRes => {res.send(dbRes.rows); console.log(dbRes.rows)})
+        .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
         .catch((err) => {
-        console.log('User registration failed: ', err);
-        res.sendStatus(500);
-    });
+            console.log('User registration failed: ', err);
+            res.sendStatus(500);
+        });
 });
 
 router.get('/:id', async (req, res) => {
     try {
         const queryText = `
-            SELECT * FROM "animals"
-            JOIN "contacts"
-                ON "animals"."contactsId" = "contacts"."id"
-            WHERE "animals"."id" = $1;
+        SELECT
+            "animals".*,
+            JSON_AGG(DISTINCT "contacts".*) AS contact,
+            JSON_AGG(DISTINCT "auditions") AS auditions,
+            JSON_AGG(DISTINCT JSONB_BUILD_OBJECT(
+                'jobId', "jobs"."id",
+                'jobDescription', "jobs"."description",
+                'jobDate', "jobs"."date",
+                'jobClient', "jobs"."client",
+                'jobActive', "jobs"."active",
+                'jobNotes', "jobs"."notes",
+                'paid', "jobsJunction"."paid",
+                'checkNumber', "jobsJunction"."checkNumber",
+                'checkAmount', "jobsJunction"."checkAmount",
+                'checkDate', "jobsJunction"."checkDate"
+                )) AS jobs
+        FROM "animals"
+        JOIN "contacts"
+            ON "contacts"."id" = "animals"."contactsId"
+        JOIN "auditions"
+            ON "auditions"."animalsId" = "animals"."id"
+        JOIN "jobsJunction"
+            ON "jobsJunction"."animalsId" = "animals"."id"
+        JOIN "jobs"
+            ON "jobsJunction"."jobId" = "jobs"."id"
+        WHERE "animals"."id" = $1
+        GROUP BY "animals"."id";
         `;
-        const queryParams= [
+        const queryParams = [
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
         console.log(dbRes.rows);
         res.send(dbRes.rows);
     }
-    catch(error) {
+    catch (error) {
         console.error('error in GET /api/animal/:id');
         res.sendStatus(500);
     }
@@ -49,12 +72,12 @@ router.get('/:id', async (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  // POST route code here
+    // POST route code here
 });
 
 module.exports = router;
 
-function queryGen(qFilter){
+function queryGen(qFilter) {
     console.log('#####################', qFilter);
     //add params counter, add counter to query 
     //add item to params
@@ -91,82 +114,82 @@ function queryGen(qFilter){
             break;
     }
 
-    if(qFilter.breed && qFilter.breed !== ''){
+    if (qFilter.breed && qFilter.breed !== '') {
         console.log('breed');
         sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
         sqlQuery.sqlParams.push(qFilter.breed);
         paramNumber++;
     }
-    if(qFilter.type && qFilter.type !== ''){
+    if (qFilter.type && qFilter.type !== '') {
         console.log('type');
         sqlQuery.sqlString += ` AND "type" = $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.type);
         paramNumber++;
     }
-    if(qFilter.minA && qFilter.minA !== ''){
+    if (qFilter.minA && qFilter.minA !== '') {
         console.log('minA');
         sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minA);
         paramNumber++;
     }
-    if(qFilter.maxA && qFilter.maxA !== ''){
+    if (qFilter.maxA && qFilter.maxA !== '') {
         console.log('maxA');
         sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minA);
         paramNumber++;
     }
-    if(qFilter.minL && qFilter.minL !== ''){
+    if (qFilter.minL && qFilter.minL !== '') {
         console.log('minL');
         sqlQuery.sqlString += ` AND "length" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minL);
         paramNumber++;
     }
-    if(qFilter.maxL && qFilter.maxL !== ''){
+    if (qFilter.maxL && qFilter.maxL !== '') {
         console.log('maxL');
         sqlQuery.sqlString += ` AND "length" <= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.maxL);
         paramNumber++;
     }
-    if(qFilter.minH && qFilter.minH !== ''){
+    if (qFilter.minH && qFilter.minH !== '') {
         console.log('minH');
         sqlQuery.sqlString += ` AND "height" >= $${paramNumber}}`
         sqlQuery.sqlParams.push(qFilter.minH);
         paramNumber++;
     }
-    if(qFilter.maxH && qFilter.maxH !== ''){
+    if (qFilter.maxH && qFilter.maxH !== '') {
         console.log('maxH');
         sqlQuery.sqlString += ` AND "height" <= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.maxH);
         paramNumber++;
     }
-    if(qFilter.minN && qFilter.minN !== ''){
+    if (qFilter.minN && qFilter.minN !== '') {
         console.log('minN');
         sqlQuery.sqlString += ` AND "neckGirth" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minN);
         paramNumber++;
     }
-    if(qFilter.maxN && qFilter.maxN !== ''){
+    if (qFilter.maxN && qFilter.maxN !== '') {
         console.log('maxN');
         sqlQuery.sqlString += ` AND "neckGirth" <= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.maxN);
         paramNumber++;
     }
-    if(qFilter.minB && qFilter.minB !== ''){
+    if (qFilter.minB && qFilter.minB !== '') {
         sqlQuery.sqlString += ` AND "bellyGirth" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minB);
         paramNumber++;
     }
-    if(qFilter.maxB && qFilter.maxB !== ''){
+    if (qFilter.maxB && qFilter.maxB !== '') {
         sqlQuery.sqlString += ` AND "bellyGirth" <= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.maxB);
         paramNumber++;
     }
-    if(qFilter.minW && qFilter.minW !== ''){
+    if (qFilter.minW && qFilter.minW !== '') {
         sqlQuery.sqlString += ` AND "weight" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minW);
         paramNumber++;
     }
-    if(qFilter.maxW && qFilter.maxW !== ''){
+    if (qFilter.maxW && qFilter.maxW !== '') {
         sqlQuery.sqlString += ` AND "weight" <= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.maxW);
         paramNumber++;

@@ -36,6 +36,36 @@ function* fetchSelectedAnimal(action) {
     }
 }
 
+function* fetchAnimalWorkHistory(action) {
+    try {
+        const response = yield axios.get('');
+        yield put({ type: 'SET_SELECTED_ANIMAL_WORK_HISTORY'});
+    }
+    catch (error) {
+        console.error('fetchAnimalWorkHistory failed', error);
+    }
+}
+
+function* fetchAnimalAuditionHistory(action) {
+    try {
+        const response = yield axios.get('');
+        yield put({ type: 'SET_SELECTED_ANIMAL_AUDITION_HISTORY'});
+    }
+    catch (error) {
+        console.error('fetchAnimalAuditionHistory failed', error);
+    }
+}
+
+function* fetchAnimalContactInfo(action) {
+    try {
+        const response = yield axios.get('');
+        yield put({ type: 'SET_SELECTED_ANIMAL_AUDITION_INFO'});
+    }
+    catch (error) {
+        console.error('fetchAnimalContactInfo failed', error);
+    }
+}
+
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
 
