@@ -145,7 +145,7 @@ function queryGen(qFilter){
         paramNumber++;
     }
     if(qFilter.maxD && qFilter.maxD !== ''){
-        sqlQuery.sqlString += ` AND "breed" <= $${paramNumber}`;
+        sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`;
         sqlQuery.sqlParams.push(qFilter.maxD);
         paramNumber++;
     }
