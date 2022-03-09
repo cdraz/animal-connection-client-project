@@ -26,7 +26,7 @@ function AnimalDetail() {
 
     // Dispatch hook, store access
     const dispatch = useDispatch();
-    const animal = useSelector(store => store.selectedAnimal.animalDetails);
+    const animal = useSelector(store => store.selectedAnimal);
 
     // Set id from URL parameters
     const { id } = useParams();

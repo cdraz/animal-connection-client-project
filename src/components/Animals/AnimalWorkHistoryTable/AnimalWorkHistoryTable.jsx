@@ -9,8 +9,8 @@ import Paper from '@mui/material/Paper';
 
 function AnimalWorkHistoryTable({ animal }) {
 
-    const jobs = [];
-    
+    const jobs = animal.jobs;
+
     return (
         <TableContainer component={Paper}>
             <Table aria-label="work history table">
@@ -24,7 +24,7 @@ function AnimalWorkHistoryTable({ animal }) {
                 </TableHead>
                 <TableBody>
                     {/* TODO: make the table row a link to the job detail when jobs are set up */}
-                    {jobs.map( job => (
+                    {jobs ? jobs.map( job => (
                         <TableRow
                             key={job.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -36,13 +36,13 @@ function AnimalWorkHistoryTable({ animal }) {
                                 {job.client}
                             </TableCell>
                             <TableCell align="left">
-                                {job.jobNumber}
+                                {job.number}
                             </TableCell>
                             <TableCell align="left">
                                 {job.description}
                             </TableCell>
                         </TableRow>
-                    ))}
+                    )) : 'Loading jobs...'}
                 </TableBody>
             </Table>
         </TableContainer>
