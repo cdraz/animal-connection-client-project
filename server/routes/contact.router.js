@@ -25,7 +25,7 @@ router.post('/', (req, res, next) => {
     pool.query(sqlText, sqlParams)
     .then((result) => {
         console.log('this is the result', result.rows[0]);
-        result.send(result.rows[0])
+        res.send(result.rows[0])
     })
     .catch((error) => {
         console.log('failed', error);

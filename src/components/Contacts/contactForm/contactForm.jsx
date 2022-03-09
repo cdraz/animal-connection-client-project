@@ -20,7 +20,7 @@ function contactForm () {
         event.preventDefault();
 
         dispatch({
-            type: 'CREATE_CONTACT_INFO',
+            type: 'ADD_CONTACTS',
             payload: contactInfo
         })
     }

@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchContacts() {
     try {
-        const response = yield axios.get(`/api/contacts`);
+        const response = yield axios.get(`/api/contact`);
         yield put({ type: 'SET_CONTACTS', payload: response.data });
     }
     catch (error) {
@@ -16,7 +16,7 @@ function* addContacts(action) {
     try {
         console.log('contact post action.payload',action.payload);
         
-        const response = yield axios.post(`/api/contacts`, action.payload);
+        const response = yield axios.post(`/api/contact`, action.payload);
         yield put({ type: 'FETCH_CONTACTS',});
     }
     catch (error) {
