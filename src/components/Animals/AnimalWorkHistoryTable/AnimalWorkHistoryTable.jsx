@@ -25,10 +25,7 @@ function AnimalWorkHistoryTable({ animal }) {
                 <TableBody>
                     {/* TODO: make the table row a link to the job detail when jobs are set up */}
                     {jobs ? jobs.map( job => (
-                        <TableRow
-                            key={job.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
+                        <TableRow key={job.id}>
                             <TableCell align="left">
                                 {job.date}
                             </TableCell>
