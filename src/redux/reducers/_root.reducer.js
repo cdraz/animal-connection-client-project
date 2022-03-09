@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   jobs, // contains list of current filtered jobs
   selectedJob, // contains current selected job for job detail page
   selectedJobDetails, //contains current selected job pet and job junction details
-  contact
+  contact,
 });
 
 export default rootReducer;
