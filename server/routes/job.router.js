@@ -25,7 +25,6 @@ router.get("/", (req, res) => {
  * POST route template
  */
 router.post("/", (req, res, next) => {
-
   const client = req.body.client;
   const jobNumber = req.body.jobNumber;
   const jobDate = req.body.jobDate;
@@ -46,28 +45,68 @@ router.post("/", (req, res, next) => {
 /**
  * Get all of the animals that work the job by ID
  */
- router.get("/:id", (req, res) => {
-     console.log('req.params is',req.params);
-     
-    const queryText = `SELECT * FROM "jobsJunction" 
+router.get("/:id", (req, res) => {
+  console.log("req.params is", req.params);
+
+  const queryText = `SELECT * FROM "jobsJunction" 
     JOIN "animals" 
       ON "jobsJunction"."animalsId" = animals.id 
     JOIN "contacts"
       ON "animals"."contactsId" = contacts.id
     WHERE "jobId"=$1`;
-    pool
-      .query(queryText, [req.params.id])
-  
-      .then((dbRes) => {
-        res.send(dbRes.rows);
-      })
-      .catch((err) => {
-        console.error("err in get jobDetails ", err);
-        console.log("req.params.id", req.params);
-      });
-  });
+  pool
+    .query(queryText, [req.params.id])
+
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error("err in get jobDetails ", err);
+      console.log("req.params.id", req.params);
+    });
+});
+
+/**
+ * Delete an Job
+ */
+router.delete("/:id", (req, res) => {
+  // endpoint functionality
+
+  const queryText = "DELETE FROM jobs WHERE id=$1";
+  pool
+    .query(queryText, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing Delete job query", err);
+      res.sendStatus(500);
+    });
+});
+
+/**
+ * PUT to set job to Inactive an Job
+ */
+router.put("/:id", (req, res) => {
+  // endpoint functionality
+
+  const queryText = `UPDATE jobs
+    SET active = NOT active
+    WHERE id = $1
+    `;
+  pool
+    .query(queryText, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing put job query", err);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
+
 
 function queryGen(qFilter){
     console.log('#####################', qFilter);

@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
-import JobSearchBar from '../../SearchBar/JobSearchBar'
+import JobSearchBar from "../../SearchBar/JobSearchBar";
 
 function JobPage() {
   // Dispatch hook, store access
@@ -22,9 +22,9 @@ function JobPage() {
     setOpen(false);
   };
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_JOBS' });
-    }, []);
+  useEffect(() => {
+    dispatch({ type: "FETCH_JOBS" });
+  }, []);
 
   const style = {
     position: "absolute",
@@ -42,7 +42,7 @@ function JobPage() {
 
   return (
     <>
-    <JobSearchBar />
+      <JobSearchBar />
       <button
         onClick={() => {
           setOpen(true);
