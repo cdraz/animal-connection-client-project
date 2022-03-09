@@ -1,6 +1,7 @@
 // Function imports
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./AnimalsPage.css";
 
 // React components
 import AnimalCard from '../AnimalCard/AnimalCard';
@@ -18,11 +19,14 @@ function AnimalsPage() {
 
     return(
         <>
+        
         <AnimalSearchBar />
+        <div id= "animalCardContainer">
         {Array.isArray(animals) ?
             animals.map( animal => (
-            <AnimalCard animal={animal} />
+            <AnimalCard key= {animal.id} animal={animal} />
         )) : <p>Loading...</p>}
+        </div>
       </>
     )
 }

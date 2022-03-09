@@ -1,0 +1,9 @@
+#animalCardContainer {
+    border: 1px solid black;
+    width: 90%;
+    height: 400px;
+    position: relative;
+    overflow: scroll;
+    margin-left: 5%;
+    margin-bottom: 20px;
+  }
