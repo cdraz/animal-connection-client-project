@@ -26,12 +26,54 @@ function* fetchAnimals() {
     }
 }
 
+function* fetchSelectedAnimal(action) {
+    try {
+        const response = yield axios.get(`/api/animal/${action.payload}`);
+        yield put({ type: 'SET_SELECTED_ANIMAL', payload: response.data });
+    }
+    catch (error) {
+        console.error('fetchSelectedAnimal failed', error);
+    }
+}
+
+function* fetchAnimalWorkHistory(action) {
+    try {
+        const response = yield axios.get('');
+        yield put({ type: 'SET_SELECTED_ANIMAL_WORK_HISTORY'});
+    }
+    catch (error) {
+        console.error('fetchAnimalWorkHistory failed', error);
+    }
+}
+
+function* fetchAnimalAuditionHistory(action) {
+    try {
+        const response = yield axios.get('');
+        yield put({ type: 'SET_SELECTED_ANIMAL_AUDITION_HISTORY'});
+    }
+    catch (error) {
+        console.error('fetchAnimalAuditionHistory failed', error);
+    }
+}
+
+function* fetchAnimalContactInfo(action) {
+    try {
+        const response = yield axios.get('');
+        yield put({ type: 'SET_SELECTED_ANIMAL_AUDITION_INFO'});
+    }
+    catch (error) {
+        console.error('fetchAnimalContactInfo failed', error);
+    }
+}
+
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
 
     // For development and testing we will use this to get all animals
     // For final product we should be able to put all get requests through the filter saga & endpoint
     yield takeLatest('FETCH_ANIMALS', fetchAnimals);
+
+    yield takeLatest('FETCH_SELECTED_ANIMAL', fetchSelectedAnimal);
 }
 
 export default animalSaga;
