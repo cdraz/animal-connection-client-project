@@ -2,6 +2,22 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+//GET New contact
+router.get("/", (req, res) => {
+    console.log("GET CONTACTS");
+    console.log(req.body);
+    let queryText =
+      `
+          SELECT * FROM "contacts"
+          ` 
+    pool.query(queryText)
+      .then((dbRes) => res.send(dbRes.rows))
+      .catch((err) => {
+        console.log("User registration failed: ", err);
+        res.sendStatus(500);
+      });
+  });
+
 //POST New contact
 router.post('/', (req, res, next) => {
     console.log('contact detail req.body', req.body);

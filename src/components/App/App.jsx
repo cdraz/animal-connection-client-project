@@ -24,7 +24,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import Contacts from "../Contacts/ContactTable/ContactTable";
-import ContactForm from "../Contacts/contactForm/contactForm";
+//import ContactForm from "../Contacts/contactForm/contactForm";
 
 import "./App.css";
 
@@ -98,13 +98,13 @@ function App() {
             <JobDetail />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows ContactDetailPage else shows LoginPage
             exact
             path="/contactForm"
           >
             <ContactForm />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
