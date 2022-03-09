@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 // React components
 import AnimalSummary from '../AnimalSummary/AnimalSummary';
+import AnimalAddToJobButton from '../AnimalAddToJobButton/AnimalAddToJobButton';
 import AnimalAuditionHistoryTable from '../AnimalAuditionHistoryTable/AnimalAuditionHistoryTable';
 import AnimalOwnerTable from '../AnimalOwnerTable/AnimalOwnerTable';
 import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
@@ -69,8 +70,7 @@ function AnimalDetail() {
                         </>
                         // : null
                     }
-
-                    <Button variant="contained">Add to Job</Button>
+                    <AnimalAddToJobButton />
                 </Stack>
             </Grid>
         </Grid>
