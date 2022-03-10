@@ -66,6 +66,8 @@ router.get("/:id", (req, res) => {
     });
 });
 
+
+
 /**
  * Delete an Job
  */
@@ -128,7 +130,7 @@ function queryGen(qFilter){
         default:
             break;
     }
-    let sqlString = '';
+    // let sqlString = ''; --? unsure why this is here, will delete if nothing breaks
     if(qFilter.client){
         sqlQuery.sqlString += ` AND LOWER("client") ~ $${paramNumber}`;
         sqlQuery.sqlParams.push(qFilter.client);
