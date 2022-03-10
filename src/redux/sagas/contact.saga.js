@@ -25,9 +25,21 @@ function* addContacts(action) {
     }
 }
 
+function* fetchContactDetails(action){
+    try {
+        console.log('contact details action.payload',action.payload);
+        
+        const response = yield axios.post(`/api/contact`, action.payload);
+        yield put({ type: 'FETCH_CONTACTS',});
+    }
+    catch (error) {
+        console.error('fetchContacts failed', error);
+    }
+}
+
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
-    yield takeLatest('FETCH_CONTACT_DETAILS_FOR_EDIT', fetchContacts);
+    yield takeLatest('FETCH_CONTACT_DETAILS_FOR_EDIT', fetchContactDetails);
     yield takeLatest('ADD_CONTACTS', addContacts);
 
 
