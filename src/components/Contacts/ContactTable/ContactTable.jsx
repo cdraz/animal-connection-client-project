@@ -1,9 +1,12 @@
 import React from "react";
 import "./ContactTable.css"
+import ContactForm from "../contactForm/contactForm";
+
 
 const contacts = () => {
     return (
         <div className="contact-container">
+            <ContactForm />
             <table>
                 <thead>
                     <tr>

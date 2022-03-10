@@ -20,6 +20,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 function AnimalCard({ animal }) {
   // Dispatch hook
@@ -30,6 +32,16 @@ function AnimalCard({ animal }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  //MUI
+const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+  //end MUI
+
   // Modal style setup
   const style = {
     position: "absolute",
@@ -46,6 +58,8 @@ function AnimalCard({ animal }) {
   };
 
     return (
+        <Grid>
+    <Item id="item"> 
         <Card key={animal.id} sx={{ maxWidth: 345 }}>
             <Link to={`/animals/${animal.id}`}>
                 <CardActionArea>
@@ -63,6 +77,8 @@ function AnimalCard({ animal }) {
                 </CardActionArea>
             </Link>
         </Card>
+        </Item>
+    </Grid>
     )
 };
 
