@@ -27,6 +27,7 @@ function* addContacts(action) {
 
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
+    yield takeLatest('FETCH_CONTACT_DETAILS_FOR_EDIT', fetchContacts);
     yield takeLatest('ADD_CONTACTS', addContacts);
 
 

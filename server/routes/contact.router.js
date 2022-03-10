@@ -58,10 +58,14 @@ function queryGen(qFilter){
         sqlParams: [],
     }
     // let sqlString = ''; --? unsure why this is here, will delete if nothing breaks
-    if(qFilter.name){
-        sqlQuery.sqlString += ` AND (LOWER("firstName") ~ $${paramNumber} OR
-            LOWER("lastName") ~ $${paramNumber})`;
-        sqlQuery.sqlParams.push(qFilter.name);
+    if(qFilter.firstName){
+        sqlQuery.sqlString += ` AND LOWER("firstName") ~ $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.firstName);
+        paramNumber++;
+    }
+    if(qFilter.lastName){
+        sqlQuery.sqlString += ` AND LOWER("lastName") ~ $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.lastName);
         paramNumber++;
     }
     if(qFilter.company){
