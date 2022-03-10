@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import "./JobCard.css";
 
 // React components
 
@@ -17,11 +18,22 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 function JobCard({ job }) {
   // Dispatch hook
   const dispatch = useDispatch();
   const history = useHistory();
+
+//MUI
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+//end MUI
 
   //  MUI modal setup for detail view
   const [open, setOpen] = useState(false);
@@ -53,7 +65,9 @@ function JobCard({ job }) {
   //main
 
   return (
-    <Card key={job.id} sx={{ maxWidth: 345 }}>
+    <Grid>
+    <Item id="item"> 
+    <Card key={job.id} sx={{  maxWidth: 300, minWidth: 300, minHeight: 300 }}>
       <CardActionArea onClick={() => handleSelectJob(job)}>
         <CardContent>
           <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
@@ -72,6 +86,8 @@ function JobCard({ job }) {
         </CardContent>
       </CardActionArea>
     </Card>
+    </Item>
+    </Grid>
   );
 }
 
