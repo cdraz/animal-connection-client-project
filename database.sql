@@ -14,8 +14,9 @@ CREATE TABLE "contacts" (
     "type" VARCHAR(255), -- Animal Owner, Client, Crew
     "firstName" VARCHAR(255),
     "lastName" VARCHAR(255),
-    "primaryNumber" INTEGER,
-    "secondaryNumber" INTEGER,
+    "company" VARCHAR(255),
+    "primaryNumber" VARCHAR(11),
+    "secondaryNumber" VARCHAR(11),
     "text" BOOLEAN,
     "email" VARCHAR(255),
     "website" VARCHAR(255),
