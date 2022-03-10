@@ -41,7 +41,7 @@ function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
     yield takeLatest('FETCH_CONTACT_DETAILS_FOR_EDIT', fetchContactDetails);
     yield takeLatest('ADD_CONTACTS', addContacts);
-
+    yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
 
 }
 

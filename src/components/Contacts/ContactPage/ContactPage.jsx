@@ -49,6 +49,8 @@ function ContactPage() {
         Add Contact
         </button>
           <ContactSearchBar />
+
+          {/* <ContactDetail /> */}
           
 
 
