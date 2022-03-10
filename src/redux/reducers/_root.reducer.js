@@ -6,6 +6,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import selectedJob from './selectedJob.reducer';
 import selectedJobDetails from './selectedJobDetails.reducer';
+import activeJobs from './activeJobs.reducer';
 import contact from './contact.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -16,6 +17,7 @@ import contact from './contact.reducer';
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
   animals, // contains list of current filtered animals
+  activeJobs, // contains list of active jobs
   selectedAnimal, // contains the selected animal being used in AnimalDetail
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in

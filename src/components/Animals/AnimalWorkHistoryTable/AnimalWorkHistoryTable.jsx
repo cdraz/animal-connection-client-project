@@ -1,3 +1,5 @@
+import { Link, useHistory } from 'react-router-dom';
+
 // MUI imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,8 +11,11 @@ import Paper from '@mui/material/Paper';
 
 function AnimalWorkHistoryTable({ animal }) {
 
-    const jobs = [];
-    
+    // History hook
+    const history = useHistory();
+
+    const jobs = animal.jobs;
+
     return (
         <TableContainer component={Paper}>
             <Table aria-label="work history table">
@@ -24,25 +29,22 @@ function AnimalWorkHistoryTable({ animal }) {
                 </TableHead>
                 <TableBody>
                     {/* TODO: make the table row a link to the job detail when jobs are set up */}
-                    {jobs.map( job => (
-                        <TableRow
-                            key={job.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell align="left">
-                                {job.date}
-                            </TableCell>
-                            <TableCell align="left">
-                                {job.client}
-                            </TableCell>
-                            <TableCell align="left">
-                                {job.jobNumber}
-                            </TableCell>
-                            <TableCell align="left">
-                                {job.description}
-                            </TableCell>
+                    {jobs ? jobs.map(job => (
+                        <TableRow key={job.id} onClick={() => history.push(`/jobs/${job.id}`)}>
+                                <TableCell align="left">
+                                    {job.date}
+                                </TableCell>
+                                <TableCell align="left">
+                                    {job.client}
+                                </TableCell>
+                                <TableCell align="left">
+                                    {job.number}
+                                </TableCell>
+                                <TableCell align="left">
+                                    {job.description}
+                                </TableCell>
                         </TableRow>
-                    ))}
+                    )) : <TableRow><TableCell>'No job history.'</TableCell></TableRow>}
                 </TableBody>
             </Table>
         </TableContainer>

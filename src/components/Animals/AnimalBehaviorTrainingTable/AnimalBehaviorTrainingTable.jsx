@@ -18,62 +18,62 @@ function AnimalBehaviorTrainingTable({ animal }) {
                 <Grid item xs={6}>
                     <Stack spacing={0}>
                         <div>
-                            <Checkbox />  Sit and stay on leash
+                            <Checkbox value={animal.sitOnLeash} disabled checked={animal.sitOnLeash} />  Sit and stay on leash
                         </div>
                         <div>
-                            <Checkbox />  Sit and stay off leash
+                            <Checkbox value={animal.sitOffLeash} disabled checked={animal.sitOffLeash} />  Sit and stay off leash
                         </div>
                         <div>
-                            <Checkbox />  Down and stay on leash
+                            <Checkbox value={animal.downOnLeash} disabled checked={animal.downOnLeash} />  Down and stay on leash
                         </div>
                         <div>
-                            <Checkbox /> Down and stay off leash
+                            <Checkbox value={animal.downOffLeash} disabled checked={animal.downOffLeash} /> Down and stay off leash
                         </div>
                         <div>
-                            <Checkbox />  Stand and stay on leash
+                            <Checkbox value={animal.standOnLeash} disabled checked={animal.standOnLeash} />  Stand and stay on leash
                         </div>
                         <div>
-                            <Checkbox />  Stand and stay off leash
+                            <Checkbox value={animal.standOffLeash} disabled checked={animal.standOffLeash} />  Stand and stay off leash
                         </div>
                         <div>
-                            <Checkbox />  Bark on cue
+                            <Checkbox value={animal.barkOnCommand} disabled checked={animal.barkOnCommand} />  Bark on cue
                         </div>
                         <div>
-                            <Checkbox />  Hold and object
+                            <Checkbox value={animal.holdItem} disabled checked={animal.holdItem} />  Hold and object
                         </div>
                         <div>
-                            <Checkbox />  Move to a mark
+                            <Checkbox value={animal.mark} disabled checked={animal.mark} />  Move to a mark
                         </div>
                         <div>
-                            <Checkbox />  Can use silent commands
+                            <Checkbox value={animal.silentCommands} disabled checked={animal.silentCommands} />  Can use silent commands
                         </div>
                     </Stack>
                 </Grid>
                 <Grid item xs={6}>
                     <Stack spacing={0}>
                         <div>
-                            <Checkbox />  Can be handled by stranger
+                            <Checkbox value={animal.strangerHandle} disabled checked={animal.strangerHandle} />  Can be handled by stranger
                         </div>
                         <div>
-                            <Checkbox />  Can be dressed by stranger
+                            <Checkbox value={animal.strangerDress} disabled checked={animal.strangerDress} />  Can be dressed by stranger
                         </div>
                         <div>
-                            <Checkbox />  Works well with children
+                            <Checkbox value={animal.goodAroundChildren} disabled checked={animal.goodAroundChildren} />  Works well with children
                         </div>
                         <div>
-                            <Checkbox />  Works well with other dogs
+                            <Checkbox value={animal.otherDogs} disabled checked={animal.otherDogs} />  Works well with other dogs
                         </div>
                         <div>
-                            <Checkbox />  Works well with other small animals
+                            <Checkbox value={animal.smallAnimals} disabled checked={animal.smallAnimals} />  Works well with other small animals
                         </div>
                         <div>
-                            <Checkbox />  Afraid of strobes
+                            <Checkbox value={animal.loudNoiseLights} disabled checked={animal.loudNoiseLights} />  Afraid of strobes
                         </div>
                         <div>
-                            <Checkbox />  Available at short notice
+                            <Checkbox value={animal.shortNotice} disabled checked={animal.shortNotice} />  Available at short notice
                         </div>
                         <div>
-                            <Checkbox />  Available for overnight jobs
+                            <Checkbox value={animal.overnight} disabled checked={animal.overnight} />  Available for overnight jobs
                         </div>
 
                     </Stack>
