@@ -10,9 +10,37 @@ import FormLabel from '@mui/material/FormLabel';
 
 function ContactSearchBar() {
     const dispatch = useDispatch();
+    const [qFilter, setqFilter] = useState({ 
+        name: '',
+        company: '',
+        type: '',
+    })
+    function filterContacts(event){
+        event.preventDefault();
+        console.log(qFilter);
+        dispatch({ type: 'FETCH_CONTACTS', payload: qFilter });
+    };
 
     return (
         <>
+        {/* <button onClick={() => console.log(qFilter)}></button> */}
+        <form id="animalSearch" onSubmit={(evt) => filterContacts(evt)}>
+            <input 
+                onChange={(evt) => setqFilter({...qFilter, name: evt.target.value})}
+                type="text" placeholder='Name' 
+            />
+            <input 
+                onChange={(evt) => setqFilter({...qFilter, company: evt.target.value})}
+                type="text" placeholder='Company'
+            />
+            <div>
+            <input 
+                onChange={(evt) => setqFilter({...qFilter, type: evt.target.value})} 
+                type="text" placeholder='Type'
+            />
+            <button type="submit">update</button>
+            </div>
+        </form>
         </>
     )
 
