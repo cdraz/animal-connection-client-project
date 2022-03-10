@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import JobEditDetail from "./JobEditDetail";
+import JobPayEdit from "./JobPayEdit";
 
 // React components
 import JobCard from "../JobCard/JobCard";
@@ -81,7 +82,6 @@ function JobDetail() {
       <JobEditDetail />
       <div>
         <br></br>
-        {selectedJobDetails.checkAmount}
 
         <Stack direction="row" spacing={2}>
           <Button
@@ -107,6 +107,13 @@ function JobDetail() {
           </Button>
         </Stack>
       </div>
+      <br></br>
+      {Array.isArray(selectedJobDetails) ?
+      selectedJobDetails.map((payDetails) => (
+      <JobPayEdit key={payDetails.id} payDetails={payDetails} />
+      )) : <p>Loading...</p>}
+      
+
     </>
   );
 }

@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
-function JobEditDetail() {
+function JobPayEdit(prop) {
   // Dispatch hook, store access
   const history = useHistory();
   const dispatch = useDispatch();
@@ -21,14 +21,16 @@ function JobEditDetail() {
   const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
   //local state
   const [editable, setEditable] = useState(false);
+  const payDetails = prop.payDetails;
   //Edit form
-  const [newClient, setNewClient] = useState(`${selectedJob.client}`);
-  const [newDescription, setNewDescription] = useState(
-    `${selectedJob.description}`
+  //   const [newPaid, setNewPaid] = useState(`${selectedJob.paid}`);
+  const [newCheckNumber, setNewCheckNumber] = useState(
+    `${payDetails.checkNumber}`
   );
-  const [newDate, setNewDate] = useState(`${selectedJob.date}`);
-  const [newNotes, setNewNotes] = useState(`${selectedJob.notes}`);
-  const [newJobNumber, setNewJobNumber] = useState(`${selectedJob.jobNumber}`);
+  const [newCheckAmount, setNewCheckAmount] = useState(
+    `${payDetails.checkAmount}`
+  );
+  const [newCheckDate, setNewCheckDate] = useState(`${payDetails.checkDate}`);
 
   useEffect(() => {
     console.log("selected job is", selectedJob);
@@ -40,14 +42,13 @@ function JobEditDetail() {
   const editSelectedJob = (event) => {
     event.preventDefault();
     let editJobToSend = {
-      newClient: newClient,
-      newDescription: newDescription,
-      newDate: newDate,
-      newNotes: newNotes,
-      newJobNumber: newJobNumber,
+      // newPaid: newPaid,
+      newCheckNumber: newCheckNumber,
+      newCheckAmount: newCheckAmount,
+      newCheckDate: newCheckDate,
       selectedJob: selectedJob.id,
     };
-    dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
+    dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
   };
 
   return (
@@ -65,65 +66,53 @@ function JobEditDetail() {
         {/* conditional rendering if editable button was clicked  */}
         {!editable ? (
           <div>
-            {selectedJob.client}
+            {payDetails.checkAmount}
             <br></br>
-            {selectedJob.date}
+            {/* JSON.stringify({selectedJobDetails.paid}) */}
+            {payDetails.checkNumber}
             <br></br>
-            {selectedJob.jobNumber}
-            <br></br>
-            {selectedJob.notes}
-            <br></br>
-            {selectedJob.description}
+            {payDetails.checkDate}
           </div>
         ) : (
           <form onSubmit={editSelectedJob}>
             {/* client input */}
+
+            {/* <input
+              type="text"
+              value={newPaid}
+              onChange={(evt) => {
+                setNewPaid(evt.target.value);
+              }}
+              placeholder={selectedJob.paid}
+            /> */}
+            {/* check number */}
             <input
               type="text"
-              value={newClient}
+              value={newCheckNumber}
               onChange={(evt) => {
-                setNewClient(evt.target.value);
+                setNewCheckNumber(evt.target.value);
               }}
-              placeholder={selectedJob.client}
+              placeholder={payDetails.checkNumber}
             />
-            {/* description */}
+
+            {/* check amount */}
             <input
               type="text"
-              value={newDescription}
+              value={newCheckAmount}
               onChange={(evt) => {
-                setNewDescription(evt.target.value);
+                setNewCheckAmount(evt.target.value);
               }}
-              placeholder={selectedJob.description}
+              placeholder={payDetails.checkAmount}
             />
 
             {/* newDate */}
             <input
               type="date"
-              value={newDate}
+              value={newCheckDate}
               onChange={(evt) => {
-                setNewDate(evt.target.value);
+                setNewCheckDate(evt.target.value);
               }}
-              placeholder={selectedJob.date}
-            />
-
-            {/* newNotes */}
-            <input
-              type="text"
-              value={newNotes}
-              onChange={(evt) => {
-                setNewNotes(evt.target.value);
-              }}
-              placeholder={selectedJob.notes}
-            />
-
-            {/* newJobNumber */}
-            <input
-              type="text"
-              value={newJobNumber}
-              onChange={(evt) => {
-                setNewJobNumber(evt.target.value);
-              }}
-              placeholder={selectedJob.jobNumber}
+              placeholder={payDetails.checkDate}
             />
 
             {/* {user.id === something.user_id && ( */}
@@ -145,4 +134,4 @@ function JobEditDetail() {
   );
 }
 
-export default JobEditDetail;
+export default JobPayEdit;
