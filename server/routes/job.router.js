@@ -130,6 +130,29 @@ router.put("/edit/:id", (req, res) => {
     });
 });
 
+router.put("/edit/pay/:id", (req, res) => {
+    const sqlText = `UPDATE "jobsJunction"
+      SET paid = $1, "checkNumber" = $2, "checkAmount" = $3, "checkDate" = $4
+      WHERE id = $5
+      `;
+    pool
+      .query(sqlText, [
+        req.body.newPaid,
+        req.body.newCheckNumber,
+        req.body.newCheckAmount,
+        req.body.newCheckDate,
+        req.params.id,
+      ])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+  
+      .catch((error) => {
+        console.log(`Error making database query ${sqlText}`, error);
+        res.sendStatus(500);
+      });
+  });
+
 module.exports = router;
 
 function queryGen(qFilter) {

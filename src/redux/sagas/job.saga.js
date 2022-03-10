@@ -113,12 +113,12 @@ function* editSelectedJobPay(action) {
     // allow the server session to recognize the user
     //send action.payload.project as params
     yield axios.put(
-      `/api/job/edit/pay/${action.payload.selectedJob}`,
+      `/api/job/edit/pay/${action.payload.payDetails}`,
       action.payload,
       config
     );
     yield put({ type: "FETCH_JOBS" });
-    yield put({ type: "FETCH_JOB_DETAILS", payload: action.payload.selectedJob });
+    
   } catch (error) {
     console.log("CHANGE TITLE failed", error);
   }

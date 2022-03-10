@@ -48,7 +48,7 @@ function JobPayEdit(prop) {
       newCheckNumber: newCheckNumber,
       newCheckAmount: newCheckAmount,
       newCheckDate: newCheckDate,
-      selectedJob: selectedJobDetails.id,
+      payDetails: payDetails.id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
   };
