@@ -73,6 +73,32 @@ router.post('/', (req, res) => {
     // POST route code here
 });
 
+/**
+ * POST Animal to job
+ */
+ router.post('/job', async (req, res) => {
+    // POST animal to jobsJunction table
+    console.log('******* POST /animals/job *******')
+    try {
+        // Write our SQL query
+        const queryText = `
+            INSERT INTO "jobsJunction" ("animalsId", "jobId")
+            VALUES ($1, $2);
+        `;
+        const queryParams = [
+            req.body.animalId, // $1
+            req.body.jobId // $2
+        ];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;
 
 function queryGen(qFilter) {

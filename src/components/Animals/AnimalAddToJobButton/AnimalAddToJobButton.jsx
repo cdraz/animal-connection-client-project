@@ -25,8 +25,15 @@ function AnimalAddToJobButton({ animal }) {
 
     // Declare addToJob
     const addToJob = () => {
-
-    }
+        console.log('animal is', animal);
+        dispatch({
+            type: 'ADD_ANIMAL_TO_JOB',
+            payload: {
+                animalId: animal.id,
+                jobId: jobInput
+            }
+        });
+    };
     
     // On component load, get active jobs
     useEffect(() => {
@@ -37,8 +44,8 @@ function AnimalAddToJobButton({ animal }) {
         <>
             {Array.isArray(options) ?
                 <Autocomplete
-                    multiple
                     options={options}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
                     getOptionLabel={(option) => option.label}
                     filterSelectedOptions
                     onChange={(event, option) => setJobInput(option.id)}

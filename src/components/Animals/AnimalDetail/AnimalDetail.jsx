@@ -70,7 +70,7 @@ function AnimalDetail() {
                         </>
                         // : null
                     }
-                    <AnimalAddToJobButton />
+                    <AnimalAddToJobButton animal={animal} />
                 </Stack>
             </Grid>
         </Grid>

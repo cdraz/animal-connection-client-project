@@ -36,15 +36,23 @@ function* fetchSelectedAnimal(action) {
     }
 }
 
+// Add an animal to a job
+function* addAnimalToJob(action) {
+    try {
+        const reponse = yield axios.post(`/api/animal/job`, action.payload);
+        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: action.payload.animalId });
+    }
+    catch (error) {
+        console.error('addAnimalToJob failed', error);
+    }
+}
+
 
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
-
-    // For development and testing we will use this to get all animals
-    // For final product we should be able to put all get requests through the filter saga & endpoint
     yield takeLatest('FETCH_ANIMALS', fetchAnimals);
-
     yield takeLatest('FETCH_SELECTED_ANIMAL', fetchSelectedAnimal);
+    yield takeLatest('ADD_ANIMAL_TO_JOB', addAnimalToJob);
 }
 
 export default animalSaga;
