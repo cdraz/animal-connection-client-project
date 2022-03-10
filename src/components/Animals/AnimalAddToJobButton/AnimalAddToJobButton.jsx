@@ -20,6 +20,14 @@ function AnimalAddToJobButton({ animal }) {
         ));
     }
 
+    // Set state variable
+    const [jobInput, setJobInput] = useState();
+
+    // Declare addToJob
+    const addToJob = () => {
+
+    }
+    
     // On component load, get active jobs
     useEffect(() => {
         dispatch({ type: 'FETCH_ACTIVE_JOBS' });
@@ -31,9 +39,9 @@ function AnimalAddToJobButton({ animal }) {
                 <Autocomplete
                     multiple
                     options={options}
-                    getOptionLabel={(option) => option}
+                    getOptionLabel={(option) => option.label}
                     filterSelectedOptions
-                    onChange={(event, value) => setJobInput(value)}
+                    onChange={(event, option) => setJobInput(option.id)}
                     renderInput={(params) => (
                         <TextField
                             {...params}
@@ -43,7 +51,12 @@ function AnimalAddToJobButton({ animal }) {
                     )}
                 />
                 : <p>Loading jobs...</p>}
-            <Button variant="contained">Add to Job</Button>
+            <Button
+                variant="contained"
+                onClick={addToJob}
+            >
+                Add to Job
+            </Button>
         </>
     )
 }
