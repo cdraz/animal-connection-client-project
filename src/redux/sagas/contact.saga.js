@@ -25,10 +25,24 @@ function* addContacts(action) {
     }
 }
 
+function* saveChanges(action) {
+    try{
+        yield axios.put('/api/contact', action.payload);
+        yield put ({
+            type: 'FETCH_CONTACTS'
+
+        })
+    }
+    catch (error) {
+        console.error('fetchContacts failed', error);
+}
+}
+
+
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
     yield takeLatest('ADD_CONTACTS', addContacts);
-
+    yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
 
 }
 

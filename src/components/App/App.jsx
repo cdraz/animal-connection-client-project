@@ -19,14 +19,15 @@ import AnimalsPage from '../Animals/AnimalsPage/AnimalsPage';
 import AnimalDetail from '../Animals/AnimalDetail/AnimalDetail';
 import JobPage from '../Job/JobsPage/JobsPage';
 import JobDetail from "../Job/JobDetail/JobDetail";
+import Contacts from "../Contacts/ContactPage/ContactPage";
+import ContactDetail from "../Contacts/ContactDetail/ContactDetail"
+
 
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import Contacts from "../Contacts/ContactPage/ContactPage";
-//import ContactForm from "../Contacts/contactForm/contactForm";
 
 import "./App.css";
 
@@ -105,6 +106,14 @@ function App() {
             path="/jobDetail"
           >
             <JobDetail />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows JobDetailPage else shows LoginPage
+            exact
+            path="/contactDetail"
+          >
+            <ContactDetail />
           </ProtectedRoute>
 
           {/* <ProtectedRoute
