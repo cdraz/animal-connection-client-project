@@ -47,12 +47,13 @@ router.post("/", (req, res, next) => {
 router.get("/:id", (req, res) => {
   console.log("req.params is", req.params);
 
-  const queryText = `SELECT * FROM "jobsJunction" 
+  const queryText = `SELECT "jobsJunction".*, animals.image,animals."name" ,contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber",contacts.email
+      FROM "jobsJunction"
     JOIN "animals" 
       ON "jobsJunction"."animalsId" = animals.id 
     JOIN "contacts"
       ON "animals"."contactsId" = contacts.id
-    WHERE "jobId"=$1`;
+    WHERE "jobId"= $1`;
   pool
     .query(queryText, [req.params.id])
 

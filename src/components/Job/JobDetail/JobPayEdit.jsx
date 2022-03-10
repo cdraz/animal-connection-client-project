@@ -23,7 +23,7 @@ function JobPayEdit(prop) {
   const [editable, setEditable] = useState(false);
   const payDetails = prop.payDetails;
   //Edit form
-  //   const [newPaid, setNewPaid] = useState(`${selectedJob.paid}`);
+    const [newPaid, setNewPaid] = useState(`${payDetails.paid}`);
   const [newCheckNumber, setNewCheckNumber] = useState(
     `${payDetails.checkNumber}`
   );
@@ -33,6 +33,7 @@ function JobPayEdit(prop) {
   const [newCheckDate, setNewCheckDate] = useState(`${payDetails.checkDate}`);
 
   useEffect(() => {
+      
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
     dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
@@ -40,13 +41,14 @@ function JobPayEdit(prop) {
 
   //edit job begins
   const editSelectedJob = (event) => {
+    console.log("!@!@!@!#$#$#$#$#",prop.payDetails);
     event.preventDefault();
-    let editJobToSend = {
-      // newPaid: newPaid,
+    let editJobPayToSend = {
+      newPaid: newPaid,
       newCheckNumber: newCheckNumber,
       newCheckAmount: newCheckAmount,
       newCheckDate: newCheckDate,
-      selectedJob: selectedJob.id,
+      selectedJob: selectedJobDetails.id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
   };
@@ -68,7 +70,7 @@ function JobPayEdit(prop) {
           <div>
             {payDetails.checkAmount}
             <br></br>
-            {/* JSON.stringify({selectedJobDetails.paid}) */}
+            {payDetails.paid.toString()}
             {payDetails.checkNumber}
             <br></br>
             {payDetails.checkDate}
@@ -77,14 +79,14 @@ function JobPayEdit(prop) {
           <form onSubmit={editSelectedJob}>
             {/* client input */}
 
-            {/* <input
+            <input
               type="text"
               value={newPaid}
               onChange={(evt) => {
                 setNewPaid(evt.target.value);
               }}
-              placeholder={selectedJob.paid}
-            /> */}
+              placeholder={payDetails.paid.toString}
+            />
             {/* check number */}
             <input
               type="text"
