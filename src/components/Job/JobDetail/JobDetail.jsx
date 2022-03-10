@@ -108,12 +108,13 @@ function JobDetail() {
         </Stack>
       </div>
       <br></br>
-      {Array.isArray(selectedJobDetails) ?
-      selectedJobDetails.map((payDetails) => (
-      <JobPayEdit key={payDetails.id} payDetails={payDetails} />
-      )) : <p>Loading...</p>}
-      
-
+      {Array.isArray(selectedJobDetails) ? (
+        selectedJobDetails.map((payDetails) => (
+          <JobPayEdit key={payDetails.id} payDetails={payDetails} />
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }

@@ -23,7 +23,7 @@ function JobPayEdit(prop) {
   const [editable, setEditable] = useState(false);
   const payDetails = prop.payDetails;
   //Edit form
-    const [newPaid, setNewPaid] = useState(`${payDetails.paid}`);
+  const [newPaid, setNewPaid] = useState(`${payDetails.paid}`);
   const [newCheckNumber, setNewCheckNumber] = useState(
     `${payDetails.checkNumber}`
   );
@@ -33,7 +33,6 @@ function JobPayEdit(prop) {
   const [newCheckDate, setNewCheckDate] = useState(`${payDetails.checkDate}`);
 
   useEffect(() => {
-      
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
     dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
@@ -41,7 +40,7 @@ function JobPayEdit(prop) {
 
   //edit job begins
   const editSelectedJob = (event) => {
-    console.log("!@!@!@!#$#$#$#$#",prop.payDetails);
+    console.log("!@!@!@!#$#$#$#$#", prop.payDetails);
     event.preventDefault();
     let editJobPayToSend = {
       newPaid: newPaid,
