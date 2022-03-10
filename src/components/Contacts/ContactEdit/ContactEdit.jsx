@@ -20,7 +20,7 @@ function ContactEdit () {
         event.preventDefault();
 
         dispatch({
-            type: 'FETCH_CONTACT_DETAILS_FOR_EDIT',
+            type: 'FETCH_CONTACT_DETAILS',
             payload: contactInfo
         })
     }

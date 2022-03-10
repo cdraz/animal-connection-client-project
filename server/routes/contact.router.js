@@ -57,7 +57,6 @@ function queryGen(qFilter){
         sqlString: '',
         sqlParams: [],
     }
-    // let sqlString = ''; --? unsure why this is here, will delete if nothing breaks
     if(qFilter.firstName){
         sqlQuery.sqlString += ` AND LOWER("firstName") ~ $${paramNumber}`;
         sqlQuery.sqlParams.push(qFilter.firstName);
