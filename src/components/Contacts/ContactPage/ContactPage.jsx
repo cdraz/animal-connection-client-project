@@ -9,7 +9,8 @@ import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 
 import ContactSearchBar from "../../SearchBar/ContactSearchBar";
-import ContactForm from "../contactForm/contactForm"
+import ContactForm from "../contactForm/contactForm";
+import ContactDetail from "../ContactDetail/ContactDetail";
 
 
 function ContactPage() {
@@ -45,6 +46,8 @@ function ContactPage() {
         Add Contact
         </button>
           <ContactSearchBar />
+
+          <ContactDetail />
           
 
 
