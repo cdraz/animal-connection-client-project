@@ -66,6 +66,8 @@ router.get("/:id", (req, res) => {
     });
 });
 
+
+
 /**
  * Delete an Job
  */
@@ -158,45 +160,46 @@ module.exports = router;
 function queryGen(qFilter) {
   console.log("#####################", qFilter);
   let paramNumber = 1;
-  let sqlQuery = {
-    // will contain sqlString, plus params
-    sqlString: "",
-    sqlParams: [],
-  };
-  switch (qFilter.isActive) {
-    case "all":
-      sqlQuery.sqlString += ` WHERE "id" > 0`;
-      break;
-    case "true":
-      sqlQuery.sqlString += ` WHERE "active" = 'true'`;
-      break;
-    case "false":
-      sqlQuery.sqlString += ` WHERE "active" = false`;
-      break;
-    default:
-      break;
-  }
-  let sqlString = "";
-  if (qFilter.client) {
-    sqlQuery.sqlString += ` AND LOWER("client") ~ $${paramNumber}`;
-    sqlQuery.sqlParams.push(qFilter.client);
-    paramNumber++;
-  }
-  if (qFilter.jobNumber) {
-    sqlQuery.sqlString += ` AND "jobNumber" = $${paramNumber}`;
-    sqlQuery.sqlParams.push(qFilter.jobNumber);
-    paramNumber++;
-  }
-  if (qFilter.minD && qFilter.minD !== "") {
-    sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`;
-    sqlQuery.sqlParams.push(qFilter.minD);
-    paramNumber++;
-  }
-  if (qFilter.maxD && qFilter.maxD !== "") {
-    sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`;
-    sqlQuery.sqlParams.push(qFilter.maxD);
-    paramNumber++;
-  }
-  console.log(sqlQuery);
-  return sqlQuery;
+
+  let sqlQuery = { // will contain sqlString, plus params
+      sqlString: '',
+      sqlParams: [],
+    }
+    switch (qFilter.isActive) {
+        case 'all':
+            sqlQuery.sqlString += ` WHERE "id" > 0`
+            break;
+        case 'true':
+            sqlQuery.sqlString += ` WHERE "active" = 'true'`
+            break;
+        case 'false':
+            sqlQuery.sqlString += ` WHERE "active" = false`
+            break;
+        default:
+            break;
+    }
+    // let sqlString = ''; --? unsure why this is here, will delete if nothing breaks
+    if(qFilter.client){
+        sqlQuery.sqlString += ` AND LOWER("client") ~ $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.client);
+        paramNumber++;
+    }
+    if(qFilter.jobNumber){
+        sqlQuery.sqlString += ` AND "jobNumber" = $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.jobNumber);
+        paramNumber++;
+    }
+    if(qFilter.minD && qFilter.minD !== ''){
+        sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.minD);
+        paramNumber++;
+    }
+    if(qFilter.maxD && qFilter.maxD !== ''){
+        sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.maxD);
+        paramNumber++;
+    }
+    console.log(sqlQuery);
+    return sqlQuery
+
 }

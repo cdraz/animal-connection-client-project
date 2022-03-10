@@ -126,6 +126,15 @@ function* editSelectedJobPay(action) {
   }
 }
 
+function* fetchActiveJobs() {
+  try {
+    const response = yield axios.get("/api/activejob");
+    yield put({ type: "SET_ACTIVE_JOBS", payload: response.data });
+  } catch (error) {
+    console.error("fetchActiveJobs failed", error);
+  }
+}
+
 function* jobSaga() {
   yield takeLatest("FILTER_JOBS", filterJobs);
   yield takeLatest("FETCH_JOBS", fetchJobs);
@@ -135,6 +144,7 @@ function* jobSaga() {
   yield takeLatest("FINISH_JOB", finishJob);
   yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
   yield takeLatest("EDIT_SELECTED_JOB_PAY", editSelectedJobPay);
+  yield takeLatest("FETCH_ACTIVE_JOBS", fetchActiveJobs);
 }
 
 export default jobSaga;

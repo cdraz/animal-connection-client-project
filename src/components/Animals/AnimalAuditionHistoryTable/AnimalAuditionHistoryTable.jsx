@@ -9,28 +9,26 @@ import Paper from '@mui/material/Paper';
 
 function AnimalAuditionHistoryTable({ animal }) {
 
-    const auditions = [];
+    const auditions = animal.auditions;
+
+    let auditionList = '';
+
+    if (auditions) {
+        for (let audition of auditions) {
+        auditionList += `${audition.date}, `;
+    }};
 
     return (
         <TableContainer component={Paper}>
             <Table aria-label="audition history table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="left">Date</TableCell>
-                    </TableRow>
-                </TableHead>
                 <TableBody>
-                    {/* TODO: make the table row a link to the job detail when jobs are set up */}
-                    {auditions.map( audition => (
-                        <TableRow
-                            key={audition.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell align="left">
-                                {audition.date}
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    <TableRow
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                        <TableCell align="left">
+                            {auditionList}
+                        </TableCell>
+                    </TableRow>
                 </TableBody>
             </Table>
         </TableContainer>

@@ -23,6 +23,18 @@ function contactForm () {
             type: 'ADD_CONTACTS',
             payload: contactInfo
         })
+        //set input back to empty
+        firstName ('');
+        lastName ('');
+        primaryNumber ('');
+        secondaryNumber ('');
+        text ('');
+        email ('');
+        type ('');
+        website ('');
+        address ('');
+        notes ('');
+
     }
 
     const handleChange = (evt, property) => {
