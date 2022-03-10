@@ -9,8 +9,8 @@ import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 
 import ContactSearchBar from "../../SearchBar/ContactSearchBar";
-import ContactForm from "../contactForm/contactForm";
-import ContactDetail from "../ContactDetail/ContactDetail";
+import ContactForm from "../contactForm/contactForm"
+import ContactTable from '../ContactTable/ContactTable'
 
 
 function ContactPage() {
@@ -33,6 +33,9 @@ function ContactPage() {
     overflow: "scroll",
     padding: 3,
   };
+  useEffect(() => {
+      dispatch({ type: 'FETCH_CONTACTS' });
+  }, []);
 
   
   
@@ -42,27 +45,27 @@ function ContactPage() {
         onClick={() => {
           setOpen(true);
         }}
-       >
+        >
         Add Contact
         </button>
           <ContactSearchBar />
 
-          <ContactDetail />
+          {/* <ContactDetail /> */}
           
 
 
           <Modal open={open} onClose={() => setOpen(false)}>
-        <Box sx={style}>
-          <Grid container spacing={5}>
-            <Grid item xs={4}>
-              <Stack spacing={2}>
-              <ContactForm />
-              </Stack>
-            </Grid>
-          </Grid>
-        </Box>
-      </Modal>
-
+            <Box sx={style}>
+              <Grid container spacing={5}>
+                <Grid item xs={4}>
+                  <Stack spacing={2}>
+                  <ContactForm />
+                  </Stack>
+                </Grid>
+              </Grid>
+            </Box>
+          </Modal>
+        <ContactTable />
         </>
       )
   }

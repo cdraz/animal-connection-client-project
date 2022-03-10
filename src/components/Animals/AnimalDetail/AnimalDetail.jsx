@@ -4,7 +4,9 @@ import { useParams } from 'react-router-dom';
 
 // React components
 import AnimalSummary from '../AnimalSummary/AnimalSummary';
+import AnimalAddToJobButton from '../AnimalAddToJobButton/AnimalAddToJobButton';
 import AnimalAuditionHistoryTable from '../AnimalAuditionHistoryTable/AnimalAuditionHistoryTable';
+import AnimalOwnerTable from '../AnimalOwnerTable/AnimalOwnerTable';
 import AnimalWorkHistoryTable from '../AnimalWorkHistoryTable/AnimalWorkHistoryTable';
 import AnimalBehaviorTrainingTable from '../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable';
 
@@ -26,20 +28,25 @@ function AnimalDetail() {
 
     // Dispatch hook, store access
     const dispatch = useDispatch();
-    const animal = useSelector(store => store.selectedAnimal.animalDetails);
+    const animal = useSelector(store => store.selectedAnimal);
 
     // Set id from URL parameters
     const { id } = useParams();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_ANIMAL', payload: id });
-      }, []);
-    
+    }, []);
+
     return (
         <Grid container spacing={5}>
             <Grid item xs={4}>
-                <Stack spacing={2}>
+                <Stack spacing={4}>
                     <AnimalSummary animal={animal} />
+                    {
+                        animal.contact ?
+                            <AnimalOwnerTable contact={animal.contact[0]} />
+                            : <p>Loading owner info...</p>
+                    }
                 </Stack>
             </Grid>
             <Grid item xs={8}>
@@ -55,18 +62,17 @@ function AnimalDetail() {
                     {
                         // If animalType is dog, show behavior/training (we only track this for dogs)
                         // animal.animalType.toLowerCase() === 'dog' ?
-                            <>
-                                <Typography variant="h5">
-                                    Behavior, Training, Availability
-                                </Typography>
-                                <AnimalBehaviorTrainingTable animal={animal} />
-                            </>
-                            // : null
+                        <>
+                            <Typography variant="h5">
+                                Behavior, Training, Availability
+                            </Typography>
+                            <AnimalBehaviorTrainingTable animal={animal} />
+                        </>
+                        // : null
                     }
-
-                    <Button variant="contained">Add to Job</Button>
+                    <AnimalAddToJobButton />
                 </Stack>
-            </Grid> 
+            </Grid>
         </Grid>
     )
 }

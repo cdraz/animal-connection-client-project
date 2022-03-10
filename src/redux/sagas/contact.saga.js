@@ -2,9 +2,10 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 
-function* fetchContacts() {
+function* fetchContacts(action) {
+    const qFilter = action.payload
     try {
-        const response = yield axios.get(`/api/contact`);
+        const response = yield axios.get(`/api/contact`, {params: qFilter});
         yield put({ type: 'SET_CONTACTS', payload: response.data });
     }
     catch (error) {
