@@ -5,20 +5,19 @@ const router = express.Router();
 router.get("/", (req, res) => {
   console.log("******* GET JOBS *******");
   const qFilter = req.query;
-  const sqlQuery = queryGen(qFilter)
+  const sqlQuery = queryGen(qFilter);
   console.log(qFilter);
-  let queryText =
-    `
+  let queryText = `
         SELECT * FROM "jobs"
         ${sqlQuery.sqlString};`;
   console.log(queryText);
   pool
     .query(queryText, sqlQuery.sqlParams)
-      .then((dbRes) => res.send(dbRes.rows))
-      .catch((err) => {
-        console.log("User registration failed: ", err);
-        res.sendStatus(500);
-      });
+    .then((dbRes) => res.send(dbRes.rows))
+    .catch((err) => {
+      console.log("User registration failed: ", err);
+      res.sendStatus(500);
+    });
 });
 
 /**
@@ -105,50 +104,75 @@ router.put("/:id", (req, res) => {
     });
 });
 
+//put to edit the title of project based on project id
+router.put("/edit/:id", (req, res) => {
+  const sqlText = `UPDATE jobs
+    SET description = $1, date = $2, client = $3, notes = $4, "jobNumber" = $5
+    WHERE id = $6
+    `;
+  pool
+    .query(sqlText, [
+      req.body.newDescription,
+      req.body.newDate,
+      req.body.newClient,
+      req.body.newNotes,
+      req.body.newJobNumber,
+      req.params.id,
+    ])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+
+    .catch((error) => {
+      console.log(`Error making database query ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
 
-
-function queryGen(qFilter){
-    console.log('#####################', qFilter);
+function queryGen(qFilter) {
+  console.log("#####################", qFilter);
   let paramNumber = 1;
-  let sqlQuery = { // will contain sqlString, plus params
-      sqlString: '',
-      sqlParams: [],
-    }
-    switch (qFilter.isActive) {
-        case 'all':
-            sqlQuery.sqlString += ` WHERE "id" > 0`
-            break;
-        case 'true':
-            sqlQuery.sqlString += ` WHERE "active" = 'true'`
-            break;
-        case 'false':
-            sqlQuery.sqlString += ` WHERE "active" = false`
-            break;
-        default:
-            break;
-    }
-    let sqlString = '';
-    if(qFilter.client){
-        sqlQuery.sqlString += ` AND LOWER("client") ~ $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.client);
-        paramNumber++;
-    }
-    if(qFilter.jobNumber){
-        sqlQuery.sqlString += ` AND "jobNumber" = $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.jobNumber);
-        paramNumber++;
-    }
-    if(qFilter.minD && qFilter.minD !== ''){
-        sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.minD);
-        paramNumber++;
-    }
-    if(qFilter.maxD && qFilter.maxD !== ''){
-        sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`;
-        sqlQuery.sqlParams.push(qFilter.maxD);
-        paramNumber++;
-    }
-    console.log(sqlQuery);
-    return sqlQuery
+  let sqlQuery = {
+    // will contain sqlString, plus params
+    sqlString: "",
+    sqlParams: [],
+  };
+  switch (qFilter.isActive) {
+    case "all":
+      sqlQuery.sqlString += ` WHERE "id" > 0`;
+      break;
+    case "true":
+      sqlQuery.sqlString += ` WHERE "active" = 'true'`;
+      break;
+    case "false":
+      sqlQuery.sqlString += ` WHERE "active" = false`;
+      break;
+    default:
+      break;
+  }
+  let sqlString = "";
+  if (qFilter.client) {
+    sqlQuery.sqlString += ` AND LOWER("client") ~ $${paramNumber}`;
+    sqlQuery.sqlParams.push(qFilter.client);
+    paramNumber++;
+  }
+  if (qFilter.jobNumber) {
+    sqlQuery.sqlString += ` AND "jobNumber" = $${paramNumber}`;
+    sqlQuery.sqlParams.push(qFilter.jobNumber);
+    paramNumber++;
+  }
+  if (qFilter.minD && qFilter.minD !== "") {
+    sqlQuery.sqlString += ` AND "date" >= $${paramNumber}`;
+    sqlQuery.sqlParams.push(qFilter.minD);
+    paramNumber++;
+  }
+  if (qFilter.maxD && qFilter.maxD !== "") {
+    sqlQuery.sqlString += ` AND "date" <= $${paramNumber}`;
+    sqlQuery.sqlParams.push(qFilter.maxD);
+    paramNumber++;
+  }
+  console.log(sqlQuery);
+  return sqlQuery;
 }

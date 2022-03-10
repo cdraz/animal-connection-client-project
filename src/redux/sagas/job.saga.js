@@ -79,6 +79,28 @@ function* finishJob(action) {
     console.log("FINISH Job failed", error);
   }
 }
+//edit job details
+function* editSelectedJob(action) {
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    // send the action.payload as the body
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    //send action.payload.project as params
+    yield axios.put(
+      `/api/job/edit/${action.payload.selectedJob}`,
+      action.payload,
+      config
+    );
+    yield put({ type: "FETCH_JOBS" });
+    yield put({ type: "FETCH_JOB_DETAILS", payload: action.payload.selectedJob });
+  } catch (error) {
+    console.log("CHANGE TITLE failed", error);
+  }
+}
 
 function* jobSaga() {
   yield takeLatest("FILTER_JOBS", filterJobs);
@@ -87,6 +109,7 @@ function* jobSaga() {
   yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
   yield takeLatest("DELETE_JOB", deleteJob);
   yield takeLatest("FINISH_JOB", finishJob);
+  yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
 }
 
 export default jobSaga;
