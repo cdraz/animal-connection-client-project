@@ -19,6 +19,19 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/:id/edit', (req, res) => {
+    console.log('******* GET CONTACTS *******');
+    let queryText = `
+        SELECT * FROM "contacts";`
+    console.log(queryText);
+    pool.query(queryText)
+        .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
+        .catch((err) => {
+            console.log('User registration failed: ', err);
+            res.sendStatus(500);
+        });
+});
+
 //POST New contact
 router.post('/', (req, res, next) => {
     console.log('contact detail req.body', req.body);
