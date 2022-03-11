@@ -55,20 +55,12 @@ function AnimalDetail() {
                         Work History
                     </Typography>
                     <AnimalWorkHistoryTable animal={animal} />
-                    <Typography variant="h5">
-                        Audition History
-                    </Typography>
                     <AnimalAuditionHistoryTable animal={animal} />
                     {
                         // If animalType is dog, show behavior/training (we only track this for dogs)
-                        // animal.animalType.toLowerCase() === 'dog' ?
-                        <>
-                            <Typography variant="h5">
-                                Behavior, Training, Availability
-                            </Typography>
+                        animal.animalType === 1 ? 
                             <AnimalBehaviorTrainingTable animal={animal} />
-                        </>
-                        // : null
+                        : null
                     }
                     <AnimalAddToJobButton animal={animal} />
                 </Stack>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // MUI imports
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 function AnimalAddToJobButton({ animal }) {
@@ -34,7 +35,7 @@ function AnimalAddToJobButton({ animal }) {
             }
         });
     };
-    
+
     // On component load, get active jobs
     useEffect(() => {
         dispatch({ type: 'FETCH_ACTIVE_JOBS' });
@@ -42,6 +43,10 @@ function AnimalAddToJobButton({ animal }) {
 
     return (
         <>
+            <Typography variant="h5">
+                Add Animal to Job
+            </Typography>
+
             {Array.isArray(options) ?
                 <Autocomplete
                     options={options}
