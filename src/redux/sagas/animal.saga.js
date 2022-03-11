@@ -54,7 +54,7 @@ function* addAnimalToJob(action) {
 function* updateAnimalTraining(action) {
     try {
         const response = yield axios.put(`/api/animal/${action.payload.id}/training`, action.payload);
-        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: action.payload.id });
+        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: {id: action.payload.id }});
     }
     catch (error) {
         console.error('updateAnimalTraining failed', error);
