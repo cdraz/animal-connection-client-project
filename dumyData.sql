@@ -20,9 +20,6 @@ INSERT INTO "contacts" (
     ('pet owner', 'subash', 'khatri', 'prime', '6125554206', 'false', 'jacob@github.io', 'j3nkii.github.io', '123 ohyeah lane', 'pretty awesome guy');
 
 
-INSERT INTO "animalTypes" (
-    "type"
-) VALUES ('cat'), ('dog');
 
 INSERT INTO "animals"("id","contactsId","animalType","otherTypeDetail","image","name","color","breed","sex","notes","birthday","active","rating","height","weight","length","neckGirth","bellyGirth","sitOnLeash","sitOffLeash","standOnLeash","standOffLeash","downOnLeash","downOffLeash","barkOnCommand","holdItem","offLeashTrained","goodAroundChildren","otherDogs","smallAnimals","atDistanceFromTrainer","silentCommands","mark","loudNoiseLights","shortNotice","livesClose","overnight","strangerHandle","strangerDress")
 VALUES
@@ -42,7 +39,11 @@ INSERT INTO "jobs" (
     "notes",
     "jobNumber"
 ) VALUES ('needs 1000 chickens', 'now', 'Chris', 'true', 'might not have enought chickens', '4'),
-    ('needs 20 aligators', 'now', 'justin', 'true', 'plenty o gators', '5');
+    ('needs 20 aligators', 'now', 'justin', 'true', 'plenty o gators', '5'),
+    ('dogs for target ads', 'now', 'target', 'true', 'plenty o dogs', '6'),
+    ('needs 5 horses', 'now', 'subash', 'true', 'plenty o horses', '7'),
+    ('needs 17 tigers', 'now', 'edan', 'true', '', '8'),
+    ('needs 5 horses', 'now', 'subash', 'true', 'plenty o horses', '9'),
 
 INSERT INTO "jobContacts" (
     "jobId",
