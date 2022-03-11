@@ -16,7 +16,11 @@ function AnimalAuditionHistoryTable({ animal }) {
 
     if (auditions) {
         for (let audition of auditions) {
-            auditionList += `${audition.date}, `;
+            if (audition) {
+            auditionList += `${audition.date}, `
+            } else {
+                auditionList = 'No auditions on record.';
+            }
         }
     };
 

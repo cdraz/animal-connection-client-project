@@ -24,7 +24,7 @@ INSERT INTO "contacts" (
 INSERT INTO "animals"("id","contactsId","animalType","otherTypeDetail","image","name","color","breed","sex","notes","birthday","active","rating","height","weight","length","neckGirth","bellyGirth","sitOnLeash","sitOffLeash","standOnLeash","standOffLeash","downOnLeash","downOffLeash","barkOnCommand","holdItem","offLeashTrained","goodAroundChildren","otherDogs","smallAnimals","atDistanceFromTrainer","silentCommands","mark","loudNoiseLights","shortNotice","livesClose","overnight","strangerHandle","strangerDress")
 VALUES
 (1,1,1,'a','https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg','tom','Brown',1,'Male','Tom is a great dog','2022-03-07',TRUE,5,5,50,5,5,5,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,TRUE),
-(2,2,2,'g','https://www.look4dog.com/img/thumbs/crop/w350h350q80/breeds/alaskan-malamute-32827.jpeg','Bear','black',2,'Male','Bear is super derp','2022-03-10',TRUE,5,8,85,8,8,8,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,FALSE);
+(2,2,1,'g','https://www.look4dog.com/img/thumbs/crop/w350h350q80/breeds/alaskan-malamute-32827.jpeg','Bear','black',2,'Male','Bear is super derp','2022-03-10',TRUE,5,8,85,8,8,8,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,FALSE);
 
 INSERT INTO "auditions" (
     "animalsId",

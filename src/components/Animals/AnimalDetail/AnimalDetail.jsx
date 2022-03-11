@@ -34,7 +34,7 @@ function AnimalDetail() {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SELECTED_ANIMAL', payload: id });
+        dispatch({ type: 'FETCH_SELECTED_ANIMAL', payload: { id: id }});
     }, []);
 
     return (
