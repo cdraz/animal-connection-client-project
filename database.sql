@@ -102,3 +102,42 @@ CREATE TABLE "jobsJunction" (
     "checkAmount" FLOAT, -- if paid, what is check amount
     "checkDate" DATE -- if paid, what is check date
 );
+
+-------------DUMMYDATA
+INSERT INTO "contacts" (
+    "type", -- Animal Owner, Client, Crew
+    "firstName",
+    "lastName",
+    "company"),
+    "primaryNumber",
+    "text",
+    "email",
+    "website",
+    "address",
+    "notes")
+VALUES ('pet owner', 'jacob', 'larson', 'prime', '6125554206', 'true', 'jacob@github.io', 'j3nkii.github.io', '123 ohyeah lane', 'pretty awesome guy'),
+    ('pet owner', 'subash', 'khatri', 'prime', '6125554206', 'false', 'jacob@github.io', 'j3nkii.github.io', '123 ohyeah lane', 'pretty awesome guy');
+
+INSERT INTO "jobs" (
+    "description",
+    "date",
+    "client",
+    "active",
+    "notes",
+    "jobNumber"
+) VALUES ('needs 1000 chickens', 'now', 'Chris', 'true', 'might not have enought chickens', '4'),
+    ('needs 20 aligators', 'now', 'justin', 'true', 'plenty o gators', '5');
+
+INSERT INTO "jobContacts" (
+    "jobId",
+    "contactId"
+) VALUES ('1', '1'), ('2', '2');
+
+INSERT INTO "jobsJunction" (
+    "animalsId",
+    "jobId",
+    "paid", -- Have they been paid yet
+    "checkNumber", -- if paid, what is check number
+    "checkAmount", -- if paid, what is check amount
+    "checkDate"
+) VALUES ('1', '1', 'true', 'EEEEEE555', '80', 'now');

@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactEdit from '../Contacts/ContactEdit/ContactEdit'
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -10,7 +9,6 @@ function InfoPage() {
   return (
     <div className="container">
       <p>Info Page</p>
-      <ContactEdit />
     </div>
   );
 }
