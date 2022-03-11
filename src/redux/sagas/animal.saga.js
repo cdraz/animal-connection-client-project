@@ -28,7 +28,9 @@ function* fetchAnimals() {
 
 function* fetchSelectedAnimal(action) {
     try {
-        const response = yield axios.get(`/api/animal/${action.payload}`);
+        console.log('ACTION.PAYLOAD IS:', action.payload)
+        const response = yield axios.get(`/api/animal/${action.payload.id}`);
+        console.log('RESPONSE FOR SELECTED ANIMAL IS:', response);
         yield put({ type: 'SET_SELECTED_ANIMAL', payload: response.data });
     }
     catch (error) {
