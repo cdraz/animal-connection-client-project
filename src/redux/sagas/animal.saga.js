@@ -42,7 +42,8 @@ function* fetchSelectedAnimal(action) {
 function* addAnimalToJob(action) {
     try {
         const reponse = yield axios.post(`/api/animal/job`, action.payload);
-        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: action.payload.animalId });
+        console.log('addAnimal to job action.payload is:', action.payload);
+        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: { id: action.payload.animalId }});
     }
     catch (error) {
         console.error('addAnimalToJob failed', error);
