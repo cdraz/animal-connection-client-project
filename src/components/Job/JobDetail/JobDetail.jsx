@@ -108,13 +108,21 @@ function JobDetail() {
         </Stack>
       </div>
       <br></br>
+      <Box sx={{ flexGrow: 1 }}>
+<Grid
+          container
+          spacing={3}
+          justifyContent="space-evenly"
+        >
       {Array.isArray(selectedJobDetails) ? (
         selectedJobDetails.map((payDetails) => (
-          <JobPayEdit key={payDetails.id} payDetails={payDetails} />
+          <JobPayEdit key={payDetails.id} payDetails={payDetails} />//<<<<<<<<<<<<<<<<<<<<
         ))
       ) : (
         <p>Loading...</p>
       )}
+      </Grid>
+      </Box>
     </>
   );
 }

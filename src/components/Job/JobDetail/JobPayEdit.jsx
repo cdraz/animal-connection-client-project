@@ -11,6 +11,21 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+// MUI imports
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
+import Modal from "@mui/material/Modal";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 function JobPayEdit(prop) {
   // Dispatch hook, store access
@@ -38,6 +53,15 @@ function JobPayEdit(prop) {
     dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
   }, []);
 
+  //MUI
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  }));
+  //end MUI
+
   //edit job begins
   const editSelectedJob = (event) => {
     console.log("!@!@!@!#$#$#$#$#", prop.payDetails);
@@ -55,25 +79,61 @@ function JobPayEdit(prop) {
   return (
     <>
       {/* edit job form begins */}
-      <FontAwesomeIcon
-        className="penIcon"
-        icon={faPenToSquare}
-        flip="horizontal"
-        transform="grow-9 right-15"
-        onClick={() => setEditable(true)}
-      />
 
       <div variant="body2">
         {/* conditional rendering if editable button was clicked  */}
         {!editable ? (
-          <div>
-            {payDetails.checkAmount}
-            <br></br>
-            {payDetails.paid.toString()}
-            {payDetails.checkNumber}
-            <br></br>
-            {payDetails.checkDate}
-          </div>
+          <Grid>
+            <Item id="item">
+              <Card
+                key={payDetails.id}
+                sx={{ maxWidth: 275, minWidth: 275, minHeight: 300, maxHeight: 300}}
+              >
+                <CardActionArea>
+                  <FontAwesomeIcon
+                    className="penIcon"
+                    icon={faPenToSquare}
+                    flip="horizontal"
+                    transform="grow-9 left-150 down-15"
+                    onClick={() => setEditable(true)}
+                  />
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={payDetails.image}
+                    alt={payDetails.name}
+                  />
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      {payDetails.checkAmount}
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                      {payDetails.paid.toString()}
+                    </Typography>
+                    <Typography
+                      sx={{ mb: 1.5 }}
+                      color="text.secondary"
+                    ></Typography>
+                  </CardContent>
+                  {payDetails.checkNumber}
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      noWrap
+                      variant="h6"
+                      component="div"
+                    >
+                      {payDetails.checkDate}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Item>
+          </Grid>
         ) : (
           <form onSubmit={editSelectedJob}>
             {/* client input */}
