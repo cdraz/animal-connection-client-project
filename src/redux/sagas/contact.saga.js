@@ -41,7 +41,7 @@ function* saveChanges(action) {
 function* deleteContacts(action) {
     try{
         
-        yield axios.delete(`/api/contact${action.payload}`);
+    yield axios.delete(`/api/contact${action.payload}`);
     } catch (error) {
         console.log('DELETE contact failed', error);
     }

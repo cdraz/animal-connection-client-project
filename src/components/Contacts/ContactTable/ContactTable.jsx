@@ -11,8 +11,8 @@ const contacts = () => {
     
 
 
-    const handleSelectedContact = (contact) => {
-        dispatch ({type: "SET_SELECTED_CONTACT", payload: contacts});
+    const handleSelectedContact = (id) => {
+        dispatch ({type: "SET_SELECTED_CONTACT", payload: id});
         history.push("/contactDetail");
     }
     return (
@@ -32,11 +32,11 @@ const contacts = () => {
                         <th>Notes</th>
                     </tr>
                 </thead>
-                <tbody  onClick= {() => handleSelectedContact()}>
+                <tbody  >
 
                     {contacts.length > 0 
                         ? contacts.map(contact => (
-                            <tr>
+                            <tr onClick= {() => handleSelectedContact(contact.id)}>
                                 <td>
                                     {contact.firstName}
                                 </td>
