@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
+import JobEditDetail from "./JobEditDetail";
+import JobPayEdit from "./JobPayEdit";
 
 // React components
 import JobCard from "../JobCard/JobCard";
@@ -13,6 +15,11 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+
+//MUI
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
 
 function JobDetail() {
   // Dispatch hook, store access
@@ -72,18 +79,9 @@ function JobDetail() {
 
   return (
     <>
+      <JobEditDetail />
       <div>
-        {selectedJob.client}
         <br></br>
-        {selectedJob.date}
-        <br></br>
-        {selectedJob.jobNumber}
-        <br></br>
-        {selectedJob.notes}
-        <br></br>
-        {selectedJob.description}
-        <br></br>
-        {selectedJobDetails.checkAmount}
 
         <Stack direction="row" spacing={2}>
           <Button
@@ -109,6 +107,14 @@ function JobDetail() {
           </Button>
         </Stack>
       </div>
+      <br></br>
+      {Array.isArray(selectedJobDetails) ? (
+        selectedJobDetails.map((payDetails) => (
+          <JobPayEdit key={payDetails.id} payDetails={payDetails} />
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }

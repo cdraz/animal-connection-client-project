@@ -3,17 +3,17 @@ import { put, takeLatest } from "redux-saga/effects";
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* filterJobs(action) {
-    const thing = action.payload
-    try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-        const response = yield axios.get(`/api/job`, {params: thing});
-        yield put({ type: 'SET_JOBS', payload: response.data });
-    } catch (error) {
-        console.log('User get request failed', error);
-    }
+  const thing = action.payload;
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    const response = yield axios.get(`/api/job`, { params: thing });
+    yield put({ type: "SET_JOBS", payload: response.data });
+  } catch (error) {
+    console.log("User get request failed", error);
+  }
 }
 
 function* fetchJobs() {
@@ -44,7 +44,7 @@ function* fetchJobDetails(action) {
       response.data
     );
 
-    yield put({ type: "SET_SELECTED_JOB_DETAILS", payload: response.data[0] });
+    yield put({ type: "SET_SELECTED_JOB_DETAILS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   } catch (error) {
     console.error("fetchSelectedJob failed", error);
   }
@@ -79,14 +79,59 @@ function* finishJob(action) {
     console.log("FINISH Job failed", error);
   }
 }
+//edit job details
+function* editSelectedJob(action) {
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    // send the action.payload as the body
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    //send action.payload.project as params
+    yield axios.put(
+      `/api/job/edit/${action.payload.selectedJob}`,
+      action.payload,
+      config
+    );
+    yield put({ type: "FETCH_JOBS" });
+    yield put({
+      type: "FETCH_JOB_DETAILS",
+      payload: action.payload.selectedJob,
+    });
+  } catch (error) {
+    console.log("CHANGE TITLE failed", error);
+  }
+}
+//edit selected job pay
+function* editSelectedJobPay(action) {
+  try {
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    // send the action.payload as the body
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    //send action.payload.project as params
+    yield axios.put(
+      `/api/job/edit/pay/${action.payload.payDetails}`,
+      action.payload,
+      config
+    );
+    yield put({ type: "FETCH_JOBS" });
+  } catch (error) {
+    console.log("CHANGE TITLE failed", error);
+  }
+}
 
 function* fetchActiveJobs() {
   try {
-    const response = yield axios.get('/api/activejob');
-    yield put({ type: 'SET_ACTIVE_JOBS', payload: response.data });
-  }
-  catch (error) {
-    console.error('fetchActiveJobs failed', error);
+    const response = yield axios.get("/api/activejob");
+    yield put({ type: "SET_ACTIVE_JOBS", payload: response.data });
+  } catch (error) {
+    console.error("fetchActiveJobs failed", error);
   }
 }
 
@@ -97,6 +142,8 @@ function* jobSaga() {
   yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
   yield takeLatest("DELETE_JOB", deleteJob);
   yield takeLatest("FINISH_JOB", finishJob);
+  yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
+  yield takeLatest("EDIT_SELECTED_JOB_PAY", editSelectedJobPay);
   yield takeLatest("FETCH_ACTIVE_JOBS", fetchActiveJobs);
 }
 

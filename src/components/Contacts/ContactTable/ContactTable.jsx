@@ -1,10 +1,20 @@
 import React from "react";
 import "./ContactTable.css"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 
 const contacts = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const contacts = useSelector((store) => store.contact);
+    
+
+
+    const handleSelectedContact = (contact) => {
+        dispatch ({type: "SET_SELECTED_CONTACT", payload: contact});
+        history.push("/contactDetail");
+    }
     return (
         <div className="contact-container">
             <table>
@@ -22,7 +32,8 @@ const contacts = () => {
                         {/* <th>Notes</th> */}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody onClick= {() => handleSelectedContact()}>
+
                     {contacts.length > 0 
                         ? contacts.map(contact => (
                             <tr>

@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 // MUI imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,9 +15,13 @@ import Typography from '@mui/material/Typography';
 
 function AnimalSummary({ animal }) {
 
+    // Set state variable for edit mode
+    const [edit, setEdit] = useState(false);
+
     // TODO: Calculate animal age
     let age = 2
 
+    // Declare ed
     return (
         <>
             <img
@@ -24,7 +31,7 @@ function AnimalSummary({ animal }) {
             <Typography variant="h3">
                 {animal.name}
             </Typography>
-            <Rating value={animal.rating} />
+            <Rating readOnly={!edit} value={animal.rating} />
             <TableContainer component={Paper}>
                 <Table aria-label="training table">
                     <TableBody>

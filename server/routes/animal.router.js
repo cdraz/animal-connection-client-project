@@ -73,6 +73,90 @@ router.post('/', (req, res) => {
     // POST route code here
 });
 
+/**
+ * PUT animal/:id -- update animal training info
+ */
+router.put('/:id/training', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        UPDATE "animals"
+        SET "sitOnLeash" = $1,
+        "sitOffLeash" = $2,
+        "downOnLeash" = $3,
+        "downOffLeash" = $4,
+        "standOnLeash" = $5,
+        "standOffLeash" = $6,
+        "barkOnCommand" = $7,
+        "holdItem" = $8,
+        "mark" = $9,
+        "silentCommands" = $10,
+        "strangerHandle" = $11,
+        "strangerDress" = $12,
+        "goodAroundChildren" = $13,
+        "otherDogs" = $14,
+        "smallAnimals" = $15,
+        "loudNoiseLights" = $16,
+        "shortNotice" = $17,
+        "overnight" = $18
+        WHERE "id" = $19
+    `;
+        const queryParams = [
+            req.body.sitOnLeash,
+            req.body.sitOffLeash,
+            req.body.downOnLeash,
+            req.body.downOffLeash,
+            req.body.standOnLeash,
+            req.body.standOffLeash,
+            req.body.barkOnCommand,
+            req.body.holdItem,
+            req.body.mark,
+            req.body.silentCommands,
+            req.body.strangerHandle,
+            req.body.strangerDress,
+            req.body.goodAroundChildren,
+            req.body.otherDogs,
+            req.body.smallAnimals,
+            req.body.loudNoiseLights,
+            req.body.shortNotice,
+            req.body.overnight,
+            req.params.id
+        ];
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in PUT /animal/id/training', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * POST Animal to job
+ */
+router.post('/job', async (req, res) => {
+    // POST animal to jobsJunction table
+    console.log('******* POST /animals/job *******')
+    try {
+        // Write SQL query
+        const queryText = `
+            INSERT INTO "jobsJunction" ("animalsId", "jobId")
+            VALUES ($1, $2);
+        `;
+        const queryParams = [
+            req.body.animalId, // $1
+            req.body.jobId // $2
+        ];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;
 
 function queryGen(qFilter) {
