@@ -18,7 +18,21 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         });
 });
-
+// Delete on contact
+router.delete("/", (req, res) => {
+    // endpoint functionality
+  
+    const queryText = "DELETE FROM contacts WHERE id=$1";
+    pool
+      .query(queryText, [req.params.id])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log("Error completing Delete contact query", err);
+        res.sendStatus(500);
+      });
+  });
 //POST New contact
 router.post('/', (req, res, next) => {
     console.log('contact detail req.body', req.body);

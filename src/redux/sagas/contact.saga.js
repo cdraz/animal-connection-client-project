@@ -38,12 +38,22 @@ function* saveChanges(action) {
 }
 }
 
+function* deleteContacts(action) {
+    try{
+        
+        yield axios.delete(`/api/contact${action.payload}`);
+    } catch (error) {
+        console.log('DELETE contact failed', error);
+    }
+}
+
+
 
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
     yield takeLatest('ADD_CONTACTS', addContacts);
     yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
-
+    yield takeLatest('DELETE_CONTACTS', deleteContacts);
 }
 
 export default contactSaga;

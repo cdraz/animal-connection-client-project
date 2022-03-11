@@ -50,7 +50,7 @@ function ContactPage() {
         </button>
           <ContactSearchBar />
 
-          {/* <ContactDetail /> */}
+          {/* <contactDetail /> */}
           
 
 

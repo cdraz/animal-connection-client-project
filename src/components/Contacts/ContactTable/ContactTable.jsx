@@ -12,7 +12,7 @@ const contacts = () => {
 
 
     const handleSelectedContact = (contact) => {
-        dispatch ({type: "SET_SELECTED_CONTACT", payload: contact});
+        dispatch ({type: "SET_SELECTED_CONTACT", payload: contacts});
         history.push("/contactDetail");
     }
     return (
@@ -23,16 +23,16 @@ const contacts = () => {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Primary Number</th>
-                        {/* <th>Secondary Number</th> */}
+                        <th>Secondary Number</th>
                         <th>Text</th>
                         <th>Email</th>
                         <th>Type</th>
-                        {/* <th>Website</th> */}
-                        {/* <th>Address</th> */}
-                        {/* <th>Notes</th> */}
+                        <th>Website</th>
+                        <th>Address</th>
+                        <th>Notes</th>
                     </tr>
                 </thead>
-                <tbody onClick= {() => handleSelectedContact()}>
+                <tbody  onClick= {() => handleSelectedContact()}>
 
                     {contacts.length > 0 
                         ? contacts.map(contact => (
@@ -47,6 +47,9 @@ const contacts = () => {
                                     {contact.primaryNumber}
                                 </td>
                                 <td>
+                                    {contact.secondaryNumber}
+                                </td>
+                                <td>
                                     {contact.text ? 'yes' : 'no'}
                                 </td>
                                 <td>
@@ -54,6 +57,15 @@ const contacts = () => {
                                 </td>
                                 <td>
                                     {contact.type}
+                                </td>
+                                <td>
+                                    {contact.website}
+                                </td>
+                                <td>
+                                    {contact.address}
+                                </td>
+                                <td>
+                                    {contact.notes}
                                 </td>
                             </tr>
                         ))
