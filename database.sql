@@ -29,6 +29,10 @@ CREATE TABLE "animalTypes" (
     "type" VARCHAR(255)
 );
 
+INSERT INTO "animalTypes" (
+    "type"
+) VALUES ('dog'), ('cat');
+
 CREATE TABLE "animals" (
     "id" SERIAL PRIMARY KEY,
     "contactsId" INT REFERENCES "contacts" ON DELETE CASCADE,
