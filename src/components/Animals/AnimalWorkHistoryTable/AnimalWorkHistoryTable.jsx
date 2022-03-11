@@ -28,9 +28,9 @@ function AnimalWorkHistoryTable({ animal }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {/* TODO: make the table row a link to the job detail when jobs are set up */}
                     {jobs ? jobs.map(job => (
-                        <TableRow key={job.id} onClick={() => history.push(`/jobs/${job.id}`)}>
+                        job.data ?
+                            <TableRow key={job.id} onClick={() => history.push(`/jobs/${job.id}`)}>
                                 <TableCell align="left">
                                     {job.date}
                                 </TableCell>
@@ -43,8 +43,8 @@ function AnimalWorkHistoryTable({ animal }) {
                                 <TableCell align="left">
                                     {job.description}
                                 </TableCell>
-                        </TableRow>
-                    )) : <TableRow><TableCell>'No job history.'</TableCell></TableRow>}
+                            </TableRow>
+                            : null)) : <TableRow><TableCell>'No job history.'</TableCell></TableRow>}
                 </TableBody>
             </Table>
         </TableContainer>

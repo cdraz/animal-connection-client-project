@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
+        console.log('IN GET /ANIMAL/:ID, REQ.PARAMS IS:', req.params)
         const queryText = `
         SELECT
             "animals".*,
@@ -44,11 +45,11 @@ router.get('/:id', async (req, res) => {
         FROM "animals"
         JOIN "contacts"
             ON "contacts"."id" = "animals"."contactsId"
-        JOIN "auditions"
+        LEFT JOIN "auditions"
             ON "auditions"."animalsId" = "animals"."id"
-        JOIN "jobsJunction"
+        LEFT JOIN "jobsJunction"
             ON "jobsJunction"."animalsId" = "animals"."id"
-        JOIN "jobs"
+        LEFT JOIN "jobs"
             ON "jobsJunction"."jobId" = "jobs"."id"
         WHERE "animals"."id" = $1
         GROUP BY "animals"."id";
@@ -57,7 +58,7 @@ router.get('/:id', async (req, res) => {
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
-        console.log(dbRes.rows);
+        console.log('GET /ANIMAL/:ID DBRES IS:', dbRes.rows);
         res.send(dbRes.rows);
     }
     catch (error) {
