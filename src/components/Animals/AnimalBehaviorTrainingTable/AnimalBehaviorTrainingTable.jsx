@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 // MUI imports
 import Button from '@mui/material/Button';
@@ -15,6 +16,9 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
 function AnimalBehaviorTrainingTable({ animal }) {
+
+    // Dispatch hook
+    const dispatch = useDispatch();
 
     // Set state variables for the inputs
     const [sitOnLeash, setSitOnLeash] = useState(animal.sitOnLeash);
@@ -42,6 +46,31 @@ function AnimalBehaviorTrainingTable({ animal }) {
     // Declare updateAnimal
     const updateAnimal = () => {
         console.log('in updateAnimal');
+        dispatch({
+            type: 'UPDATE_ANIMAL_TRAINING',
+            payload: {
+                id: animal.id,
+                sitOnLeash,
+                sitOffLeash,
+                downOnLeash,
+                downOffLeash,
+                standOnLeash,
+                standOffLeash,
+                barkOnCommand,
+                holdItem,
+                mark,
+                silentCommands,
+                strangerHandle,
+                strangerDress,
+                goodAroundChildren,
+                otherDogs,
+                smallAnimals,
+                loudNoiseLights,
+                shortNotice,
+                overnight
+            }
+        })
+        setEdit(!edit);
     }
 
     return (
