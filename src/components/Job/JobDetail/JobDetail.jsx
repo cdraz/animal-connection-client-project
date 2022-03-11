@@ -108,6 +108,7 @@ function JobDetail() {
         </Stack>
       </div>
       <br></br>
+      <div id="jobCardContainer">
       <Box sx={{ flexGrow: 1 }}>
 <Grid
           container
@@ -123,6 +124,7 @@ function JobDetail() {
       )}
       </Grid>
       </Box>
+      </div>
     </>
   );
 }
