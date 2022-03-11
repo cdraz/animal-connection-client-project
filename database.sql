@@ -34,12 +34,12 @@ CREATE TABLE "animals" (
     "contactsId" INT REFERENCES "contacts",
     "animalType" INT REFERENCES "animalTypes", -- Dog, Cat, Rabbit, Horse, Other
     "otherTypeDetail" VARCHAR(255), -- If animalType is Other, this text field is used to describe what it is exactly (Lizard, Kangaroo, Parrot, etc.)
-    "image" VARCHAR(2500), -- From audition form will be uploaded by user, can be overwritten by Barbara
+    "image" VARCHAR(3500), -- From audition form will be uploaded by user, can be overwritten by Barbara
     "name" VARCHAR(255),
     "color" VARCHAR(255),
     "breed" VARCHAR(255), --Int?
     "sex" VARCHAR(255),
-    "notes" VARCHAR(255),
+    "notes" VARCHAR(2055),
     "birthday" DATE,
     "active" BOOLEAN,
     "rating" INTEGER, -- 1 to 5, chosen by Barbara
@@ -83,7 +83,7 @@ CREATE TABLE "jobs" (
     "date" DATE,
     "client" VARCHAR(255),
     "active" BOOLEAN,
-    "notes" VARCHAR(255),
+    "notes" VARCHAR(2055),
     "jobNumber" VARCHAR(255)
 );
 
@@ -102,3 +102,11 @@ CREATE TABLE "jobsJunction" (
     "checkAmount" FLOAT, -- if paid, what is check amount
     "checkDate" DATE -- if paid, what is check date
 );
+
+INSERT INTO "public"."animals"("id","contactsId","animalType","otherTypeDetail","image","name","color","breed","sex","notes","birthday","active","rating","height","weight","length","neckGirth","bellyGirth","sitOnLeash","sitOffLeash","standOnLeash","standOffLeash","downOnLeash","downOffLeash","barkOnCommand","holdItem","offLeashTrained","goodAroundChildren","otherDogs","smallAnimals","atDistanceFromTrainer","silentCommands","mark","loudNoiseLights","shortNotice","livesClose","overnight","strangerHandle","strangerDress")
+VALUES
+(1,1,E'dog',E'a',E'https://vetstreet-brightspot.s3.amazonaws.com/a1/559f30a80911e0a0d50050568d634f/file/goldendoodle-1-645mk070411.jpg',E'tom',E'Brown',1,E'Male',E'Tom is a great dog',E'2022-03-07',TRUE,5,5,50,5,5,5,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,TRUE,TRUE);
+INSERT INTO "public"."animals"("id","contactsId","animalType","otherTypeDetail","image","name","color","breed","sex","notes","birthday","active","rating","height","weight","length","neckGirth","bellyGirth","sitOnLeash","sitOffLeash","standOnLeash","standOffLeash","downOnLeash","downOffLeash","barkOnCommand","holdItem","offLeashTrained","goodAroundChildren","otherDogs","smallAnimals","atDistanceFromTrainer","silentCommands","mark","loudNoiseLights","shortNotice","livesClose","overnight","strangerHandle","strangerDress")
+VALUES
+(2,2,E'dog',E'g',E'https://www.look4dog.com/img/thumbs/crop/w350h350q80/breeds/alaskan-malamute-32827.jpeg',E'Bear',E'black',2,E'Male',E'Bear is super derp',E'2022-03-10',TRUE,5,8,85,8,8,8,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,FALSE);
+
