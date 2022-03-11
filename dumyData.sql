@@ -43,7 +43,7 @@ INSERT INTO "jobs" (
     ('dogs for target ads', 'now', 'target', 'true', 'plenty o dogs', '6'),
     ('needs 5 horses', 'now', 'subash', 'true', 'plenty o horses', '7'),
     ('needs 17 tigers', 'now', 'edan', 'true', '', '8'),
-    ('needs 5 horses', 'now', 'subash', 'true', 'plenty o horses', '9'),
+    ('needs 5 horses', 'now', 'subash', 'true', 'plenty o horses', '9');
 
 INSERT INTO "jobContacts" (
     "jobId",
