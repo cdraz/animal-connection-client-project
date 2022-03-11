@@ -87,7 +87,7 @@ function JobPayEdit(prop) {
             <Item id="item">
               <Card
                 key={payDetails.id}
-                sx={{ maxWidth: 275, minWidth: 275, minHeight: 300, maxHeight: 300}}
+                sx={{ maxWidth: 275, minWidth: 275, minHeight: 350, maxHeight: 350}}
               >
                 <CardActionArea>
                   <FontAwesomeIcon
@@ -105,30 +105,25 @@ function JobPayEdit(prop) {
                   />
                   <CardContent>
                     <Typography
-                      sx={{ fontSize: 24 }}
+                      sx={{ fontSize: 18 }}
                       color="text.secondary"
                       gutterBottom
                     >
-                      {payDetails.checkAmount}
+                      owner: {payDetails.firstName}
+                      <br></br>
+                      pet:{payDetails.name}
+                      <br></br>
+                      
                     </Typography>
-                    <Typography variant="h5" component="div">
-                      {payDetails.paid.toString()}
+                    <Typography variant="h6" component="div">
+                      Paid: {payDetails.paid.toString()}
+                      <br></br>
+                      Amount: {payDetails.checkAmount}
                     </Typography>
                     <Typography
                       sx={{ mb: 1.5 }}
                       color="text.secondary"
                     ></Typography>
-                  </CardContent>
-                  {payDetails.checkNumber}
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      noWrap
-                      variant="h6"
-                      component="div"
-                    >
-                      {payDetails.checkDate}
-                    </Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>
