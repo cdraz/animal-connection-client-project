@@ -20,7 +20,9 @@ import AnimalDetail from "../Animals/AnimalDetail/AnimalDetail";
 import JobPage from "../Job/JobsPage/JobsPage";
 import JobDetail from "../Job/JobDetail/JobDetail";
 import Contacts from "../Contacts/ContactPage/ContactPage";
-import ContactDetail from "../Contacts/ContactDetail/ContactDetail"
+import ContactDetail from "../Contacts/ContactDetail/ContactDetail";
+import ContactForm from "../Contacts/contactForm/contactForm";
+import ContactEdit from "../Contacts/ContactEdit/ContactEdit";
 
 
 import UserPage from "../UserPage/UserPage";
@@ -78,6 +80,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/contactEdit"
+          >
+            <ContactEdit />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage
             exact
             path="/animals"
@@ -111,18 +121,18 @@ function App() {
           <ProtectedRoute
             // logged in shows JobDetailPage else shows LoginPage
             exact
-            path="/contactDetail"
+            path="/contacts/:id"
           >
             <ContactDetail />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows ContactDetailPage else shows LoginPage
             exact
             path="/contactForm"
           >
             <ContactForm />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage

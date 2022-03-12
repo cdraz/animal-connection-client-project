@@ -1,7 +1,7 @@
 import React from "react";
 import "./ContactTable.css"
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 const contacts = () => {
@@ -11,8 +11,8 @@ const contacts = () => {
     
 
 
-    const handleSelectedContact = (contact) => {
-        dispatch ({type: "SET_SELECTED_CONTACT", payload: contact});
+    const handleSelectedContact = (id) => {
+        dispatch ({type: "SET_SELECTED_CONTACT", payload: id});
         history.push("/contactDetail");
     }
     return (
@@ -23,16 +23,17 @@ const contacts = () => {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Primary Number</th>
-                        {/* <th>Secondary Number</th> */}
+                        <th>Secondary Number</th>
                         <th>Text</th>
                         <th>Email</th>
                         <th>Type</th>
-                        {/* <th>Website</th> */}
-                        {/* <th>Address</th> */}
-                        {/* <th>Notes</th> */}
+                        <th>Website</th>
+                        <th>Address</th>
+                        <th>Notes</th>
+                        <th>Show Details</th>
                     </tr>
                 </thead>
-                <tbody onClick= {() => handleSelectedContact()}>
+                <tbody  >
 
                     {contacts.length > 0 
                         ? contacts.map(contact => (
@@ -47,6 +48,9 @@ const contacts = () => {
                                     {contact.primaryNumber}
                                 </td>
                                 <td>
+                                    {contact.secondaryNumber}
+                                </td>
+                                <td>
                                     {contact.text ? 'yes' : 'no'}
                                 </td>
                                 <td>
@@ -54,6 +58,19 @@ const contacts = () => {
                                 </td>
                                 <td>
                                     {contact.type}
+                                </td>
+                                <td>
+                                    {contact.website}
+                                </td>
+                                <td>
+                                    {contact.address}
+                                </td>
+                                <td>
+                                    {contact.notes}
+                                </td>
+                                <td>
+                                    <Link to={`/contacts/${contact.id}`}>Details
+                                    </Link>
                                 </td>
                             </tr>
                         ))
