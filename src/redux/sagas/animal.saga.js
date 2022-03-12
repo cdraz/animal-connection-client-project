@@ -28,7 +28,9 @@ function* fetchAnimals() {
 
 function* fetchSelectedAnimal(action) {
     try {
-        const response = yield axios.get(`/api/animal/${action.payload}`);
+        console.log('ACTION.PAYLOAD IS:', action.payload)
+        const response = yield axios.get(`/api/animal/${action.payload.id}`);
+        console.log('RESPONSE FOR SELECTED ANIMAL IS:', response);
         yield put({ type: 'SET_SELECTED_ANIMAL', payload: response.data });
     }
     catch (error) {
@@ -40,7 +42,8 @@ function* fetchSelectedAnimal(action) {
 function* addAnimalToJob(action) {
     try {
         const reponse = yield axios.post(`/api/animal/job`, action.payload);
-        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: action.payload.animalId });
+        console.log('addAnimal to job action.payload is:', action.payload);
+        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: { id: action.payload.animalId }});
     }
     catch (error) {
         console.error('addAnimalToJob failed', error);
@@ -51,7 +54,7 @@ function* addAnimalToJob(action) {
 function* updateAnimalTraining(action) {
     try {
         const response = yield axios.put(`/api/animal/${action.payload.id}/training`, action.payload);
-        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: action.payload.id });
+        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: {id: action.payload.id }});
     }
     catch (error) {
         console.error('updateAnimalTraining failed', error);
