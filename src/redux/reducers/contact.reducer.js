@@ -3,7 +3,9 @@ const contactReducer = (state = {}, action) => {
         case 'SET_CONTACTS':
             return action.payload;
         case 'UPDATE_ACTIVE_CONTACTS':
-            return {...state, ...action.payload};    
+            return {...state, ...action.payload};  
+        case 'SET_SELECTED_CONTACT':
+            return action.payload;  
         default:
             return state;
     }

@@ -3,6 +3,9 @@ import {useHistory, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {useEffect} from "react";
 
+import AnimalCard from '../../Animals/AnimalCard/AnimalCard';
+import JobCard from '../../Job/JobCard/JobCard'
+
 
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import IconButton from '@mui/material/IconButton';
@@ -18,11 +21,10 @@ function ContactDetail() {
     // Set id from URL parameters
     const { id } = useParams();
 
+    
     useEffect(() => {
-        console.log('selected contact is', contacts);
-        console.log('selected contact *******', selectedContact);
-        
-    })
+        dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
+    }, []);
 
     const deleteContact = () => {
         dispatch({type: 'DELETE_CONTACT', payload: contacts.id});
@@ -56,6 +58,18 @@ function ContactDetail() {
         <IconButton onClick= {deleteContact} aria-label="delete" size="large">
         <DeleteIcon fontSize="inherit" />
         </IconButton>
+        <h2>WORK HISTORY</h2>
+            {Array.isArray(contacts.jobs) ? (
+                //not sure why im getting a null in array
+                contacts.jobs.map((job) => job && <JobCard job={job} key={job.id} />)
+            ) : (
+                <p>Loading...</p>
+            )}
+        <h2>ANIMALS</h2>
+        {Array.isArray(contacts.animals) ?
+            contacts.animals.map( animal => (
+            <AnimalCard key= {animal.id} animal={animal} />
+        )) : <p>Loading...</p>}
 
         
 

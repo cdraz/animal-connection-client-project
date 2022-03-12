@@ -121,7 +121,7 @@ function App() {
           <ProtectedRoute
             // logged in shows JobDetailPage else shows LoginPage
             exact
-            path="/contactDetail"
+            path="/contacts/:id"
           >
             <ContactDetail />
           </ProtectedRoute>

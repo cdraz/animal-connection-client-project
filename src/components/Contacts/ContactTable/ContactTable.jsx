@@ -1,7 +1,7 @@
 import React from "react";
 import "./ContactTable.css"
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 
 const contacts = () => {
@@ -30,13 +30,14 @@ const contacts = () => {
                         <th>Website</th>
                         <th>Address</th>
                         <th>Notes</th>
+                        <th>Show Details</th>
                     </tr>
                 </thead>
                 <tbody  >
 
                     {contacts.length > 0 
                         ? contacts.map(contact => (
-                            <tr onClick= {() => handleSelectedContact(contact.id)}>
+                            <tr>
                                 <td>
                                     {contact.firstName}
                                 </td>
@@ -66,6 +67,10 @@ const contacts = () => {
                                 </td>
                                 <td>
                                     {contact.notes}
+                                </td>
+                                <td>
+                                    <Link to={`/contacts/${contact.id}`}>Details
+                                    </Link>
                                 </td>
                             </tr>
                         ))

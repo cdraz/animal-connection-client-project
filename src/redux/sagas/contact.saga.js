@@ -17,7 +17,7 @@ function* addContacts(action) {
     try {
         console.log('contact post action.payload',action.payload);
         
-        const response = yield axios.post(`/api/contact`, action.payload);
+        const response = yield axios.post(`/api/contact`, action.payload.id);
         yield put({ type: 'FETCH_CONTACTS',});
     }
     catch (error) {
@@ -26,14 +26,13 @@ function* addContacts(action) {
 }
 
 function* fetchContactDetails(action){
+    console.log('####################', action.payload);
     try {
-        console.log('contact details action.payload',action.payload);
-        console.log('in edit contacts');
-        const response = yield axios.get(`/api/contact/${action.payload}/edit`);
-        // yield put({ type: 'FETCH_CONTACTS',});
+        const responseContact = yield axios.get(`/api/contact/${action.payload.id}`);
+        yield put({ type: 'SET_SELECTED_CONTACT', payload: responseContact.data[0]});
     }
     catch (error) {
-        console.error('fetchContacts failed', error);
+        console.error('fetchContacts failed', action.payload, error);
     }
 }
 
@@ -50,9 +49,9 @@ function* deleteContacts(action) {
 
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
-    yield takeLatest('FETCH_CONTACT_DETAILS_FOR_EDIT', fetchContactDetails);
+    yield takeLatest('FETCH_SELECTED_CONTACT', fetchContactDetails);
     yield takeLatest('ADD_CONTACTS', addContacts);
-    yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
+    // yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
     yield takeLatest('DELETE_CONTACTS', deleteContacts);
 }
 
