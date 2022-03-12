@@ -33,6 +33,20 @@ router.delete("/", (req, res) => {
         res.sendStatus(500);
       });
   });
+
+router.get('/:id/edit', (req, res) => {
+    console.log('******* GET CONTACTS *******');
+    let queryText = `
+        SELECT * FROM "contacts";`
+    console.log(queryText);
+    pool.query(queryText)
+        .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
+        .catch((err) => {
+            console.log('User registration failed: ', err);
+            res.sendStatus(500);
+        });
+});
+
 //POST New contact
 router.post('/', (req, res, next) => {
     console.log('contact detail req.body', req.body);
@@ -111,11 +125,14 @@ function queryGen(qFilter){
         sqlString: '',
         sqlParams: [],
     }
-    // let sqlString = ''; --? unsure why this is here, will delete if nothing breaks
-    if(qFilter.name){
-        sqlQuery.sqlString += ` AND (LOWER("firstName") ~ $${paramNumber} OR
-            LOWER("lastName") ~ $${paramNumber})`;
-        sqlQuery.sqlParams.push(qFilter.name);
+    if(qFilter.firstName){
+        sqlQuery.sqlString += ` AND LOWER("firstName") ~ $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.firstName);
+        paramNumber++;
+    }
+    if(qFilter.lastName){
+        sqlQuery.sqlString += ` AND LOWER("lastName") ~ $${paramNumber}`;
+        sqlQuery.sqlParams.push(qFilter.lastName);
         paramNumber++;
     }
     if(qFilter.company){

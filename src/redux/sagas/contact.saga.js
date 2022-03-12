@@ -25,16 +25,16 @@ function* addContacts(action) {
     }
 }
 
-function* saveChanges(action) {
-    try{
-        yield axios.put('/api/contact', action.payload);
-        yield put ({
-            type: 'FETCH_CONTACTS'
-
-        })
+function* fetchContactDetails(action){
+    try {
+        console.log('contact details action.payload',action.payload);
+        console.log('in edit contacts');
+        const response = yield axios.get(`/api/contact/${action.payload}/edit`);
+        // yield put({ type: 'FETCH_CONTACTS',});
     }
     catch (error) {
         console.error('fetchContacts failed', error);
+    }
 }
 }
 
@@ -51,6 +51,7 @@ function* deleteContacts(action) {
 
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
+    yield takeLatest('FETCH_CONTACT_DETAILS_FOR_EDIT', fetchContactDetails);
     yield takeLatest('ADD_CONTACTS', addContacts);
     yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
     yield takeLatest('DELETE_CONTACTS', deleteContacts);

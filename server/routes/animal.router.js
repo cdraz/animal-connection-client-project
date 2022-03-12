@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
+        console.log('IN GET /ANIMAL/:ID, REQ.PARAMS IS:', req.params)
         const queryText = `
         SELECT
             "animals".*,
@@ -44,11 +45,11 @@ router.get('/:id', async (req, res) => {
         FROM "animals"
         JOIN "contacts"
             ON "contacts"."id" = "animals"."contactsId"
-        JOIN "auditions"
+        LEFT JOIN "auditions"
             ON "auditions"."animalsId" = "animals"."id"
-        JOIN "jobsJunction"
+        LEFT JOIN "jobsJunction"
             ON "jobsJunction"."animalsId" = "animals"."id"
-        JOIN "jobs"
+        LEFT JOIN "jobs"
             ON "jobsJunction"."jobId" = "jobs"."id"
         WHERE "animals"."id" = $1
         GROUP BY "animals"."id";
@@ -57,7 +58,7 @@ router.get('/:id', async (req, res) => {
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
-        console.log(dbRes.rows);
+        console.log('GET /ANIMAL/:ID DBRES IS:', dbRes.rows);
         res.send(dbRes.rows);
     }
     catch (error) {
@@ -71,6 +72,90 @@ router.get('/:id', async (req, res) => {
  */
 router.post('/', (req, res) => {
     // POST route code here
+});
+
+/**
+ * PUT animal/:id -- update animal training info
+ */
+router.put('/:id/training', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        UPDATE "animals"
+        SET "sitOnLeash" = $1,
+        "sitOffLeash" = $2,
+        "downOnLeash" = $3,
+        "downOffLeash" = $4,
+        "standOnLeash" = $5,
+        "standOffLeash" = $6,
+        "barkOnCommand" = $7,
+        "holdItem" = $8,
+        "mark" = $9,
+        "silentCommands" = $10,
+        "strangerHandle" = $11,
+        "strangerDress" = $12,
+        "goodAroundChildren" = $13,
+        "otherDogs" = $14,
+        "smallAnimals" = $15,
+        "loudNoiseLights" = $16,
+        "shortNotice" = $17,
+        "overnight" = $18
+        WHERE "id" = $19
+    `;
+        const queryParams = [
+            req.body.sitOnLeash,
+            req.body.sitOffLeash,
+            req.body.downOnLeash,
+            req.body.downOffLeash,
+            req.body.standOnLeash,
+            req.body.standOffLeash,
+            req.body.barkOnCommand,
+            req.body.holdItem,
+            req.body.mark,
+            req.body.silentCommands,
+            req.body.strangerHandle,
+            req.body.strangerDress,
+            req.body.goodAroundChildren,
+            req.body.otherDogs,
+            req.body.smallAnimals,
+            req.body.loudNoiseLights,
+            req.body.shortNotice,
+            req.body.overnight,
+            req.params.id
+        ];
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in PUT /animal/id/training', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * POST Animal to job
+ */
+router.post('/job', async (req, res) => {
+    // POST animal to jobsJunction table
+    console.log('******* POST /animals/job *******')
+    try {
+        // Write SQL query
+        const queryText = `
+            INSERT INTO "jobsJunction" ("animalsId", "jobId")
+            VALUES ($1, $2);
+        `;
+        const queryParams = [
+            req.body.animalId, // $1
+            req.body.jobId // $2
+        ];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
 });
 
 module.exports = router;

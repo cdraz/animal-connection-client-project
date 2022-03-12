@@ -1,5 +1,5 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {useEffect} from "react";
 
@@ -12,8 +12,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function ContactDetail() {
     const dispatch = useDispatch();
     const history =  useHistory();
-    const contacts = useSelector(store => store.contact)
+    const contacts = useSelector(store => store.contact);
     const selectedContact = useSelector((store) => store.selectedContact);
+
+    // Set id from URL parameters
+    const { id } = useParams();
 
     useEffect(() => {
         console.log('selected contact is', contacts);
