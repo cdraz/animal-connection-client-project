@@ -36,7 +36,6 @@ function* fetchContactDetails(action){
         console.error('fetchContacts failed', error);
     }
 }
-}
 
 function* deleteContacts(action) {
     try{
