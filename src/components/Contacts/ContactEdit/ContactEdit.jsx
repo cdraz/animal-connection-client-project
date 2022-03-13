@@ -5,7 +5,7 @@ import {useHistory} from "react-router-dom";
 function ContactEdit () {
     const history = useHistory();
     const dispatch = useDispatch();
-    const contacts = useSelector (store => store.contact) 
+    const contacts = useSelector (store => store.contacts) 
 
     useEffect (() => {
         dispatch ({
@@ -20,7 +20,7 @@ function ContactEdit () {
             payload: contacts
 
         })
-        history.push('/contacts')
+        // history.push('/contacts/')
     }
 
 
@@ -28,8 +28,8 @@ function ContactEdit () {
     return (
         <>
         <form onSubmit={saveEdit}>
-         <span>
-             <label htmlFor="firstName">
+        <div>
+            <label htmlFor="firstName">
                 First Name:
             <input
                 type='text'
@@ -42,11 +42,11 @@ function ContactEdit () {
                     payload: {firstName: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="lastName">
+        <div>
+            <label htmlFor="lastName">
                 Last Name:
             <input
                 type='text'
@@ -59,11 +59,11 @@ function ContactEdit () {
                     payload: {lastName: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="primaryNumber">
+        <div>
+            <label htmlFor="primaryNumber">
                 Primary Number:
             <input
                 type='text'
@@ -76,27 +76,27 @@ function ContactEdit () {
                     payload: {primaryNumber: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
-         <span>
-             <label htmlFor="secondaryNumber">
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="secondaryNumber">
                 Secondary Number:
             <input
                 type='text'
                 name='secondaryNumber'
                 value={contacts.secondaryNumber}
-                required
                 placeholder='SecondaryNumber'
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_ACTIVE_CONTACTS',
                     payload: {secondaryNumber: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="text">
+        <div>
+            <label htmlFor="text">
                 Text:
             <input
                 type='text'
@@ -109,11 +109,11 @@ function ContactEdit () {
                     payload: {text: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="email">
+        <div>
+            <label htmlFor="email">
                 Email:
             <input
                 type='email'
@@ -126,11 +126,11 @@ function ContactEdit () {
                     payload: {email: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="type">
+        <div>
+            <label htmlFor="type">
                 Type:
             <input
                 type='text'
@@ -143,28 +143,27 @@ function ContactEdit () {
                     payload: {type: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="website">
+        <div>
+            <label htmlFor="website">
                 Website:
             <input
                 type='text'
                 name='website'
                 value={contacts.website}
-                required
                 placeholder='Website'
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_ACTIVE_CONTACTS',
                     payload: {website: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="address">
+        <div>
+            <label htmlFor="address">
                 Address:
             <input
                 type='text'
@@ -177,27 +176,26 @@ function ContactEdit () {
                     payload: {address: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
+            </label>
+        </div>
 
-         <span>
-             <label htmlFor="notes">
+        <div>
+            <label htmlFor="notes">
                 Notes:
             <input
                 type='text'
                 name='notes'
                 value={contacts.notes}
-                required
                 placeholder='Notes'
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_ACTIVE_CONTACTS',
                     payload: {notes: evt.target.value}
                 })}
             />    
-             </label>
-         </span>
-         
-         <button>Submit</button>
+            </label>
+        </div>
+        
+        <button>Submit</button>
         </form>
         </>
     )

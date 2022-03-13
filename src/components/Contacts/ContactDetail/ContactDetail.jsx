@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {useEffect} from "react";
 
 import AnimalCard from '../../Animals/AnimalCard/AnimalCard';
-import JobCard from '../../Job/JobCard/JobCard'
+import JobCard from '../../Job/JobCard/JobCard';
+import ContactEdit from '../ContactEdit/ContactEdit'
 
 
 import EditSharpIcon from '@mui/icons-material/EditSharp';
@@ -15,11 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function ContactDetail() {
     const dispatch = useDispatch();
     const history =  useHistory();
-    const contacts = useSelector(store => store.contact);
-    const selectedContact = useSelector((store) => store.selectedContact);
+    const selectedContact = useSelector((store) => store.contacts);
     const [editPage, setEditPage] = useState(false);
-    const [editContact, setEditContact] = useState(selectedContact);
-    console.log(editContact);
 
     // Set id from URL parameters
     const { id } = useParams();
@@ -35,24 +33,25 @@ function ContactDetail() {
 
     return (
         <>
-        {editPage 
-            ?<form>
-                <input placeholder="First Name" value={editContact.firstName}></input>
-                <input placeholder="Last Name" value={editContact.lastName}></input>
-                <input placeholder="Primary Number" value={editContact.primaryNumber}></input>
-                {/* <input placeholder="Secondary Number" value={contacts.secondaryNumber}></input> */}
-                <input placeholder="Text?" value={editContact.text}></input>
-                <input placeholder="Email" value={editContact.email}></input>
-                <input placeholder="Type" value={editContact.type}></input>
-                <input placeholder="Website" value={editContact.website}></input>
-                <input placeholder="Address" value={editContact.address}></input>
-                <input placeholder="Notes" value={editContact.notes}></input>
-                <button type="submit">Submit</button>
-            </form>
+        {editPage
+        ? <ContactEdit />
+            // ?<form>
+            //     <input placeholder="First Name" value={editContact.firstName}></input>
+            //     <input placeholder="Last Name" value={editContact.lastName}></input>
+            //     <input placeholder="Primary Number" value={editContact.primaryNumber}></input>
+            //     <input placeholder="Secondary Number" value={contacts.secondaryNumber}></input>
+            //     <input placeholder="Text?" value={editContact.text}></input>
+            //     <input placeholder="Email" value={editContact.email}></input>
+            //     <input placeholder="Type" value={editContact.type}></input>
+            //     <input placeholder="Website" value={editContact.website}></input>
+            //     <input placeholder="Address" value={editContact.address}></input>
+            //     <input placeholder="Notes" value={editContact.notes}></input>
+            //     <button type="submit">Submit</button>
+            // </form>
         : <>
             <p>Type: {`${selectedContact.type}`}</p>
-            <p>Name: {`${selectedContact.firstName} ${contacts.lastName}`}</p>
-            <p>Number: {`${selectedContact.primaryNumber} ${contacts.secondaryNumber}`}</p>
+            <p>Name: {`${selectedContact.firstName} ${selectedContact.lastName}`}</p>
+            <p>Number: {`${selectedContact.primaryNumber} ${selectedContact.secondaryNumber}`}</p>
             <p>Text: {`${selectedContact.text}`}</p>
             <p>Email: {`${selectedContact.email}`}</p>
             <p>Type: {`${selectedContact.type}`}</p>
@@ -61,25 +60,28 @@ function ContactDetail() {
             <p>Notes: {`${selectedContact.notes}`}</p>
         </>}
         
-        <EditSharpIcon onClick={() => setEditPage(!editPage)}>Edit</EditSharpIcon>
-        <IconButton onClick= {deleteContact} aria-label="delete" size="large">
+        <EditSharpIcon 
+            onClick={() => {
+                setEditPage(!editPage);
+                }
+            }>
+                Edit
+        </EditSharpIcon>
+        <IconButton onClick={deleteContact} aria-label="delete" size="large">
         <DeleteIcon fontSize="inherit" />
         </IconButton>
         <h2>WORK HISTORY</h2>
-            {Array.isArray(contacts.jobs) ? (
+            {Array.isArray(selectedContact.jobs) ? (
                 //not sure why im getting a null in array
-                contacts.jobs.map((job) => job && <JobCard job={job} key={job.id} />)
+                selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)
             ) : (
                 <p>Loading...</p>
             )}
         <h2>ANIMALS</h2>
-        {Array.isArray(contacts.animals) ?
-            contacts.animals.map( animal => (
+        {Array.isArray(selectedContact.animals) ?
+            selectedContact.animals.map( animal => (
             <AnimalCard key= {animal.id} animal={animal} />
         )) : <p>Loading...</p>}
-
-        
-
         </>
     )
 };

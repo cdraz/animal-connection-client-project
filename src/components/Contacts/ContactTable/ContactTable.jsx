@@ -5,16 +5,8 @@ import { useHistory, Link } from "react-router-dom";
 
 
 const contacts = () => {
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const contacts = useSelector((store) => store.contact);
-    
+    const contacts = useSelector((store) => store.contacts);
 
-
-    const handleSelectedContact = (id) => {
-        dispatch ({type: "SET_SELECTED_CONTACT", payload: id});
-        history.push("/contactDetail");
-    }
     return (
         <div className="contact-container">
             <table>
