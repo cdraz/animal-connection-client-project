@@ -9,7 +9,7 @@ function* filterJobs(action) {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
-    const response = yield axios.get(`/api/job`, { params: thing });
+    const response = yield axios.get(`/api/job`, { params: thing }); //<<<<<<<<<<<<<<<<<<<<<<<<<issue?
     yield put({ type: "SET_JOBS", payload: response.data });
   } catch (error) {
     console.log("User get request failed", error);
@@ -135,16 +135,32 @@ function* fetchActiveJobs() {
   }
 }
 
+function* fetchSelectedJob(action) {
+  try {
+    console.log("we are in fetchSelected saga", action.payload);
+
+    const response = yield axios.get(
+      `/api/job/selectedJob/${action.payload.id}`
+    );
+    console.log("what is set selected job response.data", response.data);
+
+    yield put({ type: "SET_SELECTED_JOB", payload: response.data[0] });
+  } catch (error) {
+    console.error("fetchJobs failed", error);
+  }
+}
+
 function* jobSaga() {
   yield takeLatest("FILTER_JOBS", filterJobs);
   yield takeLatest("FETCH_JOBS", fetchJobs);
-  yield takeLatest("ADD_JOB", addJob);
+  yield takeLatest("FETCH_ACTIVE_JOBS", fetchActiveJobs);
+  yield takeLatest("FETCH_SELECTED_JOB", fetchSelectedJob);
   yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
+  yield takeLatest("ADD_JOB", addJob);
   yield takeLatest("DELETE_JOB", deleteJob);
   yield takeLatest("FINISH_JOB", finishJob);
   yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
   yield takeLatest("EDIT_SELECTED_JOB_PAY", editSelectedJobPay);
-  yield takeLatest("FETCH_ACTIVE_JOBS", fetchActiveJobs);
 }
 
 export default jobSaga;

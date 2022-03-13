@@ -20,8 +20,7 @@ import AnimalDetail from "../Animals/AnimalDetail/AnimalDetail";
 import JobPage from "../Job/JobsPage/JobsPage";
 import JobDetail from "../Job/JobDetail/JobDetail";
 import Contacts from "../Contacts/ContactPage/ContactPage";
-import ContactDetail from "../Contacts/ContactDetail/ContactDetail"
-
+import ContactDetail from "../Contacts/ContactDetail/ContactDetail";
 
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -88,7 +87,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AnimalDetail else shows LoginPage
             exact
-            path="/animals/:id"//1<<<<<<<<<<<<<<<<<<<<<<!!!!
+            path="/animals/:id" //1<<<<<<<<<<<<<<<<<<<<<<!!!!
           >
             <AnimalDetail />
           </ProtectedRoute>

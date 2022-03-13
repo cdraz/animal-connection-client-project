@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';//2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom"; //2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!
 
 // React components
 import AnimalSummary from "../AnimalSummary/AnimalSummary";
@@ -34,7 +34,7 @@ function AnimalCard({ animal }) {
   };
 
   //MUI
-const Item = styled(Paper)(({ theme }) => ({
+  const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: "center",
@@ -57,30 +57,30 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: 3,
   };
 
-    return (
-        <Grid>
-    <Item id="item"> 
+  return (
+    <Grid>
+      <Item id="item">
         <Card key={animal.id} sx={{ maxWidth: 345 }}>
-            {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
-            <Link to={`/animals/${animal.id}`}>
-                <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image={animal.image}
-                        alt={animal.name}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom noWrap variant="h6" component="div">
-                            {animal.name}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Link>
+          {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
+          <Link to={`/animals/${animal.id}`}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image={animal.image}
+                alt={animal.name}
+              />
+              <CardContent>
+                <Typography gutterBottom noWrap variant="h6" component="div">
+                  {animal.name}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Link>
         </Card>
-        </Item>
+      </Item>
     </Grid>
-    )
-};
+  );
+}
 
 export default AnimalCard;
