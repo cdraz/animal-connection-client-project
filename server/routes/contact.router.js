@@ -108,7 +108,7 @@ router.put('/', (req, res) => {
     const sqlParams = [
         req.body.type,
         req.body.firstName,
-        req.body.lastNme,
+        req.body.lastName,
         req.body.primaryNumber,
         req.body.secondaryNumber,
         req.body.text,

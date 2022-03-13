@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
-function ContactEdit () {
+function ContactEdit ({setEditPage, editPage}) {
     const history = useHistory();
     const dispatch = useDispatch();
     const contacts = useSelector (store => store.contacts) 
@@ -18,9 +18,9 @@ function ContactEdit () {
         dispatch ({
             type: 'SAVE_CONTACT_CHANGES',
             payload: contacts
-
-        })
-        // history.push('/contacts/')
+        });
+        setEditPage(!editPage)
+        // history.push(`/contacts/${contacts.id}`)
     }
 
 

@@ -34,7 +34,7 @@ function ContactDetail() {
     return (
         <>
         {editPage
-        ? <ContactEdit />
+        ? <ContactEdit editPage={editPage} setEditPage={setEditPage} />
             // ?<form>
             //     <input placeholder="First Name" value={editContact.firstName}></input>
             //     <input placeholder="Last Name" value={editContact.lastName}></input>
