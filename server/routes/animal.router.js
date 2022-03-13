@@ -131,6 +131,58 @@ router.put('/:id/training', async (req, res) => {
 });
 
 /**
+ * PUT animal/:id -- update animal training info
+ */
+ router.put('/:id/summary', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        UPDATE "animals"
+        SET "animalType" = $1,
+        "otherTypeDetail" = $2,
+        "name" = $3,
+        "color" = $4,
+        "breed" = $5,
+        "sex" = $6,
+        "birthday" = $7,
+        "active" = $8,
+        "rating" = $9,
+        "height" = $10,
+        "weight" = $11,
+        "length" = $12,
+        "neckGirth" = $13,
+        "bellyGirth" = $14,
+        "notes" = $15
+        WHERE "id" = $16
+    `;
+        const queryParams = [
+            req.body.animalType,
+            req.body.otherTypeDetail,
+            req.body.name,
+            req.body.color,
+            req.body.breed,
+            req.body.sex,
+            req.body.birthday,
+            req.body.active,
+            req.body.rating,
+            req.body.height,
+            req.body.weight,
+            req.body.length,
+            req.body.neckGirth,
+            req.body.bellyGirth,
+            req.body.notes,
+            req.params.id
+        ];
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in PUT /animal/id/summary', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
  * POST Animal to job
  */
 router.post('/job', async (req, res) => {

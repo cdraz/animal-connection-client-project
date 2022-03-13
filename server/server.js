@@ -12,7 +12,8 @@ const userRouter = require('./routes/user.router');
 const animalRouter = require('./routes/animal.router');
 const jobRouter = require('./routes/job.router');
 const activeJobRouter = require('./routes/activeJob.router');
-const contactRouter = require('./routes/contact.router')
+const contactRouter = require('./routes/contact.router');
+const auditionRouter = require('./routes/audition.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use('/api/animal', animalRouter);
 app.use('/api/job', jobRouter);
 app.use('/api/activejob', activeJobRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/audition', auditionRouter);
 
 // Serve static files
 app.use(express.static('build'));
