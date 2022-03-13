@@ -64,7 +64,6 @@ function* updateAnimalTraining(action) {
 // Update an animal's summary info
 function* updateAnimalSummary(action) {
     try {
-        console.log('IN UPDATE ANIMAL SUMMARY', action.payload);
         const response = yield axios.put(`/api/animal/${action.payload.id}/summary`, action.payload);
         yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: {id: action.payload.id }});
     }
