@@ -18,13 +18,41 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         });
 });
+// Delete on contact
+router.delete("/", (req, res) => {
+    // endpoint functionality
+  
+    const queryText = "DELETE FROM contacts WHERE id=$1";
+    pool
+      .query(queryText, [req.params.id])
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log("Error completing Delete contact query", err);
+        res.sendStatus(500);
+      });
+  });
 
-router.get('/:id/edit', (req, res) => {
-    console.log('******* GET CONTACTS *******');
+router.get('/:id', (req, res) => {
+    console.log('******* GET CONTACTS DETAILS*******');
     let queryText = `
-        SELECT * FROM "contacts";`
+    SELECT 
+        "contacts".*,
+        JSON_AGG(DISTINCT "animals".*) AS animals,
+        JSON_AGG(DISTINCT "jobs".*) AS jobs
+    FROM "contacts"
+    LEFT JOIN "animals"
+        ON "contacts"."id" = "animals"."contactsId"
+    LEFT JOIN "jobsJunction"
+        ON "jobsJunction"."animalsId" = "animals"."id"
+    LEFT JOIN "jobs"
+        ON "jobs"."id" = "jobsJunction"."jobId"
+    WHERE "contacts".id = $1
+    GROUP BY "contacts"."id";`
+
     console.log(queryText);
-    pool.query(queryText)
+    pool.query(queryText, [req.params.id])
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
         .catch((err) => {
             console.log('User registration failed: ', err);
