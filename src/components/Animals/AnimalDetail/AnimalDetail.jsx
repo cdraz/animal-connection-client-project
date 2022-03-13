@@ -25,45 +25,51 @@ import { CardActionArea } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function AnimalDetail() {
-  // Dispatch hook, store access
-  const dispatch = useDispatch();
-  const animal = useSelector((store) => store.selectedAnimal);
+    // Dispatch hook, store access
+    const dispatch = useDispatch();
+    const animal = useSelector((store) => store.selectedAnimal);
 
-  // Set id from URL parameters
-  const { id } = useParams(); //4<<<<<<<<<<<<<<<<<<<<<<<<<
+    // Set id from URL parameters
+    const { id } = useParams(); //4<<<<<<<<<<<<<<<<<<<<<<<<<
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_SELECTED_ANIMAL", payload: { id: id } });
-  }, []);
+    // Declare refreshAnimal
+    const refreshAnimal = () => {
+        dispatch({ type: 'FETCH_SELECTED_ANIMAL', payload: { id: id } });
+    }
+    useEffect(() => {
+        refreshAnimal();
+    }, [id]);
 
-  return (
-    <Grid container spacing={5}>
-      <Grid item xs={4}>
-        <Stack spacing={4}>
-          <AnimalSummary animal={animal} />
-          {animal.contact ? (
-            <AnimalOwnerTable contact={animal.contact[0]} />
-          ) : (
-            <p>Loading owner info...</p>
-          )}
-        </Stack>
-      </Grid>
-      <Grid item xs={8}>
-        <Stack spacing={2}>
-          <Typography variant="h5">Work History</Typography>
-          <AnimalWorkHistoryTable animal={animal} />
-          <AnimalAuditionHistoryTable animal={animal} />
-          {
-            // If animalType is dog, show behavior/training (we only track this for dogs)
-            animal.animalType === 1 ? (
-              <AnimalBehaviorTrainingTable animal={animal} />
-            ) : null
-          }
-          <AnimalAddToJobButton animal={animal} />
-        </Stack>
-      </Grid>
-    </Grid>
-  );
+    return (
+        <Grid container spacing={5}>
+            <Grid item xs={4}>
+                <Stack spacing={4}>
+                    <AnimalSummary animal={animal} />
+                    {
+                        animal.contact ?
+                            <AnimalOwnerTable contact={animal.contact[0]} />
+                            : <p>Loading owner info...</p>
+                    }
+                </Stack>
+            </Grid>
+            <Grid item xs={8}>
+                <Stack spacing={2}>
+                    <Typography variant="h5">
+                        Work History
+                    </Typography>
+                    <AnimalWorkHistoryTable animal={animal} />
+                    <AnimalAuditionHistoryTable animal={animal} />
+                    {
+                        // If animalType is dog, show behavior/training (we only track this for dogs)
+                        animal.animalType === 1 ?
+                            <AnimalBehaviorTrainingTable animal={animal} />
+                            : null
+                    }
+                    <AnimalAddToJobButton animal={animal} />
+                </Stack>
+            </Grid>
+        </Grid>
+    )
 }
 
 export default AnimalDetail;

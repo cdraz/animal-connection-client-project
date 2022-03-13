@@ -21,27 +21,35 @@ function AnimalBehaviorTrainingTable({ animal }) {
     const dispatch = useDispatch();
 
     // Set state variables for the inputs
-    const [sitOnLeash, setSitOnLeash] = useState(animal.sitOnLeash);
-    const [sitOffLeash, setSitOffLeash] = useState(animal.sitOffLeash);
-    const [downOnLeash, setDownOnLeash] = useState(animal.downOnLeash);
-    const [downOffLeash, setDownOffLeash] = useState(animal.downOffLeash);
-    const [standOnLeash, setStandOnLeash] = useState(animal.standOnLeash);
-    const [standOffLeash, setStandOffLeash] = useState(animal.standOffLeash);
-    const [barkOnCommand, setBarkOnCommand] = useState(animal.barkOnCommand);
-    const [holdItem, setHoldItem] = useState(animal.holdItem);
-    const [mark, setMark] = useState(animal.mark);
-    const [silentCommands, setSilentCommands] = useState(animal.silentCommands);
-    const [strangerHandle, setStrangerHandle] = useState(animal.strangerHandle);
-    const [strangerDress, setStrangerDress] = useState(animal.strangerDress);
-    const [goodAroundChildren, setGoodAroundChildren] = useState(animal.goodAroundChildren);
-    const [otherDogs, setOtherDogs] = useState(animal.otherDogs);
-    const [smallAnimals, setSmallAnimals] = useState(animal.smallAnimals);
-    const [loudNoiseLights, setLoudNoiseLights] = useState(animal.loudNoiseLights);
-    const [shortNotice, setShortNotice] = useState(animal.shortNotice);
-    const [overnight, setOvernight] = useState(animal.overnight);
+    // const [sitOnLeash, setSitOnLeash] = useState(animal.sitOnLeash);
+    // const [sitOffLeash, setSitOffLeash] = useState(animal.sitOffLeash);
+    // const [downOnLeash, setDownOnLeash] = useState(animal.downOnLeash);
+    // const [downOffLeash, setDownOffLeash] = useState(animal.downOffLeash);
+    // const [standOnLeash, setStandOnLeash] = useState(animal.standOnLeash);
+    // const [standOffLeash, setStandOffLeash] = useState(animal.standOffLeash);
+    // const [barkOnCommand, setBarkOnCommand] = useState(animal.barkOnCommand);
+    // const [holdItem, setHoldItem] = useState(animal.holdItem);
+    // const [mark, setMark] = useState(animal.mark);
+    // const [silentCommands, setSilentCommands] = useState(animal.silentCommands);
+    // const [strangerHandle, setStrangerHandle] = useState(animal.strangerHandle);
+    // const [strangerDress, setStrangerDress] = useState(animal.strangerDress);
+    // const [goodAroundChildren, setGoodAroundChildren] = useState(animal.goodAroundChildren);
+    // const [otherDogs, setOtherDogs] = useState(animal.otherDogs);
+    // const [smallAnimals, setSmallAnimals] = useState(animal.smallAnimals);
+    // const [loudNoiseLights, setLoudNoiseLights] = useState(animal.loudNoiseLights);
+    // const [shortNotice, setShortNotice] = useState(animal.shortNotice);
+    // const [overnight, setOvernight] = useState(animal.overnight);
 
     // Set state variable for edit mode
     const [edit, setEdit] = useState(false);
+
+    // Declare handleChange
+    const handleChange = event => {
+        dispatch({
+            type: 'UPDATE_SELECTED_ANIMAL',
+            payload: { [event.target.name]: event.target.checked }
+        });
+    }
 
     // Declare updateAnimal
     const updateAnimal = () => {
@@ -50,24 +58,24 @@ function AnimalBehaviorTrainingTable({ animal }) {
             type: 'UPDATE_ANIMAL_TRAINING',
             payload: {
                 id: animal.id,
-                sitOnLeash,
-                sitOffLeash,
-                downOnLeash,
-                downOffLeash,
-                standOnLeash,
-                standOffLeash,
-                barkOnCommand,
-                holdItem,
-                mark,
-                silentCommands,
-                strangerHandle,
-                strangerDress,
-                goodAroundChildren,
-                otherDogs,
-                smallAnimals,
-                loudNoiseLights,
-                shortNotice,
-                overnight
+                sitOnLeash: animal.sitOnLeash,
+                sitOffLeash: animal.sitOffLeash,
+                downOnLeash: animal.downOnLeash,
+                downOffLeash: animal.downOffLeash,
+                standOnLeash: animal.standOnLeash,
+                standOffLeash: animal.standOffLeash,
+                barkOnCommand: animal.barkOnCommand,
+                holdItem: animal.holdItem,
+                mark: animal.mark,
+                silentCommands: animal.silentCommands,
+                strangerHandle: animal.strangerHandle,
+                strangerDress: animal.strangerDress,
+                goodAroundChildren: animal.goodAroundChildren,
+                otherDogs: animal.otherDogs,
+                smallAnimals: animal.smallAnimals,
+                loudNoiseLights: animal.loudNoiseLights,
+                shortNotice: animal.shortNotice,
+                overnight: animal.overnight
             }
         })
         setEdit(!edit);
@@ -88,17 +96,17 @@ function AnimalBehaviorTrainingTable({ animal }) {
                 }
                 {edit &&
                     <>
-                    <Button
-                        variant="contained"
-                        onClick={updateAnimal}
-                    >
-                        Save
-                    </Button>
-                    <Button
-                        onClick={() => setEdit(!edit)}
-                    >
-                        Cancel
-                    </Button>
+                        <Button
+                            variant="contained"
+                            onClick={updateAnimal}
+                        >
+                            Save
+                        </Button>
+                        <Button
+                            onClick={() => setEdit(!edit)}
+                        >
+                            Cancel
+                        </Button>
                     </>
                 }
             </div>
@@ -107,62 +115,62 @@ function AnimalBehaviorTrainingTable({ animal }) {
                     <Grid item xs={6}>
                         <Stack spacing={0}>
                             <div>
-                                <Checkbox onChange={event => setSitOnLeash(!sitOnLeash)} value={sitOnLeash} disabled={!edit} defaultChecked={sitOnLeash} />  Sit and stay on leash
+                                <Checkbox onChange={event => handleChange(event)} name='sitOnLeash' value={animal.sitOnLeash} disabled={!edit} defaultChecked={animal.sitOnLeash} />  Sit and stay on leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => setSitOffLeash(!sitOffLeash)} value={sitOffLeash} disabled={!edit} defaultChecked={sitOffLeash} />  Sit and stay off leash
+                                <Checkbox onChange={event => handleChange(event)} name='sitOffLeash' value={animal.sitOffLeash} disabled={!edit} defaultChecked={animal.sitOffLeash} />  Sit and stay off leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => setDownOnLeash(!downOnLeash)} value={downOnLeash} disabled={!edit} defaultChecked={downOnLeash} />  Down and stay on leash
+                                <Checkbox onChange={event => handleChange(event)} name='downOnLeash' value={animal.downOnLeash} disabled={!edit} defaultChecked={animal.downOnLeash} />  Down and stay on leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => setDownOffLeash(!downOffLeash)} value={downOffLeash} disabled={!edit} defaultChecked={downOffLeash} /> Down and stay off leash
+                                <Checkbox onChange={event => handleChange(event)} name='downOffLeash' value={animal.downOffLeash} disabled={!edit} defaultChecked={animal.downOffLeash} /> Down and stay off leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => setStandOnLeash(!standOnLeash)} value={standOnLeash} disabled={!edit} defaultChecked={standOnLeash} />  Stand and stay on leash
+                                <Checkbox onChange={event => handleChange(event)} name='standOnLeash' value={animal.standOnLeash} disabled={!edit} defaultChecked={animal.standOnLeash} />  Stand and stay on leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => setStandOffLeash(!standOffLeash)} value={standOffLeash} disabled={!edit} defaultChecked={standOffLeash} />  Stand and stay off leash
+                                <Checkbox onChange={event => handleChange(event)} name='standOffLeash' value={animal.standOffLeash} disabled={!edit} defaultChecked={animal.standOffLeash} />  Stand and stay off leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => setBarkOnCommand(!barkOnCommand)} value={barkOnCommand} disabled={!edit} defaultChecked={barkOnCommand} />  Bark on cue
+                                <Checkbox onChange={event => handleChange(event)} name='barkOnCommand' value={animal.barkOnCommand} disabled={!edit} defaultChecked={animal.barkOnCommand} />  Bark on cue
                             </div>
                             <div>
-                                <Checkbox onChange={event => setHoldItem(!holdItem)} value={holdItem} disabled={!edit} defaultChecked={holdItem} />  Hold and object
+                                <Checkbox onChange={event => handleChange(event)} name='holdItem' value={animal.holdItem} disabled={!edit} defaultChecked={animal.holdItem} />  Hold and object
                             </div>
                             <div>
-                                <Checkbox onChange={event => setMark(!mark)} value={mark} disabled={!edit} defaultChecked={mark} />  Move to a mark
+                                <Checkbox onChange={event => handleChange(event)} name='mark' value={animal.mark} disabled={!edit} defaultChecked={animal.mark} />  Move to a mark
                             </div>
                             <div>
-                                <Checkbox onChange={event => setSilentCommands(!silentCommands)} value={silentCommands} disabled={!edit} defaultChecked={silentCommands} />  Can use silent commands
+                                <Checkbox onChange={event => handleChange(event)} name='silentCommands' value={animal.silentCommands} disabled={!edit} defaultChecked={animal.silentCommands} />  Can use silent commands
                             </div>
                         </Stack>
                     </Grid>
                     <Grid item xs={6}>
                         <Stack spacing={0}>
                             <div>
-                                <Checkbox onChange={event => setStrangerHandle(!strangerHandle)} value={strangerHandle} disabled={!edit} defaultChecked={strangerHandle} />  Can be handled by stranger
+                                <Checkbox onChange={event => handleChange(event)} name='strangerHandle' value={animal.strangerHandle} disabled={!edit} defaultChecked={animal.strangerHandle} />  Can be handled by stranger
                             </div>
                             <div>
-                                <Checkbox onChange={event => setStrangerDress(!strangerDress)} value={strangerDress} disabled={!edit} defaultChecked={strangerDress} />  Can be dressed by stranger
+                                <Checkbox onChange={event => handleChange(event)} name='strangerDress' value={animal.strangerDress} disabled={!edit} defaultChecked={animal.strangerDress} />  Can be dressed by stranger
                             </div>
                             <div>
-                                <Checkbox onChange={event => setGoodAroundChildren(!goodAroundChildren)} value={goodAroundChildren} disabled={!edit} defaultChecked={goodAroundChildren} />  Works well with children
+                                <Checkbox onChange={event => handleChange(event)} name='goodAroundChildren' value={animal.goodAroundChildren} disabled={!edit} defaultChecked={animal.goodAroundChildren} />  Works well with children
                             </div>
                             <div>
-                                <Checkbox onChange={event => setOtherDogs(!otherDogs)} value={otherDogs} disabled={!edit} defaultChecked={otherDogs} />  Works well with other dogs
+                                <Checkbox onChange={event => handleChange(event)} name='otherDogs' value={animal.otherDogs} disabled={!edit} defaultChecked={animal.otherDogs} />  Works well with other dogs
                             </div>
                             <div>
-                                <Checkbox onChange={event => setSmallAnimals(!smallAnimals)} value={smallAnimals} disabled={!edit} defaultChecked={smallAnimals} />  Works well with other small animals
+                                <Checkbox onChange={event => handleChange(event)} name='smallAnimals' value={animal.smallAnimals} disabled={!edit} defaultChecked={animal.smallAnimals} />  Works well with other small animals
                             </div>
                             <div>
-                                <Checkbox onChange={event => setLoudNoiseLights(!loudNoiseLights)} value={loudNoiseLights} disabled={!edit} defaultChecked={loudNoiseLights} />  Afraid of strobes
+                                <Checkbox onChange={event => handleChange(event)} name='loudNoiseLights' value={animal.loudNoiseLights} disabled={!edit} defaultChecked={animal.loudNoiseLights} />  Afraid of strobes
                             </div>
                             <div>
-                                <Checkbox onChange={event => setShortNotice(!shortNotice)} value={shortNotice} disabled={!edit} defaultChecked={shortNotice} />  Available at short notice
+                                <Checkbox onChange={event => handleChange(event)} name='shortNotice' value={animal.shortNotice} disabled={!edit} defaultChecked={animal.shortNotice} />  Available at short notice
                             </div>
                             <div>
-                                <Checkbox onChange={event => setOvernight(!overnight)} value={overnight} disabled={!edit} defaultChecked={overnight} />  Available for overnight jobs
+                                <Checkbox onChange={event => handleChange(event)} name='overnight' value={animal.overnight} disabled={!edit} defaultChecked={animal.overnight} />  Available for overnight jobs
                             </div>
 
                         </Stack>
