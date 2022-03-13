@@ -23,7 +23,18 @@ function AnimalAuditionHistoryTable({ animal }) {
 
     // Declare addAudition
     const addAudition = () => {
-        console.log('in addAudition');
+        if (!auditionInput) {
+            window.alert('Please input an audition date.');
+            return;
+        }
+        dispatch({
+            type: 'ADD_AUDITION',
+            payload: {
+                id: animal.id,
+                date: auditionInput
+            }
+        });
+        setAuditionInput('');
     }
 
     // Declare handleDelete
@@ -34,7 +45,7 @@ function AnimalAuditionHistoryTable({ animal }) {
                 id: auditionId,
                 animalsId: animalsId
             }
-        })        
+        })
     }
 
     return (
@@ -52,12 +63,25 @@ function AnimalAuditionHistoryTable({ animal }) {
                 }
                 {edit &&
                     <>
-                        <Button
-                            variant="contained"
-                            onClick={addAudition}
-                        >
-                            Add
-                        </Button>
+                        <TextField
+                            id="audition-date-input"
+                            label="Audition Date"
+                            value={auditionInput}
+                            size='small'
+                            type='date'
+                            onChange={event => setAuditionInput(event.target.value)}
+                            InputProps={{
+                                endAdornment:
+                                    <Button
+                                        variant="contained"
+                                        onClick={addAudition}
+                                        size='small'
+                                    >
+                                        Add
+                                    </Button>
+                            }}
+                        />
+
                         <Button
                             onClick={() => {
                                 setEdit(!edit);
@@ -71,7 +95,7 @@ function AnimalAuditionHistoryTable({ animal }) {
             </div>
             <Stack direction="row" spacing={1}>
                 {auditions[0] ? auditions.map(audition => (
-                    <Chip key={audition.id} label={audition.date} onDelete={edit ? () => handleDelete(audition.id, audition.animalsId) : null } />
+                    <Chip key={audition.id} label={audition.date} onDelete={edit ? () => handleDelete(audition.id, audition.animalsId) : null} />
                 ))
                     :
                     <Typography variant="p">
