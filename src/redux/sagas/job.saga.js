@@ -46,7 +46,7 @@ function* fetchJobDetails(action) {
 
     yield put({ type: "SET_SELECTED_JOB_DETAILS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   } catch (error) {
-    console.error("fetchSelectedJob failed", error);
+    console.error("fetchJobDetails failed", error);
   }
 }
 

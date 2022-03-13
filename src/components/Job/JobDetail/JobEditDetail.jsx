@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
+import { useParams, Link } from 'react-router-dom';
 
 // React components
 import { useHistory } from "react-router-dom";
@@ -21,6 +22,8 @@ function JobEditDetail() {
   const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
   //local state
   const [editable, setEditable] = useState(false);
+    // Set id from URL parameters
+    const { id } = useParams();
   //Edit form
   const [newClient, setNewClient] = useState(`${selectedJob.client}`);
   const [newDescription, setNewDescription] = useState(
@@ -33,7 +36,7 @@ function JobEditDetail() {
   useEffect(() => {
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
-    dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
+    dispatch({ type: "FETCH_JOB_DETAILS", payload: { id: id }});
   }, []);
 
   //edit job begins
