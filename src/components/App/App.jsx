@@ -88,7 +88,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AnimalDetail else shows LoginPage
             exact
-            path="/animals/:id"
+            path="/animals/:id"//1<<<<<<<<<<<<<<<<<<<<<<!!!!
           >
             <AnimalDetail />
           </ProtectedRoute>

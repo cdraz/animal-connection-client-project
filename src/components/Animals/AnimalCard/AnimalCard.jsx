@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';//2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!
 
 // React components
 import AnimalSummary from "../AnimalSummary/AnimalSummary";
@@ -61,6 +61,7 @@ const Item = styled(Paper)(({ theme }) => ({
         <Grid>
     <Item id="item"> 
         <Card key={animal.id} sx={{ maxWidth: 345 }}>
+            {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
             <Link to={`/animals/${animal.id}`}>
                 <CardActionArea>
                     <CardMedia

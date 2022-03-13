@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';//5<<<<<<<<<<<<<<<<<<<<<
 
 // React components
 import AnimalSummary from '../AnimalSummary/AnimalSummary';
@@ -31,7 +31,7 @@ function AnimalDetail() {
     const animal = useSelector(store => store.selectedAnimal);
 
     // Set id from URL parameters
-    const { id } = useParams();
+    const { id } = useParams();//4<<<<<<<<<<<<<<<<<<<<<<<<<
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_ANIMAL', payload: { id: id }});
