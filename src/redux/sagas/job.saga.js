@@ -97,11 +97,7 @@ function* editSelectedJob(action) {
       action.payload,
       config
     );
-    yield put({ type: "FETCH_JOBS" });
-    yield put({
-      type: "FETCH_JOB_DETAILS",
-      payload: action.payload.selectedJob,
-    });
+    yield put({ type: "FETCH_SELECTED_JOB", payload: action.payload.id });
   } catch (error) {
     console.log("CHANGE TITLE failed", error);
   }
@@ -122,7 +118,8 @@ function* editSelectedJobPay(action) {
       action.payload,
       config
     );
-    yield put({ type: "FETCH_JOBS" });
+    yield put({ type: "FETCH_JOB_DETAILS", payload: action.payload.id });
+    
   } catch (error) {
     console.log("CHANGE TITLE failed", error);
   }

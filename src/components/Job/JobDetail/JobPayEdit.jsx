@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
+import { useParams, Link } from "react-router-dom";
 
 // React components
 import { useHistory } from "react-router-dom";
@@ -34,6 +35,7 @@ function JobPayEdit(prop) {
   // Dispatch hook, store access
   const history = useHistory();
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   //this is a list of all jobs
   const jobs = useSelector((store) => store.jobs);
@@ -61,7 +63,7 @@ function JobPayEdit(prop) {
   const [newCheckDate, setNewCheckDate] = useState(`${payDetails.checkDate}`);
 
   useEffect(() => {
-    console.log("selected job is", selectedJob);
+    console.log("selected job is", payDetails.checkDate);
     console.log("selected job  DETAILS is", selectedJobDetails);
     console.log("this is what jobs is", jobs );
     //getting all of selectedJobDetails that is used in the job detail cards
@@ -87,6 +89,7 @@ function JobPayEdit(prop) {
       newCheckAmount: newCheckAmount,
       newCheckDate: newCheckDate,
       payDetails: payDetails.id,
+      id: id 
     };
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
   };

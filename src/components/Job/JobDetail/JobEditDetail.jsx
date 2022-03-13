@@ -51,6 +51,7 @@ function JobEditDetail() {
       newNotes: newNotes,
       newJobNumber: newJobNumber,
       selectedJob: selectedJob.id,
+      id: id
     };
     dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
   };
