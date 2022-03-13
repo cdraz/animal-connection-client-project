@@ -103,7 +103,7 @@ function App() {
           <ProtectedRoute
             // logged in shows JobDetailPage else shows LoginPage
             exact
-            path="/jobDetail"
+            path="/jobDetail/:id"
           >
             <JobDetail />
           </ProtectedRoute>

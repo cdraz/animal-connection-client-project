@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useParams, Link } from 'react-router-dom';
 import "./JobCard.css";
 
 // React components
@@ -68,7 +69,8 @@ const Item = styled(Paper)(({ theme }) => ({
     <Grid>
     <Item id="item"> 
     <Card key={job.id} sx={{  maxWidth: 300, minWidth: 300, minHeight: 300 }}>
-      <CardActionArea onClick={() => handleSelectJob(job)}>
+    <Link to={`/jobDetail/${job.id}`}>
+      <CardActionArea>
         <CardContent>
           <Typography sx={{ fontSize: 24 }} color="text.secondary" gutterBottom>
             {job.client}-{job.jobNumber}
@@ -85,6 +87,7 @@ const Item = styled(Paper)(({ theme }) => ({
           </Typography>
         </CardContent>
       </CardActionArea>
+      </Link>
     </Card>
     </Item>
     </Grid>

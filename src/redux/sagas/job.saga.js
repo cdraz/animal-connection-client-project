@@ -38,7 +38,7 @@ function* addJob(action) {
 
 function* fetchJobDetails(action) {
   try {
-    const response = yield axios.get(`/api/job/${action.payload}`);
+    const response = yield axios.get(`/api/job/${action.payload.id}`);
     console.log(
       "response.data for set selected job details is ",
       response.data
