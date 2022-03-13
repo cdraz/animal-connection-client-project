@@ -43,7 +43,7 @@ router.post("/", (req, res, next) => {
  * Get Job details for job cards by id of job
  */
 router.get("/:id", (req, res) => {
-  console.log("req.params is of get job details card by id", req.params);
+  console.log("req.params of get job details card by id", req.params);
 
   const queryText = `SELECT "jobsJunction".*, animals.image,animals."name" ,contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber",contacts.email
       FROM "jobsJunction"

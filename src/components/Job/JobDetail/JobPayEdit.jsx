@@ -65,7 +65,7 @@ function JobPayEdit(prop) {
     console.log("selected job  DETAILS is", selectedJobDetails);
     console.log("this is what jobs is", jobs );
     //getting all of selectedJobDetails that is used in the job detail cards
-    dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
+    // dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
   }, []);
 
   //MUI

@@ -142,7 +142,7 @@ function* fetchSelectedJob(action) {
     console.log("we are in fetchSelected saga", action.payload);
 
     const response = yield axios.get(
-      `/api/job/selectedJob/${action.payload.id}`
+      `/api/job/selectedJob/${action.payload}`
     );
     console.log("what is set selected job response.data", response.data);
 
