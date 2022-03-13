@@ -51,21 +51,17 @@ function JobPage() {
       >
         Add Job
       </button>
-<div id="jobCardContainer">
-<Box sx={{ flexGrow: 1 }}>
-<Grid
-          container
-          spacing={3}
-          justifyContent="space-evenly"
-        >
-      {Array.isArray(jobs) ? (
-        jobs.map((job) => <JobCard job={job} key={job.id} />)
-      ) : (
-        <p>Loading...</p>
-      )}
-      </Grid>
-      </Box>
-</div>
+      <div id="jobCardContainer">
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={3} justifyContent="space-evenly">
+            {Array.isArray(jobs) ? (
+              jobs.map((job) => <JobCard job={job} key={job.id} />)
+            ) : (
+              <p>Loading...</p>
+            )}
+          </Grid>
+        </Box>
+      </div>
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
           <Grid container spacing={5}>

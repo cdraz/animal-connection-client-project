@@ -4,10 +4,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res) => {
-    console.log('******* GET ANIMALS *******');
+    console.log('******* GET ANIMALS *******', req.params);
     const qFilter = req.query;
-    //the silly where id > 0 is just to add a where statement
-    //that way i can chain a bunch of AND statement for filtering
     const sqlQuery = queryGen(qFilter)
     let queryText = `
         SELECT * FROM "animals" 
