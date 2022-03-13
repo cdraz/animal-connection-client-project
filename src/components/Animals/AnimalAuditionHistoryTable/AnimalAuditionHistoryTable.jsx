@@ -94,7 +94,7 @@ function AnimalAuditionHistoryTable({ animal }) {
 
             </div>
             <Stack direction="row" spacing={1}>
-                {auditions[0] ? auditions.map(audition => (
+                {auditions && auditions[0] != null ? auditions.map(audition => (
                     <Chip key={audition.id} label={audition.date} onDelete={edit ? () => handleDelete(audition.id, audition.animalsId) : null} />
                 ))
                     :
