@@ -1,47 +1,85 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 // MUI imports
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import Stack from '@mui/material/Stack';
+import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 function AnimalAuditionHistoryTable({ animal }) {
 
+    // Store access
     const auditions = animal.auditions;
 
-    let auditionList = '';
+    // Dispatch hook
+    const dispatch = useDispatch();
 
-    if (auditions) {
-        for (let audition of auditions) {
-            if (audition) {
-            auditionList += `${audition.date}, `
-            } else {
-                auditionList = 'No auditions on record.';
+    // Set state variables for edit mode
+    const [edit, setEdit] = useState(false);
+    const [auditionInput, setAuditionInput] = useState('');
+
+    // Declare addAudition
+    const addAudition = () => {
+        console.log('in addAudition');
+    }
+
+    // Declare handleDelete
+    const handleDelete = (auditionId, animalsId) => {
+        dispatch({
+            type: 'DELETE_AUDITION',
+            payload: {
+                id: auditionId,
+                animalsId: animalsId
             }
-        }
-    };
+        })        
+    }
 
     return (
         <>
-            <Typography variant="h5">
-                Audition History
-            </Typography>
-            <TableContainer component={Paper}>
-                <Table aria-label="audition history table">
-                    <TableBody>
-                        <TableRow
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            <div style={{ display: 'inline-flex' }}>
+                <Typography variant="h5">
+                    Audition History
+                </Typography>
+                {!edit &&
+                    <Button
+                        onClick={() => setEdit(!edit)}
+                    >
+                        Edit
+                    </Button>
+                }
+                {edit &&
+                    <>
+                        <Button
+                            variant="contained"
+                            onClick={addAudition}
                         >
-                            <TableCell align="left">
-                                {auditionList}
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                            Add
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                setEdit(!edit);
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                    </>
+                }
+
+            </div>
+            <Stack direction="row" spacing={1}>
+                {auditions[0] ? auditions.map(audition => (
+                    <Chip key={audition.id} label={audition.date} onDelete={edit ? () => handleDelete(audition.id, audition.animalsId) : null } />
+                ))
+                    :
+                    <Typography variant="p">
+                        No auditions on record.
+                    </Typography>
+                }
+            </Stack>
+
         </>
     )
 }
