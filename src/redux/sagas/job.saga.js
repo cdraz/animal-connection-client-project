@@ -38,8 +38,8 @@ function* addJob(action) {
 
 function* fetchJobDetails(action) {
   try {
-    console.log('@#@#@$$@$##fetch job detail',action.payload);
-    
+    console.log("@#@#@$$@$##fetch job detail", action.payload);
+
     const response = yield axios.get(`/api/job/${action.payload}`);
     console.log(
       "response.data for set selected job details is ",
@@ -119,7 +119,6 @@ function* editSelectedJobPay(action) {
       config
     );
     yield put({ type: "FETCH_JOB_DETAILS", payload: action.payload.id });
-    
   } catch (error) {
     console.log("CHANGE TITLE failed", error);
   }
@@ -138,9 +137,7 @@ function* fetchSelectedJob(action) {
   try {
     console.log("we are in fetchSelected saga", action.payload);
 
-    const response = yield axios.get(
-      `/api/job/selectedJob/${action.payload}`
-    );
+    const response = yield axios.get(`/api/job/selectedJob/${action.payload}`);
     console.log("what is set selected job response.data", response.data);
 
     yield put({ type: "SET_SELECTED_JOB", payload: response.data[0] });
@@ -151,8 +148,13 @@ function* fetchSelectedJob(action) {
 
 function* deleteJobPet(action) {
   try {
-    console.log('deleteJob pet action',action.payload.payDetail, "from job", action.payload.selectedJob);
-    
+    console.log(
+      "deleteJob pet action",
+      action.payload.payDetail,
+      "from job",
+      action.payload.selectedJob
+    );
+
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -161,8 +163,10 @@ function* deleteJobPet(action) {
     // the config includes credentials which
     // allow the server session to recognize the user
     yield axios.delete(`/api/job/pet/${action.payload.payDetail}`);
-     yield put({ type: "FETCH_JOB_DETAILS", payload: action.payload.selectedJob });
-    
+    yield put({
+      type: "FETCH_JOB_DETAILS",
+      payload: action.payload.selectedJob,
+    });
   } catch (error) {
     console.log("DELETE Job failed", error);
   }

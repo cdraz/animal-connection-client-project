@@ -175,7 +175,7 @@ router.put("/edit/pay/:id", (req, res) => {
 /**
  * Delete pet from a Job
  */
- router.delete("/pet/:id", (req, res) => {
+router.delete("/pet/:id", (req, res) => {
   // endpoint functionality
 
   const queryText = `DELETE FROM "jobsJunction" WHERE id= $1`;

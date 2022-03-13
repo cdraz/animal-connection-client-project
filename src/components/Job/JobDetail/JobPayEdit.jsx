@@ -44,7 +44,7 @@ function JobPayEdit(prop) {
   //this is whats displayed at top of page
   const selectedJob = useSelector((store) => store.selectedJob);
 
-  //information from jobJunction/join table paid/check/chackDate/animalImg/contactInfo 
+  //information from jobJunction/join table paid/check/chackDate/animalImg/contactInfo
   //this is whats displayed in the cards
   const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
 
@@ -65,7 +65,7 @@ function JobPayEdit(prop) {
   useEffect(() => {
     console.log("selected job is", payDetails.checkDate);
     console.log("selected job  DETAILS is", selectedJobDetails);
-    console.log("this is what jobs is", jobs );
+    console.log("this is what jobs is", jobs);
     //getting all of selectedJobDetails that is used in the job detail cards
     // dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
   }, []);
@@ -89,34 +89,34 @@ function JobPayEdit(prop) {
       newCheckAmount: newCheckAmount,
       newCheckDate: newCheckDate,
       payDetails: payDetails.id,
-      id: id 
+      id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
   };
 
-    //deletes pet from job
-    const deleteJobPet = () => {
-      let petToDelete = {
-        payDetail: payDetails.id,
-        selectedJob: selectedJob.id
-      }
-      Swal.fire({
-        title: "Are you sure you want to pet from job?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete Entire Job!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire("Job has been Deleted!", "", "success");
-          dispatch({ type: "DELETE_JOB_PET", payload: petToDelete });
-        } else if (result.isDenied) {
-          Swal.fire("Job Safe", "", "info");
-        }
-      });
+  //deletes pet from job
+  const deleteJobPet = () => {
+    let petToDelete = {
+      payDetail: payDetails.id,
+      selectedJob: selectedJob.id,
     };
+    Swal.fire({
+      title: "Are you sure you want to pet from job?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete Entire Job!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Job has been Deleted!", "", "success");
+        dispatch({ type: "DELETE_JOB_PET", payload: petToDelete });
+      } else if (result.isDenied) {
+        Swal.fire("Job Safe", "", "info");
+      }
+    });
+  };
 
   return (
     <>
@@ -129,7 +129,12 @@ function JobPayEdit(prop) {
             <Item id="item">
               <Card
                 key={payDetails.id}
-                sx={{ maxWidth: 275, minWidth: 275, minHeight: 350, maxHeight: 350}}
+                sx={{
+                  maxWidth: 275,
+                  minWidth: 275,
+                  minHeight: 350,
+                  maxHeight: 350,
+                }}
               >
                 <CardActionArea>
                   <FontAwesomeIcon
@@ -139,13 +144,13 @@ function JobPayEdit(prop) {
                     transform="grow-9 left-140 down-20"
                     onClick={() => setEditable(true)}
                   />
-                    <FontAwesomeIcon
-        className="faTrash"
-        icon={faTrash}
-        flip="horizontal"
-        transform="grow-9 right-130 down-20"
-        onClick={deleteJobPet}
-      />
+                  <FontAwesomeIcon
+                    className="faTrash"
+                    icon={faTrash}
+                    flip="horizontal"
+                    transform="grow-9 right-130 down-20"
+                    onClick={deleteJobPet}
+                  />
                   <CardMedia
                     component="img"
                     height="140"
@@ -162,7 +167,6 @@ function JobPayEdit(prop) {
                       <br></br>
                       pet:{payDetails.name}
                       <br></br>
-                      
                     </Typography>
                     <Typography variant="h6" component="div">
                       Paid: {payDetails.paid.toString()}

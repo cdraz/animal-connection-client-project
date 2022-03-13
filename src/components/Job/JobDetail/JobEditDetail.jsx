@@ -37,8 +37,8 @@ function JobEditDetail() {
   useEffect(() => {
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
-    dispatch({ type: "FETCH_JOB_DETAILS", payload: id  });
-    dispatch({ type: "FETCH_SELECTED_JOB", payload: id  });
+    dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
+    dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
   }, []);
 
   //edit job begins
@@ -51,12 +51,10 @@ function JobEditDetail() {
       newNotes: newNotes,
       newJobNumber: newJobNumber,
       selectedJob: selectedJob.id,
-      id: id
+      id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
   };
-
- 
 
   return (
     <>
@@ -68,7 +66,7 @@ function JobEditDetail() {
         transform="grow-9 right-15"
         onClick={() => setEditable(true)}
       />
-     
+
       <div variant="body2">
         {/* conditional rendering if editable button was clicked  */}
         {!editable ? (
