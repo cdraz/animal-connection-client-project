@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {useEffect} from "react";
@@ -17,44 +17,51 @@ function ContactDetail() {
     const history =  useHistory();
     const contacts = useSelector(store => store.contact);
     const selectedContact = useSelector((store) => store.selectedContact);
+    const [editPage, setEditPage] = useState(false);
+    const [editContact, setEditContact] = useState(selectedContact);
+    console.log(editContact);
 
     // Set id from URL parameters
     const { id } = useParams();
 
-    
     useEffect(() => {
         dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
     }, []);
 
     const deleteContact = () => {
-        dispatch({type: 'DELETE_CONTACT', payload: contacts.id});
+        dispatch({type: 'DELETE_CONTACT', payload: selectedContact.id});
         history.push('/contacts')
     }
 
-    
-
     return (
         <>
-        <p className="contact-detail">Type: {`${contacts.type}`}
-        <br></br>
-         Name: {`${contacts.firstName} ${contacts.lastName}`}
-         <br></br>
-         Number: {`${contacts.primaryNumber} ${contacts.secondaryNumber}`}
-         <br></br>
-         Text: {`${contacts.text}`}
-         <br></br>
-         Email: {`${contacts.email}`}
-         <br></br>
-         Type: {`${contacts.type}`}
-         <br></br>
-         Website: {`${contacts.website}`}
-         <br></br>
-         Address: {`${contacts.address}`}
-         <br></br>
-         Notes: {`${contacts.notes}`}
-          </p>
+        {editPage 
+            ?<form>
+                <input placeholder="First Name" value={editContact.firstName}></input>
+                <input placeholder="Last Name" value={editContact.lastName}></input>
+                <input placeholder="Primary Number" value={editContact.primaryNumber}></input>
+                {/* <input placeholder="Secondary Number" value={contacts.secondaryNumber}></input> */}
+                <input placeholder="Text?" value={editContact.text}></input>
+                <input placeholder="Email" value={editContact.email}></input>
+                <input placeholder="Type" value={editContact.type}></input>
+                <input placeholder="Website" value={editContact.website}></input>
+                <input placeholder="Address" value={editContact.address}></input>
+                <input placeholder="Notes" value={editContact.notes}></input>
+                <button type="submit">Submit</button>
+            </form>
+        : <>
+            <p>Type: {`${selectedContact.type}`}</p>
+            <p>Name: {`${selectedContact.firstName} ${contacts.lastName}`}</p>
+            <p>Number: {`${selectedContact.primaryNumber} ${contacts.secondaryNumber}`}</p>
+            <p>Text: {`${selectedContact.text}`}</p>
+            <p>Email: {`${selectedContact.email}`}</p>
+            <p>Type: {`${selectedContact.type}`}</p>
+            <p>Website: {`${selectedContact.website}`}</p>
+            <p>Address: {`${selectedContact.address}`}</p>
+            <p>Notes: {`${selectedContact.notes}`}</p>
+        </>}
         
-        <EditSharpIcon onClick={() => history.push('/contactEdit')}>Edit</EditSharpIcon>
+        <EditSharpIcon onClick={() => setEditPage(!editPage)}>Edit</EditSharpIcon>
         <IconButton onClick= {deleteContact} aria-label="delete" size="large">
         <DeleteIcon fontSize="inherit" />
         </IconButton>

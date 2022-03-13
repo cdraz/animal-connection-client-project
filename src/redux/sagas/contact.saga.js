@@ -26,7 +26,6 @@ function* addContacts(action) {
 }
 
 function* fetchContactDetails(action){
-    console.log('####################', action.payload);
     try {
         const responseContact = yield axios.get(`/api/contact/${action.payload.id}`);
         yield put({ type: 'SET_SELECTED_CONTACT', payload: responseContact.data[0]});

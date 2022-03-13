@@ -117,7 +117,7 @@ function JobDetail() {
         >
       {Array.isArray(selectedJobDetails) ? (
         selectedJobDetails.map((payDetails) => (
-          <JobPayEdit key={payDetails.id} payDetails={payDetails} />//<<<<<<<<<<<<<<<<<<<<
+          <JobPayEdit key={payDetails.id} payDetails={payDetails} />
         ))
       ) : (
         <p>Loading...</p>
