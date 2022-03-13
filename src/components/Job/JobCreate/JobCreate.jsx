@@ -124,6 +124,7 @@ const JobCreate = () => {
             onChange={(evt) => setJobDate(evt.target.value)}
             placeholder="Date"
           />
+          
           {/* end date input */}
           <br />
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
