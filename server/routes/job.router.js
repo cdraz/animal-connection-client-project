@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res, next) => {
   const client = req.body.client;
   const jobNumber = req.body.jobNumber;
-  const jobDate = req.body.jobDate;
+  const jobDate = req.body.date;
   const notes = req.body.notes;
   const description = req.body.description;
 
