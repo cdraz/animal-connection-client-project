@@ -33,9 +33,13 @@ function AnimalDetail() {
     // Set id from URL parameters
     const { id } = useParams();
 
-    useEffect(() => {
+    // Declare refreshAnimal
+    const refreshAnimal = () => {
         dispatch({ type: 'FETCH_SELECTED_ANIMAL', payload: { id: id }});
-    }, []);
+    }
+    useEffect(() => {
+        refreshAnimal();
+    }, [id]);
 
     return (
         <Grid container spacing={5}>

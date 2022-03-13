@@ -61,12 +61,25 @@ function* updateAnimalTraining(action) {
     }
 }
 
+// Update an animal's summary info
+function* updateAnimalSummary(action) {
+    try {
+        console.log('IN UPDATE ANIMAL SUMMARY', action.payload);
+        const response = yield axios.put(`/api/animal/${action.payload.id}/summary`, action.payload);
+        yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: {id: action.payload.id }});
+    }
+    catch (error) {
+        console.error('updateAnimalTraining failed', error);
+    }
+}
+
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
     yield takeLatest('FETCH_ANIMALS', fetchAnimals);
     yield takeLatest('FETCH_SELECTED_ANIMAL', fetchSelectedAnimal);
     yield takeLatest('ADD_ANIMAL_TO_JOB', addAnimalToJob);
     yield takeLatest('UPDATE_ANIMAL_TRAINING', updateAnimalTraining);
+    yield takeLatest('UPDATE_ANIMAL_SUMMARY', updateAnimalSummary);
 }
 
 export default animalSaga;
