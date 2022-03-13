@@ -38,7 +38,9 @@ function* addJob(action) {
 
 function* fetchJobDetails(action) {
   try {
-    const response = yield axios.get(`/api/job/${action.payload.id}`);
+    console.log('@#@#@$$@$##fetch job detail',action.payload);
+    
+    const response = yield axios.get(`/api/job/${action.payload}`);
     console.log(
       "response.data for set selected job details is ",
       response.data
@@ -152,7 +154,7 @@ function* fetchSelectedJob(action) {
 
 function* deleteJobPet(action) {
   try {
-    console.log('deletejob pet action',action.payload);
+    console.log('deleteJob pet action',action.payload.payDetail, "from job", action.payload.selectedJob);
     
     const config = {
       headers: { "Content-Type": "application/json" },
@@ -161,7 +163,9 @@ function* deleteJobPet(action) {
     // send the action.payload as the params
     // the config includes credentials which
     // allow the server session to recognize the user
-    yield axios.delete(`/api/job/pet/${action.payload}`);
+    yield axios.delete(`/api/job/pet/${action.payload.payDetail}`);
+     yield put({ type: "FETCH_JOB_DETAILS", payload: action.payload.selectedJob });
+    
   } catch (error) {
     console.log("DELETE Job failed", error);
   }

@@ -29,16 +29,27 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Swal from "sweetalert2";
 
+//bottom section of job details page "cards" and their information
 function JobPayEdit(prop) {
   // Dispatch hook, store access
   const history = useHistory();
   const dispatch = useDispatch();
+
+  //this is a list of all jobs
   const jobs = useSelector((store) => store.jobs);
+
+  //information about the job client/date/desc/id/jobnumber/notes
+  //this is whats displayed at top of page
   const selectedJob = useSelector((store) => store.selectedJob);
+
+  //information from jobJunction/join table paid/check/chackDate/animalImg/contactInfo 
+  //this is whats displayed in the cards
   const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
+
   //local state
   const [editable, setEditable] = useState(false);
   const payDetails = prop.payDetails;
+
   //Edit form
   const [newPaid, setNewPaid] = useState(`${payDetails.paid}`);
   const [newCheckNumber, setNewCheckNumber] = useState(
@@ -52,6 +63,8 @@ function JobPayEdit(prop) {
   useEffect(() => {
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
+    console.log("this is what jobs is", jobs );
+    //getting all of selectedJobDetails that is used in the job detail cards
     dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
   }, []);
 
@@ -80,6 +93,10 @@ function JobPayEdit(prop) {
 
     //deletes pet from job
     const deleteJobPet = () => {
+      let petToDelete = {
+        payDetail: payDetails.id,
+        selectedJob: selectedJob.id
+      }
       Swal.fire({
         title: "Are you sure you want to pet from job?",
         text: "You won't be able to revert this!",
@@ -91,7 +108,7 @@ function JobPayEdit(prop) {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("Job has been Deleted!", "", "success");
-          dispatch({ type: "DELETE_JOB_PET", payload: payDetails.id });
+          dispatch({ type: "DELETE_JOB_PET", payload: petToDelete });
         } else if (result.isDenied) {
           Swal.fire("Job Safe", "", "info");
         }

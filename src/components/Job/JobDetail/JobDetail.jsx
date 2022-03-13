@@ -35,8 +35,8 @@ function JobDetail() {
   
 
   useEffect(() => {
-    dispatch({ type: "FETCH_JOB_DETAILS", payload: { id: id }});
-    dispatch({ type: "FETCH_SELECTED_JOB", payload: { id: id }});
+    dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
+    dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
   }, []);
 
   //deletes entire selected job and all foreign keys associated with it after confirmation

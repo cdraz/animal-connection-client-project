@@ -37,8 +37,8 @@ function JobEditDetail() {
   useEffect(() => {
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
-    dispatch({ type: "FETCH_JOB_DETAILS", payload: { id: id } });
-    dispatch({ type: "FETCH_SELECTED_JOB", payload: { id: id } });
+    dispatch({ type: "FETCH_JOB_DETAILS", payload: id  });
+    dispatch({ type: "FETCH_SELECTED_JOB", payload: id  });
   }, []);
 
   //edit job begins
