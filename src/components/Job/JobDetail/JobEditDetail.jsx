@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function JobEditDetail() {
   // Dispatch hook, store access
@@ -54,6 +55,8 @@ function JobEditDetail() {
     dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
   };
 
+ 
+
   return (
     <>
       {/* edit job form begins */}
@@ -64,7 +67,7 @@ function JobEditDetail() {
         transform="grow-9 right-15"
         onClick={() => setEditable(true)}
       />
-
+     
       <div variant="body2">
         {/* conditional rendering if editable button was clicked  */}
         {!editable ? (

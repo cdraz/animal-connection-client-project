@@ -172,6 +172,24 @@ router.put("/edit/pay/:id", (req, res) => {
     });
 });
 
+/**
+ * Delete pet from a Job
+ */
+ router.delete("/pet/:id", (req, res) => {
+  // endpoint functionality
+
+  const queryText = `DELETE FROM "jobsJunction" WHERE id= $1`;
+  pool
+    .query(queryText, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing Delete job query", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
 
 function queryGen(qFilter) {

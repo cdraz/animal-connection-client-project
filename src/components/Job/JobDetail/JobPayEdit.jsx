@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 // MUI imports
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -26,6 +27,7 @@ import { CardActionArea } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Swal from "sweetalert2";
 
 function JobPayEdit(prop) {
   // Dispatch hook, store access
@@ -76,6 +78,26 @@ function JobPayEdit(prop) {
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
   };
 
+    //deletes pet from job
+    const deleteJobPet = () => {
+      Swal.fire({
+        title: "Are you sure you want to pet from job?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete Entire Job!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Job has been Deleted!", "", "success");
+          dispatch({ type: "DELETE_JOB_PET", payload: payDetails.id });
+        } else if (result.isDenied) {
+          Swal.fire("Job Safe", "", "info");
+        }
+      });
+    };
+
   return (
     <>
       {/* edit job form begins */}
@@ -94,9 +116,16 @@ function JobPayEdit(prop) {
                     className="penIcon"
                     icon={faPenToSquare}
                     flip="horizontal"
-                    transform="grow-9 left-150 down-15"
+                    transform="grow-9 left-140 down-20"
                     onClick={() => setEditable(true)}
                   />
+                    <FontAwesomeIcon
+        className="faTrash"
+        icon={faTrash}
+        flip="horizontal"
+        transform="grow-9 right-130 down-20"
+        onClick={deleteJobPet}
+      />
                   <CardMedia
                     component="img"
                     height="140"
