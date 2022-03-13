@@ -60,7 +60,12 @@ function AnimalCard({ animal }) {
   return (
     <Grid>
       <Item id="item">
-        <Card key={animal.id} sx={{ maxWidth: 345 }}>
+        <Card key={animal.id} sx={{
+                  maxWidth: 200,
+                  minWidth: 200,
+                  minHeight: 200,
+                  maxHeight: 200,
+                }}>
           {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
           <Link to={`/animals/${animal.id}`}>
             <CardActionArea>
