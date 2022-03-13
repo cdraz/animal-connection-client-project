@@ -22,7 +22,7 @@ import JobDetail from "../Job/JobDetail/JobDetail";
 import Contacts from "../Contacts/ContactPage/ContactPage";
 import ContactDetail from "../Contacts/ContactDetail/ContactDetail";
 import ContactForm from "../Contacts/contactForm/contactForm";
-import ContactEdit from "../Contacts/ContactEdit/ContactEdit";
+// import ContactEdit from "../Contacts/ContactEdit/ContactEdit";
 
 
 
@@ -80,13 +80,13 @@ function App() {
             <Contacts />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/contactEdit"
           >
             <ContactEdit />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage

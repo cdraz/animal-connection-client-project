@@ -34,7 +34,6 @@ function contactForm () {
         website ('');
         address ('');
         notes ('');
-
     }
 
     const handleChange = (evt, property) => {
@@ -45,8 +44,8 @@ function contactForm () {
     return(
         <>
         <form onSubmit={createContactInfo}>
-         <span>
-             <label htmlFor="firstName">
+        <span>
+            <label htmlFor="firstName">
                 First Name:
             <input
                 type='text'
@@ -56,11 +55,11 @@ function contactForm () {
                 placeholder='First Name'
                 onChange={(evt) => handleChange (evt, "firstName")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="lastName">
+        <span>
+            <label htmlFor="lastName">
                 Last Name:
             <input
                 type='text'
@@ -69,12 +68,12 @@ function contactForm () {
                 required
                 placeholder='Last Name'
                 onChange={(evt) => handleChange (evt, "lastName")}
-            />    
-             </label>
-         </span>
+        />    
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="primaryNumber">
+        <span>
+            <label htmlFor="primaryNumber">
                 Primary Number:
             <input
                 type='text'
@@ -84,10 +83,11 @@ function contactForm () {
                 placeholder='Primary Number'
                 onChange={(evt) => handleChange (evt, "primaryNumber")}
             />    
-             </label>
-         </span>
-         <span>
-             <label htmlFor="secondaryNumber">
+            </label>
+        </span>
+
+        <span>
+            <label htmlFor="secondaryNumber">
                 Secondary Number:
             <input
                 type='text'
@@ -97,11 +97,11 @@ function contactForm () {
                 placeholder='SecondaryNumber'
                 onChange={(evt) => handleChange (evt, "secondaryNumber")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="text">
+        <span>
+            <label htmlFor="text">
                 Text:
             <input
                 type='text'
@@ -111,11 +111,11 @@ function contactForm () {
                 placeholder='Text'
                 onChange={(evt) => handleChange (evt, "text")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="email">
+        <span>
+            <label htmlFor="email">
                 Email:
             <input
                 type='email'
@@ -125,11 +125,11 @@ function contactForm () {
                 placeholder='Email'
                 onChange={(evt) => handleChange (evt, "email")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="type">
+        <span>
+            <label htmlFor="type">
                 Type:
             <input
                 type='text'
@@ -139,11 +139,11 @@ function contactForm () {
                 placeholder='Type'
                 onChange={(evt) => handleChange (evt, "type")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="website">
+        <span>
+            <label htmlFor="website">
                 Website:
             <input
                 type='text'
@@ -153,11 +153,11 @@ function contactForm () {
                 placeholder='Website'
                 onChange={(evt) => handleChange (evt, "website")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="address">
+        <span>
+            <label htmlFor="address">
                 Address:
             <input
                 type='text'
@@ -167,11 +167,11 @@ function contactForm () {
                 placeholder='Address'
                 onChange={(evt) => handleChange (evt, "address")}
             />    
-             </label>
-         </span>
+            </label>
+        </span>
 
-         <span>
-             <label htmlFor="notes">
+        <span>
+            <label htmlFor="notes">
                 Notes:
             <input
                 type='text'
@@ -181,13 +181,12 @@ function contactForm () {
                 placeholder='Notes'
                 onChange={(evt) => handleChange (evt, "notes")}
             />    
-             </label>
-         </span>
-         
-         <button type="submit">Enter</button>
+            </label>
+        </span>
+
+        <button type="submit">Enter</button>
+
         </form>
-
-
         </>
     )
 }
