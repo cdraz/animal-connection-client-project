@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import JobEditDetail from "./JobEditDetail";
 import JobPayEdit from "./JobPayEdit";
+import JobContacts from "./JobContacts";
 import { useParams, Link } from 'react-router-dom';
 
 
@@ -37,6 +38,7 @@ function JobDetail() {
   useEffect(() => {
     dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
     dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
+    dispatch({ type: "FETCH_SELECTED_JOB_CONTACTS", payload: id });
   }, []);
 
   //deletes entire selected job and all foreign keys associated with it after confirmation
@@ -83,6 +85,7 @@ function JobDetail() {
 
   return (
     <>
+    <JobContacts />
       <JobEditDetail />
       <div>
         <br></br>
