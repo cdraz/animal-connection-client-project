@@ -7,6 +7,7 @@ import AnimalCard from '../../Animals/AnimalCard/AnimalCard';
 import JobCard from '../../Job/JobCard/JobCard';
 import ContactEdit from '../ContactEdit/ContactEdit'
 import ContactAddToJobButton from "../ContactAddToJobButton/ContactAddToJobButton";
+import Swal from "sweetalert2";
 
 
 import EditSharpIcon from '@mui/icons-material/EditSharp';
@@ -27,11 +28,29 @@ function ContactDetail() {
         dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
     }, []);
 
-    const deleteContact = () => {
+  
+
+
+  //deletes entire selected job and all foreign keys associated with it after confirmation
+  const deleteContact = () => {
+    Swal.fire({
+      title: "Are you sure you want to delete Contact?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete Entire Contact!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Contact has been Deleted!", "", "success");
         dispatch({type: 'DELETE_CONTACT', payload: id });
         history.push('/contacts')
-    }
-
+      } else if (result.isDenied) {
+        Swal.fire("Contact Safe", "", "info");
+      }
+    });
+  };
     return (
         <>
         <ContactAddToJobButton contact={selectedContact} />

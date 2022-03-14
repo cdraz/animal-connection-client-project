@@ -39,6 +39,7 @@ function* deleteContact(action) {
     try{
         
     yield axios.delete(`/api/contact/${action.payload}`);
+    yield put({ type: 'FETCH_CONTACTS'});
     } catch (error) {
         console.log('DELETE contact failed', error);
     }
