@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+router.post('/register', rejectUnauthenticated, (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
@@ -41,7 +41,7 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 });
 
 // clear all server session information about this user
-router.post('/logout', (req, res) => {
+router.post('/logout', rejectUnauthenticated, (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);

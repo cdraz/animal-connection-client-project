@@ -1,8 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS *******');
     const qFilter = req.query;
     const sqlQuery = queryGen(qFilter)
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
         });
 });
 // Delete on contact
-router.delete("/", (req, res) => {
+router.delete("/", rejectUnauthenticated, (req, res) => {
     // endpoint functionality
   
     const queryText = "DELETE FROM contacts WHERE id=$1";
@@ -34,7 +37,7 @@ router.delete("/", (req, res) => {
       });
   });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS DETAILS*******');
     let queryText = `
     SELECT 
@@ -61,7 +64,7 @@ router.get('/:id', (req, res) => {
 });
 
 //POST New contact
-router.post('/', (req, res, next) => {
+router.post('/', rejectUnauthenticated, (req, res, next) => {
     console.log('contact detail req.body', req.body);
     const sqlText = `
     INSERT INTO "contacts"
@@ -89,7 +92,7 @@ router.post('/', (req, res, next) => {
 })
 
 //Edit contact 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
   console.log('this is req.body in put', req.body);
   const sqlText = `UPDATES "contacts"
                    SET

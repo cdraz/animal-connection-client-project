@@ -1,15 +1,18 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get("/", (req, res) => {
+router.get("/", rejectUnauthenticated,(req, res) => {
   console.log("******* GET JOBS *******");
   const qFilter = req.query;
   const sqlQuery = queryGen(qFilter);
   console.log(qFilter);
   let queryText = `
         SELECT * FROM "jobs"
-        ${sqlQuery.sqlString};`;
+        ${sqlQuery.sqlString};`;  
   console.log(queryText);
   pool
     .query(queryText, sqlQuery.sqlParams)
@@ -23,7 +26,7 @@ router.get("/", (req, res) => {
 /**
  * POST route template
  */
-router.post("/", (req, res, next) => {
+router.post("/", rejectUnauthenticated, (req, res, next) => {
   const client = req.body.client;
   const jobNumber = req.body.jobNumber;
   const jobDate = req.body.jobDate;
@@ -44,7 +47,7 @@ router.post("/", (req, res, next) => {
 /**
  * Get all of the animals that work the job by ID
  */
-router.get("/:id", (req, res) => {
+router.get("/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params is", req.params);
 
   const queryText = `SELECT "jobsJunction".*, animals.image,animals."name" ,contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber",contacts.email
@@ -71,7 +74,7 @@ router.get("/:id", (req, res) => {
 /**
  * Delete an Job
  */
-router.delete("/:id", (req, res) => {
+router.delete("/:id", rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 
   const queryText = "DELETE FROM jobs WHERE id=$1";
@@ -89,7 +92,7 @@ router.delete("/:id", (req, res) => {
 /**
  * PUT to set job to Inactive an Job
  */
-router.put("/:id", (req, res) => {
+router.put("/:id", rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 
   const queryText = `UPDATE jobs
@@ -108,7 +111,7 @@ router.put("/:id", (req, res) => {
 });
 
 //put to edit the title of project based on project id
-router.put("/edit/:id", (req, res) => {
+router.put("/edit/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `UPDATE jobs
     SET description = $1, date = $2, client = $3, notes = $4, "jobNumber" = $5
     WHERE id = $6
@@ -132,7 +135,7 @@ router.put("/edit/:id", (req, res) => {
     });
 });
 
-router.put("/edit/pay/:id", (req, res) => {
+router.put("/edit/pay/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `UPDATE "jobsJunction"
       SET paid = $1, "checkNumber" = $2, "checkAmount" = $3, "checkDate" = $4
       WHERE id = $5
