@@ -22,7 +22,8 @@ import JobDetail from "../Job/JobDetail/JobDetail";
 import Contacts from "../Contacts/ContactPage/ContactPage";
 import ContactDetail from "../Contacts/ContactDetail/ContactDetail";
 import ContactForm from "../Contacts/contactForm/contactForm";
-import ContactEdit from "../Contacts/ContactEdit/ContactEdit";
+// import ContactEdit from "../Contacts/ContactEdit/ContactEdit";
+
 
 
 import UserPage from "../UserPage/UserPage";
@@ -79,13 +80,13 @@ function App() {
             <Contacts />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/contactEdit"
           >
             <ContactEdit />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage
@@ -98,7 +99,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AnimalDetail else shows LoginPage
             exact
-            path="/animals/:id"
+            path="/animals/:id" //1<<<<<<<<<<<<<<<<<<<<<<!!!!
           >
             <AnimalDetail />
           </ProtectedRoute>
@@ -113,7 +114,7 @@ function App() {
           <ProtectedRoute
             // logged in shows JobDetailPage else shows LoginPage
             exact
-            path="/jobDetail"
+            path="/jobDetail/:id"
           >
             <JobDetail />
           </ProtectedRoute>

@@ -15,9 +15,9 @@ function* fetchContacts(action) {
 
 function* addContacts(action) {
     try {
-        console.log('contact post action.payload',action.payload);
+        console.log('contact post action.payload', action.payload);
         
-        const response = yield axios.post(`/api/contact`, action.payload.id);
+        const response = yield axios.post(`/api/contact`, action.payload);
         yield put({ type: 'FETCH_CONTACTS',});
     }
     catch (error) {
@@ -26,7 +26,6 @@ function* addContacts(action) {
 }
 
 function* fetchContactDetails(action){
-    console.log('####################', action.payload);
     try {
         const responseContact = yield axios.get(`/api/contact/${action.payload.id}`);
         yield put({ type: 'SET_SELECTED_CONTACT', payload: responseContact.data[0]});
@@ -36,23 +35,45 @@ function* fetchContactDetails(action){
     }
 }
 
-function* deleteContacts(action) {
+function* deleteContact(action) {
     try{
         
-    yield axios.delete(`/api/contact${action.payload}`);
+    yield axios.delete(`/api/contact/${action.payload}`);
+    yield put({ type: 'FETCH_CONTACTS'});
     } catch (error) {
         console.log('DELETE contact failed', error);
     }
 }
 
+function* saveChanges(action){
+    try{
+        
+    yield axios.put(`/api/contact`, action.payload);
+    } catch (error) {
+        console.log('UPDATE contact failed', error);
+    }
+}
+
+// Add an contact to a job
+function* addContactToJob(action) {
+    try {
+        const reponse = yield axios.post(`/api/contact/job`, action.payload);
+        console.log('addContact to job action.payload is:', action.payload);
+        yield put({ type: 'FETCH_SELECTED_CONTACT', payload: { id: action.payload.contactId }});
+    }
+    catch (error) {
+        console.error('addContactToJob failed', error);
+    }
+}
 
 
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
     yield takeLatest('FETCH_SELECTED_CONTACT', fetchContactDetails);
     yield takeLatest('ADD_CONTACTS', addContacts);
-    // yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
-    yield takeLatest('DELETE_CONTACTS', deleteContacts);
+    yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
+    yield takeLatest('DELETE_CONTACT', deleteContact);
+    yield takeLatest('ADD_CONTACT_TO_JOB', addContactToJob);
 }
 
 export default contactSaga;

@@ -18,8 +18,8 @@ function ContactPage() {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
     const handleClose = () => {
-    setOpen(false);
-  };
+      setOpen(false);
+    };
   const style = {
     position: "absolute",
     top: "50%",

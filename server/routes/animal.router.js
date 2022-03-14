@@ -12,7 +12,6 @@ router.get('/',  rejectUnauthenticated,(req, res) => {
     let queryText = `
         SELECT * FROM "animals" 
         ${sqlQuery.sqlString};`
-    console.log(queryText);
     pool.query(queryText, sqlQuery.sqlParams)
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
         .catch((err) => {
@@ -58,7 +57,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
-        console.log('GET /ANIMAL/:ID DBRES IS:', dbRes.rows);
         res.send(dbRes.rows);
     }
     catch (error) {
@@ -133,6 +131,58 @@ router.put('/:id/training', rejectUnauthenticated, async (req, res) => {
 });
 
 /**
+ * PUT animal/:id -- update animal training info
+ */
+router.put('/:id/summary', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        UPDATE "animals"
+        SET "animalType" = $1,
+        "otherTypeDetail" = $2,
+        "name" = $3,
+        "color" = $4,
+        "breed" = $5,
+        "sex" = $6,
+        "birthday" = $7,
+        "active" = $8,
+        "rating" = $9,
+        "height" = $10,
+        "weight" = $11,
+        "length" = $12,
+        "neckGirth" = $13,
+        "bellyGirth" = $14,
+        "notes" = $15
+        WHERE "id" = $16
+    `;
+        const queryParams = [
+            req.body.animalType,
+            req.body.otherTypeDetail,
+            req.body.name,
+            req.body.color,
+            req.body.breed,
+            req.body.sex,
+            req.body.birthday,
+            req.body.active,
+            req.body.rating,
+            req.body.height,
+            req.body.weight,
+            req.body.length,
+            req.body.neckGirth,
+            req.body.bellyGirth,
+            req.body.notes,
+            req.params.id
+        ];
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in PUT /animal/id/summary', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
  * POST Animal to job
  */
 router.post('/job', rejectUnauthenticated, async (req, res) => {
@@ -154,6 +204,28 @@ router.post('/job', rejectUnauthenticated, async (req, res) => {
     }
     catch (error) {
         console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * DELETE Animal
+ */
+router.delete('/:id', async (req, res) => {
+    // DELETE animal from database
+    try {
+        console.log(`******* DELETE /animals/${req.params.id} *******`);
+        const queryText = `
+        DELETE FROM "animals"
+        WHERE "id" = $1;
+    `;
+        const queryParams = [req.params.id];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(200);
+    }
+    catch (error) {
+        console.error(`ERROR in DELETE /animals/${req.params.id}`, error);
         res.sendStatus(500);
     }
 });

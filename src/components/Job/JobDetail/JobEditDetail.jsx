@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
+import { useParams, Link } from "react-router-dom";
 
 // React components
 import { useHistory } from "react-router-dom";
@@ -11,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function JobEditDetail() {
   // Dispatch hook, store access
@@ -21,6 +23,8 @@ function JobEditDetail() {
   const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
   //local state
   const [editable, setEditable] = useState(false);
+  // Set id from URL parameters
+  const { id } = useParams();
   //Edit form
   const [newClient, setNewClient] = useState(`${selectedJob.client}`);
   const [newDescription, setNewDescription] = useState(
@@ -33,7 +37,8 @@ function JobEditDetail() {
   useEffect(() => {
     console.log("selected job is", selectedJob);
     console.log("selected job  DETAILS is", selectedJobDetails);
-    dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
+    dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
+    dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
   }, []);
 
   //edit job begins
@@ -46,6 +51,7 @@ function JobEditDetail() {
       newNotes: newNotes,
       newJobNumber: newJobNumber,
       selectedJob: selectedJob.id,
+      id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
   };

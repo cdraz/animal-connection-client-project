@@ -30,7 +30,7 @@ function AnimalWorkHistoryTable({ animal }) {
                 <TableBody>
                     {jobs ? jobs.map(job => (
                         job.date ?
-                            <TableRow key={job.id} onClick={() => history.push(`/jobs/${job.id}`)}>
+                            <TableRow key={job.id} onClick={() => history.push(`/jobDetail/${job.id}`)}>
                                 <TableCell align="left">
                                     {job.date}
                                 </TableCell>
