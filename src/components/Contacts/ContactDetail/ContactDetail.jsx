@@ -78,10 +78,10 @@ function ContactDetail() {
                 <p>Loading...</p>
             )}
         <h2>ANIMALS</h2>
-        {Array.isArray(selectedContact.animals) ?
+        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !=null ?
             selectedContact.animals.map( animal => (
             <AnimalCard key= {animal.id} animal={animal} />
-        )) : <p>Loading...</p>}
+        )) : <p>No animals on record.</p>}
         </>
     )
 };
