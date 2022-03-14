@@ -9,6 +9,7 @@ import AnimalAuditionHistoryTable from "../AnimalAuditionHistoryTable/AnimalAudi
 import AnimalOwnerTable from "../AnimalOwnerTable/AnimalOwnerTable";
 import AnimalWorkHistoryTable from "../AnimalWorkHistoryTable/AnimalWorkHistoryTable";
 import AnimalBehaviorTrainingTable from "../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable";
+import AnimalPhoto from "../AnimalPhoto/AnimalPhoto"
 
 // MUI imports
 import Box from "@mui/material/Box";
@@ -67,7 +68,9 @@ function AnimalDetail() {
                     }
                     <AnimalAddToJobButton animal={animal} />
                 </Stack>
+                <AnimalPhoto />
             </Grid>
+            
         </Grid>
     )
 }
