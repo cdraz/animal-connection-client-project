@@ -5,12 +5,9 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-<<<<<<< HEAD
+
 router.get("/", rejectUnauthenticated,(req, res) => {
   console.log("******* GET JOBS *******");
-=======
-router.get("/", (req, res) => {
->>>>>>> 06e79e7f9504d8824ee422ce11a0db8605c78927
   const qFilter = req.query;
   const sqlQuery = queryGen(qFilter);
   let queryText = `
@@ -50,13 +47,10 @@ router.post("/", rejectUnauthenticated, (req, res, next) => {
 /**
  * Get Job details for job cards by id of job
  */
-<<<<<<< HEAD
+
 router.get("/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params is", req.params);
-=======
-router.get("/:id", (req, res) => {
-  console.log("req.params of get job details card by id", req.params);
->>>>>>> 06e79e7f9504d8824ee422ce11a0db8605c78927
+
 
   const queryText = `SELECT "jobsJunction".*, animals.image,animals."name" ,contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber",contacts.email
       FROM "jobsJunction"
