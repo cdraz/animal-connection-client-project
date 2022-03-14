@@ -1,9 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-
-router.get('/', (req, res) => {
+router.get('/',  rejectUnauthenticated,(req, res) => {
     console.log('******* GET ANIMALS *******', req.params);
     const qFilter = req.query;
     const sqlQuery = queryGen(qFilter)
@@ -18,7 +20,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
     try {
         console.log('IN GET /ANIMAL/:ID, REQ.PARAMS IS:', req.params)
         const queryText = `
@@ -66,14 +68,14 @@ router.get('/:id', async (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     // POST route code here
 });
 
 /**
  * PUT animal/:id -- update animal training info
  */
-router.put('/:id/training', async (req, res) => {
+router.put('/:id/training', rejectUnauthenticated, async (req, res) => {
     try {
         // Write SQL query
         const queryText = `
@@ -183,7 +185,7 @@ router.put('/:id/summary', async (req, res) => {
 /**
  * POST Animal to job
  */
-router.post('/job', async (req, res) => {
+router.post('/job', rejectUnauthenticated, async (req, res) => {
     // POST animal to jobsJunction table
     console.log('******* POST /animals/job *******')
     try {
