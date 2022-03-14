@@ -68,8 +68,9 @@ function AnimalDetail() {
                     }
                     <AnimalAddToJobButton animal={animal} />
                 </Stack>
+                <AnimalPhoto />
             </Grid>
-            {/* <AnimalPhoto /> */}
+            
         </Grid>
     )
 }
