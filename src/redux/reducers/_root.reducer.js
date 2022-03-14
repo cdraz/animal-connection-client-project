@@ -1,14 +1,14 @@
-import { combineReducers } from 'redux';
-import animals from './animal.reducer';
-import selectedAnimal from './selectedAnimal.reducer';
-import jobs from './job.reducer';
-import errors from './errors.reducer';
-import user from './user.reducer';
-import selectedJob from './selectedJob.reducer';
-import selectedJobDetails from './selectedJobDetails.reducer';
-import activeJobs from './activeJobs.reducer';
-import contacts from './contact.reducer';
-import selectedJobContacts from './selectedJobContacts.reducer';
+import { combineReducers } from "redux";
+import animals from "./animal.reducer";
+import selectedAnimal from "./selectedAnimal.reducer";
+import jobs from "./job.reducer";
+import errors from "./errors.reducer";
+import user from "./user.reducer";
+import selectedJob from "./selectedJob.reducer";
+import selectedJobDetails from "./selectedJobDetails.reducer";
+import activeJobs from "./activeJobs.reducer";
+import contacts from "./contact.reducer";
+import selectedJobContacts from "./selectedJobContacts.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,4 +31,3 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
-  

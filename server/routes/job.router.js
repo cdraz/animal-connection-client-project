@@ -67,7 +67,7 @@ router.get("/:id", (req, res) => {
 /**
  * Get Job contacts for jobcontacts table by id of job
  */
- router.get("/contacts/:id", (req, res) => {
+router.get("/contacts/:id", (req, res) => {
   console.log("req.params of get job contacts by  id", req.params);
 
   const queryText = `SELECT "jobContacts".*, contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber"
@@ -212,10 +212,6 @@ router.delete("/pet/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
-
-
-
-
 
 module.exports = router;
 

@@ -50,7 +50,8 @@ function* fetchJobDetails(action) {
   }
 }
 
-function* fetchSelectedJobContacts(action) {//<<<<<<<<<<<<<<<<<<<<
+function* fetchSelectedJobContacts(action) {
+  //<<<<<<<<<<<<<<<<<<<<
   try {
     console.log("@#@#@$$@$##fetch job Contacts", action.payload);
 
@@ -199,7 +200,6 @@ function* jobSaga() {
   yield takeLatest("FINISH_JOB", finishJob);
   yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
   yield takeLatest("EDIT_SELECTED_JOB_PAY", editSelectedJobPay);
-
 }
 
 export default jobSaga;
