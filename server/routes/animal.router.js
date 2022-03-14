@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
     let queryText = `
         SELECT * FROM "animals" 
         ${sqlQuery.sqlString};`
-    console.log(queryText);
     pool.query(queryText, sqlQuery.sqlParams)
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
         .catch((err) => {
@@ -56,7 +55,6 @@ router.get('/:id', async (req, res) => {
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
-        console.log('GET /ANIMAL/:ID DBRES IS:', dbRes.rows);
         res.send(dbRes.rows);
     }
     catch (error) {
@@ -133,7 +131,7 @@ router.put('/:id/training', async (req, res) => {
 /**
  * PUT animal/:id -- update animal training info
  */
- router.put('/:id/summary', async (req, res) => {
+router.put('/:id/summary', async (req, res) => {
     try {
         // Write SQL query
         const queryText = `
@@ -204,6 +202,28 @@ router.post('/job', async (req, res) => {
     }
     catch (error) {
         console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * DELETE Animal
+ */
+router.delete('/:id', async (req, res) => {
+    // DELETE animal from database
+    try {
+        console.log(`******* DELETE /animals/${req.params.id} *******`);
+        const queryText = `
+        DELETE FROM "animals"
+        WHERE "id" = $1;
+    `;
+        const queryParams = [req.params.id];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(200);
+    }
+    catch (error) {
+        console.error(`ERROR in DELETE /animals/${req.params.id}`, error);
         res.sendStatus(500);
     }
 });
