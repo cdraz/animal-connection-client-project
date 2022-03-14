@@ -187,6 +187,31 @@ function* deleteJobPet(action) {
   }
 }
 
+
+function* deleteJobContact(action) {
+  try {
+    console.log(
+      "deleteJob Contact action",
+      action.payload.contact,
+      "from job",
+      action.payload.id
+    );
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    // send the action.payload as the params
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    yield axios.delete(`/api/job/contact/${action.payload.contact}`);
+    yield put({type: "FETCH_SELECTED_JOB_CONTACTS", payload: action.payload.id
+    });
+  } catch (error) {
+    console.log("DELETE Job contact failed", error);
+  }
+}
+
 function* jobSaga() {
   yield takeLatest("FILTER_JOBS", filterJobs);
   yield takeLatest("FETCH_JOBS", fetchJobs);
@@ -197,6 +222,7 @@ function* jobSaga() {
   yield takeLatest("ADD_JOB", addJob);
   yield takeLatest("DELETE_JOB", deleteJob);
   yield takeLatest("DELETE_JOB_PET", deleteJobPet);
+  yield takeLatest("DELETE_JOB_CONTACT", deleteJobContact);
   yield takeLatest("FINISH_JOB", finishJob);
   yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
   yield takeLatest("EDIT_SELECTED_JOB_PAY", editSelectedJobPay);
