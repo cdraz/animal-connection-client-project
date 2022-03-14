@@ -53,6 +53,18 @@ function* saveChanges(action){
     }
 }
 
+// Add an contact to a job
+function* addContactToJob(action) {
+    try {
+        const reponse = yield axios.post(`/api/contact/job`, action.payload);
+        console.log('addContact to job action.payload is:', action.payload);
+        yield put({ type: 'FETCH_SELECTED_CONTACT', payload: { id: action.payload.contactId }});
+    }
+    catch (error) {
+        console.error('addContactToJob failed', error);
+    }
+}
+
 
 function* contactSaga () {
     yield takeLatest('FETCH_CONTACTS', fetchContacts);
@@ -60,6 +72,7 @@ function* contactSaga () {
     yield takeLatest('ADD_CONTACTS', addContacts);
     yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
     yield takeLatest('DELETE_CONTACT', deleteContact);
+    yield takeLatest('ADD_CONTACT_TO_JOB', addContactToJob);
 }
 
 export default contactSaga;

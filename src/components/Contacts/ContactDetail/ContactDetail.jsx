@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import AnimalCard from '../../Animals/AnimalCard/AnimalCard';
 import JobCard from '../../Job/JobCard/JobCard';
 import ContactEdit from '../ContactEdit/ContactEdit'
+import ContactAddToJobButton from "../ContactAddToJobButton/ContactAddToJobButton";
 
 
 import EditSharpIcon from '@mui/icons-material/EditSharp';
@@ -33,6 +34,7 @@ function ContactDetail() {
 
     return (
         <>
+        <ContactAddToJobButton contact={selectedContact} />
         {editPage
         ? <ContactEdit editPage={editPage} setEditPage={setEditPage} />
             // ?<form>

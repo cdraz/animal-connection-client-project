@@ -59,6 +59,29 @@ router.get('/:id', (req, res) => {
         });
 });
 
+router.post('/job', async (req, res) => {
+    // POST contact to jobsContacts table
+    console.log('******* POST /contact/job *******',req.body)
+    try {
+        // Write SQL query
+        const queryText = `
+            INSERT INTO "jobContacts" ("contactId", "jobId")
+            VALUES ($1, $2);
+        `;
+        const queryParams = [
+            req.body.contactId, // $1
+            req.body.jobId // $2
+        ];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('ERROR in POST /contact/job', error);
+        res.sendStatus(500);
+    }
+});
+
 //POST New contact
 router.post('/', (req, res, next) => {
     console.log('contact detail req.body', req.body);
