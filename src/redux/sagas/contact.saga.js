@@ -35,10 +35,10 @@ function* fetchContactDetails(action){
     }
 }
 
-function* deleteContacts(action) {
+function* deleteContact(action) {
     try{
         
-    yield axios.delete(`/api/contact${action.payload}`);
+    yield axios.delete(`/api/contact/${action.payload}`);
     } catch (error) {
         console.log('DELETE contact failed', error);
     }
@@ -59,7 +59,7 @@ function* contactSaga () {
     yield takeLatest('FETCH_SELECTED_CONTACT', fetchContactDetails);
     yield takeLatest('ADD_CONTACTS', addContacts);
     yield takeLatest('SAVE_CONTACT_CHANGES',saveChanges);
-    yield takeLatest('DELETE_CONTACTS', deleteContacts);
+    yield takeLatest('DELETE_CONTACT', deleteContact);
 }
 
 export default contactSaga;

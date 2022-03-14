@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         });
 });
 // Delete on contact
-router.delete("/", (req, res) => {
+router.delete("/:id", (req, res) => {
     // endpoint functionality
     const queryText = "DELETE FROM contacts WHERE id=$1";
     pool

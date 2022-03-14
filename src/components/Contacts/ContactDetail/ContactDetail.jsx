@@ -27,7 +27,7 @@ function ContactDetail() {
     }, []);
 
     const deleteContact = () => {
-        dispatch({type: 'DELETE_CONTACT', payload: selectedContact.id});
+        dispatch({type: 'DELETE_CONTACT', payload: id });
         history.push('/contacts')
     }
 
