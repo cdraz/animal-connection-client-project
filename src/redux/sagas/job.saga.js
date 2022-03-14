@@ -38,8 +38,6 @@ function* addJob(action) {
 
 function* fetchJobDetails(action) {
   try {
-    console.log("@#@#@$$@$##fetch job detail", action.payload);
-
     const response = yield axios.get(`/api/job/${action.payload}`);
     console.log(
       "response.data for set selected job details is ",
@@ -47,6 +45,23 @@ function* fetchJobDetails(action) {
     );
 
     yield put({ type: "SET_SELECTED_JOB_DETAILS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  } catch (error) {
+    console.error("fetchJobDetails failed", error);
+  }
+}
+
+function* fetchSelectedJobContacts(action) {
+  //<<<<<<<<<<<<<<<<<<<<
+  try {
+    console.log("@#@#@$$@$##fetch job Contacts", action.payload);
+
+    const response = yield axios.get(`/api/job/contacts/${action.payload}`);
+    console.log(
+      "response.data for set selected job contacts is ",
+      response.data
+    );
+
+    yield put({ type: "SET_SELECTED_JOB_CONTACTS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   } catch (error) {
     console.error("fetchJobDetails failed", error);
   }
@@ -178,6 +193,7 @@ function* jobSaga() {
   yield takeLatest("FETCH_ACTIVE_JOBS", fetchActiveJobs);
   yield takeLatest("FETCH_SELECTED_JOB", fetchSelectedJob);
   yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
+  yield takeLatest("FETCH_SELECTED_JOB_CONTACTS", fetchSelectedJobContacts);
   yield takeLatest("ADD_JOB", addJob);
   yield takeLatest("DELETE_JOB", deleteJob);
   yield takeLatest("DELETE_JOB_PET", deleteJobPet);

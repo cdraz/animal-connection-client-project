@@ -65,6 +65,29 @@ router.get("/:id", (req, res) => {
 });
 
 /**
+ * Get Job contacts for jobcontacts table by id of job
+ */
+router.get("/contacts/:id", (req, res) => {
+  console.log("req.params of get job contacts by  id", req.params);
+
+  const queryText = `SELECT "jobContacts".*, contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber"
+      FROM "jobContacts"
+    JOIN "contacts" 
+      ON "jobContacts"."contactId" = contacts.id 
+    WHERE "jobId"= $1`;
+  pool
+    .query(queryText, [req.params.id])
+
+    .then((dbRes) => {
+      res.send(dbRes.rows);
+    })
+    .catch((err) => {
+      console.error("err in get jobDetails selected job cards", err);
+      console.log("req.params.id", req.params);
+    });
+});
+
+/**
  * Get  get selected job details by job ID for top of selected job page
  */
 router.get("/selectedJob/:id", (req, res) => {
