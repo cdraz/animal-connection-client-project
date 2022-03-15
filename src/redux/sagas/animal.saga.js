@@ -72,6 +72,15 @@ function* updateAnimalSummary(action) {
     }
 }
 
+function* addNewAnimal(action){
+    try{
+        yield axios.post(`/api/animal`, action.payload);
+    }
+    catch (error) {
+        console.error('POST animal failed', error);
+    }
+}
+
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
     yield takeLatest('FETCH_ANIMALS', fetchAnimals);
@@ -79,6 +88,7 @@ function* animalSaga() {
     yield takeLatest('ADD_ANIMAL_TO_JOB', addAnimalToJob);
     yield takeLatest('UPDATE_ANIMAL_TRAINING', updateAnimalTraining);
     yield takeLatest('UPDATE_ANIMAL_SUMMARY', updateAnimalSummary);
+    yield takeLatest('ADD_NEW_ANIMAL', addNewAnimal);
 }
 
 export default animalSaga;

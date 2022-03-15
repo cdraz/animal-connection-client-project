@@ -22,7 +22,7 @@ import JobDetail from "../Job/JobDetail/JobDetail";
 import Contacts from "../Contacts/ContactPage/ContactPage";
 import ContactDetail from "../Contacts/ContactDetail/ContactDetail";
 import ContactForm from "../Contacts/contactForm/contactForm";
-// import ContactEdit from "../Contacts/ContactEdit/ContactEdit";
+import AnimalForm from "../Animals/AnimalForm/AnimalForm"
 
 
 
@@ -96,6 +96,13 @@ function App() {
             <AnimalsPage />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // logged in shows AnimalDetail else shows LoginPage
+            exact
+            path="/animals/add/:id" //1<<<<<<<<<<<<<<<<<<<<<<!!!!
+          >
+            <AnimalForm />
+          </ProtectedRoute>
           <ProtectedRoute
             // logged in shows AnimalDetail else shows LoginPage
             exact

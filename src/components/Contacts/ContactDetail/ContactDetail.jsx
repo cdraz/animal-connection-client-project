@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams, Link} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {useEffect} from "react";
 
@@ -77,7 +77,7 @@ function ContactDetail() {
             ) : (
                 <p>Loading...</p>
             )}
-        <h2>ANIMALS</h2>
+        <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
         {Array.isArray(selectedContact.animals) ?
             selectedContact.animals.map( animal => (
             <AnimalCard key= {animal.id} animal={animal} />

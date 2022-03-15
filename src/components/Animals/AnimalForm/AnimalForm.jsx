@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams, useHistory } from "react-router-dom"; 
 
 // MUI imports
 import Button from '@mui/material/Button';
@@ -19,23 +20,27 @@ import { CardActionArea } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import Checkbox from '@mui/material/Checkbox';
 
-function AnimalForm({contactId}) {
-    
+function AnimalForm() {
+    const dispatch = useDispatch();
+    // Set id from URL parameters
+    const { id } = useParams();
+    const history = useHistory();
 
-    // Dispatch hook{
     const [newAnimal, setNewAnimal] = useState({
+        contactId: id, 
+        image: '', //needs an input box and setup with cloud server
         name: '',
-        rating: '',
+        rating: 0,
         animalType: '',
         otherTypeDetail: '',
         breed: '',
         birthday: '',
         sex: '',
-        weight: '',
-        height: '',
-        length: '',
-        neckGirth: '',
-        bellyGirth: '',
+        weight: 0,
+        height: 0,
+        length: 0,
+        neckGirth: 0,
+        bellyGirth: 0,
         color: '',
         active: '',
         notes: '',
@@ -48,60 +53,40 @@ function AnimalForm({contactId}) {
         barkOnCommand: false,
         holdItem: false,
         mark: false,
+        loudNoiseLights: false,
         silentCommands: false,
         strangerHandle: false,
         strangerDress: false,
+        offLeashTrained: false,
         goodAroundChildren: false,
+        atDistanceFromTrainer: false,
         otherDogs: false,
         smallAnimals: false,
         loudNoiseLights: false,
         shortNotice: false,
-        overnight: false
+        overnight: false,
+        livesClose: false
     });
-    console.log(newAnimal);
+    
     const handleChange = event => {
-        console.log(event.target.name);
-        console.log(newAnimal[event.target.name]);
-        setNewAnimal({...newAnimal, [event.target.name]: event.target.value})
-        console.table(newAnimal)
+        setNewAnimal({...newAnimal, [event.target.name]: event.target.value});
+    }
+    const handleBoolChange = (event) => {
+        newAnimal[event.target.name] = event.target.checked;
+    }
+
+    const submitNewAnimal = (evt) => {
+        evt.preventDefault();
+        dispatch({
+            type: 'ADD_NEW_ANIMAL',
+            payload: newAnimal,
+        });
+        history.push(`/contacts/${id}`)
     }
 
     return (
         <>
-            {/* <div style={{ display: 'inline-flex' }}>
-                <Typography variant="h5">
-                    Animal Details
-                </Typography>
-                {!edit &&
-                    <Button
-                        onClick={() => setEdit(!edit)}
-                    >
-                        Edit
-                    </Button>
-                }
-                {edit &&
-                    <>
-                        <Button
-                            variant="contained"
-                            onClick={updateAnimal}
-                        >
-                            Save
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                setEdit(!edit);
-                                dispatch({
-                                    type: 'FETCH_SELECTED_ANIMAL',
-                                    payload: { id: animal.id }
-                                })
-                            }}
-                        >
-                            Cancel
-                        </Button>
-                    </>
-                }
-            </div> */}
-
+        <form onSubmit={submitNewAnimal}>
             <Paper sx={{ padding: 3 }}>
                 {/* <img
                     width="auto"
@@ -115,12 +100,14 @@ function AnimalForm({contactId}) {
                         sx={{ margin: 'auto' }}
                     />
                     <TextField
+                        required
                         name='name'
                         id="animal-name-input"
                         label="Animal Name"
                         onChange={event => handleChange(event)}
                     />
                     <TextField
+                        required
                         name='animalType'
                         id="animal-type-input"
                         label="Animal Type"
@@ -190,6 +177,7 @@ function AnimalForm({contactId}) {
                         onChange={event => handleChange(event)}
                     />
                     <TextField
+                        required
                         name='active'
                         id="animal-active-input"
                         label="Active"
@@ -208,68 +196,79 @@ function AnimalForm({contactId}) {
                     <Grid item xs={6}>
                         <Stack spacing={0}>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='sitOnLeash' />  Sit and stay on leash
+                                <Checkbox onChange={event => handleBoolChange(event)} name='sitOnLeash' />  Sit and stay on leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='sitOffLeash' />  Sit and stay off leash
+                                <Checkbox onChange={event => handleBoolChange(event)} name='sitOffLeash' />  Sit and stay off leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='downOnLeash' />  Down and stay on leash
+                                <Checkbox onChange={event => handleBoolChange(event)} name='downOnLeash' />  Down and stay on leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='downOffLeash' /> Down and stay off leash
+                                <Checkbox onChange={event => handleBoolChange(event)} name='downOffLeash' /> Down and stay off leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='standOnLeash' />  Stand and stay on leash
+                                <Checkbox onChange={event => handleBoolChange(event)} name='standOnLeash' />  Stand and stay on leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='standOffLeash' />  Stand and stay off leash
+                                <Checkbox onChange={event => handleBoolChange(event)} name='standOffLeash' />  Stand and stay off leash
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='barkOnCommand' />  Bark on cue
+                                <Checkbox onChange={event => handleBoolChange(event)} name='barkOnCommand' />  Bark on cue
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='holdItem' />  Hold and object
+                                <Checkbox onChange={event => handleBoolChange(event)} name='holdItem' />  Hold and object
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='mark' />  Move to a mark
+                                <Checkbox onChange={event => handleBoolChange(event)} name='mark' />  Move to a mark
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='silentCommands' />  Can use silent commands
+                                <Checkbox onChange={event => handleBoolChange(event)} name='silentCommands' />  Can use silent commands
                             </div>
                         </Stack>
                     </Grid>
                     <Grid item xs={6}>
                         <Stack spacing={0}>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} checked name='strangerHandle' />  Can be handled by stranger
+                                <Checkbox onChange={event => handleBoolChange(event)} value name='strangerHandle' />  Can be handled by stranger
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='strangerDress' />  Can be dressed by stranger
+                                <Checkbox onChange={event => handleBoolChange(event)} name='strangerDress' />  Can be dressed by stranger
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='goodAroundChildren' />  Works well with children
+                                <Checkbox onChange={event => handleBoolChange(event)} name='offLeashTrained' />  Works well with children
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='otherDogs' />  Works well with other dogs
+                                <Checkbox onChange={event => handleBoolChange(event)} name='goodAroundChildren' />  Works well with children
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='smallAnimals' />  Works well with other small animals
+                                <Checkbox onChange={event => handleBoolChange(event)} name='otherDogs' />  Works well with other dogs
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='loudNoiseLights' />  Afraid of strobes
+                                <Checkbox onChange={event => handleBoolChange(event)} name='smallAnimals' />  Works well with other small animals
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='shortNotice' />  Available at short notice
+                                <Checkbox onChange={event => handleBoolChange(event)} name='atDistanceFromTrainer' />  Can work at a Distance from trainer
                             </div>
                             <div>
-                                <Checkbox onChange={event => handleChange(event)} name='overnight' />  Available for overnight jobs
+                                <Checkbox onChange={event => handleBoolChange(event)} name='loudNoiseLights' />  Afraid of strobes
+                            </div>
+                            <div>
+                                <Checkbox onChange={event => handleBoolChange(event)} name='shortNotice' />  Available at short notice
+                            </div>
+                            <div>
+                                <Checkbox onChange={event => handleBoolChange(event)} name='overnight' />  Available for overnight jobs
+                            </div>
+                            <div>
+                                <Checkbox onChange={event => handleBoolChange(event)} name='livesClose' />  Lives near by
                             </div>
 
                         </Stack>
                     </Grid>
                 </Grid>
             </Paper>
+            <button type="submit">SUBMIT</button>
+        </form>
         </>
     )
 }
