@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const {
     rejectUnauthenticated,
-  } = require('../modules/authentication-middleware');
+} = require('../modules/authentication-middleware');
 
 router.get('/',  rejectUnauthenticated,(req, res) => {
     console.log('******* GET ANIMALS *******', req.params);
