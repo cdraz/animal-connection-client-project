@@ -7,22 +7,17 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
-import Modal from "@mui/material/Modal";
-import { CardActionArea } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
 import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import DateAdapter from '@mui/lab/AdapterMoment';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+
 
 function AnimalForm() {
     const dispatch = useDispatch();
-    // Set id from URL parameters
     const { id } = useParams();
     const history = useHistory();
 
@@ -86,7 +81,7 @@ function AnimalForm() {
 
     return (
         <>
-        <form onSubmit={submitNewAnimal}>
+        <FormControl id="animalForm" onSubmit={submitNewAnimal}>
             <Paper sx={{ padding: 3 }}>
                 {/* <img
                     width="auto"
@@ -126,12 +121,15 @@ function AnimalForm() {
                         label="Breed"
                         onChange={event => handleChange(event)}
                     />
-                    <TextField
+                    <LocalizationProvider dateAdapter={DateAdapter}>
+                    <DesktopDatePicker
+                        inputFormat="MM/dd/yyyy"
                         name='birthday'
                         id="animal-birthday-input"
                         label="Birthdate"
                         onChange={event => handleChange(event)}
                     />
+                    </LocalizationProvider>
                     <TextField
                         name='sex'
                         id="animal-sex-input"
@@ -267,8 +265,8 @@ function AnimalForm() {
                     </Grid>
                 </Grid>
             </Paper>
-            <button type="submit">SUBMIT</button>
-        </form>
+            <Button type="submit">SUBMIT</Button>
+        </FormControl>
         </>
     )
 }

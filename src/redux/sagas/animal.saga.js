@@ -72,7 +72,6 @@ function* updateAnimalSummary(action) {
     }
 }
 
-<<<<<<< HEAD
 function* addNewAnimal(action){
     try{
         yield axios.post(`/api/animal`, action.payload);
@@ -82,7 +81,6 @@ function* addNewAnimal(action){
     }
 }
 
-=======
 // Delete an animal from the database
 function* deleteAnimal(action) {
     try {
@@ -93,7 +91,6 @@ function* deleteAnimal(action) {
         console.error('deleteAnimal failed', error);
     }
 }
->>>>>>> c9d20f6d3568cfc17ce5ca0e45061d9b24cd72ce
 function* animalSaga() {
     yield takeLatest('FILTER_ANIMALS', filterAnimals);
     yield takeLatest('FETCH_ANIMALS', fetchAnimals);
@@ -101,11 +98,8 @@ function* animalSaga() {
     yield takeLatest('ADD_ANIMAL_TO_JOB', addAnimalToJob);
     yield takeLatest('UPDATE_ANIMAL_TRAINING', updateAnimalTraining);
     yield takeLatest('UPDATE_ANIMAL_SUMMARY', updateAnimalSummary);
-<<<<<<< HEAD
     yield takeLatest('ADD_NEW_ANIMAL', addNewAnimal);
-=======
     yield takeLatest('DELETE_ANIMAL', deleteAnimal);
->>>>>>> c9d20f6d3568cfc17ce5ca0e45061d9b24cd72ce
 }
 
 export default animalSaga;

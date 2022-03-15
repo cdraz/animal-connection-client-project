@@ -98,13 +98,8 @@ function ContactDetail() {
             ) : (
                 <p>Loading...</p>
             )}
-<<<<<<< HEAD
         <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
         {Array.isArray(selectedContact.animals) ?
-=======
-        <h2>ANIMALS</h2>
-        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !=null ?
->>>>>>> c9d20f6d3568cfc17ce5ca0e45061d9b24cd72ce
             selectedContact.animals.map( animal => (
             <AnimalCard key= {animal.id} animal={animal} />
         )) : <p>No animals on record.</p>}

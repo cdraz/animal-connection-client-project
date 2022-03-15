@@ -68,18 +68,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 /**
  * POST route template
  */
-<<<<<<< HEAD
  router.put('/:id/training', async (req, res) => {
-=======
-router.post('/', rejectUnauthenticated, (req, res) => {
-    // POST route code here
-});
-
-/**
- * PUT animal/:id -- update animal training info
- */
-router.put('/:id/training', rejectUnauthenticated, async (req, res) => {
->>>>>>> c9d20f6d3568cfc17ce5ca0e45061d9b24cd72ce
     try {
         // Write SQL query
         const queryText = `
