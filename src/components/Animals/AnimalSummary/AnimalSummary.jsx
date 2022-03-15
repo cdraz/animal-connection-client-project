@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import dogBreeds from '../DogBreedList';
@@ -18,6 +18,16 @@ function AnimalSummary({ animal }) {
     // Dispatch hook, history hook
     const dispatch = useDispatch();
     const history = useHistory();
+
+    // Get animal types from server on component load
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_ANIMAL_TYPES'
+        });
+    }, []);
+
+    // Store access for types
+    const types = (useSelector(store => store.animalTypes))
 
     // Set state variables for edit mode
     const [edit, setEdit] = useState("");
@@ -147,16 +157,30 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
-                    />
-                    <TextField
-                        name='animalType'
-                        id="animal-type-input"
-                        label="Animal Type"
-                        value={animal.animalType}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
+                        InputLabelProps={{
+                            shrink: true
                         }}
+                    /> 
+                    <Autocomplete
+                        name='type'
+                        readOnly={!edit}
+                        options={types}
+                        getOptionLabel={(option) => option.type}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                        filterSelectedOptions
+                        defaultValue={types.find(e => e.id === animal.animalType)}
+                        onChange={(event, option) => (
+                            dispatch({
+                                type: 'UPDATE_SELECTED_ANIMAL',
+                                payload: { animalType: option.id }
+                            }))}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Animal Type"
+                                placeholder="Types"
+                            />
+                        )}
                     />
                     {/* Show other animal type detail if type is other */}
                     {animal.animalType === 'other' ?
@@ -168,6 +192,9 @@ function AnimalSummary({ animal }) {
                             onChange={event => handleChange(event)}
                             InputProps={{
                                 readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
                             }}
                         />
                         : null}
@@ -203,6 +230,9 @@ function AnimalSummary({ animal }) {
                             InputProps={{
                                 readOnly: !edit,
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
                     }
                     <TextField
@@ -214,16 +244,30 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
-                    />
-                    <TextField
-                        name='sex'
-                        id="animal-sex-input"
-                        label="Sex"
-                        value={animal.sex}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
+                        InputLabelProps={{
+                            shrink: true
                         }}
+                    />
+                    <Autocomplete
+                        name='sex'
+                        readOnly={!edit}
+                        options={[{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }, { label: 'N/A', value: null }]}
+                        getOptionLabel={(option) => option.label}
+                        filterSelectedOptions
+                        value={animal.sex !== null ? { label: animal.sex, value: animal.sex } : { label: 'N/A', value: null }}
+                        isOptionEqualToValue={(option, value) => option.value === value.value}
+                        onChange={(event, option) => (
+                            dispatch({
+                                type: 'UPDATE_SELECTED_ANIMAL',
+                                payload: { sex: option.value }
+                            }))}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Sex"
+                                placeholder="Sex"
+                            />
+                        )}
                     />
                     <div style={{ display: 'inline-flex' }}>
                         <TextField
@@ -235,6 +279,9 @@ function AnimalSummary({ animal }) {
                             InputProps={{
                                 readOnly: !edit,
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
                         <TextField
                             name='length'
@@ -244,6 +291,9 @@ function AnimalSummary({ animal }) {
                             onChange={event => handleChange(event)}
                             InputProps={{
                                 readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
                             }}
                         />
                         <TextField
@@ -255,6 +305,9 @@ function AnimalSummary({ animal }) {
                             InputProps={{
                                 readOnly: !edit,
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
                         <TextField
                             name='neckGirth'
@@ -264,6 +317,9 @@ function AnimalSummary({ animal }) {
                             onChange={event => handleChange(event)}
                             InputProps={{
                                 readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
                             }}
                         />
                     </div>
@@ -276,6 +332,9 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
                     />
                     <TextField
                         name='color'
@@ -286,25 +345,44 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
-                    />
-                    <TextField
-                        name='active'
-                        id="animal-active-input"
-                        label="Active"
-                        value={animal.active}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
+                        InputLabelProps={{
+                            shrink: true
                         }}
+                    />
+                    <Autocomplete
+                        name='active'
+                        readOnly={!edit}
+                        options={[{ label: 'Active', value: true }, { label: 'Inactive', value: false }]}
+                        getOptionLabel={(option) => option.label}
+                        filterSelectedOptions
+                        value={animal.active ? { label: 'Active', value: animal.active } : { label: 'Inactive', value: animal.active }}
+                        isOptionEqualToValue={(option, value) => option.value === value.value}
+                        onChange={(event, option) => (
+                            dispatch({
+                                type: 'UPDATE_SELECTED_ANIMAL',
+                                payload: { sex: option.value }
+                            }))}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Status"
+                                placeholder="Active or Inactive"
+                            />
+                        )}
                     />
                     <TextField
                         name='notes'
                         id="animal-notes-input"
                         label="Notes"
+                        multiline
+                        rows={3}
                         value={animal.notes}
                         onChange={event => handleChange(event)}
                         InputProps={{
                             readOnly: !edit,
+                        }}
+                        InputLabelProps={{
+                            shrink: true
                         }}
                     />
                 </Stack>

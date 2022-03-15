@@ -7,6 +7,7 @@ import animalSaga from './animal.saga';
 import jobSaga from './job.saga';
 import contactSaga from './contact.saga';
 import addPhotoSaga from './addPhoto.saga';
+import animalTypesSaga from './animalTypes.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     contactSaga(),
     auditionSaga(),
     addPhotoSaga(),
+    animalTypesSaga(),
   ]);
 }

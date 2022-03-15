@@ -288,8 +288,6 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     }
 });
 
-module.exports = router;
-
 function queryGen(qFilter) {
     console.log('#####################', qFilter);
     let paramNumber = 1;
@@ -351,7 +349,7 @@ function queryGen(qFilter) {
         paramNumber++;
     }
     if (qFilter.minH && qFilter.minH !== '') {
-        sqlQuery.sqlString += ` AND "height" >= $${paramNumber}}`
+        sqlQuery.sqlString += ` AND "height" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minH);
         paramNumber++;
     }
@@ -393,3 +391,5 @@ function queryGen(qFilter) {
     console.log(sqlQuery);
     return sqlQuery
 }
+
+module.exports = router;
