@@ -31,7 +31,7 @@ CREATE TABLE "animalTypes" (
 
 INSERT INTO "animalTypes" (
     "type"
-) VALUES ('dog'), ('cat');
+) VALUES ('dog'), ('cat'), ('horse'), ('cattle'), ('sheep'), ('goat'), ('swine'), ('llama'), ('chicken'), ('turkey'), ('geese'), ('ducks'), ('other');
 
 CREATE TABLE "animals" (
     "id" SERIAL PRIMARY KEY,

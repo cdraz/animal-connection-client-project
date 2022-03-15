@@ -65,9 +65,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     }
 })
 
-/**
- * POST route template
- */
+
  router.put('/:id/training', async (req, res) => {
     try {
         // Write SQL query
@@ -123,9 +121,7 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     }
 });
 
-/**
- * PUT animal/:id -- update animal training info
- */
+
 router.post('/', async (req, res) => {
     try {
         // Write SQL query
@@ -193,7 +189,9 @@ router.post('/', async (req, res) => {
 /**
  * PUT animal/:id -- update animal training info
  */
- router.put('/:id/summary', async (req, res) => {
+ 
+router.put('/:id/summary', rejectUnauthenticated, async (req, res) => {
+
     try {
         // Write SQL query
         const queryText = `
@@ -271,7 +269,7 @@ router.post('/job', rejectUnauthenticated, async (req, res) => {
 /**
  * DELETE Animal
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     // DELETE animal from database
     try {
         console.log(`******* DELETE /animals/${req.params.id} *******`);
