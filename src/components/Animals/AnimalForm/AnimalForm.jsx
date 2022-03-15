@@ -11,9 +11,9 @@ import Stack from '@mui/material/Stack';
 import Grid from "@mui/material/Grid";
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-import DateAdapter from '@mui/lab/AdapterMoment';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+// import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+// import DateAdapter from '@mui/lab/AdapterMoment';
+// import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 
 function AnimalForm() {
@@ -121,15 +121,13 @@ function AnimalForm() {
                         label="Breed"
                         onChange={event => handleChange(event)}
                     />
-                    <LocalizationProvider dateAdapter={DateAdapter}>
-                    <DesktopDatePicker
+                    <TextField
                         inputFormat="MM/dd/yyyy"
                         name='birthday'
                         id="animal-birthday-input"
                         label="Birthdate"
                         onChange={event => handleChange(event)}
                     />
-                    </LocalizationProvider>
                     <TextField
                         name='sex'
                         id="animal-sex-input"
