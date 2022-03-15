@@ -1,16 +1,17 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-
-router.get('/', (req, res) => {
+router.get('/',  rejectUnauthenticated,(req, res) => {
     console.log('******* GET ANIMALS *******', req.params);
     const qFilter = req.query;
     const sqlQuery = queryGen(qFilter)
     let queryText = `
         SELECT * FROM "animals" 
         ${sqlQuery.sqlString};`
-    console.log(queryText);
     pool.query(queryText, sqlQuery.sqlParams)
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
         .catch((err) => {
@@ -19,7 +20,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
     try {
         console.log('IN GET /ANIMAL/:ID, REQ.PARAMS IS:', req.params)
         const queryText = `
@@ -56,7 +57,6 @@ router.get('/:id', async (req, res) => {
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
-        console.log('GET /ANIMAL/:ID DBRES IS:', dbRes.rows);
         res.send(dbRes.rows);
     }
     catch (error) {
@@ -68,7 +68,18 @@ router.get('/:id', async (req, res) => {
 /**
  * POST route template
  */
+<<<<<<< HEAD
  router.put('/:id/training', async (req, res) => {
+=======
+router.post('/', rejectUnauthenticated, (req, res) => {
+    // POST route code here
+});
+
+/**
+ * PUT animal/:id -- update animal training info
+ */
+router.put('/:id/training', rejectUnauthenticated, async (req, res) => {
+>>>>>>> c9d20f6d3568cfc17ce5ca0e45061d9b24cd72ce
     try {
         // Write SQL query
         const queryText = `
@@ -245,7 +256,7 @@ router.post('/', async (req, res) => {
 /**
  * POST Animal to job
  */
-router.post('/job', async (req, res) => {
+router.post('/job', rejectUnauthenticated, async (req, res) => {
     // POST animal to jobsJunction table
     console.log('******* POST /animals/job *******')
     try {
@@ -264,6 +275,28 @@ router.post('/job', async (req, res) => {
     }
     catch (error) {
         console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * DELETE Animal
+ */
+router.delete('/:id', async (req, res) => {
+    // DELETE animal from database
+    try {
+        console.log(`******* DELETE /animals/${req.params.id} *******`);
+        const queryText = `
+        DELETE FROM "animals"
+        WHERE "id" = $1;
+    `;
+        const queryParams = [req.params.id];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(200);
+    }
+    catch (error) {
+        console.error(`ERROR in DELETE /animals/${req.params.id}`, error);
         res.sendStatus(500);
     }
 });

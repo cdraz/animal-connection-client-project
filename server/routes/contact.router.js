@@ -1,8 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-//get contacts+query
-router.get('/', (req, res) => {
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
+
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS *******');
     const qFilter = req.query;
     const sqlQuery = queryGen(qFilter)
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
         });
 });
 // Delete on contact
-router.delete("/", (req, res) => {
+router.delete("/", rejectUnauthenticated, (req, res) => {
     // endpoint functionality
     const queryText = "DELETE FROM contacts WHERE id=$1";
     pool
@@ -30,10 +33,10 @@ router.delete("/", (req, res) => {
     .catch((err) => {
         console.log("Error completing Delete contact query", err);
         res.sendStatus(500);
-    });
-});
-//get contact details --> agg jobs and animals into arrays to be mapped to DOM
-router.get('/:id', (req, res) => {
+      });
+  });
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS DETAILS*******');
     let queryText = `
     SELECT 
@@ -59,8 +62,31 @@ router.get('/:id', (req, res) => {
         });
 });
 
+router.post('/job', async (req, res) => {
+    // POST contact to jobsContacts table
+    console.log('******* POST /contact/job *******',req.body)
+    try {
+        // Write SQL query
+        const queryText = `
+            INSERT INTO "jobContacts" ("contactId", "jobId")
+            VALUES ($1, $2);
+        `;
+        const queryParams = [
+            req.body.contactId, // $1
+            req.body.jobId // $2
+        ];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('ERROR in POST /contact/job', error);
+        res.sendStatus(500);
+    }
+});
+
 //POST New contact
-router.post('/', (req, res, next) => {
+router.post('/', rejectUnauthenticated, (req, res, next) => {
     console.log('contact detail req.body', req.body);
     const sqlText = `
     INSERT INTO "contacts"
@@ -88,41 +114,41 @@ router.post('/', (req, res, next) => {
 })
 
 //Edit contact 
-router.put('/', (req, res) => {
-    console.log('this is req.body in put', req.body);
-    const sqlText = `
-        UPDATE "contacts"
-        SET
-        "type" = $1,
-        "firstName" = $2,
-        "lastName" = $3,
-        "primaryNumber" = $4,
-        "secondaryNumber" = $5,
-        "text" = $6,
-        "email" = $7, 
-        "website" = $8,
-        "address" = $9,
-        "notes" = $10 
-        WHERE "id" = $11 
-    `;
-    const sqlParams = [
-        req.body.type,
-        req.body.firstName,
-        req.body.lastName,
-        req.body.primaryNumber,
-        req.body.secondaryNumber,
-        req.body.text,
-        req.body.email,
-        req.body.website,
-        req.body.address,
-        req.body.notes,
-        req.body.id
-        ]
-    pool.query(sqlText, sqlParams)
-    .then(() => res.sendStatus(201))
-        .catch((err) => {
-        console.log("project creation failed: ", err);
-        res.sendStatus(500);
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log('this is req.body in put', req.body);
+  const sqlText = `UPDATES "contacts"
+                   SET
+                    "type" = $1,
+                    "firstName" = $2,
+                    "lastName" = $3,
+                    "primaryNumber" = $4,
+                    "secondaryNumber" $5,
+                    "text" = $6,
+                    "email" = $7, 
+                    "website" = $8,
+                    "address" = $9,
+                    "notes" = $10 
+                   WHERE "id" = $11 
+                    
+                    `;
+  const sqlParams = [
+    req.body.type,
+    req.body.firstName,
+    req.body.lastNme,
+    req.body.primaryNumber,
+    req.body.secondaryNumber,
+    req.body.text,
+    req.body.email,
+    req.body.website,
+    req.body.address,
+    req.body.notes,
+    req.body.id
+  ]
+  pool.query(sqlText, sqlParams)
+   .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log("project creation failed: ", err);
+      res.sendStatus(500);
     });
 })
 

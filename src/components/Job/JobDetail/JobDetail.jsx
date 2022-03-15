@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import JobEditDetail from "./JobEditDetail";
 import JobPayEdit from "./JobPayEdit";
-import { useParams, Link } from 'react-router-dom';
-
+import JobContacts from "./JobContacts";
+import { useParams, Link } from "react-router-dom";
 
 // React components
 import JobCard from "../JobCard/JobCard";
@@ -30,13 +30,13 @@ function JobDetail() {
   const jobs = useSelector((store) => store.jobs);
   const selectedJob = useSelector((store) => store.selectedJob);
   const selectedJobDetails = useSelector((store) => store.selectedJobDetails);
-    // Set id from URL parameters
-    const { id } = useParams();
-  
+  // Set id from URL parameters
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
     dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
+    dispatch({ type: "FETCH_SELECTED_JOB_CONTACTS", payload: id });
   }, []);
 
   //deletes entire selected job and all foreign keys associated with it after confirmation
@@ -83,6 +83,7 @@ function JobDetail() {
 
   return (
     <>
+      <JobContacts />
       <JobEditDetail />
       <div>
         <br></br>
@@ -113,21 +114,17 @@ function JobDetail() {
       </div>
       <br></br>
       <div id="jobCardContainer">
-      <Box sx={{ flexGrow: 1 }}>
-<Grid
-          container
-          spacing={3}
-          justifyContent="space-evenly"
-        >
-      {Array.isArray(selectedJobDetails) ? (
-        selectedJobDetails.map((payDetails) => (
-          <JobPayEdit key={payDetails.id} payDetails={payDetails} />
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
-      </Grid>
-      </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={3} justifyContent="space-evenly">
+            {Array.isArray(selectedJobDetails) ? (
+              selectedJobDetails.map((payDetails) => (
+                <JobPayEdit key={payDetails.id} payDetails={payDetails} />
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
+          </Grid>
+        </Box>
       </div>
     </>
   );

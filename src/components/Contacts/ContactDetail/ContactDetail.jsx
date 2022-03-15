@@ -6,6 +6,8 @@ import {useEffect} from "react";
 import AnimalCard from '../../Animals/AnimalCard/AnimalCard';
 import JobCard from '../../Job/JobCard/JobCard';
 import ContactEdit from '../ContactEdit/ContactEdit'
+import ContactAddToJobButton from "../ContactAddToJobButton/ContactAddToJobButton";
+import Swal from "sweetalert2";
 
 
 import EditSharpIcon from '@mui/icons-material/EditSharp';
@@ -26,13 +28,32 @@ function ContactDetail() {
         dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
     }, []);
 
-    const deleteContact = () => {
-        dispatch({type: 'DELETE_CONTACT', payload: selectedContact.id});
-        history.push('/contacts')
-    }
+  
 
+
+  //deletes entire selected job and all foreign keys associated with it after confirmation
+  const deleteContact = () => {
+    Swal.fire({
+      title: "Are you sure you want to delete Contact?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete Entire Contact!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Contact has been Deleted!", "", "success");
+        dispatch({type: 'DELETE_CONTACT', payload: id });
+        history.push('/contacts')
+      } else if (result.isDenied) {
+        Swal.fire("Contact Safe", "", "info");
+      }
+    });
+  };
     return (
         <>
+        <ContactAddToJobButton contact={selectedContact} />
         {editPage
         ? <ContactEdit editPage={editPage} setEditPage={setEditPage} />
             // ?<form>
@@ -77,11 +98,16 @@ function ContactDetail() {
             ) : (
                 <p>Loading...</p>
             )}
+<<<<<<< HEAD
         <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
         {Array.isArray(selectedContact.animals) ?
+=======
+        <h2>ANIMALS</h2>
+        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !=null ?
+>>>>>>> c9d20f6d3568cfc17ce5ca0e45061d9b24cd72ce
             selectedContact.animals.map( animal => (
             <AnimalCard key= {animal.id} animal={animal} />
-        )) : <p>Loading...</p>}
+        )) : <p>No animals on record.</p>}
         </>
     )
 };

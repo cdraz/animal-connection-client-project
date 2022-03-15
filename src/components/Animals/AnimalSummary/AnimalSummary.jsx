@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 // MUI imports
 import Button from '@mui/material/Button';
@@ -11,8 +13,9 @@ import Stack from '@mui/material/Stack';
 
 function AnimalSummary({ animal }) {
 
-    // Dispatch hook
+    // Dispatch hook, history hook
     const dispatch = useDispatch();
+    const history = useHistory();
 
     // Set state variables for edit mode
     const [edit, setEdit] = useState(false);
@@ -58,6 +61,27 @@ function AnimalSummary({ animal }) {
         });
     }
 
+    // Declare deleteAnimal
+    const deleteAnimal = () => {
+        Swal.fire({
+            title: `Are you sure you want to delete ${animal.name}?`,
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete this animal!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(`${animal.name} has been deleted!`, "", "success");
+                dispatch({ type: "DELETE_ANIMAL", payload: { id: animal.id } });
+                history.push("/animals");
+            } else if (result.isDenied) {
+                Swal.fire("Delete has been cancelled.", "", "info");
+            }
+        });
+    }
+
     // Declare handleChange
     const handleChange = event => {
         dispatch({
@@ -88,6 +112,12 @@ function AnimalSummary({ animal }) {
                             Save
                         </Button>
                         <Button
+                            variant="outlined"
+                            onClick={deleteAnimal}
+                        >
+                            Delete
+                        </Button>
+                        <Button
                             onClick={() => {
                                 setEdit(!edit);
                                 dispatch({
@@ -105,7 +135,7 @@ function AnimalSummary({ animal }) {
             <Paper sx={{ padding: 3 }}>
                 <img
                     width="auto"
-                    src={animal.image}
+                    src={`${animal.image}`}
                 />
                 <Stack spacing={2}>
                     <Rating

@@ -38,8 +38,6 @@ function* addJob(action) {
 
 function* fetchJobDetails(action) {
   try {
-    console.log("@#@#@$$@$##fetch job detail", action.payload);
-
     const response = yield axios.get(`/api/job/${action.payload}`);
     console.log(
       "response.data for set selected job details is ",
@@ -47,6 +45,23 @@ function* fetchJobDetails(action) {
     );
 
     yield put({ type: "SET_SELECTED_JOB_DETAILS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  } catch (error) {
+    console.error("fetchJobDetails failed", error);
+  }
+}
+
+function* fetchSelectedJobContacts(action) {
+  //<<<<<<<<<<<<<<<<<<<<
+  try {
+    console.log("@#@#@$$@$##fetch job Contacts", action.payload);
+
+    const response = yield axios.get(`/api/job/contacts/${action.payload}`);
+    console.log(
+      "response.data for set selected job contacts is ",
+      response.data
+    );
+
+    yield put({ type: "SET_SELECTED_JOB_CONTACTS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   } catch (error) {
     console.error("fetchJobDetails failed", error);
   }
@@ -172,15 +187,42 @@ function* deleteJobPet(action) {
   }
 }
 
+
+function* deleteJobContact(action) {
+  try {
+    console.log(
+      "deleteJob Contact action",
+      action.payload.contact,
+      "from job",
+      action.payload.id
+    );
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    };
+    // send the action.payload as the params
+    // the config includes credentials which
+    // allow the server session to recognize the user
+    yield axios.delete(`/api/job/contact/${action.payload.contact}`);
+    yield put({type: "FETCH_SELECTED_JOB_CONTACTS", payload: action.payload.id
+    });
+  } catch (error) {
+    console.log("DELETE Job contact failed", error);
+  }
+}
+
 function* jobSaga() {
   yield takeLatest("FILTER_JOBS", filterJobs);
   yield takeLatest("FETCH_JOBS", fetchJobs);
   yield takeLatest("FETCH_ACTIVE_JOBS", fetchActiveJobs);
   yield takeLatest("FETCH_SELECTED_JOB", fetchSelectedJob);
   yield takeLatest("FETCH_JOB_DETAILS", fetchJobDetails);
+  yield takeLatest("FETCH_SELECTED_JOB_CONTACTS", fetchSelectedJobContacts);
   yield takeLatest("ADD_JOB", addJob);
   yield takeLatest("DELETE_JOB", deleteJob);
   yield takeLatest("DELETE_JOB_PET", deleteJobPet);
+  yield takeLatest("DELETE_JOB_CONTACT", deleteJobContact);
   yield takeLatest("FINISH_JOB", finishJob);
   yield takeLatest("EDIT_SELECTED_JOB", editSelectedJob);
   yield takeLatest("EDIT_SELECTED_JOB_PAY", editSelectedJobPay);
