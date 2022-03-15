@@ -126,7 +126,7 @@ function AnimalSummary({ animal }) {
             <Paper sx={{ padding: 3 }}>
                 <img
                     width="auto"
-                    src={`${animal.image}`}
+                    src={animal.image}
                 />
                 <Stack spacing={2}>
                     <Rating
