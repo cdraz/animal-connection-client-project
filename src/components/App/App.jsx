@@ -4,8 +4,8 @@ import {
   Redirect,
   Route,
   Switch,
-  useParams
-} from 'react-router-dom';
+  useParams,
+} from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,19 +14,23 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import AboutPage from '../AboutPage/AboutPage';
-import AnimalsPage from '../Animals/AnimalsPage/AnimalsPage';
-import AnimalDetail from '../Animals/AnimalDetail/AnimalDetail';
-import JobPage from '../Job/JobsPage/JobsPage';
+import AboutPage from "../AboutPage/AboutPage";
+import AnimalsPage from "../Animals/AnimalsPage/AnimalsPage";
+import AnimalDetail from "../Animals/AnimalDetail/AnimalDetail";
+import JobPage from "../Job/JobsPage/JobsPage";
 import JobDetail from "../Job/JobDetail/JobDetail";
+import Contacts from "../Contacts/ContactPage/ContactPage";
+import ContactDetail from "../Contacts/ContactDetail/ContactDetail";
+import ContactForm from "../Contacts/contactForm/contactForm";
+import AnimalForm from "../Animals/AnimalForm/AnimalForm"
+
+
 
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
-import Contacts from "../Contacts/ContactPage/ContactPage";
-//import ContactForm from "../Contacts/contactForm/contactForm";
 
 import "./App.css";
 
@@ -76,6 +80,14 @@ function App() {
             <Contacts />
           </ProtectedRoute>
 
+          {/* <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/contactEdit"
+          >
+            <ContactEdit />
+          </ProtectedRoute> */}
+
           <ProtectedRoute
             // logged in shows AnimalPage else shows LoginPage
             exact
@@ -87,7 +99,14 @@ function App() {
           <ProtectedRoute
             // logged in shows AnimalDetail else shows LoginPage
             exact
-            path="/animals/:id"
+            path="/animals/add/:id" //1<<<<<<<<<<<<<<<<<<<<<<!!!!
+          >
+            <AnimalForm />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows AnimalDetail else shows LoginPage
+            exact
+            path="/animals/:id" //1<<<<<<<<<<<<<<<<<<<<<<!!!!
           >
             <AnimalDetail />
           </ProtectedRoute>
@@ -102,18 +121,26 @@ function App() {
           <ProtectedRoute
             // logged in shows JobDetailPage else shows LoginPage
             exact
-            path="/jobDetail"
+            path="/jobDetail/:id"
           >
             <JobDetail />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
+            // logged in shows JobDetailPage else shows LoginPage
+            exact
+            path="/contacts/:id"
+          >
+            <ContactDetail />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows ContactDetailPage else shows LoginPage
             exact
             path="/contactForm"
           >
             <ContactForm />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage

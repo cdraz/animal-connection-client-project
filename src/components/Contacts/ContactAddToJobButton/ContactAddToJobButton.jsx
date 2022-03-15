@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-function AnimalAddToJobButton({ animal }) {
+function ContactAddToJobButton({ contact }) {//<<<<<<<<<<<<<<<contact needs to be sent
 
     // Dispatch hook, store access
     const dispatch = useDispatch();
@@ -26,11 +26,11 @@ function AnimalAddToJobButton({ animal }) {
 
     // Declare addToJob
     const addToJob = () => {
-        console.log('animal is', animal);
+        console.log('contact is', contact);
         dispatch({
-            type: 'ADD_ANIMAL_TO_JOB',
+            type: 'ADD_CONTACT_TO_JOB',
             payload: {
-                animalId: animal.id,
+                contactId: contact.id,
                 jobId: jobInput
             }
         });
@@ -44,7 +44,7 @@ function AnimalAddToJobButton({ animal }) {
     return (
         <>
             <Typography variant="h5">
-                Add Animal to Job
+                Add Contact to Job
             </Typography>
 
             {Array.isArray(options) ?
@@ -73,4 +73,4 @@ function AnimalAddToJobButton({ animal }) {
     )
 }
 
-export default AnimalAddToJobButton;
+export default ContactAddToJobButton;

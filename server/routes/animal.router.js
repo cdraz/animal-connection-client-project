@@ -1,18 +1,17 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-
-router.get('/', (req, res) => {
-    console.log('******* GET ANIMALS *******');
+router.get('/',  rejectUnauthenticated,(req, res) => {
+    console.log('******* GET ANIMALS *******', req.params);
     const qFilter = req.query;
-    //the silly where id > 0 is just to add a where statement
-    //that way i can chain a bunch of AND statement for filtering
     const sqlQuery = queryGen(qFilter)
     let queryText = `
         SELECT * FROM "animals" 
         ${sqlQuery.sqlString};`
-    console.log(queryText);
     pool.query(queryText, sqlQuery.sqlParams)
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
         .catch((err) => {
@@ -21,8 +20,9 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', rejectUnauthenticated, async (req, res) => {
     try {
+        console.log('IN GET /ANIMAL/:ID, REQ.PARAMS IS:', req.params)
         const queryText = `
         SELECT
             "animals".*,
@@ -44,11 +44,11 @@ router.get('/:id', async (req, res) => {
         FROM "animals"
         JOIN "contacts"
             ON "contacts"."id" = "animals"."contactsId"
-        JOIN "auditions"
+        LEFT JOIN "auditions"
             ON "auditions"."animalsId" = "animals"."id"
-        JOIN "jobsJunction"
+        LEFT JOIN "jobsJunction"
             ON "jobsJunction"."animalsId" = "animals"."id"
-        JOIN "jobs"
+        LEFT JOIN "jobs"
             ON "jobsJunction"."jobId" = "jobs"."id"
         WHERE "animals"."id" = $1
         GROUP BY "animals"."id";
@@ -57,7 +57,6 @@ router.get('/:id', async (req, res) => {
             req.params.id
         ];
         const dbRes = await pool.query(queryText, queryParams);
-        console.log(dbRes.rows);
         res.send(dbRes.rows);
     }
     catch (error) {
@@ -69,8 +68,226 @@ router.get('/:id', async (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-    // POST route code here
+ router.put('/:id/training', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        UPDATE "animals"
+        SET "sitOnLeash" = $1,
+        "sitOffLeash" = $2,
+        "downOnLeash" = $3,
+        "downOffLeash" = $4,
+        "standOnLeash" = $5,
+        "standOffLeash" = $6,
+        "barkOnCommand" = $7,
+        "holdItem" = $8,
+        "mark" = $9,
+        "silentCommands" = $10,
+        "strangerHandle" = $11,
+        "strangerDress" = $12,
+        "goodAroundChildren" = $13,
+        "otherDogs" = $14,
+        "smallAnimals" = $15,
+        "loudNoiseLights" = $16,
+        "shortNotice" = $17,
+        "overnight" = $18
+        WHERE "id" = $19
+    `;
+        const queryParams = [
+            req.body.sitOnLeash,
+            req.body.sitOffLeash,
+            req.body.downOnLeash,
+            req.body.downOffLeash,
+            req.body.standOnLeash,
+            req.body.standOffLeash,
+            req.body.barkOnCommand,
+            req.body.holdItem,
+            req.body.mark,
+            req.body.silentCommands,
+            req.body.strangerHandle,
+            req.body.strangerDress,
+            req.body.goodAroundChildren,
+            req.body.otherDogs,
+            req.body.smallAnimals,
+            req.body.loudNoiseLights,
+            req.body.shortNotice,
+            req.body.overnight,
+            req.params.id
+        ];
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in PUT /animal/id/training', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * PUT animal/:id -- update animal training info
+ */
+router.post('/', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        INSERT INTO "animals"
+            ("contactsId","animalType","otherTypeDetail","image","name","color","breed",
+            "sex","notes","birthday","active","rating","height","weight","length","neckGirth","bellyGirth","sitOnLeash",
+            "sitOffLeash","standOnLeash","standOffLeash","downOnLeash","downOffLeash","barkOnCommand","holdItem","offLeashTrained",
+            "goodAroundChildren","otherDogs","smallAnimals","atDistanceFromTrainer","silentCommands","mark","loudNoiseLights","shortNotice",
+            "livesClose","overnight","strangerHandle","strangerDress")
+        VALUES
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19,
+            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38)
+        `;
+        const queryParams = [
+            req.body.contactId,
+            req.body.animalType,
+            req.body.otherTypeDetail,
+            req.body.image,
+            req.body.name,
+            req.body.color,
+            req.body.breed,
+            req.body.sex,
+            req.body.notes,
+            req.body.birthday,
+            req.body.active,
+            req.body.rating,
+            req.body.height,
+            req.body.weight,
+            req.body.length,
+            req.body.neckGirth,
+            req.body.bellyGirth,
+            req.body.sitOnLeash,
+            req.body.sitOffLeash,
+            req.body.standOnLeash,
+            req.body.standOffLeash,
+            req.body.downOnLeash,
+            req.body.downOffLeash,
+            req.body.barkOnCommand,
+            req.body.holdItem,
+            req.body.offLeashTrained,
+            req.body.goodAroundChildren,
+            req.body.otherDogs,
+            req.body.smallAnimals,
+            req.body.atDistanceFromTrainer,
+            req.body.silentCommands,
+            req.body.mark,
+            req.body.loudNoiseLights,
+            req.body.shortNotice,
+            req.body.livesClose,
+            req.body.overnight,
+            req.body.strangerHandle,
+            req.body.strangerDress,
+        ];
+        console.log('#######################################', req.body);
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in POST /animal/', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * PUT animal/:id -- update animal training info
+ */
+ router.put('/:id/summary', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        UPDATE "animals"
+        SET "animalType" = $1,
+        "otherTypeDetail" = $2,
+        "name" = $3,
+        "color" = $4,
+        "breed" = $5,
+        "sex" = $6,
+        "birthday" = $7,
+        "active" = $8,
+        "rating" = $9,
+        "height" = $10,
+        "weight" = $11,
+        "length" = $12,
+        "neckGirth" = $13,
+        "bellyGirth" = $14,
+        "notes" = $15
+        WHERE "id" = $16
+    `;
+        const queryParams = [
+            req.body.animalType,
+            req.body.otherTypeDetail,
+            req.body.name,
+            req.body.color,
+            req.body.breed,
+            req.body.sex,
+            req.body.birthday,
+            req.body.active,
+            req.body.rating,
+            req.body.height,
+            req.body.weight,
+            req.body.length,
+            req.body.neckGirth,
+            req.body.bellyGirth,
+            req.body.notes,
+            req.params.id
+        ];
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in PUT /animal/id/summary', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * POST Animal to job
+ */
+router.post('/job', rejectUnauthenticated, async (req, res) => {
+    // POST animal to jobsJunction table
+    console.log('******* POST /animals/job *******')
+    try {
+        // Write SQL query
+        const queryText = `
+            INSERT INTO "jobsJunction" ("animalsId", "jobId")
+            VALUES ($1, $2);
+        `;
+        const queryParams = [
+            req.body.animalId, // $1
+            req.body.jobId // $2
+        ];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('ERROR in POST /animals/job', error);
+        res.sendStatus(500);
+    }
+});
+
+/**
+ * DELETE Animal
+ */
+router.delete('/:id', async (req, res) => {
+    // DELETE animal from database
+    try {
+        console.log(`******* DELETE /animals/${req.params.id} *******`);
+        const queryText = `
+        DELETE FROM "animals"
+        WHERE "id" = $1;
+    `;
+        const queryParams = [req.params.id];
+        // Query DB and sendStatus when complete
+        const dbRes = await pool.query(queryText, queryParams);
+        res.sendStatus(200);
+    }
+    catch (error) {
+        console.error(`ERROR in DELETE /animals/${req.params.id}`, error);
+        res.sendStatus(500);
+    }
 });
 
 module.exports = router;
