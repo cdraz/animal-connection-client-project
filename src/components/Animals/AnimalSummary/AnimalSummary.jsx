@@ -20,7 +20,7 @@ function AnimalSummary({ animal }) {
     const history = useHistory();
 
     // Set state variables for edit mode
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState("");
 
     // Set autocomplete options for dog breeds
     const options = dogBreeds;
@@ -128,6 +128,7 @@ function AnimalSummary({ animal }) {
                     width="auto"
                     src={animal.image}
                 />
+                {/* error in this stack value is temp undefined which throws error but then becomes defined*/}
                 <Stack spacing={2}>
                     <Rating
                         name='rating'
@@ -171,7 +172,7 @@ function AnimalSummary({ animal }) {
                         />
                         : null}
                     {/* If animalType is dog, show breed autocomplete, otherwise text field */}
-                    {animal.animalType === 1 ?
+                    {animal.animalType === "1" ?
                         <Autocomplete
                             name='breed'
                             readOnly={!edit}

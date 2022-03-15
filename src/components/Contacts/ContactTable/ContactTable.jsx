@@ -27,7 +27,7 @@ const contacts = () => {
         <tbody>
           {contacts.length > 0
             ? contacts.map((contact) => (
-                <tr>
+                <tr key={contact.id}>
                   <td>{contact.firstName}</td>
                   <td>{contact.lastName}</td>
                   <td>{contact.primaryNumber}</td>

@@ -56,7 +56,7 @@ function JobContacts() {
         <tbody>
           {selectedJobContacts.length > 0
             ? selectedJobContacts.map((contact) => (
-                <tr>
+                <tr key={contact.id}>
                     <td>{contact.id}</td>
                   <td>{contact.firstName}</td>
                   <td>{contact.lastName}</td>
