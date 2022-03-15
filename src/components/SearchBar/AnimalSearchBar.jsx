@@ -40,7 +40,6 @@ function AnimalSearchBar() {
     }
     return (
         <div  className="container">
-            {/* <button onClick={() => console.log(qFilter)}></button> */}
             <FormControl id="animalSearch" onSubmit={(evt) => filterAnimals(evt)}>
                 <Stack spacing={2}>
                     <FormLabel id="demo-radio-buttons-group-label">Active?</FormLabel>
@@ -194,7 +193,7 @@ function AnimalSearchBar() {
                             type="date" 
                         />
                     </div>
-                    <Button type="submit">update</Button>
+                    <Button type="submit">Filter</Button>
                 </Stack>
             </FormControl>
         </div>
