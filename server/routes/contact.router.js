@@ -62,7 +62,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
-router.post('/job', async (req, res) => {
+router.post('/job', rejectUnauthenticated, async (req, res) => {
     // POST contact to jobsContacts table
     console.log('******* POST /contact/job *******',req.body)
     try {
