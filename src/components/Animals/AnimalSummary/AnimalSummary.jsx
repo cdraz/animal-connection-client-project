@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
+import dogBreeds from '../DogBreedList';
 
 // MUI imports
+import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -18,21 +20,10 @@ function AnimalSummary({ animal }) {
     const history = useHistory();
 
     // Set state variables for edit mode
-    const [edit, setEdit] = useState(false);
-    // const [name, setName] = useState(animal.name);
-    // const [rating, setRating] = useState(animal.rating);
-    // const [animalType, setAnimalType] = useState(animal.animalType);
-    // const [otherTypeDetail, setOtherTypeDetail] = useState(animal.otherTypeDetail);
-    // const [breed, setBreed] = useState(animal.breed);
-    // const [birthdate, setBirthdate] = useState(animal.birthday);
-    // const [sex, setSex] = useState(animal.sex);
-    // const [weight, setWeight] = useState(animal.weight);
-    // const [height, setHeight] = useState(animal.height);
-    // const [length, setLength] = useState(animal.length);
-    // const [neck, setNeck] = useState(animal.neckGirth);
-    // const [belly, setBelly] = useState(animal.bellyGirth);
-    // const [color, setColor] = useState(animal.color);
-    // const [active, setActive] = useState(animal.active);
+    const [edit, setEdit] = useState("");
+
+    // Set autocomplete options for dog breeds
+    const options = dogBreeds;
 
     // Declare updateAnimal
     const updateAnimal = () => {
@@ -135,8 +126,9 @@ function AnimalSummary({ animal }) {
             <Paper sx={{ padding: 3 }}>
                 <img
                     width="auto"
-                    src={`${animal.image}`}
+                    src={animal.image}
                 />
+                {/* error in this stack value is temp undefined which throws error but then becomes defined*/}
                 <Stack spacing={2}>
                     <Rating
                         name='rating'
@@ -179,16 +171,40 @@ function AnimalSummary({ animal }) {
                             }}
                         />
                         : null}
-                    <TextField
-                        name='breed'
-                        id="animal-breed-input"
-                        label="Breed"
-                        value={animal.breed}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
-                        }}
-                    />
+                    {/* If animalType is dog, show breed autocomplete, otherwise text field */}
+                    {animal.animalType === "1" ?
+                        <Autocomplete
+                            name='breed'
+                            readOnly={!edit}
+                            options={options}
+                            getOptionLabel={(option) => option}
+                            filterSelectedOptions
+                            value={animal.breed}
+                            onChange={(event, option) => (
+                                dispatch({
+                                    type: 'UPDATE_SELECTED_ANIMAL',
+                                    payload: { breed: option }
+                                }))}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Breed"
+                                    placeholder="Breeds"
+                                />
+                            )}
+                        />
+                        :
+                        <TextField
+                            name='breed'
+                            id="animal-breed-input"
+                            label="Breed"
+                            value={animal.breed}
+                            onChange={event => handleChange(event)}
+                            InputProps={{
+                                readOnly: !edit,
+                            }}
+                        />
+                    }
                     <TextField
                         name='birthday'
                         id="animal-birthday-input"

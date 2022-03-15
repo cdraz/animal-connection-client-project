@@ -74,7 +74,7 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
 /**
  * Get Job contacts for jobcontacts table by id of job
  */
-router.get("/contacts/:id", (req, res) => {
+router.get("/contacts/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params of get job contacts by  id", req.params);
 
   const queryText = `SELECT "jobContacts".*, contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber"
@@ -97,7 +97,7 @@ router.get("/contacts/:id", (req, res) => {
 /**
  * Get  get selected job details by job ID for top of selected job page
  */
-router.get("/selectedJob/:id", (req, res) => {
+router.get("/selectedJob/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params of selected job details is", req.params.id);
 
   const queryText = `SELECT * FROM "jobs"
@@ -205,7 +205,7 @@ router.put("/edit/pay/:id", rejectUnauthenticated, (req, res) => {
 /**
  * Delete pet from a Job
  */
-router.delete("/pet/:id", (req, res) => {
+router.delete("/pet/:id", rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 
   const queryText = `DELETE FROM "jobsJunction" WHERE id= $1`;
@@ -223,7 +223,7 @@ router.delete("/pet/:id", (req, res) => {
 /**
  * Delete contact from a Job
  */
- router.delete("/contact/:id", (req, res) => {
+ router.delete("/contact/:id", rejectUnauthenticated, (req, res) => {
   // endpoint functionality
 
   const queryText = `DELETE FROM "jobContacts" WHERE id = $1 `;
