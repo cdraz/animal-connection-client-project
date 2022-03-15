@@ -232,12 +232,13 @@ function AnimalSummary({ animal }) {
                     <Autocomplete
                         name='sex'
                         readOnly={!edit}
-                        options={[{ label: 'Male', value: 'male' }, { label: 'Female', value: 'female' }, { label: 'N/A', value: null }]}
+                        options={[{ label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }, { label: 'N/A', value: null }]}
                         getOptionLabel={(option) => option.label}
                         filterSelectedOptions
-                        value={animal.sex}
+                        value={animal.sex !== null ? { label: animal.sex, value: animal.sex } : { label: 'N/A', value: null }}
+                        isOptionEqualToValue={(option, value) => option.value === value.value}
                         onChange={(event, option) => (
-                            dispatch({
+                            dispatch({  
                                 type: 'UPDATE_SELECTED_ANIMAL',
                                 payload: { sex: option.value }
                             }))}
