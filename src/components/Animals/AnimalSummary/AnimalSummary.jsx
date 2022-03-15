@@ -330,18 +330,26 @@ function AnimalSummary({ animal }) {
                             shrink: true
                         }}
                     />
-                    <TextField
+                    <Autocomplete
                         name='active'
-                        id="animal-active-input"
-                        label="Active"
-                        value={animal.active}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
-                        }}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
+                        readOnly={!edit}
+                        options={[{ label: 'Active', value: true }, { label: 'Inactive', value: false }]}
+                        getOptionLabel={(option) => option.label}
+                        filterSelectedOptions
+                        value={animal.active ? { label: 'Active', value: animal.active } : { label: 'Inactive', value: animal.active }}
+                        isOptionEqualToValue={(option, value) => option.value === value.value}
+                        onChange={(event, option) => (
+                            dispatch({  
+                                type: 'UPDATE_SELECTED_ANIMAL',
+                                payload: { sex: option.value }
+                            }))}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Status"
+                                placeholder="Active or Inactive"
+                            />
+                        )}
                     />
                     <TextField
                         name='notes'
