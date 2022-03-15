@@ -65,6 +65,7 @@ function AnimalForm() {
     
     const handleChange = event => {
         setNewAnimal({...newAnimal, [event.target.name]: event.target.value});
+        console.log(newAnimal);
     }
     const handleBoolChange = (event) => {
         newAnimal[event.target.name] = event.target.checked;
@@ -81,7 +82,7 @@ function AnimalForm() {
 
     return (
         <>
-        <FormControl id="animalForm" onSubmit={submitNewAnimal}>
+        <FormControl id="animalForm" onSubmit={submitNewAnimal} sx={{ minWidth: '60%' }}>
             <Paper sx={{ padding: 3 }}>
                 {/* <img
                     width="auto"
@@ -95,6 +96,9 @@ function AnimalForm() {
                         sx={{ margin: 'auto' }}
                     />
                     <TextField
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                         required
                         name='name'
                         id="animal-name-input"
@@ -102,6 +106,9 @@ function AnimalForm() {
                         onChange={event => handleChange(event)}
                     />
                     <TextField
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                         required
                         name='animalType'
                         id="animal-type-input"
@@ -109,84 +116,127 @@ function AnimalForm() {
                         onChange={event => handleChange(event)}
                     />
                     {/* Show other animal type detail if type is other */}
+                    {newAnimal.animalType === '1' &&
+                        <>
                         <TextField
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                             name='otherTypeDetail'
                             id="animal-other-type-input"
                             label="Other Type Description"
                             onChange={event => handleChange(event)}
                         />
-                    <TextField
-                        name='breed'
-                        id="animal-breed-input"
-                        label="Breed"
-                        onChange={event => handleChange(event)}
-                    />
-                    <TextField
-                        inputFormat="MM/dd/yyyy"
-                        name='birthday'
-                        id="animal-birthday-input"
-                        label="Birthdate"
-                        onChange={event => handleChange(event)}
-                    />
-                    <TextField
-                        name='sex'
-                        id="animal-sex-input"
-                        label="Sex"
-                        onChange={event => handleChange(event)}
-                    />
-                    <div style={{ display: 'inline-flex' }}>
                         <TextField
-                            name='height'
-                            id="animal-height-input"
-                            label="Height (in)"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            name='breed'
+                            id="animal-breed-input"
+                            label="Breed"
                             onChange={event => handleChange(event)}
                         />
                         <TextField
-                            name='length'
-                            id="animal-length-input"
-                            label="Length (in)"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            required
+                            type="date"
+                            name='birthday'
+                            id="animal-birthday-input"
+                            label="Birthdate"
                             onChange={event => handleChange(event)}
                         />
                         <TextField
-                            name='bellyGirth'
-                            id="animal-girth-input"
-                            label="Girth (in)"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            name='sex'
+                            id="animal-sex-input"
+                            label="Sex"
+                            onChange={event => handleChange(event)}
+                        />
+                        <div style={{ display: 'inline-flex' }}>
+                            <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                                name='height'
+                                id="animal-height-input"
+                                label="Height (in)"
+                                onChange={event => handleChange(event)}
+                            />
+                            <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                                name='length'
+                                id="animal-length-input"
+                                label="Length (in)"
+                                onChange={event => handleChange(event)}
+                            />
+                            <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                                name='bellyGirth'
+                                id="animal-girth-input"
+                                label="Girth (in)"
+                                onChange={event => handleChange(event)}
+                            />
+                            <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                                name='neckGirth'
+                                id="animal-neck-input"
+                                label="Neck (in)"
+                                onChange={event => handleChange(event)}
+                            />
+                        </div>
+                        <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            name='weight'
+                            id="animal-weight-input"
+                            label="Weight (lbs)"
                             onChange={event => handleChange(event)}
                         />
                         <TextField
-                            name='neckGirth'
-                            id="animal-neck-input"
-                            label="Neck (in)"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            name='color'
+                            id="animal-color-input"
+                            label="Color"
                             onChange={event => handleChange(event)}
                         />
-                    </div>
-                    <TextField
-                        name='weight'
-                        id="animal-weight-input"
-                        label="Weight (lbs)"
-                        onChange={event => handleChange(event)}
-                    />
-                    <TextField
-                        name='color'
-                        id="animal-color-input"
-                        label="Color"
-                        onChange={event => handleChange(event)}
-                    />
-                    <TextField
-                        required
-                        name='active'
-                        id="animal-active-input"
-                        label="Active"
-                        onChange={event => handleChange(event)}
-                    />
-                    <TextField
-                        name='notes'
-                        id="animal-notes-input"
-                        label="Notes"
-                        onChange={event => handleChange(event)}
-                    />
+                        <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            required
+                            name='active'
+                            id="animal-active-input"
+                            label="Active"
+                            onChange={event => handleChange(event)}
+                        />
+                        <TextField
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            name='notes'
+                            id="animal-notes-input"
+                            label="Notes"
+                            onChange={event => handleChange(event)}
+                        />
+                    </>}
                 </Stack>
             </Paper>
+
+            {newAnimal.animalType === '1' &&
+            <>
             <Paper>
                 <Grid container spacing={0}>
                     <Grid item xs={6}>
@@ -263,6 +313,7 @@ function AnimalForm() {
                     </Grid>
                 </Grid>
             </Paper>
+            </>}
             <Button type="submit">SUBMIT</Button>
         </FormControl>
         </>

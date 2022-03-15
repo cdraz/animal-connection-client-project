@@ -25,7 +25,6 @@ import ContactForm from "../Contacts/contactForm/contactForm";
 import AnimalForm from "../Animals/AnimalForm/AnimalForm"
 
 
-
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
