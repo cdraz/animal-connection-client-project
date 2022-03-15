@@ -80,6 +80,9 @@ function AnimalAuditionHistoryTable({ animal }) {
                                         Add
                                     </Button>
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
 
                         <Button

@@ -146,6 +146,9 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
                     />
                     <TextField
                         name='animalType'
@@ -155,6 +158,9 @@ function AnimalSummary({ animal }) {
                         onChange={event => handleChange(event)}
                         InputProps={{
                             readOnly: !edit,
+                        }}
+                        InputLabelProps={{
+                            shrink: true
                         }}
                     />
                     {/* Show other animal type detail if type is other */}
@@ -167,6 +173,9 @@ function AnimalSummary({ animal }) {
                             onChange={event => handleChange(event)}
                             InputProps={{
                                 readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
                             }}
                         />
                         : null}
@@ -202,6 +211,9 @@ function AnimalSummary({ animal }) {
                             InputProps={{
                                 readOnly: !edit,
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
                     }
                     <TextField
@@ -213,16 +225,29 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
-                    />
-                    <TextField
-                        name='sex'
-                        id="animal-sex-input"
-                        label="Sex"
-                        value={animal.sex}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
+                        InputLabelProps={{
+                            shrink: true
                         }}
+                    />
+                    <Autocomplete
+                        name='sex'
+                        readOnly={!edit}
+                        options={[{ label: 'Male', value: 'male' }, { label: 'Female', value: 'female' }, { label: 'N/A', value: null }]}
+                        getOptionLabel={(option) => option.label}
+                        filterSelectedOptions
+                        value={animal.sex}
+                        onChange={(event, option) => (
+                            dispatch({
+                                type: 'UPDATE_SELECTED_ANIMAL',
+                                payload: { sex: option.value }
+                            }))}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Sex"
+                                placeholder="Sex"
+                            />
+                        )}
                     />
                     <div style={{ display: 'inline-flex' }}>
                         <TextField
@@ -234,6 +259,9 @@ function AnimalSummary({ animal }) {
                             InputProps={{
                                 readOnly: !edit,
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
                         <TextField
                             name='length'
@@ -243,6 +271,9 @@ function AnimalSummary({ animal }) {
                             onChange={event => handleChange(event)}
                             InputProps={{
                                 readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
                             }}
                         />
                         <TextField
@@ -254,6 +285,9 @@ function AnimalSummary({ animal }) {
                             InputProps={{
                                 readOnly: !edit,
                             }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
                         />
                         <TextField
                             name='neckGirth'
@@ -263,6 +297,9 @@ function AnimalSummary({ animal }) {
                             onChange={event => handleChange(event)}
                             InputProps={{
                                 readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
                             }}
                         />
                     </div>
@@ -275,6 +312,9 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
                     />
                     <TextField
                         name='color'
@@ -284,6 +324,9 @@ function AnimalSummary({ animal }) {
                         onChange={event => handleChange(event)}
                         InputProps={{
                             readOnly: !edit,
+                        }}
+                        InputLabelProps={{
+                            shrink: true
                         }}
                     />
                     <TextField
@@ -295,6 +338,9 @@ function AnimalSummary({ animal }) {
                         InputProps={{
                             readOnly: !edit,
                         }}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
                     />
                     <TextField
                         name='notes'
@@ -304,6 +350,9 @@ function AnimalSummary({ animal }) {
                         onChange={event => handleChange(event)}
                         InputProps={{
                             readOnly: !edit,
+                        }}
+                        InputLabelProps={{
+                            shrink: true
                         }}
                     />
                 </Stack>
