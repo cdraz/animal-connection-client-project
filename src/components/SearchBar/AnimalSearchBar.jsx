@@ -40,7 +40,8 @@ function AnimalSearchBar() {
     }
     return (
         <div  className="container">
-            <FormControl id="animalSearch" onSubmit={(evt) => filterAnimals(evt)}>
+            <form onSubmit={(evt) => filterAnimals(evt)}>
+            <FormControl id="animalSearch" >
                 <Stack spacing={2}>
                     <FormLabel id="demo-radio-buttons-group-label">Active?</FormLabel>
                         <RadioGroup
@@ -196,6 +197,7 @@ function AnimalSearchBar() {
                     <Button type="submit">Filter</Button>
                 </Stack>
             </FormControl>
+            </form>
         </div>
     );
 }
