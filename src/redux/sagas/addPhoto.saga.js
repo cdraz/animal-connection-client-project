@@ -5,7 +5,7 @@ function* addPhoto(action) {
   try {
    console.log('!$!$!PHOTO',action.payload.formData);
    
-    yield axios.put("/api/images", action.payload.formData);
+    yield axios.post("/api/images", action.payload.formData);
 
 
   } catch (error) {
