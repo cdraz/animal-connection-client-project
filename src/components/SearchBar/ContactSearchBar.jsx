@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 
 
 
@@ -23,30 +22,41 @@ function ContactSearchBar() {
     };
 
     return (
-        <>
-        {/* <button onClick={() => console.log(qFilter)}></button> */}
-        <form id="animalSearch" onSubmit={(evt) => filterContacts(evt)}>
-            <input 
-                onChange={(evt) => setqFilter({...qFilter, firstName: evt.target.value})}
-                type="text" placeholder='First Name' 
-            />
-            <input 
-                onChange={(evt) => setqFilter({...qFilter, lastName: evt.target.value})}
-                type="text" placeholder='Last Name' 
-            />
-            <input 
-                onChange={(evt) => setqFilter({...qFilter, company: evt.target.value})}
-                type="text" placeholder='Company'
-            />
-            <div>
-            <input 
-                onChange={(evt) => setqFilter({...qFilter, type: evt.target.value})} 
-                type="text" placeholder='Type'
-            />
-            <button type="submit">update</button>
-            </div>
-        </form>
-        </>
+        <div  className="container">
+            <FormControl id="animalSearch" onSubmit={(evt) => filterContacts(evt)}>
+                <Stack spacing={2}>
+                    <TextField 
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={(evt) => setqFilter({...qFilter, firstName: evt.target.value})}
+                        type="text" label='First Name' 
+                    />
+                    <TextField 
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={(evt) => setqFilter({...qFilter, lastName: evt.target.value})}
+                        type="text" label='Last Name' 
+                    />
+                    <TextField 
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={(evt) => setqFilter({...qFilter, company: evt.target.value})}
+                        type="text" label='Company'
+                    />
+                    <TextField 
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        onChange={(evt) => setqFilter({...qFilter, type: evt.target.value})} 
+                        type="text" label='Type'
+                    />
+                    <Button type="submit">Filter</Button>
+                </Stack>
+            </FormControl>
+        </div>
     )
 
 }
