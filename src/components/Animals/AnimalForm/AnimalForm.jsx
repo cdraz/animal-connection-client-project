@@ -235,7 +235,7 @@ function AnimalForm() {
                 </Stack>
             </Paper>
 
-            {newAnimal.animalType === '1' &&
+            {newAnimal.animalType === 1 &&
             <>
             <Paper>
                 <Grid container spacing={0}>
