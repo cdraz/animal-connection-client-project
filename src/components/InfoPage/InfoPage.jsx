@@ -1,4 +1,5 @@
 import React from 'react';
+import AnimalForm from '../Animals/AnimalForm/AnimalForm'
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -8,6 +9,7 @@ import React from 'react';
 function InfoPage() {
   return (
     <div className="container">
+      <AnimalForm />
       <p>Info Page</p>
     </div>
   );

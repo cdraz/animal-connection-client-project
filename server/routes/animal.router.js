@@ -65,17 +65,8 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
     }
 })
 
-/**
- * POST route template
- */
-router.post('/', rejectUnauthenticated, (req, res) => {
-    // POST route code here
-});
 
-/**
- * PUT animal/:id -- update animal training info
- */
-router.put('/:id/training', rejectUnauthenticated, async (req, res) => {
+ router.put('/:id/training', async (req, res) => {
     try {
         // Write SQL query
         const queryText = `
@@ -130,10 +121,77 @@ router.put('/:id/training', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+
+router.post('/', async (req, res) => {
+    try {
+        // Write SQL query
+        const queryText = `
+        INSERT INTO "animals"
+            ("contactsId","animalType","otherTypeDetail","image","name","color","breed",
+            "sex","notes","birthday","active","rating","height","weight","length","neckGirth","bellyGirth","sitOnLeash",
+            "sitOffLeash","standOnLeash","standOffLeash","downOnLeash","downOffLeash","barkOnCommand","holdItem","offLeashTrained",
+            "goodAroundChildren","otherDogs","smallAnimals","atDistanceFromTrainer","silentCommands","mark","loudNoiseLights","shortNotice",
+            "livesClose","overnight","strangerHandle","strangerDress")
+        VALUES
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19,
+            $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38)
+        `;
+        const queryParams = [
+            req.body.contactId,
+            req.body.animalType,
+            req.body.otherTypeDetail,
+            req.body.image,
+            req.body.name,
+            req.body.color,
+            req.body.breed,
+            req.body.sex,
+            req.body.notes,
+            req.body.birthday,
+            req.body.active,
+            req.body.rating,
+            req.body.height,
+            req.body.weight,
+            req.body.length,
+            req.body.neckGirth,
+            req.body.bellyGirth,
+            req.body.sitOnLeash,
+            req.body.sitOffLeash,
+            req.body.standOnLeash,
+            req.body.standOffLeash,
+            req.body.downOnLeash,
+            req.body.downOffLeash,
+            req.body.barkOnCommand,
+            req.body.holdItem,
+            req.body.offLeashTrained,
+            req.body.goodAroundChildren,
+            req.body.otherDogs,
+            req.body.smallAnimals,
+            req.body.atDistanceFromTrainer,
+            req.body.silentCommands,
+            req.body.mark,
+            req.body.loudNoiseLights,
+            req.body.shortNotice,
+            req.body.livesClose,
+            req.body.overnight,
+            req.body.strangerHandle,
+            req.body.strangerDress,
+        ];
+        console.log('#######################################', req.body);
+        const response = await pool.query(queryText, queryParams);
+        res.sendStatus(201);
+    }
+    catch (error) {
+        console.error('Error in POST /animal/', error);
+        res.sendStatus(500);
+    }
+});
+
 /**
  * PUT animal/:id -- update animal training info
  */
+ 
 router.put('/:id/summary', rejectUnauthenticated, async (req, res) => {
+
     try {
         // Write SQL query
         const queryText = `
