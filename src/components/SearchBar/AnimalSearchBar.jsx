@@ -194,7 +194,7 @@ function AnimalSearchBar() {
                             type="date" 
                         />
                     </div>
-                    <button type="submit">update</button>
+                    <Button type="submit">update</Button>
                 </Stack>
             </FormControl>
         </div>
