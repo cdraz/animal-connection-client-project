@@ -178,6 +178,7 @@ function AnimalSummary({ animal }) {
                             options={options}
                             getOptionLabel={(option) => option}
                             filterSelectedOptions
+                            value={animal.breed}
                             onChange={(event, option) => (
                                 dispatch({
                                     type: 'UPDATE_SELECTED_ANIMAL',
