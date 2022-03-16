@@ -34,12 +34,12 @@ function AnimalCard({ animal }) {
   };
 
   //MUI
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
+  // const Item = styled(Paper)(({ theme }) => ({
+  //   ...theme.typography.body2,
+  //   padding: theme.spacing(1),
+  //   textAlign: "center",
+  //   color: theme.palette.text.secondary,
+  // }));
   //end MUI
 
   // Modal style setup
@@ -59,12 +59,13 @@ function AnimalCard({ animal }) {
 
   return (
     <Grid>
-      <Item id="item">
+      {/* <Item id="item"> */}
         <Card key={animal.id} sx={{
                   maxWidth: 200,
                   minWidth: 200,
                   minHeight: 200,
                   maxHeight: 200,
+                  margin: 2
                 }}>
           {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
           <Link to={`/animals/${animal.id}`}>
@@ -83,7 +84,7 @@ function AnimalCard({ animal }) {
             </CardActionArea>
           </Link>
         </Card>
-      </Item>
+      {/* </Item> */}
     </Grid>
   );
 }

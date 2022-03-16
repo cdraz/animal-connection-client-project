@@ -199,7 +199,7 @@ function AnimalSummary({ animal }) {
                         />
                         : null}
                     {/* If animalType is dog, show breed autocomplete, otherwise text field */}
-                    {animal.animalType === "1" ?
+                    {animal.animalType === 1 ?
                         <Autocomplete
                             name='breed'
                             readOnly={!edit}
