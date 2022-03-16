@@ -6,40 +6,51 @@ import "./AnimalsPage.css";
 // React components
 import AnimalCard from '../AnimalCard/AnimalCard';
 import AnimalSearchBar from '../../SearchBar/AnimalSearchBar'
+
 //MUI
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 function AnimalsPage() {
   // Dispatch hook, store access
   const dispatch = useDispatch();
   const animals = useSelector((store) => store.animals);
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_ANIMALS' });
-    }, []);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_ANIMALS' });
+  }, []);
 
 
-    return(
-        <>
-        
-        <AnimalSearchBar />
-        <div id= "animalCardContainer">
-        <Box sx={{ flexGrow: 1 }}>
-<Grid
-          container
-          spacing={3}
-          justifyContent="space-evenly"
-        >
-        {Array.isArray(animals) ?
-            animals.map( animal => (
-            <AnimalCard key= {animal.id} animal={animal} />
-        )) : <p>Loading...</p>}
+  return (
+    <div id="animalsPage">
+      <Typography variant="h3">
+        Search Animals
+      </Typography>
+      <Grid container spacing={8}>
+        <Grid item xs={4}>
+          <AnimalSearchBar />
         </Grid>
-      </Box>
-        </div>
-      </>
-    )
+        <Grid item container spacing={2} xs={8}>
+          {/* <div id= "animalCardContainer"> */}
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid
+              container
+              spacing={3}
+              alignItems="left"
+            >
+              {Array.isArray(animals) ?
+                animals.map(animal => (
+                  <AnimalCard key={animal.id} animal={animal} />
+                )) : <p>Loading...</p>}
+            </Grid>
+
+          </Box>
+          {/* </div> */}
+        </Grid>
+      </Grid>
+    </div>
+  )
 }
 
 export default AnimalsPage;
