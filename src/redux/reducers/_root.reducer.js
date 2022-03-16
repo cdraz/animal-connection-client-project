@@ -9,6 +9,7 @@ import selectedJobDetails from "./selectedJobDetails.reducer";
 import activeJobs from "./activeJobs.reducer";
 import contacts from "./contact.reducer";
 import selectedJobContacts from "./selectedJobContacts.reducer";
+import animalTypes from "./animalTypes.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   selectedJobDetails, //contains current selected job pet and job junction details
   contacts,
   selectedJobContacts,
+  animalTypes, // Contains animal types for dropdown in animal forms
   // selectedContact
 });
 

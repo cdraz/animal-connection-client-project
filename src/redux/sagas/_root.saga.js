@@ -7,7 +7,11 @@ import animalSaga from './animal.saga';
 import jobSaga from './job.saga';
 import contactSaga from './contact.saga';
 import addPhotoSaga from './addPhoto.saga';
+<<<<<<< HEAD
 import csvSaga from './csv.saga'
+=======
+import animalTypesSaga from './animalTypes.saga';
+>>>>>>> 2304f1f8dafa4ade656d18056537b4918b6d92cd
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -26,6 +30,10 @@ export default function* rootSaga() {
     contactSaga(),
     auditionSaga(),
     addPhotoSaga(),
+<<<<<<< HEAD
     csvSaga(),
+=======
+    animalTypesSaga(),
+>>>>>>> 2304f1f8dafa4ade656d18056537b4918b6d92cd
   ]);
 }

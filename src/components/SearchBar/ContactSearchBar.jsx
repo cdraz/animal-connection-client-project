@@ -23,7 +23,8 @@ function ContactSearchBar() {
 
     return (
         <div  className="container">
-            <FormControl id="animalSearch" onSubmit={(evt) => filterContacts(evt)}>
+            <form onSubmit={(evt) => filterContacts(evt)}>
+            <FormControl id="animalSearch" >
                 <Stack spacing={2}>
                     <TextField 
                         InputLabelProps={{
@@ -56,6 +57,7 @@ function ContactSearchBar() {
                     <Button type="submit">Filter</Button>
                 </Stack>
             </FormControl>
+            </form>
         </div>
     )
 

@@ -1,16 +1,55 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const multer = require("multer");
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+
+
+//AWS3
+const multerS3 = require("multer-s3");
+const aws = require("aws-sdk");
+const app = express();
+const s3 = new aws.S3({
+  accessKeyID: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+// const upload = multer({ dest: 'public/uploads/' })
+
+//Multer s3 upload
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "starpet-prime",
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+      
+    },
+    key: function (req, file, cb) {
+      console.log("Multer file is ", file);
+
+      cb(null, Date.now() + `--` + file.originalname)
+    },
+  }),
+});
+
+
 
 router.get('/',  rejectUnauthenticated,(req, res) => {
     console.log('******* GET ANIMALS *******', req.params);
     const qFilter = req.query;
     const sqlQuery = queryGen(qFilter)
-    let queryText = `
-        SELECT * FROM "animals" 
+    let queryText = 
+
+
+        `SELECT "animals".*, contacts."firstName",contacts."lastName",contacts."primaryNumber"
+      FROM "animals"
+    JOIN "contacts" 
+      ON "animals"."contactsId" = contacts.id 
+   
+
         ${sqlQuery.sqlString};`
     pool.query(queryText, sqlQuery.sqlParams)
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
@@ -122,8 +161,13 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/',upload.single("selectedFile"),rejectUnauthenticated, async (req, res, next) => {
     try {
+        console.log('#######################################', req.body);
+        console.log("req.body.name is", req.body.name);
+        console.log("req.file is", req.file);
+    
+        
         // Write SQL query
         const queryText = `
         INSERT INTO "animals"
@@ -140,7 +184,7 @@ router.post('/', async (req, res) => {
             req.body.contactId,
             req.body.animalType,
             req.body.otherTypeDetail,
-            req.body.image,
+            req.file.location,
             req.body.name,
             req.body.color,
             req.body.breed,
@@ -175,8 +219,9 @@ router.post('/', async (req, res) => {
             req.body.overnight,
             req.body.strangerHandle,
             req.body.strangerDress,
+            
         ];
-        console.log('#######################################', req.body);
+        
         const response = await pool.query(queryText, queryParams);
         res.sendStatus(201);
     }
@@ -288,8 +333,6 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     }
 });
 
-module.exports = router;
-
 function queryGen(qFilter) {
     console.log('#####################', qFilter);
     let paramNumber = 1;
@@ -351,7 +394,7 @@ function queryGen(qFilter) {
         paramNumber++;
     }
     if (qFilter.minH && qFilter.minH !== '') {
-        sqlQuery.sqlString += ` AND "height" >= $${paramNumber}}`
+        sqlQuery.sqlString += ` AND "height" >= $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.minH);
         paramNumber++;
     }
@@ -393,3 +436,5 @@ function queryGen(qFilter) {
     console.log(sqlQuery);
     return sqlQuery
 }
+
+module.exports = router;
