@@ -9,7 +9,6 @@ import {useSelector, useDispatch} from 'react-redux';
 function InfoPage() {
   const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState(null);
-  const animal = useSelector((store) => store.selectedAnimal);
 
   //Event handlers
   const handleFileSelect = (event) => {
@@ -27,7 +26,6 @@ function InfoPage() {
 
     let csvFile = {
       formData: formData,
-      animal: animal,
     };
 
     dispatch({
@@ -43,7 +41,7 @@ function InfoPage() {
           <input
             type="file"
             className="form-control-file"
-            name="uploaded_file"
+            name="selectedFile"
             onChange={handleFileSelect}
           />
             <button
