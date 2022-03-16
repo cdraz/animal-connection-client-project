@@ -21,6 +21,13 @@ function AnimalForm() {
     const { id } = useParams();
     const history = useHistory();
 
+    const [selectedFile, setSelectedFile] = useState(null);
+  
+    //Event handlers
+    const handleFileSelect = (event) => {
+      setSelectedFile(event.target.files[0]);
+    };
+
     const [newAnimal, setNewAnimal] = useState({
         contactId: id, 
         image: '', //needs an input box and setup with cloud server
@@ -73,16 +80,30 @@ function AnimalForm() {
 
     const submitNewAnimal = (evt) => {
         evt.preventDefault();
+
+        console.log("SELECTED FILE IS", selectedFile);
+    //appending id,description and file to form Data to be sent over in an object with selected project
+    //form data will be req.file and selected project will be req.body
+    const formData = new FormData();
+    for (let key in newAnimal){
+        formData.append(key, newAnimal[key])
+    }
+    // formData.append("newAnimal", newAnimal.name);
+     formData.append("selectedFile", selectedFile);
+
+
+        
         dispatch({
             type: 'ADD_NEW_ANIMAL',
-            payload: newAnimal,
+            payload: formData,
         });
         history.push(`/contacts/${id}`)
     }
 
     return (
         <>
-        <FormControl id="animalForm" onSubmit={submitNewAnimal} sx={{ minWidth: '60%' }}>
+        <form onSubmit={submitNewAnimal}>
+        <FormControl id="animalForm"  sx={{ minWidth: '60%' }}>
             <Paper sx={{ padding: 3 }}>
                 {/* <img
                     width="auto"
@@ -95,6 +116,12 @@ function AnimalForm() {
                         size="large"
                         sx={{ margin: 'auto' }}
                     />
+                     <input
+            type="file"
+            className="form-control-file"
+            name="uploaded_file"
+            onChange={handleFileSelect}
+          />
                     <TextField
                         InputLabelProps={{
                             shrink: true,
@@ -316,6 +343,7 @@ function AnimalForm() {
             </>}
             <Button type="submit">SUBMIT</Button>
         </FormControl>
+        </form>
         </>
     )
 }
