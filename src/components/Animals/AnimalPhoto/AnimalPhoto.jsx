@@ -47,7 +47,7 @@ const ProjectGalleryForm = () => {
 
     dispatch({
       type: "SEND_FILE",
-      payload: imageDataToSend,
+      payload: imageDataToSend, 
     });
   }
 
