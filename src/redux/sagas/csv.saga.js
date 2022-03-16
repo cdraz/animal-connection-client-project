@@ -19,7 +19,7 @@ import { put, takeLatest } from "redux-saga/effects";
 function* addPhoto(action) {
     try {
     console.log("!$!$!CSV", action.payload);
-    yield axios.post("/api/csv", action.payload.formData);
+    yield axios.post("/api/csv", action.payload);
     }
     catch(error) {
         console.log("Add photo failed", error);

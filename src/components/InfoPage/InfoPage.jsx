@@ -24,13 +24,13 @@ function InfoPage() {
     const formData = new FormData();
     formData.append("selectedFile", selectedFile);
 
-    let csvFile = {
-      formData: formData,
-    };
+    // let csvFile = {
+    //   formData: formData,
+    // };
 
     dispatch({
       type: "UPLOAD_CSV",
-      payload: csvFile,
+      payload: formData,
     });
   }
 

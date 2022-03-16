@@ -82,7 +82,8 @@ function AnimalForm() {
 
     return (
         <>
-        <FormControl id="animalForm" onSubmit={submitNewAnimal} sx={{ minWidth: '60%' }}>
+        <form onSubmit={submitNewAnimal} >
+        <FormControl id="animalForm" sx={{ minWidth: '60%' }}>
             <Paper sx={{ padding: 3 }}>
                 {/* <img
                     width="auto"
@@ -316,6 +317,7 @@ function AnimalForm() {
             </>}
             <Button type="submit">SUBMIT</Button>
         </FormControl>
+        </form>
         </>
     )
 }

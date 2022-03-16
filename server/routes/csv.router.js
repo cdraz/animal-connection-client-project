@@ -4,35 +4,8 @@ const pool = require("../modules/pool");
 const multer = require("multer");
 
 const {
-  rejectUnauthenticated,
+    rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
-
-//AWS3
-// const multerS3 = require("multer-s3");
-// const aws = require("aws-sdk");
-// const app = express();
-// const s3 = new aws.S3({
-//   accessKeyID: process.env.AWS_ACCESS_KEY_ID,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-// });
-
-// const upload = multer({ dest: 'public/uploads/' })
-
-//Multer s3 upload
-// const upload = multer({
-//   storage: multerS3({
-//     s3: s3,
-//     bucket: "starpet-prime",
-//     metadata: function (req, file, cb) {
-//       cb(null, { fieldName: file.fieldname });
-//     },
-//     key: function (req, file, cb) {
-//       console.log("Multer file is ", file);
-
-//       cb(null, file.originalname);
-//     },
-//   }),
-// });
 
 //using storage over destination so i can customize the storage
 const storage = multer.diskStorage({
@@ -51,10 +24,17 @@ const upload = multer({
   limits: { fileSize: 10000000 },
 });
 
-router.post("/", upload.single("selectedFile"), function (req, res, next) {
-    console.log('###############');
-    res.send("Successfully uploaded " + req.file.length + " files!");
+router.post("/", function (req, res) {
+    var data = Papa.parse(csv);
+    Papa.parse(req.body, {
+        complete: function(results) {
+            console.log("Finished:", results.data);
+        }
+    });
+    // console.log('###############');
+    // res.send("Successfully uploaded " + req.file.length + " files!");
 });
+
 
 // router.put(
 //     "/",
@@ -96,17 +76,25 @@ module.exports = router;
 
 
 
-fs = require('fs');
-const csv = require('@fast-csv/parse');
-const results = [];
+// fs = require('fs');
+// const csv = require('@fast-csv/parse');
+// //const results = [];
 
-const csvParser = (filePath) => {
-    fs.createReadStream(filePath) // <--------------File Path
-        .pipe(csv.parse({headers: true}))                    //headers: true uses the first row of CSV file as names for obj, can replace tru with an array of custom headers
-        .on('error', error => console.error(error))         //error handler
-        .on('data', row => {                               //happens per row of CSV file    ?? fire off posts here ??
-                // yield axios.post(`/api/csv`, action.payload);
-                results.push(row)
-            })              
-        .on('end', rowCount => console.log(results));     //happens at the end of function, will need to move results somewhere
-}
+// const csvParser = (filePath, onComplete) => {
+//     let results = [];
+//     fs.createReadStream(filePath) // <--------------File Path
+//         .pipe(csv.parse({headers: true}))                    //headers: true uses the first row of CSV file as names for obj, can replace tru with an array of custom headers
+//         .on('error', error => console.error(error))         //error handler
+//         .on('data', row => {                               //happens per row of CSV file    ?? fire off posts here ??
+//                 // yield axios.post(`/api/csv`, action.payload);
+//                 results.push(row)
+//             })              
+//         .on('end', rowCount => onComplete(results));     //happens at the end of function, will need to move results somewhere
+// }
+
+
+// router.post('/', (req, res) => {
+//     csvParser('file.csv', (results) => {
+//         res.send(results);
+//     })
+// })

@@ -25,7 +25,7 @@ function ContactDetail() {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
+      dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
     }, []);
 
   
