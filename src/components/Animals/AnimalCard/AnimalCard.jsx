@@ -63,8 +63,9 @@ function AnimalCard({ animal }) {
         <Card key={animal.id} sx={{
                   maxWidth: 200,
                   minWidth: 200,
-                  minHeight: 200,
-                  maxHeight: 200,
+                  minHeight: 250,
+                  maxHeight: 250,
+
                   margin: 2
                 }}>
           {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
@@ -78,7 +79,7 @@ function AnimalCard({ animal }) {
               />
               <CardContent>
                 <Typography gutterBottom noWrap variant="h6" component="div">
-                  {animal.name}
+                  {animal.name} <br></br>{animal.firstName} {animal.lastName}
                 </Typography>
               </CardContent>
             </CardActionArea>
