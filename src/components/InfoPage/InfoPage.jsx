@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux';
 // or even care what the redux state is
 
 function InfoPage() {
+  const dispatch = useDispatch();
   const [selectedFile, setSelectedFile] = useState(null);
   const animal = useSelector((store) => store.selectedAnimal);
 
