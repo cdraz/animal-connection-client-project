@@ -29,7 +29,7 @@ const upload = multer({
     key: function (req, file, cb) {
       console.log("Multer file is ", file);
 
-      cb(null, file.originalname);
+      cb(null, Date.now() + `--` + file.originalname)
     },
   }),
 });
