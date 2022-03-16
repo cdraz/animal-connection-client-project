@@ -3,6 +3,15 @@ import "./ContactTable.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 
+// MUI Imports
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+
 const contacts = () => {
   const contacts = useSelector((store) => store.contacts);
 
@@ -14,11 +23,9 @@ const contacts = () => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Primary Number</th>
-            <th>Secondary Number</th>
             <th>Text</th>
             <th>Email</th>
             <th>Type</th>
-            <th>Website</th>
             <th>Address</th>
             <th>Notes</th>
             <th>Show Details</th>
@@ -31,11 +38,9 @@ const contacts = () => {
                   <td>{contact.firstName}</td>
                   <td>{contact.lastName}</td>
                   <td>{contact.primaryNumber}</td>
-                  <td>{contact.secondaryNumber}</td>
                   <td>{contact.text ? "yes" : "no"}</td>
                   <td>{contact.email}</td>
                   <td>{contact.type}</td>
-                  <td>{contact.website}</td>
                   <td>{contact.address}</td>
                   <td>{contact.notes}</td>
                   <td>
