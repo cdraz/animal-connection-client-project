@@ -99,14 +99,14 @@ function AnimalSearchBar() {
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minL: evt.target.value})}
-                            type="number" label='min length' 
+                            type="number" label='Min Length' 
                         />
                         <TextField 
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, maxL: evt.target.value})}
-                            type="number" label='max length'
+                            type="number" label='Max Length'
                         />
                     </div>
 
@@ -116,14 +116,14 @@ function AnimalSearchBar() {
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minH: evt.target.value})} 
-                            type="number" label='min height'
+                            type="number" label='Min Height'
                         />
                         <TextField 
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, maxH: evt.target.value})} 
-                            type="number" label='max height'
+                            type="number" label='Max Height'
                         />
                     </div>
 
@@ -133,14 +133,14 @@ function AnimalSearchBar() {
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minN: evt.target.value})} 
-                            type="number" label='min neck'
+                            type="number" label='Min Neck'
                         />
                         <TextField 
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minN: evt.target.value})} 
-                            type="number" label='max neck'
+                            type="number" label='Max Neck'
                         />
                     </div>
 
@@ -150,14 +150,14 @@ function AnimalSearchBar() {
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minB: evt.target.value})} 
-                            type="number" label='min belly'
+                            type="number" label='Min Belly'
                         />
                         <TextField 
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, maxB: evt.target.value})} 
-                            type="number" label='max belly'
+                            type="number" label='Max Belly'
                         />
                     </div>
 
@@ -167,14 +167,14 @@ function AnimalSearchBar() {
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minW: evt.target.value})} 
-                            type="number" label='min weight'
+                            type="number" label='Min Weight'
                         />
                         <TextField 
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, maxW: evt.target.value})}
-                            type="number" label='max weight'
+                            type="number" label='Max Weight'
                         />
                     </div>
 
