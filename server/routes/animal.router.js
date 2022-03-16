@@ -41,8 +41,15 @@ router.get('/',  rejectUnauthenticated,(req, res) => {
     console.log('******* GET ANIMALS *******', req.params);
     const qFilter = req.query;
     const sqlQuery = queryGen(qFilter)
-    let queryText = `
-        SELECT * FROM "animals" 
+    let queryText = 
+
+
+        `SELECT "animals".*, contacts."firstName",contacts."lastName",contacts."primaryNumber"
+      FROM "animals"
+    JOIN "contacts" 
+      ON "animals"."contactsId" = contacts.id 
+   
+
         ${sqlQuery.sqlString};`
     pool.query(queryText, sqlQuery.sqlParams)
         .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
