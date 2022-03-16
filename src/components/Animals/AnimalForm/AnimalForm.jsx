@@ -88,14 +88,16 @@ function AnimalForm() {
     for (let key in newAnimal){
         formData.append(key, newAnimal[key])
     }
-    // formData.append("newAnimal", newAnimal.name);
      formData.append("selectedFile", selectedFile);
 
-
+  let imageDataToSend = {
+      formData: formData,
+      id: {id},
+    };
         
         dispatch({
             type: 'ADD_NEW_ANIMAL',
-            payload: formData,
+            payload: imageDataToSend,
         });
         history.push(`/contacts/${id}`)
     }

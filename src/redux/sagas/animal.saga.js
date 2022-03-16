@@ -83,8 +83,9 @@ function* updateAnimalSummary(action) {
 
 function* addNewAnimal(action) {
   try {
-    console.log("!$!$!PHOTO on create animal is", action.payload);
-    yield axios.post(`/api/animal`, action.payload);
+    console.log("!$!$!PHOTO on create animal is", action.payload.id);
+    yield axios.post(`/api/animal`, action.payload.formData);
+    yield put({ type: 'FETCH_SELECTED_CONTACT', payload: action.payload.id });
   } catch (error) {
     console.error("POST animal failed", error);
   }
