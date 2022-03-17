@@ -58,7 +58,7 @@ const JobCreate = () => {
   return (
     <div className="bodyContainer">
       <form className="newJobForm" onSubmit={saveJobInformation}>
-        <Stack spacing={2}>
+        <Stack className= "jobStack" spacing={2}>
           <h1 className="createTitle">Create New Job</h1>
           {/* date input */}
 
@@ -100,6 +100,7 @@ const JobCreate = () => {
           </FormControl>
 
           {/* end Job Number input */}
+          
 
           {/* end date input */}
 

@@ -31,7 +31,7 @@ function ContactPage() {
     transform: "translate(-50%, -50%)",
     bgcolor: "background.paper",
     boxShadow: 24,
-    width: "30%",
+    width: "40%",
     height: "70%",
     p: 4,
     overflow: "scroll",

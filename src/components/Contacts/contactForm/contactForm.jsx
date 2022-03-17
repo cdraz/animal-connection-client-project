@@ -37,7 +37,7 @@ function contactForm() {
   return (
     <>
       <form onSubmit={createContactInfo}>
-        <Stack spacing={2}>
+        <Stack className= "contactStack"spacing={2}>
           <label htmlFor="firstName">
             First Name:
             <input
@@ -97,6 +97,8 @@ function contactForm() {
               onChange={(evt) => handleChange(evt, "text")}
             />
           </label>
+          </Stack>
+          <Stack className= "contactStack"spacing={2}>
 
           <label htmlFor="email">
             Email:
@@ -109,6 +111,8 @@ function contactForm() {
               onChange={(evt) => handleChange(evt, "email")}
             />
           </label>
+          
+         
 
           <label htmlFor="type">
             Type:
@@ -133,6 +137,7 @@ function contactForm() {
               onChange={(evt) => handleChange(evt, "website")}
             />
           </label>
+         
 
           <label htmlFor="address">
             Address:
