@@ -65,6 +65,7 @@ function AnimalCard({ animal }) {
                   minWidth: 200,
                   minHeight: 250,
                   maxHeight: 250,
+
                   margin: 2
                 }}>
           {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}

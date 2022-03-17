@@ -54,7 +54,7 @@ function ContactSearchBar() {
                         onChange={(evt) => setqFilter({...qFilter, type: evt.target.value})} 
                         type="text" label='Type'
                     />
-                    <Button type="submit">Filter</Button>
+                    <Button type="submit" variant="contained">Filter</Button>
                 </Stack>
             </FormControl>
             </form>

@@ -7,6 +7,7 @@ import animalSaga from './animal.saga';
 import jobSaga from './job.saga';
 import contactSaga from './contact.saga';
 import addPhotoSaga from './addPhoto.saga';
+import csvSaga from './csv.saga'
 import animalTypesSaga from './animalTypes.saga';
 
 // rootSaga is the primary saga.
@@ -26,6 +27,7 @@ export default function* rootSaga() {
     contactSaga(),
     auditionSaga(),
     addPhotoSaga(),
+    csvSaga(),
     animalTypesSaga(),
   ]);
 }
