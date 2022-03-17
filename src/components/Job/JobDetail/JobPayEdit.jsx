@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import { useParams, Link } from "react-router-dom";
+import TextField from '@mui/material/TextField';
+
 
 // React components
 import { useHistory } from "react-router-dom";
@@ -30,6 +32,15 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Swal from "sweetalert2";
 
+
+//MUI
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+//end MUI
 //bottom section of job details page "cards" and their information
 function JobPayEdit(prop) {
   // Dispatch hook, store access
@@ -70,14 +81,7 @@ function JobPayEdit(prop) {
     // dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
   }, []);
 
-  //MUI
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  //end MUI
+
 
   //edit job begins
   const editSelectedJob = (event) => {
@@ -183,58 +187,118 @@ function JobPayEdit(prop) {
             </Item>
           </Grid>
         ) : (
-          <form onSubmit={editSelectedJob}>
-            {/* client input */}
 
-            <input
-              type="text"
-              value={newPaid}
-              onChange={(evt) => {
-                setNewPaid(evt.target.value);
-              }}
-              placeholder={payDetails.paid.toString}
-            />
-            {/* check number */}
-            <input
-              type="text"
-              value={newCheckNumber}
-              onChange={(evt) => {
-                setNewCheckNumber(evt.target.value);
-              }}
-              placeholder={payDetails.checkNumber}
-            />
+          <Grid>
+            <Item id="item">
+              <Card
+                key={payDetails.id}
+                sx={{
+                  maxWidth: 275,
+                  minWidth: 275,
+                  minHeight: 350,
+                  maxHeight: 350,
+                }}
+              >
 
-            {/* check amount */}
-            <input
-              type="text"
-              value={newCheckAmount}
-              onChange={(evt) => {
-                setNewCheckAmount(evt.target.value);
-              }}
-              placeholder={payDetails.checkAmount}
-            />
+                <FontAwesomeIcon
+                  className="penIcon"
+                  icon={faPenToSquare}
+                  flip="horizontal"
+                  transform="grow-9 left-130 down-20"
+                  onClick={() => setEditable(true)}
+                />
+                <FontAwesomeIcon
+                  className="faTrash"
+                  icon={faTrash}
+                  flip="horizontal"
+                  transform="grow-9 right-130 down-20"
+                  onClick={deleteJobPet}
+                />
 
-            {/* newDate */}
-            <input
-              type="date"
-              value={newCheckDate}
-              onChange={(evt) => {
-                setNewCheckDate(evt.target.value);
-              }}
-              placeholder={payDetails.checkDate}
-            />
+                <CardContent>
 
-            {/* {user.id === something.user_id && ( */}
-            <button className="newJobDetailBtn" type="submit">
-              Submit
-            </button>
-            {/* )} */}
-            <FontAwesomeIcon
-              icon={faBan}
-              transform="grow-9 right-15 down-4"
-              onClick={() => setEditable(false)}
-            />
-          </form>
+
+                  <form onSubmit={editSelectedJob}>
+                    {/* client input */}
+                    <Stack>
+                      <TextField
+                        type="text"
+                        value={newPaid}
+                        onChange={(evt) => {
+                          setNewPaid(evt.target.value);
+                        }}
+
+                      />
+                      {/* check number */}
+                      <TextField
+                        type="text"
+                        value={newCheckNumber}
+                        onChange={(evt) => {
+                          setNewCheckNumber(evt.target.value);
+                        }}
+
+                      />
+
+                      {/* check amount */}
+                      <TextField
+                        type="text"
+                        value={newCheckAmount}
+                        onChange={(evt) => {
+                          setNewCheckAmount(evt.target.value);
+                        }}
+
+                      />
+                      {/* newDate */}
+                      <TextField
+                        type="date"
+                        value={newCheckDate}
+                        onChange={(evt) => {
+                          setNewCheckDate(evt.target.value);
+                        }}
+
+                      />
+                      <Button type="submit" variant="contained">Submit</Button>
+
+                    </Stack>
+                  </form>
+
+
+                  <Typography
+                    sx={{ mb: 1.5 }}
+                    color="text.secondary"
+                  ></Typography>
+
+                </CardContent>
+                <FontAwesomeIcon
+                  icon={faBan}
+                  transform="grow-9 right-15 down-4"
+                  onClick={() => setEditable(false)}
+                />
+
+              </Card>
+            </Item>
+          </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          //   {/* {user.id === something.user_id && ( */}
+
+          //   {/* )} */}
+
+          // </form>
         )}
       </div>
 
