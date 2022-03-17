@@ -83,7 +83,7 @@ function JobSearchBar() {
                             type="date" label='Max Date'
                         />
                     </div>
-                    <Button type="submit">update</Button>
+                    <Button type="submit" variant="contained">Filter</Button>
                     </Stack>
             </FormControl>
             </form>

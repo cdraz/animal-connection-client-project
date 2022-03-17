@@ -12,6 +12,8 @@ import Grid from "@mui/material/Grid";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import JobSearchBar from "../../SearchBar/JobSearchBar";
+import Typography from "@mui/material/Typography";
+import Button from '@mui/material/Button';
 
 function JobPage() {
   // Dispatch hook, store access
@@ -42,38 +44,52 @@ function JobPage() {
   };
 
   return (
-    <>
-      <JobSearchBar />
-      <button
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Add Job
-      </button>
-      <div id="jobCardContainer">
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={3} justifyContent="space-evenly">
-            {Array.isArray(jobs) ? (
-              jobs.map((job) => <JobCard job={job} key={job.id} />)
-            ) : (
-              <p>Loading...</p>
-            )}
-          </Grid>
-        </Box>
-      </div>
+    <div id="jobsPage">
+      <Grid container spacing={8}>
+        <Grid item xs={12} display="inline-flex">
+          <Typography variant="h1">
+            Jobs
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            Add Job
+          </Button>
+          <JobSearchBar />
+        </Grid>
+        {/* <div id="jobCardContainer"> */}
+        <Grid item container spacing={2} xs={9}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid
+              container
+              spacing={3}
+              alignItems="left"
+            >
+              {Array.isArray(jobs) ? (
+                jobs.map((job) => <JobCard job={job} key={job.id} />)
+              ) : (
+                <p>Loading...</p>
+              )}
+            </Grid>
+          </Box>
+        </Grid>
+      </Grid>
+
+      {/* </div> */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
-          <Grid container spacing={5}>
-            <Grid item xs={4}>
-              <Stack spacing={2}>
-                <JobCreate />
-              </Stack>
-            </Grid>
-          </Grid>
+          <Stack spacing={2}>
+            <JobCreate />
+          </Stack>
         </Box>
       </Modal>
-    </>
+    </div>
   );
 }
 
