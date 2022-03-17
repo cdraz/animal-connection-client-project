@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool");
 const multer = require("multer");
+const Papa = require('papaparse')
 
 const {
     rejectUnauthenticated,
@@ -24,9 +25,13 @@ const upload = multer({
   limits: { fileSize: 10000000 },
 });
 
+
+
 router.post("/", function (req, res) {
-    var data = Papa.parse(csv);
+    console.log(req.body.formData);
+    console.log(req.file);
     Papa.parse(req.body, {
+        header: true,
         complete: function(results) {
             console.log("Finished:", results.data);
         }
@@ -63,15 +68,6 @@ router.post("/", function (req, res) {
 
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
 
 
 

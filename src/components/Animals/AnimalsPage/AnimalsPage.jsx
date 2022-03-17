@@ -10,11 +10,8 @@ import AnimalSearchBar from '../../SearchBar/AnimalSearchBar'
 //MUI
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-<<<<<<< HEAD
 import Button from "@mui/material/Button";
-=======
 import Typography from "@mui/material/Typography";
->>>>>>> 2304f1f8dafa4ade656d18056537b4918b6d92cd
 
 function AnimalsPage() {
   // Dispatch hook, store access
@@ -22,29 +19,6 @@ function AnimalsPage() {
   const [limit, setLimit] = useState(0)
   const animals = useSelector((store) => store.animals);
 
-<<<<<<< HEAD
-    useEffect(() => {
-        dispatch({ type: 'FETCH_ANIMALS' });
-    }, []);
-
-
-    return(
-        <>
-        <Button>Prev</Button>
-        <Button>Next</Button>
-        <AnimalSearchBar />
-        <div id= "animalCardContainer">
-        <Box sx={{ flexGrow: 1 }}>
-        <Grid
-          container
-          spacing={3}
-          justifyContent="space-evenly"
-        >
-          {Array.isArray(animals) ?
-              animals.map( animal => (
-              <AnimalCard key= {animal.id} animal={animal} />
-          )) : <p>Loading...</p>}
-=======
   useEffect(() => {
     dispatch({ type: 'FETCH_ANIMALS' });
   }, []);
@@ -75,7 +49,6 @@ function AnimalsPage() {
 
           </Box>
           {/* </div> */}
->>>>>>> 2304f1f8dafa4ade656d18056537b4918b6d92cd
         </Grid>
       </Grid>
     </div>

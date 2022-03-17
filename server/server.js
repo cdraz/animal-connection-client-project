@@ -15,11 +15,8 @@ const activeJobRouter = require('./routes/activeJob.router');
 const contactRouter = require('./routes/contact.router');
 const auditionRouter = require('./routes/audition.router');
 const imagesRouter = require('./routes/images.router');
-<<<<<<< HEAD
 const csvRouter = require('./routes/csv.router');
-=======
 const animalTypesRouter = require('./routes/animalTypes.router');
->>>>>>> 2304f1f8dafa4ade656d18056537b4918b6d92cd
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -40,11 +37,8 @@ app.use('/api/activejob', activeJobRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/audition', auditionRouter);
 app.use('/api/images', imagesRouter);
-<<<<<<< HEAD
 app.use('/api/csv', csvRouter);
-=======
 app.use('/api/types', animalTypesRouter);
->>>>>>> 2304f1f8dafa4ade656d18056537b4918b6d92cd
 
 // Serve static files
 app.use(express.static('build'));
