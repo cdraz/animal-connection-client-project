@@ -163,22 +163,22 @@ function queryGen(qFilter){
         sqlParams: [],
     }
     if(qFilter.firstName){
-        sqlQuery.sqlString += ` AND LOWER("firstName") ~ $${paramNumber}`;
+        sqlQuery.sqlString += ` AND LOWER("firstName") ~ LOWER($${paramNumber})`;
         sqlQuery.sqlParams.push(qFilter.firstName);
         paramNumber++;
     }
     if(qFilter.lastName){
-        sqlQuery.sqlString += ` AND LOWER("lastName") ~ $${paramNumber}`;
+        sqlQuery.sqlString += ` AND LOWER("lastName") ~ LOWER($${paramNumber})`;
         sqlQuery.sqlParams.push(qFilter.lastName);
         paramNumber++;
     }
     if(qFilter.company){
-        sqlQuery.sqlString += ` AND LOWER("company") ~ $${paramNumber}`;
+        sqlQuery.sqlString += ` AND LOWER("company") ~ LOWER($${paramNumber})`;
         sqlQuery.sqlParams.push(qFilter.company);
         paramNumber++;
     }
     if(qFilter.type){
-        sqlQuery.sqlString += ` AND LOWER("type") ~ $${paramNumber}`;
+        sqlQuery.sqlString += ` AND LOWER("type") ~ LOWER($${paramNumber})`;
         sqlQuery.sqlParams.push(qFilter.type);
         paramNumber++;
     }
