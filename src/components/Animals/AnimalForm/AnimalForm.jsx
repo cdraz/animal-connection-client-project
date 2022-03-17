@@ -119,6 +119,7 @@ function AnimalForm() {
                         sx={{ margin: 'auto' }}
                     />
                      <input
+                     required
             type="file"
             className="form-control-file"
             name="uploaded_file"
