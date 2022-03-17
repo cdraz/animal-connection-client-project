@@ -36,8 +36,8 @@ function JobPage() {
     transform: "translate(-50%, -50%)",
     bgcolor: "background.paper",
     boxShadow: 24,
-    width: "80%",
-    height: "80%",
+    width: "30%",
+    height: "70%",
     p: 4,
     overflow: "scroll",
     padding: 3,
@@ -84,9 +84,9 @@ function JobPage() {
       {/* </div> */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
-          <Stack spacing={2}>
+          
             <JobCreate />
-          </Stack>
+          
         </Box>
       </Modal>
     </div>
