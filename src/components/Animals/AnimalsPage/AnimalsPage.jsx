@@ -24,14 +24,16 @@ function AnimalsPage() {
 
   return (
     <div id="animalsPage">
-      <Typography variant="h3">
-        Search Animals
-      </Typography>
       <Grid container spacing={8}>
-        <Grid item xs={4}>
+        <Grid item xs={12}>
+          <Typography variant="h1">
+            Animals
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
           <AnimalSearchBar />
         </Grid>
-        <Grid item container spacing={2} xs={8}>
+        <Grid item container spacing={2} xs={9}>
           {/* <div id= "animalCardContainer"> */}
           <Box sx={{ flexGrow: 1 }}>
             <Grid
