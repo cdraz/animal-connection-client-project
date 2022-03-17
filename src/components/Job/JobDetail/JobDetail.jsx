@@ -62,23 +62,8 @@ function JobDetail() {
 
   //finish job do put request to changed active to inactive
   const finishJob = () => {
-    Swal.fire({
-      title: "Are you sure you want to finish job?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Finish Job!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Job has been Finished!", "", "success");
-        dispatch({ type: "FINISH_JOB", payload: selectedJob.id });
-        history.push("/jobs");
-      } else if (result.isDenied) {
-        Swal.fire("Job Safe", "", "info");
-      }
-    });
+    dispatch({ type: "FINISH_JOB", payload: id });
+  
   };
 
   return (
@@ -88,17 +73,31 @@ function JobDetail() {
       <div>
         <br></br>
 
-        <Stack direction="row" spacing={2}>
-          <Button
-            onClick={finishJob}
-            id="jobFinish"
-            type="button"
-            value="Finish"
-            variant="contained"
-          >
-            Finish Job
-          </Button>
-        </Stack>
+        {selectedJob.active ? (
+          <Stack direction="row" spacing={2}>
+            <Button
+              onClick={finishJob}
+              id="jobFinish"
+              type="button"
+              value="Finish"
+              variant="contained"
+            >
+              Finish Job
+            </Button>
+          </Stack>
+        ) : (
+          <Stack direction="row" spacing={2}>
+            <Button
+              onClick={finishJob}
+              id="jobFinish"
+              type="button"
+              value="Finish"
+              variant="outlined"
+            >
+              Finished
+            </Button>
+          </Stack>
+        )}
 
         <Stack direction="row" spacing={2}>
           <Button

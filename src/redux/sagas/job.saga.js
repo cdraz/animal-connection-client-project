@@ -92,6 +92,8 @@ function* finishJob(action) {
     // the config includes credentials which
     // allow the server session to recognize the user
     yield axios.put(`/api/job/${action.payload}`, config);
+    yield put({ type: "FETCH_SELECTED_JOB", payload: action.payload });
+    
   } catch (error) {
     console.log("FINISH Job failed", error);
   }
