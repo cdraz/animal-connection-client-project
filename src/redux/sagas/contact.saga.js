@@ -57,7 +57,7 @@ function* saveChanges(action){
 // Add an contact to a job
 function* addContactToJob(action) {
     try {
-        const reponse = yield axios.post(`/api/contact/job`, action.payload);
+        const response = yield axios.post(`/api/contact/job`, action.payload);
         console.log('addContact to job action.payload is:', action.payload);
         yield put({ type: 'FETCH_SELECTED_CONTACT', payload: { id: action.payload.contactId }});
     }

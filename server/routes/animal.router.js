@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require("multer");
 const {
     rejectUnauthenticated,
-  } = require('../modules/authentication-middleware');
+} = require('../modules/authentication-middleware');
 
 
 //AWS3

@@ -1,5 +1,5 @@
 // Function imports
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./AnimalsPage.css";
 
@@ -10,11 +10,13 @@ import AnimalSearchBar from '../../SearchBar/AnimalSearchBar'
 //MUI
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 function AnimalsPage() {
   // Dispatch hook, store access
   const dispatch = useDispatch();
+  const [limit, setLimit] = useState(0)
   const animals = useSelector((store) => store.animals);
 
   useEffect(() => {

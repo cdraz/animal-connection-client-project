@@ -25,7 +25,7 @@ function ContactDetail() {
     const { id } = useParams();
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
+      dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
     }, []);
 
   
@@ -81,13 +81,10 @@ function ContactDetail() {
             <p>Notes: {`${selectedContact.notes}`}</p>
         </>}
         
-        <EditSharpIcon 
-            onClick={() => {
-                setEditPage(!editPage);
-                }
-            }>
-                Edit
-        </EditSharpIcon>
+        <IconButton  onClick={() => setEditPage(!editPage)} aria-label="delete" size="large">
+        <EditSharpIcon />
+        </IconButton>
+
         <IconButton onClick={deleteContact} aria-label="delete" size="large">
         <DeleteIcon fontSize="inherit" />
         </IconButton>
