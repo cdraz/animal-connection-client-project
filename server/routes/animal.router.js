@@ -364,12 +364,12 @@ function queryGen(qFilter) {
             break;
     }
     if (qFilter.breed && qFilter.breed !== '') {
-        sqlQuery.sqlString += ` AND "breed" = $${paramNumber}`;
+        sqlQuery.sqlString += ` AND LOWER("breed") = LOWER($${paramNumber})`;
         sqlQuery.sqlParams.push(qFilter.breed);
         paramNumber++;
     }
     if (qFilter.type && qFilter.type !== '') {
-        sqlQuery.sqlString += ` AND "type" = $${paramNumber}`
+        sqlQuery.sqlString += ` AND "animalType" = $${paramNumber}`
         sqlQuery.sqlParams.push(qFilter.type);
         paramNumber++;
     }

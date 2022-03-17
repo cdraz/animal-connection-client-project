@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -8,10 +8,21 @@ import FormLabel from '@mui/material/FormLabel';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import dogBreeds from '../Animals/DogBreedList';
 import './AnimalSearch.css'
+
 
 function AnimalSearchBar() {
     const dispatch = useDispatch();
+    const types = (useSelector(store => store.animalTypes))
+    const options = dogBreeds;
+    // Get animal types from server on component load
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_ANIMAL_TYPES'
+        });
+    }, []);
     const [qFilter, setqFilter] = useState({ // -------->>> needs to be saved to state
         hasWorked: 'all',
         isActive: 'all',
@@ -85,13 +96,50 @@ function AnimalSearchBar() {
                         />
                     </RadioGroup>
 
-                    <select onChange={(evt) => setqFilter({...qFilter, type: evt.target.value})}>
-                        <option value="type">Type</option>
-                    </select>
+                    <Autocomplete
+                        name='type'
+                        options={types}
+                        getOptionLabel={(option) => option.type}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                        filterSelectedOptions 
+                        onChange={(evt, opt) => {
+                            setqFilter({...qFilter, type: opt.id});
+                            console.log(qFilter);
+                        }}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Animal Type"
+                                placeholder="Types"
+                            />
+                        )}
+                    />
 
-                    <select onChange={(evt) => setqFilter({...qFilter, breed: evt.target.value})}>
-                        <option value="breed">Breed</option>
-                    </select>
+                    {qFilter.type === 1 ?
+                    <Autocomplete
+                            name='breed'
+                            options={options}
+                            getOptionLabel={(option) => option}
+                            filterSelectedOptions
+                            onChange={(evt, opt) => {
+                                setqFilter({...qFilter, breed: opt.toLowerCase()});
+                                console.log(qFilter);
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Breed"
+                                    placeholder="Breeds"
+                                />
+                            )}
+                        />
+                        : <TextField 
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={(evt) => setqFilter({...qFilter, breed: evt.target.value})} 
+                            type="text" label='Breed'
+                        />}
 
                     <div style={{ display: 'inline-flex' }}>
                         <TextField 
