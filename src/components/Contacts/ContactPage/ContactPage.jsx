@@ -46,12 +46,19 @@ function ContactPage() {
   return (
     <div id="contactPage">
       <Grid container spacing={2}>
-        <Grid item xs={11}>
+        <Grid item xs={12}>
           <Typography variant="h1">
             Contacts
           </Typography>
         </Grid>
-        <Grid item xs={1} justifyContent="flex-end">
+        <Grid item xs={2}>
+          <Typography variant="h5">
+            Search Contacts
+          </Typography>
+          <ContactSearchBar />
+          <Typography variant="h5">
+            Add Contact
+          </Typography>
           <Button
             variant="contained"
             onClick={() => {
@@ -60,9 +67,6 @@ function ContactPage() {
           >
             Add Contact
           </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <ContactSearchBar />
         </Grid>
         <Grid item spacing={2} xs={10}>
           <ContactTable />

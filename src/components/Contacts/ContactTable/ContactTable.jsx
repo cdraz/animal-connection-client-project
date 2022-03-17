@@ -22,6 +22,7 @@ const contacts = () => {
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Company</th>
             <th>Primary Number</th>
             <th>Text</th>
             <th>Email</th>
@@ -37,6 +38,7 @@ const contacts = () => {
                 <tr key={contact.id}>
                   <td>{contact.firstName}</td>
                   <td>{contact.lastName}</td>
+                  <td>{contact.company}</td>
                   <td>{contact.primaryNumber}</td>
                   <td>{contact.text ? "yes" : "no"}</td>
                   <td>{contact.email}</td>
