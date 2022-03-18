@@ -13,6 +13,8 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
+import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
+
 function AnimalSummary({ animal }) {
 
     // Dispatch hook, history hook
@@ -236,14 +238,15 @@ function AnimalSummary({ animal }) {
                         />
                     }
                     <TextField
+                        type="date"
                         name='birthday'
                         id="animal-birthday-input"
                         label="Birthdate"
-                        value={animal.birthday}
+                        defaultValue={jacobsAwesomeDateFormatterVersion2(animal.birthday, 'input')}
                         onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
-                        }}
+                        // InputProps={{
+                        //     readOnly: !edit,
+                        // }}
                         InputLabelProps={{
                             shrink: true
                         }}

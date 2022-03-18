@@ -232,14 +232,14 @@ function AnimalSearchBar() {
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, minA: evt.target.value})} 
-                            type="date" 
+                            type="date" label="BDay Start"
                         />
                         <TextField
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             onChange={(evt) => setqFilter({...qFilter, maxA: evt.target.value})} 
-                            type="date" 
+                            type="date" label="BDay End"
                         />
                     </div>
                     <Button type="submit" variant="contained">Filter</Button>
