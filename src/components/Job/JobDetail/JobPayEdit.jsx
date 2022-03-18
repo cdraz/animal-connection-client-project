@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 
 //MUI
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IconButton from '@mui/material/IconButton';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -141,20 +142,22 @@ function JobPayEdit(prop) {
                 }}
               >
                 <CardActionArea>
-                  <FontAwesomeIcon
-                    className="penIcon"
-                    icon={faPenToSquare}
-                    flip="horizontal"
-                    transform="grow-9 left-140 down-20"
-                    onClick={() => setEditable(true)}
-                  />
-                  <FontAwesomeIcon
-                    className="faTrash"
-                    icon={faTrash}
-                    flip="horizontal"
-                    transform="grow-9 right-130 down-20"
-                    onClick={deleteJobPet}
-                  />
+                  <IconButton onClick={() => setEditable(true)}  aria-label="delete" size="large" color="primary">
+                    <FontAwesomeIcon
+                      className="penIcon"
+                      icon={faPenToSquare}
+                      flip="horizontal"
+                      // transform="grow-9 left-140 down-20"
+                    />
+                  </IconButton>
+                  <IconButton onClick={() => deleteJobPet()} aria-label="delete" size="large" color="primary">
+                    <FontAwesomeIcon
+                      className="faTrash"
+                      icon={faTrash}
+                      flip="horizontal"
+                      // transform="grow-9 right-21 down-20"
+                    />
+                  </IconButton>
                   <CardMedia
                     component="img"
                     height="140"
@@ -200,20 +203,19 @@ function JobPayEdit(prop) {
                 }}
               >
 
-                <FontAwesomeIcon
-                  className="penIcon"
-                  icon={faPenToSquare}
-                  flip="horizontal"
-                  transform="grow-9 left-130 down-20"
-                  onClick={() => setEditable(true)}
-                />
-                <FontAwesomeIcon
-                  className="faTrash"
-                  icon={faTrash}
-                  flip="horizontal"
-                  transform="grow-9 right-130 down-20"
-                  onClick={deleteJobPet}
-                />
+                <IconButton onClick={() => setEditable(false)} aria-label="delete" size="large" color="primary">
+                  <FontAwesomeIcon
+                    icon={faBan}
+                  />
+                </IconButton>
+
+                <IconButton onClick={deleteJobPet} aria-label="delete" size="large" color="primary">
+                  <FontAwesomeIcon
+                    className="faTrash"
+                    icon={faTrash}
+                    flip="horizontal"
+                  />
+                </IconButton>
 
                 <CardContent>
 
@@ -272,11 +274,6 @@ function JobPayEdit(prop) {
                   ></Typography>
 
                 </CardContent>
-                <FontAwesomeIcon
-                  icon={faBan}
-                  transform="grow-9 right-125 up-35"
-                  onClick={() => setEditable(false)}
-                />
 
               </Card>
             </Item>

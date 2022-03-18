@@ -237,40 +237,20 @@ function AnimalSummary({ animal }) {
                             }}
                         />
                     }
-
-                    {/* Needs default value for edit */}
-                    {edit ? 
-                        <TextField
-                            type="date"
-                            name='birthday'
-                            id="animal-birthday-input"
-                            label="Birthdate"
-                            defaultValue={animal.birthday}
-                            onChange={event => handleChange(event)}
-                            InputProps={{
-                                readOnly: !edit,
-                            }}
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                        />
-                        :
-                        <TextField
-                            name='birthday'
-                            id="animal-birthday-input"
-                            label="Birthdate"
-                            value={jacobsAwesomeDateFormatterVersion2(animal.birthday)}
-                            onChange={event => handleChange(event)}
-                            InputProps={{
-                                readOnly: !edit,
-                            }}
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                        />
-                    }
-
-
+                    <TextField
+                        type="date"
+                        name='birthday'
+                        id="animal-birthday-input"
+                        label="Birthdate"
+                        defaultValue={jacobsAwesomeDateFormatterVersion2(animal.birthday, 'input')}
+                        onChange={event => handleChange(event)}
+                        // InputProps={{
+                        //     readOnly: !edit,
+                        // }}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
+                    />
                     <Autocomplete
                         name='sex'
                         readOnly={!edit}

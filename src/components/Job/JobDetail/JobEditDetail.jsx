@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 
 //MUI
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IconButton from '@mui/material/IconButton';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -65,13 +66,13 @@ function JobEditDetail() {
   return (
     <>
       {/* edit job form begins */}
-      <FontAwesomeIcon
-        className="penIcon"
-        icon={faPenToSquare}
-        flip="horizontal"
-        transform="grow-9 right-15"
-        onClick={() => setEditable(true)}
-      />
+      <IconButton onClick={() => setEditable(true)} aria-label="delete" size="large" color="primary">
+        <FontAwesomeIcon
+          className="penIcon"
+          icon={faPenToSquare}
+          flip="horizontal"
+        />
+      </IconButton>
 
       <div variant="body2">
         {/* conditional rendering if editable button was clicked  */}
