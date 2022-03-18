@@ -80,25 +80,25 @@ function ContactDetail() {
           <p>Address: {`${selectedContact.address}`}</p>
           <p>Notes: {`${selectedContact.notes}`}</p>
         </>}
+        
+        <IconButton  onClick={() => setEditPage(!editPage)} aria-label="delete" size="large" color="primary">
+          <EditSharpIcon />
+        </IconButton>
 
-      <IconButton onClick={() => setEditPage(!editPage)} aria-label="delete" size="large">
-        <EditSharpIcon />
-      </IconButton>
-
-      <IconButton onClick={deleteContact} aria-label="delete" size="large">
-        <DeleteIcon fontSize="inherit" />
-      </IconButton>
-      <h2>WORK HISTORY</h2>
-      {Array.isArray(selectedContact.jobs) ? (
-        //not sure why im getting a null in array
-        selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)
-      ) : (
-        <p>Loading...</p>
-      )}
-      <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
-      {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null ?
-        selectedContact.animals.map(animal => (
-          <AnimalCard key={animal.id} animal={animal} />
+        <IconButton onClick={deleteContact} aria-label="delete" size="large" color="primary">
+          <DeleteIcon/>
+        </IconButton>
+        <h2>WORK HISTORY</h2>
+            {Array.isArray(selectedContact.jobs) ? (
+                //not sure why im getting a null in array
+                selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)
+            ) : (
+                <p>Loading...</p>
+            )}
+        <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
+        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null ?
+            selectedContact.animals.map( animal => (
+            <AnimalCard key= {animal.id} animal={animal} />
         )) : <p>No animals on record.</p>}
     </>
   )

@@ -17,6 +17,8 @@ import EditSharpIcon from '@mui/icons-material/EditSharp';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
+
 function AnimalSummary({ animal }) {
 
     // Dispatch hook, history hook
@@ -242,14 +244,15 @@ function AnimalSummary({ animal }) {
                         />
                     }
                     <TextField
+                        type="date"
                         name='birthday'
                         id="animal-birthday-input"
                         label="Birthdate"
-                        value={animal.birthday}
+                        defaultValue={jacobsAwesomeDateFormatterVersion2(animal.birthday, 'input')}
                         onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
-                        }}
+                        // InputProps={{
+                        //     readOnly: !edit,
+                        // }}
                         InputLabelProps={{
                             shrink: true
                         }}
