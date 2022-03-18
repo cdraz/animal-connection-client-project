@@ -274,6 +274,11 @@ function JobPayEdit(prop) {
                   ></Typography>
 
                 </CardContent>
+                <FontAwesomeIcon
+                  icon={faBan}
+                  transform="grow-10 right-130 up-35"
+                  onClick={() => setEditable(false)}
+                />
 
               </Card>
             </Item>
