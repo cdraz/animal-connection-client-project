@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
 
 function AnimalAddToJobButton({ animal }) {
 
@@ -42,7 +43,7 @@ function AnimalAddToJobButton({ animal }) {
     }, []);
 
     return (
-        <>
+        <Stack spacing={2}>
             <Typography variant="h5">
                 Add Animal to Job
             </Typography>
@@ -69,7 +70,7 @@ function AnimalAddToJobButton({ animal }) {
             >
                 Add to Job
             </Button>
-        </>
+        </Stack>
     )
 }
 
