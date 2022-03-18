@@ -14,6 +14,8 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import EditSharpIcon from '@mui/icons-material/EditSharp';
+import IconButton from '@mui/material/IconButton';
 
 function AnimalBehaviorTrainingTable({ animal }) {
 
@@ -83,16 +85,14 @@ function AnimalBehaviorTrainingTable({ animal }) {
 
     return (
         <>
-            <div style={{ display: 'inline-flex' }}>
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                 <Typography variant="h5">
                     Behavior, Training, Availability
                 </Typography>
                 {!edit &&
-                    <Button
-                        onClick={() => setEdit(!edit)}
-                    >
-                        Edit
-                    </Button>
+                    <IconButton onClick={() => setEdit(!edit)} aria-label="edit" size="medium">
+                        <EditSharpIcon />
+                    </IconButton>
                 }
                 {edit &&
                     <>
@@ -109,7 +109,7 @@ function AnimalBehaviorTrainingTable({ animal }) {
                         </Button>
                     </>
                 }
-            </div>
+            </Stack>
             <Paper>
                 <Grid container spacing={0}>
                     <Grid item xs={6}>

@@ -1,3 +1,4 @@
+import './AnimalDetail.css';
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom"; //5<<<<<<<<<<<<<<<<<<<<<
@@ -9,7 +10,6 @@ import AnimalAuditionHistoryTable from "../AnimalAuditionHistoryTable/AnimalAudi
 import AnimalOwnerTable from "../AnimalOwnerTable/AnimalOwnerTable";
 import AnimalWorkHistoryTable from "../AnimalWorkHistoryTable/AnimalWorkHistoryTable";
 import AnimalBehaviorTrainingTable from "../AnimalBehaviorTrainingTable/AnimalBehaviorTrainingTable";
-import AnimalPhoto from "../AnimalPhoto/AnimalPhoto";
 
 // MUI imports
 import Box from "@mui/material/Box";
@@ -42,7 +42,7 @@ function AnimalDetail() {
   }, [id]);
 
   return (
-    <Grid container spacing={5}>
+    <Grid container spacing={5} id="AnimalDetailContainer">
       <Grid item xs={4}>
         <Stack spacing={4}>
           <AnimalSummary animal={animal} />
@@ -66,7 +66,6 @@ function AnimalDetail() {
           }
           <AnimalAddToJobButton animal={animal} />
         </Stack>
-        <AnimalPhoto />
       </Grid>
     </Grid>
   );

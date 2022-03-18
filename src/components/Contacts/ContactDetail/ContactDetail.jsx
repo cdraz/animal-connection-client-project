@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import {useHistory, useParams, Link} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 import AnimalCard from '../../Animals/AnimalCard/AnimalCard';
 import JobCard from '../../Job/JobCard/JobCard';
@@ -16,19 +16,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function ContactDetail() {
-    const dispatch = useDispatch();
-    const history =  useHistory();
-    const selectedContact = useSelector((store) => store.contacts);
-    const [editPage, setEditPage] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const selectedContact = useSelector((store) => store.contacts);
+  const [editPage, setEditPage] = useState(false);
 
-    // Set id from URL parameters
-    const { id } = useParams();
+  // Set id from URL parameters
+  const { id } = useParams();
 
-    useEffect(() => {
-      dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id }});
-    }, []);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id } });
+  }, []);
 
-  
+
 
 
   //deletes entire selected job and all foreign keys associated with it after confirmation
@@ -44,41 +44,41 @@ function ContactDetail() {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Contact has been Deleted!", "", "success");
-        dispatch({type: 'DELETE_CONTACT', payload: id });
+        dispatch({ type: 'DELETE_CONTACT', payload: id });
         history.push('/contacts')
       } else if (result.isDenied) {
         Swal.fire("Contact Safe", "", "info");
       }
     });
   };
-    return (
-        <>
-        <ContactAddToJobButton contact={selectedContact} />
-        {editPage
+  return (
+    <>
+      <ContactAddToJobButton contact={selectedContact} />
+      {editPage
         ? <ContactEdit editPage={editPage} setEditPage={setEditPage} />
-            // ?<form>
-            //     <input placeholder="First Name" value={editContact.firstName}></input>
-            //     <input placeholder="Last Name" value={editContact.lastName}></input>
-            //     <input placeholder="Primary Number" value={editContact.primaryNumber}></input>
-            //     <input placeholder="Secondary Number" value={contacts.secondaryNumber}></input>
-            //     <input placeholder="Text?" value={editContact.text}></input>
-            //     <input placeholder="Email" value={editContact.email}></input>
-            //     <input placeholder="Type" value={editContact.type}></input>
-            //     <input placeholder="Website" value={editContact.website}></input>
-            //     <input placeholder="Address" value={editContact.address}></input>
-            //     <input placeholder="Notes" value={editContact.notes}></input>
-            //     <button type="submit">Submit</button>
-            // </form>
+        // ?<form>
+        //     <input placeholder="First Name" value={editContact.firstName}></input>
+        //     <input placeholder="Last Name" value={editContact.lastName}></input>
+        //     <input placeholder="Primary Number" value={editContact.primaryNumber}></input>
+        //     <input placeholder="Secondary Number" value={contacts.secondaryNumber}></input>
+        //     <input placeholder="Text?" value={editContact.text}></input>
+        //     <input placeholder="Email" value={editContact.email}></input>
+        //     <input placeholder="Type" value={editContact.type}></input>
+        //     <input placeholder="Website" value={editContact.website}></input>
+        //     <input placeholder="Address" value={editContact.address}></input>
+        //     <input placeholder="Notes" value={editContact.notes}></input>
+        //     <button type="submit">Submit</button>
+        // </form>
         : <>
-            <p>Type: {`${selectedContact.type}`}</p>
-            <p>Name: {`${selectedContact.firstName} ${selectedContact.lastName}`}</p>
-            <p>Number: {`${selectedContact.primaryNumber} ${selectedContact.secondaryNumber}`}</p>
-            <p>Text: {`${selectedContact.text}`}</p>
-            <p>Email: {`${selectedContact.email}`}</p>
-            <p>Type: {`${selectedContact.type}`}</p>
-            <p>Website: {`${selectedContact.website}`}</p>
-            <p>Address: {`${selectedContact.address}`}</p>
-            <p>Notes: {`${selectedContact.notes}`}</p>
+          <p>Type: {`${selectedContact.type}`}</p>
+          <p>Name: {`${selectedContact.firstName} ${selectedContact.lastName}`}</p>
+          <p>Number: {`${selectedContact.primaryNumber} ${selectedContact.secondaryNumber}`}</p>
+          <p>Text: {`${selectedContact.text}`}</p>
+          <p>Email: {`${selectedContact.email}`}</p>
+          <p>Type: {`${selectedContact.type}`}</p>
+          <p>Website: {`${selectedContact.website}`}</p>
+          <p>Address: {`${selectedContact.address}`}</p>
+          <p>Notes: {`${selectedContact.notes}`}</p>
         </>}
         
         <IconButton  onClick={() => setEditPage(!editPage)} aria-label="delete" size="large" color="primary">
@@ -100,8 +100,8 @@ function ContactDetail() {
             selectedContact.animals.map( animal => (
             <AnimalCard key= {animal.id} animal={animal} />
         )) : <p>No animals on record.</p>}
-        </>
-    )
+    </>
+  )
 };
 
-export  default ContactDetail;
+export default ContactDetail;
