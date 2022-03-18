@@ -81,12 +81,12 @@ function ContactDetail() {
             <p>Notes: {`${selectedContact.notes}`}</p>
         </>}
         
-        <IconButton  onClick={() => setEditPage(!editPage)} aria-label="delete" size="large">
-        <EditSharpIcon />
+        <IconButton  onClick={() => setEditPage(!editPage)} aria-label="delete" size="large" color="primary">
+          <EditSharpIcon />
         </IconButton>
 
-        <IconButton onClick={deleteContact} aria-label="delete" size="large">
-        <DeleteIcon fontSize="inherit" />
+        <IconButton onClick={deleteContact} aria-label="delete" size="large" color="primary">
+          <DeleteIcon/>
         </IconButton>
         <h2>WORK HISTORY</h2>
             {Array.isArray(selectedContact.jobs) ? (

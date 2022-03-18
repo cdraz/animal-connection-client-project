@@ -1,0 +1,4 @@
+.jobRow:hover > td {
+    background-color: #BDE3F2;
+    cursor: pointer;
+  } 
