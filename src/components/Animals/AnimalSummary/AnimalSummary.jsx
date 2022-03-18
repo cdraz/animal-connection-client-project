@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import dogBreeds from '../DogBreedList';
+import AnimalPhoto from "../AnimalPhoto/AnimalPhoto";
 
 // MUI imports
 import Autocomplete from '@mui/material/Autocomplete';
@@ -12,6 +13,9 @@ import Paper from '@mui/material/Paper';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import EditSharpIcon from '@mui/icons-material/EditSharp';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
 
@@ -95,16 +99,14 @@ function AnimalSummary({ animal }) {
 
     return (
         <>
-            <div style={{ display: 'inline-flex' }}>
+            <Stack direction='row' spacing={1} sx={{ alignItems: 'center' }}>
                 <Typography variant="h5">
                     Animal Details
                 </Typography>
                 {!edit &&
-                    <Button
-                        onClick={() => setEdit(!edit)}
-                    >
-                        Edit
-                    </Button>
+                    <IconButton onClick={() => setEdit(!edit)} aria-label="edit" size="medium">
+                        <EditSharpIcon />
+                    </IconButton>
                 }
                 {edit &&
                     <>
@@ -115,8 +117,9 @@ function AnimalSummary({ animal }) {
                             Save
                         </Button>
                         <Button
-                            variant="outlined"
+                            variant="text"
                             onClick={deleteAnimal}
+                            sx={{ color: '#f00' }}
                         >
                             Delete
                         </Button>
@@ -134,13 +137,16 @@ function AnimalSummary({ animal }) {
                     </>
                 }
 
-            </div>
+            </Stack>
             <Paper sx={{ padding: 3 }}>
                 <img
                     width="auto"
                     src={animal.image}
                 />
                 {/* error in this stack value is temp undefined which throws error but then becomes defined*/}
+                {edit &&
+                    <AnimalPhoto />
+                }
                 <Stack spacing={2}>
                     <Rating
                         name='rating'
@@ -162,7 +168,7 @@ function AnimalSummary({ animal }) {
                         InputLabelProps={{
                             shrink: true
                         }}
-                    /> 
+                    />
                     <Autocomplete
                         name='type'
                         readOnly={!edit}

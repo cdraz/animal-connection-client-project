@@ -11,6 +11,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import Input from '@mui/material/Input';
 import { useParams } from "react-router-dom";
 
 const ProjectGalleryForm = () => {
@@ -47,31 +48,31 @@ const ProjectGalleryForm = () => {
 
     dispatch({
       type: "SEND_FILE",
-      payload: imageDataToSend, 
+      payload: imageDataToSend,
     });
   }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+          <Button
+            id="photoSubmit"
+            type="submit"
+            value="Add new Photo"
+            variant="outlined"
+          >
+            Change Photo
+          </Button>
           <input
             type="file"
             className="form-control-file"
             name="uploaded_file"
             onChange={handleFileSelect}
+            required
           />
-          <Stack direction="row" spacing={2}>
-            <Button
-              id="photoSubmit"
-              type="submit"
-              value="Add new Photo"
-              variant="contained"
-            >
-              Add Photo
-            </Button>
-          </Stack>
-        </div>
+
+        </Stack>
       </form>
     </>
   );

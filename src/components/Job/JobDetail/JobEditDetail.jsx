@@ -152,7 +152,7 @@ function JobEditDetail() {
             {/* )} */}
             <FontAwesomeIcon
               icon={faBan}
-              transform="grow-9 right-15 down-4"
+              transform="grow-9 right-0 down-4"
               onClick={() => setEditable(false)}
             />
              </Stack>
