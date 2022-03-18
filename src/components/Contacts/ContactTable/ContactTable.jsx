@@ -31,7 +31,7 @@ const contacts = () => {
             <th>Email</th>
             <th>Type</th>
             <th>Address</th>
-            <th>Notes</th>
+            {/* <th>Notes</th> */}
           </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@ const contacts = () => {
                   <td>{contact.email}</td>
                   <td>{contact.type}</td>
                   <td>{contact.address}</td>
-                  <td>{contact.notes}</td>
+                  {/* <td>{contact.notes}</td> */}
                 </tr>
               ))
             : console.log("loading...")}
