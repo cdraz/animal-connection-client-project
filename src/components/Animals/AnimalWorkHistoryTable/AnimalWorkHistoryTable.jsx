@@ -1,4 +1,5 @@
 import { Link, useHistory } from 'react-router-dom';
+import './AnimalWorkHistoryTable.css';
 
 // MUI imports
 import Table from '@mui/material/Table';
@@ -30,7 +31,7 @@ function AnimalWorkHistoryTable({ animal }) {
                 <TableBody>
                     {jobs ? jobs.map(job => (
                         job.date ?
-                            <TableRow key={job.id} onClick={() => history.push(`/jobDetail/${job.id}`)}>
+                            <TableRow key={job.id} className="jobRow" onClick={() => history.push(`/jobDetail/${job.id}`)}>
                                 <TableCell align="left">
                                     {job.date}
                                 </TableCell>
