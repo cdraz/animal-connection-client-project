@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import { useParams, Link } from "react-router-dom";
+import './JobEditDetail.css';
 
 // React components
 import { useHistory } from "react-router-dom";
@@ -16,6 +17,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter'
 
+import Stack from "@mui/material/Stack";
+import TextField from '@mui/material/TextField';
+import Button from "@mui/material/Button";
 function JobEditDetail() {
   // Dispatch hook, store access
   const history = useHistory();
@@ -72,7 +76,7 @@ function JobEditDetail() {
       <div variant="body2">
         {/* conditional rendering if editable button was clicked  */}
         {!editable ? (
-          <div>
+          <Stack>
             {selectedJob.client}
             <br></br>
             {jacobsAwesomeDateFormatterVersion2(selectedJob.date)}
@@ -82,22 +86,28 @@ function JobEditDetail() {
             {selectedJob.notes}
             <br></br>
             {selectedJob.description}
-          </div>
+          </Stack>
         ) : (
+
+
+          
           <form onSubmit={editSelectedJob}>
+            <Stack className="Gap" spacing={1.5}>
             {/* client input */}
-            <input
+            <TextField
               type="text"
               value={newClient}
+              label="First Name"
               onChange={(evt) => {
                 setNewClient(evt.target.value);
               }}
               placeholder={selectedJob.client}
             />
             {/* description */}
-            <input
+            <TextField
               type="text"
               value={newDescription}
+              label="Description"
               onChange={(evt) => {
                 setNewDescription(evt.target.value);
               }}
@@ -105,7 +115,7 @@ function JobEditDetail() {
             />
 
             {/* newDate */}
-            <input
+            <TextField
               type="date"
               value={newDate}
               onChange={(evt) => {
@@ -115,9 +125,10 @@ function JobEditDetail() {
             />
 
             {/* newNotes */}
-            <input
+            <TextField
               type="text"
               value={newNotes}
+              label="Notes"
               onChange={(evt) => {
                 setNewNotes(evt.target.value);
               }}
@@ -125,9 +136,10 @@ function JobEditDetail() {
             />
 
             {/* newJobNumber */}
-            <input
+            <TextField
               type="text"
               value={newJobNumber}
+              label="Job Number"
               onChange={(evt) => {
                 setNewJobNumber(evt.target.value);
               }}
@@ -135,18 +147,19 @@ function JobEditDetail() {
             />
 
             {/* {user.id === something.user_id && ( */}
-            <button className="newJobDetailBtn" type="submit">
-              Submit
-            </button>
+              <Button type="submit" variant="contained">Submit</Button>
             {/* )} */}
             <FontAwesomeIcon
               icon={faBan}
               transform="grow-9 right-15 down-4"
               onClick={() => setEditable(false)}
             />
+             </Stack>
+             
           </form>
         )}
       </div>
+      
 
       {/* edit job form ends */}
     </>
