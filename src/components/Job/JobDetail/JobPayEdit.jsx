@@ -175,7 +175,7 @@ function JobPayEdit(prop) {
                     <Typography variant="h6" component="div">
                       Paid: {payDetails.paid.toString()}
                       <br></br>
-                      Amount: {payDetails.checkAmount}
+                      Amount: ${payDetails.checkAmount}
                     </Typography>
                     <Typography
                       sx={{ mb: 1.5 }}

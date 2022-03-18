@@ -101,7 +101,7 @@ CREATE TABLE "jobsJunction" (
     "id" SERIAL PRIMARY KEY,
     "animalsId" INT REFERENCES "animals" ON DELETE CASCADE,
     "jobId" INT REFERENCES "jobs" ON DELETE CASCADE,
-    "paid" BOOLEAN DEFAULT TRUE, -- Have they been paid yet
+    "paid" BOOLEAN DEFAULT FALSE, -- Have they been paid yet
     "checkNumber" VARCHAR(255), -- if paid, what is check number
     "checkAmount" FLOAT, -- if paid, what is check amount
     "checkDate" DATE -- if paid, what is check date
