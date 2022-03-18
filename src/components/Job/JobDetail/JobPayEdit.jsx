@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import { useParams, Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
-
+import './JobPayEdit.css';
 
 // React components
 import { useHistory } from "react-router-dom";
@@ -220,10 +220,11 @@ function JobPayEdit(prop) {
 
                   <form onSubmit={editSelectedJob}>
                     {/* client input */}
-                    <Stack>
+                    <Stack className="space" spacing={1}>
                       <TextField
                         type="text"
                         value={newPaid}
+                        label="First Name"
                         onChange={(evt) => {
                           setNewPaid(evt.target.value);
                         }}
@@ -233,6 +234,7 @@ function JobPayEdit(prop) {
                       <TextField
                         type="text"
                         value={newCheckNumber}
+                        label="Check Number"
                         onChange={(evt) => {
                           setNewCheckNumber(evt.target.value);
                         }}
@@ -243,6 +245,7 @@ function JobPayEdit(prop) {
                       <TextField
                         type="text"
                         value={newCheckAmount}
+                        label="Amount"
                         onChange={(evt) => {
                           setNewCheckAmount(evt.target.value);
                         }}
@@ -271,7 +274,7 @@ function JobPayEdit(prop) {
                 </CardContent>
                 <FontAwesomeIcon
                   icon={faBan}
-                  transform="grow-9 right-15 down-4"
+                  transform="grow-9 right-125 up-35"
                   onClick={() => setEditable(false)}
                 />
 

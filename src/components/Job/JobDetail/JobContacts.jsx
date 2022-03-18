@@ -1,9 +1,10 @@
+import './JobContacts.css';
+
 // Function imports
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link, useParams } from "react-router-dom";
-
 
 // React components
 import Box from "@mui/material/Box";
@@ -14,10 +15,15 @@ import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
 
 function JobContacts() {
+
+  // Store access
   const selectedJobContacts = useSelector((store) => store.selectedJobContacts);
   const selectedJob = useSelector((store) => store.selectedJob);
-  // Dispatch hook, store access
+
+  // Dispatch hook, history hook
   const dispatch = useDispatch();
+  const history = useHistory();
+
   // Set id from URL parameters
   const { id } = useParams();
 
@@ -49,22 +55,17 @@ function JobContacts() {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Primary Number</th>
-            <th>Secondary Number</th>
-            <th>Contact Page</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {selectedJobContacts.length > 0
             ? selectedJobContacts.map((contact) => (
-                <tr key={contact.id}>
+                <tr key={contact.id} className="jobContactRow" onClick={() => history.push(`/contacts/${contact.contactId}`)}>
                     <td>{contact.id}</td>
                   <td>{contact.firstName}</td>
                   <td>{contact.lastName}</td>
                   <td>{contact.primaryNumber}</td>
-                  <td>{contact.secondaryNumber}</td>
-                  <td>
-                    <Link to={`/contacts/${contact.contactId}`}>Details</Link>
-                  </td>
                   <td>  <Stack direction="row" spacing={2}>
           <Button
           onClick={(evt) => deleteJobContact(contact)}
@@ -73,7 +74,7 @@ function JobContacts() {
             value="Delete"
             variant="contained"
           >
-            Delete Job
+            Remove From Job
           </Button>
         </Stack></td>
                 </tr>
