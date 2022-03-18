@@ -39,3 +39,8 @@
   form * {
     font-size: 14px;
   }
+
+  .contactRow:hover > td {
+    background-color: #BDE3F2;
+    cursor: pointer;
+  } 
