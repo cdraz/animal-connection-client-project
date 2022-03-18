@@ -12,6 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 
+//date formatter
+import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter'
+
 function JobEditDetail() {
   // Dispatch hook, store access
   const history = useHistory();
@@ -67,7 +70,7 @@ function JobEditDetail() {
           <div>
             {selectedJob.client}
             <br></br>
-            {selectedJob.date}
+            {jacobsAwesomeDateFormatterVersion2(selectedJob.date)}
             <br></br>
             {selectedJob.jobNumber}
             <br></br>

@@ -46,7 +46,7 @@ const contacts = () => {
                   <td>{contact.email}</td>
                   <td>{contact.type}</td>
                   <td>{contact.address}</td>
-                  <td>{contact.notes}</td>
+                  <td  colSpan={'8'}>{contact.notes}</td>
                 </tr>
               ))
             : console.log("loading...")}

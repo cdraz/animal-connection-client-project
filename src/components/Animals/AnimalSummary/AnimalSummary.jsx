@@ -13,6 +13,8 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
+import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
+
 function AnimalSummary({ animal }) {
 
     // Dispatch hook, history hook
@@ -235,19 +237,40 @@ function AnimalSummary({ animal }) {
                             }}
                         />
                     }
-                    <TextField
-                        name='birthday'
-                        id="animal-birthday-input"
-                        label="Birthdate"
-                        value={animal.birthday}
-                        onChange={event => handleChange(event)}
-                        InputProps={{
-                            readOnly: !edit,
-                        }}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                    />
+
+                    {/* Needs default value for edit */}
+                    {edit ? 
+                        <TextField
+                            type="date"
+                            name='birthday'
+                            id="animal-birthday-input"
+                            label="Birthdate"
+                            defaultValue={animal.birthday}
+                            onChange={event => handleChange(event)}
+                            InputProps={{
+                                readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
+                        />
+                        :
+                        <TextField
+                            name='birthday'
+                            id="animal-birthday-input"
+                            label="Birthdate"
+                            value={jacobsAwesomeDateFormatterVersion2(animal.birthday)}
+                            onChange={event => handleChange(event)}
+                            InputProps={{
+                                readOnly: !edit,
+                            }}
+                            InputLabelProps={{
+                                shrink: true
+                            }}
+                        />
+                    }
+
+
                     <Autocomplete
                         name='sex'
                         readOnly={!edit}
