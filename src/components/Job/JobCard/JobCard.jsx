@@ -71,7 +71,7 @@ function JobCard({ job }) {
       <Item id="item">
         <Card
           key={job.id}
-          sx={{ maxWidth: 300, minWidth: 300, minHeight: 300 }}
+          sx={{ maxWidth: 265, minWidth: 265, minHeight: 250 }}
         >
           <CardActionArea onClick={() => handleSelectJob(job)}>
             <CardContent>
