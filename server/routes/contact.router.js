@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const {
     rejectUnauthenticated,
-  } = require('../modules/authentication-middleware');
+} = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS *******');
@@ -33,8 +33,8 @@ router.delete("/", rejectUnauthenticated, (req, res) => {
     .catch((err) => {
         console.log("Error completing Delete contact query", err);
         res.sendStatus(500);
-      });
-  });
+    });
+});
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS DETAILS*******');
@@ -115,9 +115,9 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
 
 //Edit contact 
 router.put('/', rejectUnauthenticated, (req, res) => {
-  console.log('this is req.body in put', req.body);
-  const sqlText = `UPDATES "contacts"
-                   SET
+    console.log('this is req.body in put', req.body);
+    const sqlText = `UPDATES "contacts"
+                    SET
                     "type" = $1,
                     "firstName" = $2,
                     "lastName" = $3,
@@ -128,35 +128,34 @@ router.put('/', rejectUnauthenticated, (req, res) => {
                     "website" = $8,
                     "address" = $9,
                     "notes" = $10 
-                   WHERE "id" = $11 
+                    WHERE "id" = $11 
                     
                     `;
-  const sqlParams = [
-    req.body.type,
-    req.body.firstName,
-    req.body.lastNme,
-    req.body.primaryNumber,
-    req.body.secondaryNumber,
-    req.body.text,
-    req.body.email,
-    req.body.website,
-    req.body.address,
-    req.body.notes,
-    req.body.id
-  ]
-  pool.query(sqlText, sqlParams)
-   .then(() => res.sendStatus(201))
-    .catch((err) => {
-      console.log("project creation failed: ", err);
-      res.sendStatus(500);
-    });
+    const sqlParams = [
+        req.body.type,
+        req.body.firstName,
+        req.body.lastNme,
+        req.body.primaryNumber,
+        req.body.secondaryNumber,
+        req.body.text,
+        req.body.email,
+        req.body.website,
+        req.body.address,
+        req.body.notes,
+        req.body.id
+    ]
+    pool.query(sqlText, sqlParams)
+    .then(() => res.sendStatus(201))
+        .catch((err) => {
+        console.log("project creation failed: ", err);
+        res.sendStatus(500);
+        });
 })
 
 module.exports = router;
 
 
 function queryGen(qFilter){
-    console.log('#####################', qFilter);
     let paramNumber = 1;
     let sqlQuery = { // will contain sqlString, plus params
         sqlString: '',

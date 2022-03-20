@@ -8,6 +8,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import Typography from "@mui/material/Typography";
 import './AnimalSearch.css'
 
 function JobSearchBar() {
@@ -25,9 +26,11 @@ function JobSearchBar() {
         dispatch({ type: 'FILTER_JOBS', payload: qFilter });
     }
     return (
-        <div  className="container">
-            {/* <button onClick={() => console.log(qFilter)}></button> */}
-            <form onSubmit={(evt) => filterAnimals(evt)}>
+        <div  className="searchBar">
+        <Typography className="searchHeader" variant="h5" sx={{marginBottom: '30px'}}>
+            Search Jobs
+        </Typography>
+            <form onSubmit={(evt) => filterAnimals(evt)} className="searchForm">
             <FormControl id="animalSearch" >
                 <Stack spacing={2}>
                     <div>

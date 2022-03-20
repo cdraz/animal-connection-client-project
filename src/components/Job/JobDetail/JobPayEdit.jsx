@@ -219,8 +219,6 @@ function JobPayEdit(prop) {
                 </IconButton>
 
                 <CardContent>
-
-
                   <form onSubmit={editSelectedJob}>
                     {/* client input */}
                     <Stack className="space" spacing={1}>
@@ -283,35 +281,11 @@ function JobPayEdit(prop) {
                   transform="grow-10 right-130 up-35"
                   onClick={() => setEditable(false)}
                 />
-
               </Card>
             </Item>
           </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          //   {/* {user.id === something.user_id && ( */}
-
-          //   {/* )} */}
-
-          // </form>
         )}
       </div>
-
-      {/* edit job form ends */}
     </>
   );
 }

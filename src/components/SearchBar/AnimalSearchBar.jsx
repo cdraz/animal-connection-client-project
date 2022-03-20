@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import dogBreeds from '../Animals/DogBreedList';
+import Typography from "@mui/material/Typography";
 import './AnimalSearch.css'
 
 
@@ -50,9 +51,12 @@ function AnimalSearchBar() {
         })
     }
     return (
-        <div  className="container">
-            <form onSubmit={(evt) => filterAnimals(evt)}>
-            <FormControl id="animalSearch" >
+        <div  className="searchBar">
+        <Typography className="searchHeader" variant="h5" sx={{marginBottom: '30px'}}>
+            Search Animals
+        </Typography>
+            <form class="searchForm" onSubmit={(evt) => filterAnimals(evt)} >
+            <FormControl >
                 <Stack spacing={2}>
                     <FormLabel id="demo-radio-buttons-group-label">Active?</FormLabel>
                         <RadioGroup
