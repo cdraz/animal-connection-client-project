@@ -43,6 +43,28 @@ function AnimalSummary({ animal }) {
 
     // Declare updateAnimal
     const updateAnimal = () => {
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+          title: 'Animal Details Updated!',
+          timer: 1200,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
         setEdit(false);
         console.log('in updateAnimal', animal);
         dispatch({

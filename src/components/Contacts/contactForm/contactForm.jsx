@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import Stack from "@mui/material/Stack";
+import Swal from "sweetalert2";
 
 function contactForm() {
   const history = useHistory();
@@ -28,6 +29,28 @@ function contactForm() {
     });
 
     history.push("/contacts");
+    let timerInterval
+    Swal.fire({
+        icon: 'success',
+      title: 'Contact Added!',
+      timer: 1200,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
   };
 
   const handleChange = (evt, property) => {
