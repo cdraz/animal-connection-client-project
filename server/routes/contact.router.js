@@ -116,13 +116,13 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
 //Edit contact 
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('this is req.body in put', req.body);
-    const sqlText = `UPDATES "contacts"
+    const sqlText = `UPDATE "contacts"
                     SET
                     "type" = $1,
                     "firstName" = $2,
                     "lastName" = $3,
                     "primaryNumber" = $4,
-                    "secondaryNumber" $5,
+                    "secondaryNumber" = $5,
                     "text" = $6,
                     "email" = $7, 
                     "website" = $8,
@@ -134,7 +134,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlParams = [
         req.body.type,
         req.body.firstName,
-        req.body.lastNme,
+        req.body.lastName,
         req.body.primaryNumber,
         req.body.secondaryNumber,
         req.body.text,
