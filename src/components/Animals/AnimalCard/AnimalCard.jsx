@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom"; //2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!
+import './AnimalCard.css';
 
 // React components
 import AnimalSummary from "../AnimalSummary/AnimalSummary";
@@ -60,7 +61,7 @@ function AnimalCard({ animal }) {
   return (
     <Grid>
       {/* <Item id="item"> */}
-        <Card key={animal.id} sx={{
+        <Card className="animalCard" key={animal.id} sx={{
                   maxWidth: 200,
                   minWidth: 200,
                   minHeight: 250,
@@ -69,7 +70,7 @@ function AnimalCard({ animal }) {
                   margin: 2
                 }}>
           {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
-          <Link to={`/animals/${animal.id}`}>
+          <Link to={`/animals/${animal.id}`} style={{ textDecoration: 'none', color: '#000'}}>
             <CardActionArea>
               <CardMedia
                 component="img"

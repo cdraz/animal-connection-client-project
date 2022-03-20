@@ -1,7 +1,7 @@
 #jobCardContainer {
     border: 1px solid black;
     width: 90%;
-    height: 400px;
+    height: 600px;
     position: relative;
     overflow: scroll;
     margin-left: 5%;

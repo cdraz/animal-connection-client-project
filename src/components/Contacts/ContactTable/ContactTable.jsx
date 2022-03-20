@@ -15,6 +15,9 @@ import TableRow from '@mui/material/TableRow';
 const contacts = () => {
   const contacts = useSelector((store) => store.contacts);
 
+  // History hook
+  const history = useHistory();
+
   return (
     <div className="contact-container">
       <table>
@@ -28,14 +31,13 @@ const contacts = () => {
             <th>Email</th>
             <th>Type</th>
             <th>Address</th>
-            <th>Notes</th>
-            <th>Show Details</th>
+            {/* <th>Notes</th> */}
           </tr>
         </thead>
         <tbody>
           {contacts.length > 0
             ? contacts.map((contact) => (
-                <tr key={contact.id}>
+                <tr key={contact.id} className="contactRow" onClick={() => history.push(`/contacts/${contact.id}`)}>
                   <td>{contact.firstName}</td>
                   <td>{contact.lastName}</td>
                   <td>{contact.company}</td>
@@ -44,10 +46,7 @@ const contacts = () => {
                   <td>{contact.email}</td>
                   <td>{contact.type}</td>
                   <td>{contact.address}</td>
-                  <td>{contact.notes}</td>
-                  <td>
-                    <Link to={`/contacts/${contact.id}`}>Details</Link>
-                  </td>
+                  {/* <td>{contact.notes}</td> */}
                 </tr>
               ))
             : console.log("loading...")}
