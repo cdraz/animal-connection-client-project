@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from "react-router-dom"; 
-
+import "./AnimalForm.css";
 
 // MUI imports
 import Button from '@mui/material/Button';

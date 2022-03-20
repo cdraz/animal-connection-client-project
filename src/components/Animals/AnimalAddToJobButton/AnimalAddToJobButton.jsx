@@ -7,6 +7,8 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Swal from "sweetalert2";
+import Stack from "@mui/material/Stack";
+
 
 function AnimalAddToJobButton({ animal }) {
 
@@ -69,7 +71,7 @@ Swal.fire({
     }, []);
 
     return (
-        <>
+        <Stack spacing={2}>
             <Typography variant="h5">
                 Add Animal to Job
             </Typography>
@@ -96,7 +98,7 @@ Swal.fire({
             >
                 Add to Job
             </Button>
-        </>
+        </Stack>
     )
 }
 
