@@ -2,6 +2,8 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
+import TextField from '@mui/material/TextField';
+
 function ContactEdit ({setEditPage, editPage}) {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -31,7 +33,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="firstName">
                 First Name:
-            <input
+            <TextField
                 type='text'
                 name='firstName'
                 value={contacts.firstName}
@@ -48,7 +50,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="lastName">
                 Last Name:
-            <input
+            <TextField
                 type='text'
                 name='lastName'
                 value={contacts.lastName}
@@ -65,7 +67,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="primaryNumber">
                 Primary Number:
-            <input
+            <TextField
                 type='text'
                 name='primaryNumber'
                 value={contacts.primaryNumber}
@@ -82,7 +84,7 @@ function ContactEdit ({setEditPage, editPage}) {
             <div>
                 <label htmlFor="secondaryNumber">
                 Secondary Number:
-            <input
+            <TextField
                 type='text'
                 name='secondaryNumber'
                 value={contacts.secondaryNumber}
@@ -98,7 +100,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="text">
                 Text:
-            <input
+            <TextField
                 type='text'
                 name='text'
                 value={contacts.text}
@@ -115,7 +117,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="email">
                 Email:
-            <input
+            <TextField
                 type='email'
                 name='email'
                 value={contacts.email}
@@ -132,7 +134,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="type">
                 Type:
-            <input
+            <TextField
                 type='text'
                 name='type'
                 value={contacts.type}
@@ -149,7 +151,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="website">
                 Website:
-            <input
+            <TextField
                 type='text'
                 name='website'
                 value={contacts.website}
@@ -165,7 +167,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="address">
                 Address:
-            <input
+            <TextField
                 type='text'
                 name='address'
                 value={contacts.address}
@@ -182,7 +184,7 @@ function ContactEdit ({setEditPage, editPage}) {
         <div>
             <label htmlFor="notes">
                 Notes:
-            <input
+            <TextField
                 type='text'
                 name='notes'
                 value={contacts.notes}

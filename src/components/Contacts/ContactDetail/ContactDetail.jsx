@@ -36,8 +36,22 @@ function ContactDetail() {
     dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id } });
   }, []);
 
-
-
+  const handleChange = (evt) => {
+    dispatch({
+      type: 'UPDATE_ACTIVE_CONTACTS',
+      payload: {[event.target.name]: evt.target.value}
+    });
+  }
+  
+  const saveEdit = (event) => {
+    event.preventDefault()
+    dispatch ({
+        type: 'SAVE_CONTACT_CHANGES',
+        payload: contacts
+    });
+    setEditPage(!editPage)
+    // history.push(`/contacts/${contacts.id}`)
+  }
 
   //deletes entire selected job and all foreign keys associated with it after confirmation
   const deleteContact = () => {
@@ -63,7 +77,7 @@ function ContactDetail() {
     <Grid container spacing={5} sx={{marginLeft: '5px', marginRight: '5px'}}>
       <Grid item xs={4}>
           <Typography variant="h1">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
-
+    <form onSubmit={() => saveEdit()}>
       <Stack spacing={2}>
         {edit &&
           <><TextField
@@ -199,6 +213,7 @@ function ContactDetail() {
           }}
         />
       </Stack>
+      </form>
       {/* {editPage
         ? 
           <ContactEdit editPage={editPage} setEditPage={setEditPage} />
