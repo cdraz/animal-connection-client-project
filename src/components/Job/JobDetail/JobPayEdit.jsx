@@ -220,8 +220,8 @@ function JobPayEdit(prop) {
                 sx={{
                   maxWidth: 275,
                   minWidth: 275,
-                  minHeight: 350,
-                  maxHeight: 350,
+                  minHeight: 400,
+                  maxHeight: 400,
                 }}
               >
 
@@ -297,11 +297,7 @@ function JobPayEdit(prop) {
                   ></Typography>
 
                 </CardContent>
-                <FontAwesomeIcon
-                  icon={faBan}
-                  transform="grow-10 right-130 up-35"
-                  onClick={() => setEditable(false)}
-                />
+                
               </Card>
             </Item>
           </Grid>

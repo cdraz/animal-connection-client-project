@@ -49,6 +49,42 @@ function JobEditDetail() {
     dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
   }, []);
 
+//deletes entire selected job and all foreign keys associated with it after confirmation
+  const deleteJob = () => {
+    Swal.fire({
+      title: "Are you sure you want to delete job?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete Entire Job!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Job has been Deleted!", "", "success");
+        dispatch({ type: "DELETE_JOB", payload: selectedJob.id });
+        history.push("/jobs");
+      } else if (result.isDenied) {
+        Swal.fire("Job Safe", "", "info");
+      }
+    });
+  };
+
+
+    //finish job do put request to changed active to inactive
+    const finishJob = () => {
+      dispatch({ type: "FINISH_JOB", payload: id });
+    
+    };
+
+
+
+
+
+
+
+
+
   //edit job begins
   const editSelectedJob = (event) => {
     event.preventDefault();
@@ -89,39 +125,49 @@ function JobEditDetail() {
 
   return (
     <>
-      {/* edit job form begins */}
-      <IconButton onClick={() => setEditable(true)} aria-label="delete" size="large" color="primary">
-        <FontAwesomeIcon
-          className="penIcon"
-          icon={faPenToSquare}
-          flip="horizontal"
-        />
-      </IconButton>
+
+     
 
       <div variant="body2">
         {/* conditional rendering if editable button was clicked  */}
         {!editable ? (
-          <Stack>
-            {selectedJob.client}
-            <br></br>
-            {jacobsAwesomeDateFormatterVersion2(selectedJob.date)}
-            <br></br>
-            {selectedJob.jobNumber}
-            <br></br>
-            {selectedJob.notes}
-            <br></br>
-            {selectedJob.description}
+          <Stack >
+ {/* edit job form begins */}
+ <IconButton onClick={() => setEditable(true)} aria-label="delete" size="large" color="primary">
+        <FontAwesomeIcon
+          className="penIcon"
+          icon={faPenToSquare}
+          flip="horizontal"
+          
+        />
+      </IconButton>
+           
+           <h2 className="jobClient">{selectedJob.client}: {selectedJob.jobNumber}</h2> 
+           <h5 className="jobDate">{jacobsAwesomeDateFormatterVersion2(selectedJob.date)}</h5> 
+          <p className="jobDescription">{selectedJob.description}</p>  
+           <p>{selectedJob.notes}</p> 
           </Stack>
         ) : (
+          
+
+<div>
 
 
           <form onSubmit={editSelectedJob}>
-            <Stack className="Gap" spacing={1.5}>
+            <Stack spacing={1}>
+               {/* )} */}
+            <IconButton onClick={() => setEditable(false)} aria-label="delete" size="large" color="primary">
+              <FontAwesomeIcon
+                icon={faBan}
+                transform="grow-15"
+                
+              />
+            </IconButton>
             {/* client input */}
             <TextField
               type="text"
               value={newClient}
-              label="First Name"
+              label="Client Name"
               onChange={(evt) => {
                 setNewClient(evt.target.value);
               }}
@@ -172,15 +218,55 @@ function JobEditDetail() {
 
             {/* {user.id === something.user_id && ( */}
               <Button type="submit" variant="contained">Submit</Button>
-            {/* )} */}
-            <IconButton onClick={() => setEditable(false)} aria-label="delete" size="large" color="primary">
-              <FontAwesomeIcon
-                icon={faBan}
-                transform="grow-9"
-              />
-            </IconButton>
+           
             </Stack>
           </form>
+
+
+<div className="jobDetailBtns">
+           {/* Delete job button starts */}
+    <Button className="deleteJob"
+            onClick={deleteJob}
+            id="jobDelete"
+            type="button"
+            value="Delete"
+            variant="contained"
+          >
+            Delete
+          </Button>
+          {/* Delete job button ends */}
+
+
+{/* finish job button starts */}
+    {selectedJob.active ? (
+          
+            <Button className="finishJob"
+              onClick={finishJob}
+              id="jobFinish"
+              type="button"
+              value="Finish"
+              variant="contained"
+            >
+              Finish
+            </Button>
+          
+        ) : (
+          
+            <Button className="unfinishJob"
+              onClick={finishJob}
+              id="jobFinish"
+              type="button"
+              value="Finish"
+              variant="outlined"
+            >
+              Finished
+            </Button>
+         
+        )}
+        </div>
+
+        {/* finish job button ends */}
+          </div>
         )}
       </div>
       

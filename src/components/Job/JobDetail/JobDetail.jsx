@@ -39,77 +39,17 @@ function JobDetail() {
     dispatch({ type: "FETCH_SELECTED_JOB_CONTACTS", payload: id });
   }, []);
 
-  //deletes entire selected job and all foreign keys associated with it after confirmation
-  const deleteJob = () => {
-    Swal.fire({
-      title: "Are you sure you want to delete job?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete Entire Job!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Job has been Deleted!", "", "success");
-        dispatch({ type: "DELETE_JOB", payload: selectedJob.id });
-        history.push("/jobs");
-      } else if (result.isDenied) {
-        Swal.fire("Job Safe", "", "info");
-      }
-    });
-  };
-
-  //finish job do put request to changed active to inactive
-  const finishJob = () => {
-    dispatch({ type: "FINISH_JOB", payload: id });
-  
-  };
-
   return (
-    <>
-      <JobContacts />
+    
+    <Grid container spacing={5} id="AnimalDetailContainer">
+      <Grid item xs={3}>
       <JobEditDetail />
+      </Grid>
+       <Grid item xs={9}>
+      <JobContacts />
+      </Grid>
+      
       <div>
-        <br></br>
-
-        {selectedJob.active ? (
-          <Stack direction="row" spacing={2}>
-            <Button
-              onClick={finishJob}
-              id="jobFinish"
-              type="button"
-              value="Finish"
-              variant="contained"
-            >
-              Finish Job
-            </Button>
-          </Stack>
-        ) : (
-          <Stack direction="row" spacing={2}>
-            <Button
-              onClick={finishJob}
-              id="jobFinish"
-              type="button"
-              value="Finish"
-              variant="outlined"
-            >
-              Finished
-            </Button>
-          </Stack>
-        )}
-
-        <Stack direction="row" spacing={2}>
-          <Button
-            onClick={deleteJob}
-            id="jobDelete"
-            type="button"
-            value="Delete"
-            variant="contained"
-          >
-            Delete Job
-          </Button>
-        </Stack>
       </div>
       <br></br>
       <div id="jobCardContainer">
@@ -124,8 +64,10 @@ function JobDetail() {
             )}
           </Grid>
         </Box>
+        
       </div>
-    </>
+      </Grid>
+    
   );
 }
 

@@ -71,7 +71,7 @@ function JobCard({ job }) {
       <Item id="item">
         <Card
           key={job.id}
-          sx={{ maxWidth: 300, minWidth: 300, minHeight: 300 }}
+          sx={{ maxWidth: 265, minWidth: 265, minHeight: 250 }}
         >
           <CardActionArea onClick={() => handleSelectJob(job)}>
             <CardContent>
@@ -82,16 +82,15 @@ function JobCard({ job }) {
               >
                 {job.client}-{job.jobNumber}
               </Typography>
-              <Typography variant="h5" component="div">
-                {job.notes}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
-            </CardContent>
-            {job.description}
-            <CardContent>
               <Typography gutterBottom noWrap variant="h6" component="div">
                 {jacobsAwesomeDateFormatterVersion2(job.date)}
               </Typography>
+              
+              <Typography   variant="h5" component="div">
+              {job.description}
+              </Typography>
+            </CardContent>
+            <CardContent>
             </CardContent>
           </CardActionArea>
         </Card>
