@@ -1,4 +1,12 @@
-#animalSearch{
-    display: flex;
-    flex-direction: column;
+.searchBar{
+    border: 4px solid #f2b705;
+    /* padding: 10px; */
+    border-radius: 8px;
+}
+.searchForm{
+    padding: 10px;
+}
+.searchHeader{
+    background-color: #f2b705;
+    margin-bottom: 12px;
 }

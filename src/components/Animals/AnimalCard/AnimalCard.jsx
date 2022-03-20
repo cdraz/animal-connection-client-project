@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom"; //2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!
+import './AnimalCard.css';
 
 // React components
 import AnimalSummary from "../AnimalSummary/AnimalSummary";

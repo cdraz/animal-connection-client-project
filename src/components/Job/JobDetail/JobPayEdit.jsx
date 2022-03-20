@@ -97,6 +97,7 @@ function JobPayEdit(prop) {
       id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
+    setEditable(false)
   };
 
   //deletes pet from job
@@ -137,8 +138,8 @@ function JobPayEdit(prop) {
                 sx={{
                   maxWidth: 275,
                   minWidth: 275,
-                  minHeight: 350,
-                  maxHeight: 350,
+                  minHeight: 400,
+                  maxHeight: 400,
                 }}
               >
                 <CardActionArea>
@@ -176,7 +177,7 @@ function JobPayEdit(prop) {
                       <br></br>
                     </Typography>
                     <Typography variant="h6" component="div">
-                      Paid: {payDetails.paid.toString()}
+                      Paid: {payDetails.checkDate}
                       <br></br>
                       Amount: ${payDetails.checkAmount}
                     </Typography>
@@ -218,15 +219,14 @@ function JobPayEdit(prop) {
                 </IconButton>
 
                 <CardContent>
-
-
                   <form onSubmit={editSelectedJob}>
                     {/* client input */}
                     <Stack className="space" spacing={1}>
                       <TextField
+                      required
                         type="text"
                         value={newPaid}
-                        label="First Name"
+                        label="Paid"
                         onChange={(evt) => {
                           setNewPaid(evt.target.value);
                         }}
@@ -234,6 +234,7 @@ function JobPayEdit(prop) {
                       />
                       {/* check number */}
                       <TextField
+                      required
                         type="text"
                         value={newCheckNumber}
                         label="Check Number"
@@ -245,6 +246,7 @@ function JobPayEdit(prop) {
 
                       {/* check amount */}
                       <TextField
+                      required
                         type="text"
                         value={newCheckAmount}
                         label="Amount"
@@ -279,35 +281,11 @@ function JobPayEdit(prop) {
                   transform="grow-10 right-130 up-35"
                   onClick={() => setEditable(false)}
                 />
-
               </Card>
             </Item>
           </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          //   {/* {user.id === something.user_id && ( */}
-
-          //   {/* )} */}
-
-          // </form>
         )}
       </div>
-
-      {/* edit job form ends */}
     </>
   );
 }
