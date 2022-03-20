@@ -8,16 +8,16 @@ function contactForm() {
   const dispatch = useDispatch();
 
   const [contactInfo, setContactInfo] = useState({
-    firstName: "",
-    lastName: "",
-    primaryNumber: "",
-    secondaryNumber: "",
-    text: "",
-    email: "",
-    type: "",
-    website: "",
-    address: "",
-    notes: "",
+    firstName: "John",
+    lastName: "Doe",
+    primaryNumber: "612-555-5555",
+    secondaryNumber: "612-444-4444",
+    text: "Yes : No",
+    email: "jOHNDO@gmail.com",
+    type: "breed",
+    website: "johndoe.com",
+    address: "123 lane rd MN",
+    notes: "for commercial",
   });
   const createContactInfo = (event) => {
     event.preventDefault();
