@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
+import Swal from "sweetalert2";
 
 import TextField from '@mui/material/TextField';
 
@@ -17,6 +18,28 @@ function ContactEdit ({setEditPage, editPage}) {
 
     const saveEdit = (event) => {
         event.preventDefault()
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+          title: 'Contact Added to Job!',
+          timer: 1200,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
         dispatch ({
             type: 'SAVE_CONTACT_CHANGES',
             payload: contacts

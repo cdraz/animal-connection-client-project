@@ -6,7 +6,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Swal from "sweetalert2";
 import Stack from "@mui/material/Stack";
+
 
 function AnimalAddToJobButton({ animal }) {
 
@@ -27,6 +29,7 @@ function AnimalAddToJobButton({ animal }) {
 
     // Declare addToJob
     const addToJob = () => {
+
         console.log('animal is', animal);
         dispatch({
             type: 'ADD_ANIMAL_TO_JOB',
@@ -35,6 +38,31 @@ function AnimalAddToJobButton({ animal }) {
                 jobId: jobInput
             }
         });
+
+        let timerInterval
+Swal.fire({
+    icon: 'success',
+  title: 'Animal Added to Job!',
+  timer: 1200,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+
+       
     };
 
     // On component load, get active jobs

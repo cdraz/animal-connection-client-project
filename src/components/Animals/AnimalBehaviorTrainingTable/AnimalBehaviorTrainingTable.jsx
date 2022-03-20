@@ -16,6 +16,7 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import IconButton from '@mui/material/IconButton';
+import Swal from "sweetalert2";
 
 function AnimalBehaviorTrainingTable() {
 
@@ -56,6 +57,28 @@ function AnimalBehaviorTrainingTable() {
 
     // Declare updateAnimal
     const updateAnimal = () => {
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+          title: 'Animal Behavior Updated!',
+          timer: 1200,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
         console.log('in updateAnimal');
         dispatch({
             type: 'UPDATE_ANIMAL_TRAINING',

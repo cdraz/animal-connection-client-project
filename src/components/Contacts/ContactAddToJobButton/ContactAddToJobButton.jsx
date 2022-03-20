@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Swal from "sweetalert2";
 
 function ContactAddToJobButton({ contact }) {//<<<<<<<<<<<<<<<contact needs to be sent
 
@@ -26,6 +27,28 @@ function ContactAddToJobButton({ contact }) {//<<<<<<<<<<<<<<<contact needs to b
 
     // Declare addToJob
     const addToJob = () => {
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+          title: 'Contact Added to Job!',
+          timer: 1200,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
         console.log('contact is', contact);
         dispatch({
             type: 'ADD_CONTACT_TO_JOB',
