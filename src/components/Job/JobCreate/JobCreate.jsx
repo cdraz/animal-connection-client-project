@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 
+
 const JobCreate = () => {
   const dispatch = useDispatch();
   //local state to be updated and sent to saga on form submit
@@ -53,6 +54,28 @@ const JobCreate = () => {
     setNotes("");
     setDescription("");
     history.push("/jobs");
+    let timerInterval
+    Swal.fire({
+        icon: 'success',
+      title: 'Job Added!',
+      timer: 1200,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
   };
 
   return (

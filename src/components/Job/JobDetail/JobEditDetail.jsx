@@ -15,6 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
 
 import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter'
 
@@ -51,6 +52,28 @@ function JobEditDetail() {
   //edit job begins
   const editSelectedJob = (event) => {
     event.preventDefault();
+    let timerInterval
+    Swal.fire({
+        icon: 'success',
+      title: 'Job Updated!',
+      timer: 1200,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
     let editJobToSend = {
       newClient: newClient,
       newDescription: newDescription,
@@ -61,6 +84,7 @@ function JobEditDetail() {
       id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
+    setEditable(false)
   };
 
   return (

@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import IconButton from '@mui/material/IconButton';
+import Swal from "sweetalert2";
 
 function AnimalAuditionHistoryTable({ animal }) {
 
@@ -29,6 +30,28 @@ function AnimalAuditionHistoryTable({ animal }) {
             window.alert('Please input an audition date.');
             return;
         }
+        let timerInterval
+        Swal.fire({
+            icon: 'success',
+          title: 'Audition Added!',
+          timer: 1200,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
         dispatch({
             type: 'ADD_AUDITION',
             payload: {
