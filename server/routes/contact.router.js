@@ -39,19 +39,19 @@ router.delete("/", rejectUnauthenticated, (req, res) => {
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS DETAILS*******');
     let queryText = `
-    SELECT 
-        "contacts".*,
-        JSON_AGG(DISTINCT "animals".*) AS animals,
-        JSON_AGG(DISTINCT "jobs".*) AS jobs
-    FROM "contacts"
-    LEFT JOIN "animals"
-        ON "contacts"."id" = "animals"."contactsId"
-    LEFT JOIN "jobsJunction"
-        ON "jobsJunction"."animalsId" = "animals"."id"
-    LEFT JOIN "jobs"
-        ON "jobs"."id" = "jobsJunction"."jobId"
-    WHERE "contacts".id = $1
-    GROUP BY "contacts"."id";`
+        SELECT 
+            "contacts".*,
+            JSON_AGG(DISTINCT "animals".*) AS animals,
+            JSON_AGG(DISTINCT "jobs".*) AS jobs
+        FROM "contacts"
+        LEFT JOIN "animals"
+            ON "contacts"."id" = "animals"."contactsId"
+        LEFT JOIN "jobsJunction"
+            ON "jobsJunction"."animalsId" = "animals"."id"
+        LEFT JOIN "jobs"
+            ON "jobs"."id" = "jobsJunction"."jobId"
+        WHERE "contacts".id = $1
+        GROUP BY "contacts"."id";`
 
     console.log(queryText);
     pool.query(queryText, [req.params.id])

@@ -1,0 +1,25 @@
+#jobContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#animalCardsHeader{
+    display: flex;
+    align-items: center;
+}
+
+#animalCardsHeader a{
+    font-size: larger;
+    text-decoration: none;
+    margin-left: 15px;
+    background-color: #2b88d9;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+#contactDetailJobSelector{
+    width: 40%; }
+#addContactToJobSelectorAndButton{
+    display: flex; }

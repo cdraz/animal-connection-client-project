@@ -80,7 +80,6 @@ function contactForm() {
               type="text"
               name="secondaryNumber"
               value={contactInfo.secondaryNumber}
-              required
               placeholder="SecondaryNumber"
               onChange={(evt) => handleChange(evt, "secondaryNumber")}
             />
@@ -111,8 +110,6 @@ function contactForm() {
               onChange={(evt) => handleChange(evt, "email")}
             />
           </label>
-          
-         
 
           <label htmlFor="type">
             Type:
@@ -132,12 +129,10 @@ function contactForm() {
               type="text"
               name="website"
               value={contactInfo.website}
-              required
               placeholder="Website"
               onChange={(evt) => handleChange(evt, "website")}
             />
           </label>
-         
 
           <label htmlFor="address">
             Address:
@@ -157,7 +152,6 @@ function contactForm() {
               type="text"
               name="notes"
               value={contactInfo.notes}
-              required
               placeholder="Notes"
               onChange={(evt) => handleChange(evt, "notes")}
             />
