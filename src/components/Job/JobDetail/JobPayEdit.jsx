@@ -138,8 +138,8 @@ function JobPayEdit(prop) {
                 sx={{
                   maxWidth: 275,
                   minWidth: 275,
-                  minHeight: 350,
-                  maxHeight: 350,
+                  minHeight: 400,
+                  maxHeight: 400,
                 }}
               >
                 <CardActionArea>
@@ -177,7 +177,7 @@ function JobPayEdit(prop) {
                       <br></br>
                     </Typography>
                     <Typography variant="h6" component="div">
-                      Paid: {payDetails.paid.toString()}
+                      Paid: {payDetails.checkDate}
                       <br></br>
                       Amount: ${payDetails.checkAmount}
                     </Typography>
