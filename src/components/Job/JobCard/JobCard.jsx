@@ -82,16 +82,15 @@ function JobCard({ job }) {
               >
                 {job.client}-{job.jobNumber}
               </Typography>
-              <Typography variant="h5" component="div">
-                {job.notes}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
-            </CardContent>
-            {job.description}
-            <CardContent>
               <Typography gutterBottom noWrap variant="h6" component="div">
                 {jacobsAwesomeDateFormatterVersion2(job.date)}
               </Typography>
+              
+              <Typography   variant="h5" component="div">
+              {job.description}
+              </Typography>
+            </CardContent>
+            <CardContent>
             </CardContent>
           </CardActionArea>
         </Card>

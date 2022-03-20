@@ -4,3 +4,35 @@
    flex-direction: column;
    padding: 1rem;
 }
+.deleteJob{
+width: 85px;
+margin-right: 20px !important;
+margin-left: 2px !important
+}
+.deleteJob:hover{
+ background-color: red !important
+}
+.finishJob{
+   width: 85px;
+   
+}
+.finishJob:hover{
+   background-color: green !important
+}
+.unfinishJob{
+   width: 80px;
+}
+.jobDetailBtns{
+   margin-top: 5px;
+}
+.jobDate{
+   margin-top: 0px;
+   margin-bottom: 8px;
+}
+.jobClient{
+   margin-bottom: 0px;
+}
+.jobDescription{
+   margin-top: 0px; 
+   margin-bottom: 0px;
+}
