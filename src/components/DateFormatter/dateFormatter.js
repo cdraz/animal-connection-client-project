@@ -1,5 +1,4 @@
 export default function dateFormatter(date, format){
-    console.log('AAAAAAAAHHHHHHHHHHHHHHHHHH', date);
     if(date === undefined) return
     if(format === 'input') return date.replace(/^(\d{4}-0\d{2}-0\d{2}).*/, '$1')
     let formDate = date.replace(/^(\d{4})-0?(\d{1,2})-0?(\d{1,2}).*/, '$2 $3 $1').split(' ');
