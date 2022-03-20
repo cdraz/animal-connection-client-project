@@ -55,8 +55,15 @@ function AnimalDetail() {
       </Grid>
       <Grid item xs={8}>
         <Stack spacing={2}>
-          <Typography variant="h5">Work History</Typography>
-          <AnimalWorkHistoryTable animal={animal} />
+          <Grid container spacing={4}>
+            <Grid item xs={9}>
+              <Typography variant="h5">Work History</Typography>
+              <AnimalWorkHistoryTable animal={animal} />
+            </Grid>
+            <Grid item xs={3}>
+              <AnimalAddToJobButton animal={animal} />
+            </Grid>
+          </Grid>
           <AnimalAuditionHistoryTable animal={animal} />
           {
             // If animalType is dog, show behavior/training (we only track this for dogs)
@@ -64,7 +71,6 @@ function AnimalDetail() {
               <AnimalBehaviorTrainingTable animal={animal} />
             ) : null
           }
-          <AnimalAddToJobButton animal={animal} />
         </Stack>
       </Grid>
     </Grid>
