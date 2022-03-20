@@ -61,9 +61,6 @@ function ContactPage() {
         </Grid>
         <Grid item xs={2}>
           <ContactSearchBar />
-          <Typography variant="h5">
-            Add Contact
-          </Typography>
         </Grid>
         <Grid item spacing={2} xs={10}>
           <ContactTable />

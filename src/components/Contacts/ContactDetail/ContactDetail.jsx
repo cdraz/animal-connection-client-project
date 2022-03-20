@@ -54,8 +54,8 @@ function ContactDetail() {
     });
   };
   return (
-    <Grid container spacing={5} >
-      <Grid item xs={4}>
+    <Grid container spacing={5} sx={{marginLeft: '5px', marginRight: '5px'}}>
+      <Grid item xs={3}>
       {editPage
         ? 
           <ContactEdit editPage={editPage} setEditPage={setEditPage} />
@@ -83,6 +83,13 @@ function ContactDetail() {
         >
           <DeleteIcon/>
         </IconButton>
+        <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
+        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null 
+          ? selectedContact.animals.map( animal => (<AnimalCard key= {animal.id} animal={animal} />))
+          : <p>No animals on record.</p>
+        }
+
+        
         </Grid>
         <Grid item xs={8}>
 
@@ -95,15 +102,6 @@ function ContactDetail() {
           : (<p>No work history on record.</p>)
         }
       </Grid>
-      <Grid item xs={2}>
-        <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
-      </Grid>
-        <Grid item xs={10} sx={{display: 'flex'}}>
-        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null 
-          ? selectedContact.animals.map( animal => (<AnimalCard key= {animal.id} animal={animal} />))
-          : <p>No animals on record.</p>
-        }
-        </Grid>
     </Grid>
   )
 };
