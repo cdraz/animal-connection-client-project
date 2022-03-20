@@ -60,7 +60,7 @@ function AnimalDetail() {
               <Typography variant="h5">Work History</Typography>
               <AnimalWorkHistoryTable animal={animal} />
             </Grid>
-            <Grid item xs={3  }>
+            <Grid item xs={3}>
               <AnimalAddToJobButton animal={animal} />
             </Grid>
           </Grid>
