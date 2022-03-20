@@ -39,7 +39,7 @@ function AnimalWorkHistoryTable({ animal }) {
                                     {job.client}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {job.number}
+                                    {job.number ? job.number : job.jobNumber} {/* Hacky fix for stolen component */}
                                 </TableCell>
                                 <TableCell align="left">
                                     {job.description}

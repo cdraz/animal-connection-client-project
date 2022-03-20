@@ -15,9 +15,11 @@ import Grid from "@mui/material/Grid";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import './ContactDetail.css'
+import AnimalWorkHistoryTable from '../../Animals/AnimalWorkHistoryTable/AnimalWorkHistoryTable'
 
 
 function ContactDetail() {
@@ -25,7 +27,7 @@ function ContactDetail() {
   const history = useHistory();
   const selectedContact = useSelector((store) => store.contacts);
   const [edit, setEdit] = useState(false);
-  const [editPage, setEditPage] = useState(false);
+  console.log(selectedContact);
 
   // Set id from URL parameters
   const { id } = useParams();
@@ -60,139 +62,143 @@ function ContactDetail() {
   return (
     <Grid container spacing={5} sx={{marginLeft: '5px', marginRight: '5px'}}>
       <Grid item xs={4}>
+          <Typography variant="h1">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
 
-      <TextField
-        name='firstName'
-        label="First Name"
-        value={selectedContact.firstName}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='lastName'
-        label="Last Name"
-        value={selectedContact.lastName}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='primaryNumber'
-        label="Primary Number"
-        value={selectedContact.primaryNumber}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='secondaryNumber'
-        label="Secondary Number"
-        value={selectedContact.secondaryNumber}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='text'
-        label="Textable"
-        value={selectedContact.text}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='email'
-        label="Email"
-        value={selectedContact.email}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='address'
-        label="Address"
-        value={selectedContact.address}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='type'
-        label="Type"
-        value={selectedContact.type}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='website'
-        label="Website"
-        value={selectedContact.website}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='company'
-        label="Company"
-        value={selectedContact.company}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
-      <TextField
-        name='notes'
-        label="Notes"
-        value={selectedContact.notes}
-        onChange={event => handleChange(event)}
-        InputProps={{
-            readOnly: !edit,
-        }}
-        InputLabelProps={{
-            shrink: true
-        }}
-      />
+      <Stack spacing={2}>
+        {edit &&
+          <><TextField
+          name='firstName'
+          label="First Name"
+          value={selectedContact.firstName}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='lastName'
+          label="Last Name"
+          value={selectedContact.lastName}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        /></>}
+        <TextField
+          name='primaryNumber'
+          label="Primary Number"
+          value={selectedContact.primaryNumber}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='secondaryNumber'
+          label="Secondary Number"
+          value={selectedContact.secondaryNumber}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='text'
+          label="Textable"
+          value={selectedContact.text}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='email'
+          label="Email"
+          value={selectedContact.email}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='address'
+          label="Address"
+          value={selectedContact.address}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='type'
+          label="Type"
+          value={selectedContact.type}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='website'
+          label="Website"
+          value={selectedContact.website}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='company'
+          label="Company"
+          value={selectedContact.company}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='notes'
+          label="Notes"
+          value={selectedContact.notes}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+      </Stack>
       {/* {editPage
         ? 
           <ContactEdit editPage={editPage} setEditPage={setEditPage} />
@@ -216,9 +222,9 @@ function ContactDetail() {
           <Typography>Notes:</Typography>
           <Typography>{`${selectedContact.notes}`}</Typography>
         </>} */}
-        
+
         <IconButton 
-          onClick={() => setEditPage(!editPage)}
+          onClick={() => setEdit(!edit)}
           aria-label="delete" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
         >
           <EditSharpIcon />
@@ -229,6 +235,22 @@ function ContactDetail() {
         >
           <DeleteIcon/>
         </IconButton>
+
+        
+        </Grid>
+        <Grid item xs={6}>
+        <div>
+        <h2>WORK HISTORY</h2>
+        <ContactAddToJobButton contact={selectedContact} id="contactDetailJobSelector"/>
+        </div>
+        <AnimalWorkHistoryTable animal={selectedContact}/> {/* Animal is the name of the prop inside of this component I stole */}
+        {/* <div id="jobContainer">
+          {Array.isArray(selectedContact.jobs)
+            //not sure why im getting a null in array
+            ? (selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)) 
+            : (<p>No work history on record.</p>)
+          }
+        </div> */}
         <div>
           <div id="animalCardsHeader">
             <h2>ANIMALS</h2>
@@ -240,19 +262,6 @@ function ContactDetail() {
                 : <p>No animals on record.</p>
               }
             </div>
-        </div>
-
-        
-        </Grid>
-        <Grid item xs={6}>
-        <h2>WORK HISTORY</h2>
-        <ContactAddToJobButton contact={selectedContact} id="contactDetailJobSelector"/>
-        <div id="jobContainer">
-          {Array.isArray(selectedContact.jobs)
-            //not sure why im getting a null in array
-            ? (selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)) 
-            : (<p>No work history on record.</p>)
-          }
         </div>
       </Grid>
     </Grid>
