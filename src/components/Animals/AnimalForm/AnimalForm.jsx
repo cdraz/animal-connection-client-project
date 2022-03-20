@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from "react-router-dom"; 
 
 
@@ -12,21 +12,31 @@ import Stack from '@mui/material/Stack';
 import Grid from "@mui/material/Grid";
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
-// import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
-// import DateAdapter from '@mui/lab/AdapterMoment';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Autocomplete from '@mui/material/Autocomplete';
+
+//master list of dog breeds
+import dogBreeds from '../DogBreedList';
 
 
 function AnimalForm() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
+    const types = (useSelector(store => store.animalTypes))
+    const options = dogBreeds;
+    // Get animal types from server on component load
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_ANIMAL_TYPES'
+        });
+    }, []);
+    
 
     const [selectedFile, setSelectedFile] = useState(null);
-  
+
     //Event handlers
     const handleFileSelect = (event) => {
-      setSelectedFile(event.target.files[0]);
+        setSelectedFile(event.target.files[0]);
     };
 
     const [newAnimal, setNewAnimal] = useState({
@@ -89,11 +99,11 @@ function AnimalForm() {
     for (let key in newAnimal){
         formData.append(key, newAnimal[key])
     }
-     formData.append("selectedFile", selectedFile);
+    formData.append("selectedFile", selectedFile);
 
-  let imageDataToSend = {
-      formData: formData,
-      id: {id},
+    let imageDataToSend = {
+        formData: formData,
+        id: {id},
     };
         
         dispatch({
@@ -119,13 +129,13 @@ function AnimalForm() {
                         size="large"
                         sx={{ margin: 'auto' }}
                     />
-                     <input
-                     required
-            type="file"
-            className="form-control-file"
-            name="uploaded_file"
-            onChange={handleFileSelect}
-          />
+                    <TextField
+                        required
+                        type="file"
+                        className="form-control-file"
+                        name="uploaded_file"
+                        onChange={handleFileSelect}
+                    />
                     <TextField
                         InputLabelProps={{
                             shrink: true,
@@ -136,7 +146,7 @@ function AnimalForm() {
                         label="Animal Name"
                         onChange={event => handleChange(event)}
                     />
-                    <TextField
+                    {/* <TextField
                         InputLabelProps={{
                             shrink: true,
                         }}
@@ -145,10 +155,26 @@ function AnimalForm() {
                         id="animal-type-input"
                         label="Animal Type"
                         onChange={event => handleChange(event)}
+                    /> */}
+                    <Autocomplete
+                        name='type'
+                        options={types}
+                        getOptionLabel={(option) => option.type}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                        filterSelectedOptions 
+                        onChange={(evt, opt) => {
+                            setNewAnimal({...newAnimal, animalType: opt.id});
+                        }}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Animal Type"
+                                placeholder="Types"
+                            />
+                        )}
                     />
                     {/* Show other animal type detail if type is other */}
-                    {newAnimal.animalType === '1' &&
-                        <>
+                    {newAnimal.animalType === 13 &&
                         <TextField
                         InputLabelProps={{
                             shrink: true,
@@ -158,7 +184,8 @@ function AnimalForm() {
                             label="Other Type Description"
                             onChange={event => handleChange(event)}
                         />
-                        <TextField
+                    }
+                        {/* <TextField
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -166,7 +193,34 @@ function AnimalForm() {
                             id="animal-breed-input"
                             label="Breed"
                             onChange={event => handleChange(event)}
-                        />
+                        /> */}
+                    {newAnimal.animalType === 1 ?
+                        <Autocomplete
+                                name='breed'
+                                options={options}
+                                getOptionLabel={(option) => option}
+                                filterSelectedOptions
+                                onChange={(evt, opt) => {
+                                    setNewAnimal({...newAnimal, breed: opt.toLowerCase()});
+                                    console.log(qFilter);
+                                }}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        label="Breed"
+                                        placeholder="Breeds"
+                                    />
+                                )}
+                            />
+                            : <TextField 
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onChange={(evt) => setNewAnimal({...newAnimal, breed: evt.target.value})} 
+                                type="text" label='Breed'
+                            />}
+                    {newAnimal.animalType === 1 &&
+                        <>
                         <TextField
                             InputLabelProps={{
                                 shrink: true,
@@ -266,7 +320,7 @@ function AnimalForm() {
                 </Stack>
             </Paper>
 
-            {newAnimal.animalType === "1" &&
+            {newAnimal.animalType === 1 &&
             <>
             <Paper>
                 <Grid container spacing={0}>

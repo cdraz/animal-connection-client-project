@@ -18,7 +18,7 @@ function AnimalWorkHistoryTable({ animal }) {
     const jobs = animal.jobs;
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} id="workHistoryContainer">
             <Table aria-label="work history table">
                 <TableHead>
                     <TableRow>

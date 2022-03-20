@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 // MUI imports
-import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import EditSharpIcon from '@mui/icons-material/EditSharp';
+import IconButton from '@mui/material/IconButton';
 
 function AnimalAuditionHistoryTable({ animal }) {
 
@@ -50,16 +52,14 @@ function AnimalAuditionHistoryTable({ animal }) {
 
     return (
         <>
-            <div style={{ display: 'inline-flex' }}>
+            <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                 <Typography variant="h5">
                     Audition History
                 </Typography>
                 {!edit &&
-                    <Button
-                        onClick={() => setEdit(!edit)}
-                    >
-                        Edit
-                    </Button>
+                    <IconButton onClick={() => setEdit(!edit)} aria-label="edit" size="medium">
+                        <EditSharpIcon />
+                    </IconButton>
                 }
                 {edit &&
                     <>
@@ -95,7 +95,7 @@ function AnimalAuditionHistoryTable({ animal }) {
                     </>
                 }
 
-            </div>
+            </Stack>
             <Stack direction="row" spacing={1}>
                 {auditions && auditions[0] != null ? auditions.map(audition => (
                     <Chip key={audition.id} label={audition.date} onDelete={edit ? () => handleDelete(audition.id, audition.animalsId) : null} />
