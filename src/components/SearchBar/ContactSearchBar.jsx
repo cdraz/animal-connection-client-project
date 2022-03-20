@@ -4,6 +4,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import Typography from "@mui/material/Typography";
 
 
 
@@ -22,9 +23,12 @@ function ContactSearchBar() {
     };
 
     return (
-        <div  className="container">
-            <form onSubmit={(evt) => filterContacts(evt)}>
-            <FormControl id="animalSearch" >
+        <div  className="searchBar">
+        <Typography className="searchHeader" variant="h5" sx={{marginBottom: '30px'}}>
+            Search Contacts
+        </Typography>
+            <form onSubmit={(evt) => filterContacts(evt)} className="searchForm">
+            <FormControl>
                 <Stack spacing={2}>
                     <TextField 
                         InputLabelProps={{

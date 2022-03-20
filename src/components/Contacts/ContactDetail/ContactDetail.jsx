@@ -11,8 +11,10 @@ import Swal from "sweetalert2";
 
 
 import EditSharpIcon from '@mui/icons-material/EditSharp';
+import Grid from "@mui/material/Grid";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Typography from '@mui/material/Typography';
 
 
 function ContactDetail() {
@@ -52,55 +54,57 @@ function ContactDetail() {
     });
   };
   return (
-    <>
-      <ContactAddToJobButton contact={selectedContact} />
+    <Grid container spacing={5} >
+      <Grid item xs={4}>
       {editPage
-        ? <ContactEdit editPage={editPage} setEditPage={setEditPage} />
-        // ?<form>
-        //     <input placeholder="First Name" value={editContact.firstName}></input>
-        //     <input placeholder="Last Name" value={editContact.lastName}></input>
-        //     <input placeholder="Primary Number" value={editContact.primaryNumber}></input>
-        //     <input placeholder="Secondary Number" value={contacts.secondaryNumber}></input>
-        //     <input placeholder="Text?" value={editContact.text}></input>
-        //     <input placeholder="Email" value={editContact.email}></input>
-        //     <input placeholder="Type" value={editContact.type}></input>
-        //     <input placeholder="Website" value={editContact.website}></input>
-        //     <input placeholder="Address" value={editContact.address}></input>
-        //     <input placeholder="Notes" value={editContact.notes}></input>
-        //     <button type="submit">Submit</button>
-        // </form>
+        ? 
+          <ContactEdit editPage={editPage} setEditPage={setEditPage} />
         : <>
-          <p>Type: {`${selectedContact.type}`}</p>
-          <p>Name: {`${selectedContact.firstName} ${selectedContact.lastName}`}</p>
-          <p>Number: {`${selectedContact.primaryNumber} ${selectedContact.secondaryNumber}`}</p>
-          <p>Text: {`${selectedContact.text}`}</p>
-          <p>Email: {`${selectedContact.email}`}</p>
-          <p>Type: {`${selectedContact.type}`}</p>
-          <p>Website: {`${selectedContact.website}`}</p>
-          <p>Address: {`${selectedContact.address}`}</p>
-          <p>Notes: {`${selectedContact.notes}`}</p>
+          <Typography variant="h3">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
+          <Typography>Number: {`${selectedContact.primaryNumber} ${selectedContact.secondaryNumber}`}</Typography>
+          <Typography>Text: {`${selectedContact.text}`}</Typography>
+          <Typography>Email: {`${selectedContact.email}`}</Typography>
+          <Typography>Address: {`${selectedContact.address}`}</Typography>
+          <Typography>Type: {`${selectedContact.type}`}</Typography>
+          <Typography>Website: {`${selectedContact.website}`}</Typography>
+          <Typography>Company: {`${selectedContact.company}`}</Typography>
+          <Typography>Notes: {`${selectedContact.notes}`}</Typography>
         </>}
         
-        <IconButton  onClick={() => setEditPage(!editPage)} aria-label="delete" size="large" color="primary">
+        <IconButton 
+          onClick={() => setEditPage(!editPage)}
+          aria-label="delete" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
+        >
           <EditSharpIcon />
         </IconButton>
-
-        <IconButton onClick={deleteContact} aria-label="delete" size="large" color="primary">
+        <IconButton
+          onClick={() => deleteContact()}
+          aria-label="delete" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
+        >
           <DeleteIcon/>
         </IconButton>
+        </Grid>
+        <Grid item xs={8}>
+
         <h2>WORK HISTORY</h2>
-            {Array.isArray(selectedContact.jobs) ? (
-                //not sure why im getting a null in array
-                selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)
-            ) : (
-                <p>Loading...</p>
-            )}
+        <ContactAddToJobButton contact={selectedContact}/>
+
+        {Array.isArray(selectedContact.jobs)
+          //not sure why im getting a null in array
+          ? (selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)) 
+          : (<p>No work history on record.</p>)
+        }
+      </Grid>
+      <Grid item xs={2}>
         <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
-        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null ?
-            selectedContact.animals.map( animal => (
-            <AnimalCard key= {animal.id} animal={animal} />
-        )) : <p>No animals on record.</p>}
-    </>
+      </Grid>
+        <Grid item xs={10} sx={{display: 'flex'}}>
+        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null 
+          ? selectedContact.animals.map( animal => (<AnimalCard key= {animal.id} animal={animal} />))
+          : <p>No animals on record.</p>
+        }
+        </Grid>
+    </Grid>
   )
 };
 

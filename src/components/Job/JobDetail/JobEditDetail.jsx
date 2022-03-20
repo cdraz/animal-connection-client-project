@@ -91,7 +91,6 @@ function JobEditDetail() {
         ) : (
 
 
-          
           <form onSubmit={editSelectedJob}>
             <Stack className="Gap" spacing={1.5}>
             {/* client input */}
@@ -150,13 +149,13 @@ function JobEditDetail() {
             {/* {user.id === something.user_id && ( */}
               <Button type="submit" variant="contained">Submit</Button>
             {/* )} */}
-            <FontAwesomeIcon
-              icon={faBan}
-              transform="grow-9 right-0 down-4"
-              onClick={() => setEditable(false)}
-            />
-             </Stack>
-             
+            <IconButton onClick={() => setEditable(false)} aria-label="delete" size="large" color="primary">
+              <FontAwesomeIcon
+                icon={faBan}
+                transform="grow-9"
+              />
+            </IconButton>
+            </Stack>
           </form>
         )}
       </div>

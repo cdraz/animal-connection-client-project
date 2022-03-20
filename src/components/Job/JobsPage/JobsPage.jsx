@@ -46,12 +46,10 @@ function JobPage() {
   return (
     <div id="jobsPage">
       <Grid container spacing={8}>
-        <Grid item xs={12} display="inline-flex">
+        <Grid item xs={12} >
           <Typography variant="h1">
             Jobs
           </Typography>
-        </Grid>
-        <Grid item xs={3}>
           <Button
             variant="contained"
             size="small"
@@ -61,6 +59,8 @@ function JobPage() {
           >
             Add Job
           </Button>
+        </Grid>
+        <Grid item xs={3}>
           <JobSearchBar />
         </Grid>
         {/* <div id="jobCardContainer"> */}
