@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // MUI imports
 import Button from '@mui/material/Button';
@@ -17,10 +17,11 @@ import Stack from '@mui/material/Stack';
 import EditSharpIcon from '@mui/icons-material/EditSharp';
 import IconButton from '@mui/material/IconButton';
 
-function AnimalBehaviorTrainingTable({ animal }) {
+function AnimalBehaviorTrainingTable() {
 
-    // Dispatch hook
+    // Dispatch hook, store access
     const dispatch = useDispatch();
+    const animal = useSelector(store => store.selectedAnimal);
 
     // Set state variables for the inputs
     // const [sitOnLeash, setSitOnLeash] = useState(animal.sitOnLeash);
