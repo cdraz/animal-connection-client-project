@@ -82,8 +82,8 @@ const JobCreate = () => {
     setClient("Target");
     setJobNumber("AC-064587");
     setJobDate("0332-10-00");
-    setNotes("Shampoo Commercial");
-    setDescription("Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger.");
+    setNotes("Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger.");
+    setDescription("Shampoo Commercial");
   }
 
   return (
@@ -95,6 +95,7 @@ const JobCreate = () => {
 
           <input
             type="date"
+            required
             value={jobDate}
             onChange={(evt) => setJobDate(evt.target.value)}
             placeholder="Date"
