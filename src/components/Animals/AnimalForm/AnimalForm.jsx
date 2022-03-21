@@ -209,7 +209,6 @@ function AnimalForm() {
                                 filterSelectedOptions
                                 onChange={(evt, opt) => {
                                     setNewAnimal({...newAnimal, breed: opt.toLowerCase()});
-                                    console.log(qFilter);
                                 }}
                                 renderInput={(params) => (
                                     <TextField
