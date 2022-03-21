@@ -4,6 +4,12 @@ import { useParams, useHistory } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+
+import './ContactForm.css'
+
 function contactForm() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -59,11 +65,10 @@ function contactForm() {
 
   return (
     <>
-      <form onSubmit={createContactInfo}>
-        <Stack className= "contactStack"spacing={2}>
-          <label htmlFor="firstName">
-            First Name:
-            <input
+    <Typography variant="h2">Add Contact</Typography>
+      <form id="contactFormModal" onSubmit={createContactInfo}>
+            <TextField
+              label="First Name"
               type="text"
               name="firstName"
               value={contactInfo.firstName}
@@ -71,11 +76,9 @@ function contactForm() {
               placeholder="First Name"
               onChange={(evt) => handleChange(evt, "firstName")}
             />
-          </label>
 
-          <label htmlFor="lastName">
-            Last Name:
-            <input
+            <TextField
+              label="Last Name"
               type="text"
               name="lastName"
               value={contactInfo.lastName}
@@ -83,11 +86,9 @@ function contactForm() {
               placeholder="Last Name"
               onChange={(evt) => handleChange(evt, "lastName")}
             />
-          </label>
 
-          <label htmlFor="primaryNumber">
-            Primary Number:
-            <input
+            <TextField
+              label="Primary Number"
               type="text"
               name="primaryNumber"
               value={contactInfo.primaryNumber}
@@ -95,22 +96,18 @@ function contactForm() {
               placeholder="Primary Number"
               onChange={(evt) => handleChange(evt, "primaryNumber")}
             />
-          </label>
 
-          <label htmlFor="secondaryNumber">
-            Secondary Number:
-            <input
+            <TextField
+              label="Secondary Number"
               type="text"
               name="secondaryNumber"
               value={contactInfo.secondaryNumber}
               placeholder="SecondaryNumber"
               onChange={(evt) => handleChange(evt, "secondaryNumber")}
             />
-          </label>
 
-          <label htmlFor="text">
-            Text:
-            <input
+            <TextField
+              label="Textable"
               type="text"
               name="text"
               value={contactInfo.text}
@@ -118,13 +115,9 @@ function contactForm() {
               placeholder="Text"
               onChange={(evt) => handleChange(evt, "text")}
             />
-          </label>
-          </Stack>
-          <Stack className= "contactStack"spacing={2}>
 
-          <label htmlFor="email">
-            Email:
-            <input
+            <TextField
+              label="Email"
               type="email"
               name="email"
               value={contactInfo.email}
@@ -132,11 +125,9 @@ function contactForm() {
               placeholder="Email"
               onChange={(evt) => handleChange(evt, "email")}
             />
-          </label>
 
-          <label htmlFor="type">
-            Type:
-            <input
+            <TextField
+              label="Type"
               type="text"
               name="type"
               value={contactInfo.type}
@@ -144,22 +135,18 @@ function contactForm() {
               placeholder="Type"
               onChange={(evt) => handleChange(evt, "type")}
             />
-          </label>
 
-          <label htmlFor="website">
-            Website:
-            <input
+            <TextField
+              label="Website"
               type="text"
               name="website"
               value={contactInfo.website}
               placeholder="Website"
               onChange={(evt) => handleChange(evt, "website")}
             />
-          </label>
 
-          <label htmlFor="address">
-            Address:
-            <input
+            <TextField
+              label="Address"
               type="text"
               name="address"
               value={contactInfo.address}
@@ -167,21 +154,17 @@ function contactForm() {
               placeholder="Address"
               onChange={(evt) => handleChange(evt, "address")}
             />
-          </label>
 
-          <label htmlFor="notes">
-            Notes:
-            <input
+            <TextField
+              label="Notes"
               type="text"
               name="notes"
               value={contactInfo.notes}
               placeholder="Notes"
               onChange={(evt) => handleChange(evt, "notes")}
             />
-          </label>
 
-          <button type="submit">Enter</button>
-        </Stack>
+          <Button color="primary" type="submit">Enter</Button>
       </form>
     </>
   );

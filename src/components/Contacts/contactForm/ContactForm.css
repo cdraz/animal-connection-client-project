@@ -1,0 +1,4 @@
+#contactFormModal{
+    display: flex;
+    flex-direction: column;
+}
