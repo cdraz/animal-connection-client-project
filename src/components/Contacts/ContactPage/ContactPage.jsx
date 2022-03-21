@@ -32,7 +32,7 @@ function ContactPage() {
     bgcolor: "background.paper",
     boxShadow: 24,
     width: "40%",
-    height: "70%",
+    height: "80%",
     p: 4,
     overflow: "scroll",
     padding: 3,
@@ -69,13 +69,7 @@ function ContactPage() {
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
-          <Grid container spacing={5}>
-            <Grid item xs={4}>
-              <Stack spacing={2}>
-                <ContactForm />
-              </Stack>
-            </Grid>
-          </Grid>
+          <ContactForm />
         </Box>
       </Modal>
     </div>
