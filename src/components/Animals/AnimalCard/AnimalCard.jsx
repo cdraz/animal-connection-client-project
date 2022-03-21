@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom"; //2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!
-import './AnimalCard.css';
+import "./AnimalCard.css";
 
 // React components
 import AnimalSummary from "../AnimalSummary/AnimalSummary";
@@ -34,15 +34,6 @@ function AnimalCard({ animal }) {
     setOpen(false);
   };
 
-  //MUI
-  // const Item = styled(Paper)(({ theme }) => ({
-  //   ...theme.typography.body2,
-  //   padding: theme.spacing(1),
-  //   textAlign: "center",
-  //   color: theme.palette.text.secondary,
-  // }));
-  //end MUI
-
   // Modal style setup
   const style = {
     position: "absolute",
@@ -61,31 +52,39 @@ function AnimalCard({ animal }) {
   return (
     <Grid>
       {/* <Item id="item"> */}
-        <Card className="animalCard" key={animal.id} sx={{
-                  maxWidth: 200,
-                  minWidth: 200,
-                  minHeight: 250,
-                  maxHeight: 250,
+      <Card
+        className="animalCard"
+        key={animal.id}
+        sx={{
+          maxWidth: 200,
+          minWidth: 200,
+          minHeight: 250,
+          maxHeight: 250,
 
-                  margin: 2
-                }}>
-          {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
-          <Link to={`/animals/${animal.id}`} style={{ textDecoration: 'none', color: '#000'}}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="140"
-                image={animal.image}
-                alt={animal.name}
-              />
-              <CardContent>
-                <Typography gutterBottom noWrap variant="h6" component="div">
-                  {animal.name} <br></br>{animal.firstName} {animal.lastName}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Link>
-        </Card>
+          margin: 2,
+        }}
+      >
+        {/* 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<!!!!!! */}
+        <Link
+          to={`/animals/${animal.id}`}
+          style={{ textDecoration: "none", color: "#000" }}
+        >
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="140"
+              image={animal.image}
+              alt={animal.name}
+            />
+            <CardContent>
+              <Typography gutterBottom noWrap variant="h6" component="div">
+                {animal.name} <br></br>
+                {animal.firstName} {animal.lastName}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Link>
+      </Card>
       {/* </Item> */}
     </Grid>
   );

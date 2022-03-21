@@ -4,15 +4,15 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobCreate from "../JobCreate/JobCreate";
 import { useParams, Link } from "react-router-dom";
-import TextField from '@mui/material/TextField';
-import './JobPayEdit.css';
+import TextField from "@mui/material/TextField";
+import "./JobPayEdit.css";
 
 // React components
 import { useHistory } from "react-router-dom";
 
 //MUI
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -33,8 +33,7 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Swal from "sweetalert2";
 
-import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
-
+import jacobsAwesomeDateFormatterVersion2 from "../../DateFormatter/dateFormatter";
 
 //MUI
 const Item = styled(Paper)(({ theme }) => ({
@@ -76,40 +75,30 @@ function JobPayEdit(prop) {
   );
   const [newCheckDate, setNewCheckDate] = useState(payDetails.checkDate);
 
-  useEffect(() => {
-    console.log("selected job is", payDetails.checkDate);
-    console.log("selected job  DETAILS is", selectedJobDetails);
-    console.log("this is what jobs is", jobs);
-    //getting all of selectedJobDetails that is used in the job detail cards
-    // dispatch({ type: "FETCH_JOB_DETAILS", payload: selectedJob.id });
-  }, []);
-
-
-
   //edit job begins
   const editSelectedJob = (event) => {
-    let timerInterval
+    let timerInterval;
     Swal.fire({
-        icon: 'success',
-      title: 'Job Pay Updated!',
+      icon: "success",
+      title: "Job Pay Updated!",
       timer: 1200,
       timerProgressBar: true,
       didOpen: () => {
-        Swal.showLoading()
-        const b = Swal.getHtmlContainer().querySelector('b')
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
         timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft()
-        }, 100)
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
       },
       willClose: () => {
-        clearInterval(timerInterval)
-      }
+        clearInterval(timerInterval);
+      },
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        console.log("I was closed by the timer");
       }
-    })
+    });
     event.preventDefault();
     let editJobPayToSend = {
       newPaid: newPaid,
@@ -120,7 +109,7 @@ function JobPayEdit(prop) {
       id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB_PAY", payload: editJobPayToSend });
-    setEditable(false)
+    setEditable(false);
   };
 
   //deletes pet from job
@@ -136,13 +125,13 @@ function JobPayEdit(prop) {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete Entire Job!",
+      confirmButtonText: "Yes, delete pet from Job!",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire("Job has been Deleted!", "", "success");
         dispatch({ type: "DELETE_JOB_PET", payload: petToDelete });
       } else if (result.isDenied) {
-        Swal.fire("Job Safe", "", "info");
+        Swal.fire("Canceled", "", "info");
       }
     });
   };
@@ -166,7 +155,12 @@ function JobPayEdit(prop) {
                 }}
               >
                 <CardActionArea>
-                  <IconButton onClick={() => setEditable(true)}  aria-label="delete" size="large" color="primary">
+                  <IconButton
+                    onClick={() => setEditable(true)}
+                    aria-label="delete"
+                    size="large"
+                    color="primary"
+                  >
                     <FontAwesomeIcon
                       className="penIcon"
                       icon={faPenToSquare}
@@ -174,7 +168,12 @@ function JobPayEdit(prop) {
                       // transform="grow-9 left-140 down-20"
                     />
                   </IconButton>
-                  <IconButton onClick={() => deleteJobPet()} aria-label="delete" size="large" color="primary">
+                  <IconButton
+                    onClick={() => deleteJobPet()}
+                    aria-label="delete"
+                    size="large"
+                    color="primary"
+                  >
                     <FontAwesomeIcon
                       className="faTrash"
                       icon={faTrash}
@@ -200,7 +199,8 @@ function JobPayEdit(prop) {
                       <br></br>
                     </Typography>
                     <Typography variant="h6" component="div">
-                      Paid: {jacobsAwesomeDateFormatterVersion2(payDetails.checkDate)}
+                      Paid:{" "}
+                      {jacobsAwesomeDateFormatterVersion2(payDetails.checkDate)}
                       <br></br>
                       Amount: ${payDetails.checkAmount}
                     </Typography>
@@ -214,7 +214,6 @@ function JobPayEdit(prop) {
             </Item>
           </Grid>
         ) : (
-
           <Grid>
             <Item id="item">
               <Card
@@ -226,14 +225,21 @@ function JobPayEdit(prop) {
                   maxHeight: 400,
                 }}
               >
-
-                <IconButton onClick={() => setEditable(false)} aria-label="delete" size="large" color="primary">
-                  <FontAwesomeIcon
-                    icon={faBan}
-                  />
+                <IconButton
+                  onClick={() => setEditable(false)}
+                  aria-label="delete"
+                  size="large"
+                  color="primary"
+                >
+                  <FontAwesomeIcon icon={faBan} />
                 </IconButton>
 
-                <IconButton onClick={deleteJobPet} aria-label="delete" size="large" color="primary">
+                <IconButton
+                  onClick={deleteJobPet}
+                  aria-label="delete"
+                  size="large"
+                  color="primary"
+                >
                   <FontAwesomeIcon
                     className="faTrash"
                     icon={faTrash}
@@ -246,60 +252,57 @@ function JobPayEdit(prop) {
                     {/* client input */}
                     <Stack className="space" spacing={1}>
                       <TextField
-                      required
+                        required
                         type="text"
                         value={newPaid}
                         label="Paid"
                         onChange={(evt) => {
                           setNewPaid(evt.target.value);
                         }}
-
                       />
                       {/* check number */}
                       <TextField
-                      required
+                        required
                         type="text"
                         value={newCheckNumber}
                         label="Check Number"
                         onChange={(evt) => {
                           setNewCheckNumber(evt.target.value);
                         }}
-
                       />
 
                       {/* check amount */}
                       <TextField
-                      required
+                        required
                         type="text"
                         value={newCheckAmount}
                         label="Amount"
                         onChange={(evt) => {
                           setNewCheckAmount(evt.target.value);
                         }}
-
                       />
                       {/* newDate */}
                       <TextField
                         type="date"
-                        value={jacobsAwesomeDateFormatterVersion2(newCheckDate, 'input')}
+                        value={jacobsAwesomeDateFormatterVersion2(
+                          newCheckDate,
+                          "input"
+                        )}
                         onChange={(evt) => {
                           setNewCheckDate(evt.target.value);
                         }}
-
                       />
-                      <Button type="submit" variant="contained">Submit</Button>
-
+                      <Button type="submit" variant="contained">
+                        Submit
+                      </Button>
                     </Stack>
                   </form>
-
 
                   <Typography
                     sx={{ mb: 1.5 }}
                     color="text.secondary"
                   ></Typography>
-
                 </CardContent>
-                
               </Card>
             </Item>
           </Grid>

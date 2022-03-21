@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 
-
-import './ContactForm.css'
+import "./ContactForm.css";
 
 function contactForm() {
   const history = useHistory();
@@ -38,34 +37,33 @@ function contactForm() {
     });
 
     history.push("/contacts");
-    let timerInterval
+    let timerInterval;
     Swal.fire({
-      icon: 'success',
-      title: 'Contact Added!',
+      icon: "success",
+      title: "Contact Added!",
       timer: 1200,
       timerProgressBar: true,
       didOpen: () => {
-        Swal.showLoading()
-        const b = Swal.getHtmlContainer().querySelector('b')
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
         timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft()
-        }, 100)
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
       },
       willClose: () => {
-        clearInterval(timerInterval)
-      }
+        clearInterval(timerInterval);
+      },
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        console.log("I was closed by the timer");
       }
-    })
+    });
   };
 
   const handleChange = (evt, property) => {
     setContactInfo({ ...contactInfo, [property]: evt.target.value });
   };
-
 
   const autoContact = () => {
     setContactInfo({
@@ -78,113 +76,112 @@ function contactForm() {
       type: "Pet Owner",
       website: "http://AlaskanMalumute.meetup.com",
       address: "123 Main street NE Minneapolis MN",
-      notes: "Met Diane at the Alaskan Malamute meet up and her puppy was very well trained and calm",
+      notes:
+        "Met Diane at the Alaskan Malamute meet up and her puppy was very well trained and calm",
     });
-  }
-
-
+  };
 
   return (
     <>
-    <Typography onClick={autoContact} variant="h2">Add Contact</Typography>
+      <Typography onClick={autoContact} variant="h2">
+        Add Contact
+      </Typography>
       <form id="contactFormModal" onSubmit={createContactInfo}>
-            <TextField
-              label="First Name"
-              type="text"
-              name="firstName"
-              value={contactInfo.firstName}
-              required
-              placeholder="First Name"
-              onChange={(evt) => handleChange(evt, "firstName")}
-            />
+        <TextField
+          label="First Name"
+          type="text"
+          name="firstName"
+          value={contactInfo.firstName}
+          required
+          placeholder="First Name"
+          onChange={(evt) => handleChange(evt, "firstName")}
+        />
 
-            <TextField
-              label="Last Name"
-              type="text"
-              name="lastName"
-              value={contactInfo.lastName}
-              required
-              placeholder="Last Name"
-              onChange={(evt) => handleChange(evt, "lastName")}
-            />
+        <TextField
+          label="Last Name"
+          type="text"
+          name="lastName"
+          value={contactInfo.lastName}
+          required
+          placeholder="Last Name"
+          onChange={(evt) => handleChange(evt, "lastName")}
+        />
 
-            <TextField
-              label="Primary Number"
-              type="text"
-              name="primaryNumber"
-              value={contactInfo.primaryNumber}
-              required
-              placeholder="Primary Number"
-              onChange={(evt) => handleChange(evt, "primaryNumber")}
-            />
+        <TextField
+          label="Primary Number"
+          type="text"
+          name="primaryNumber"
+          value={contactInfo.primaryNumber}
+          required
+          placeholder="Primary Number"
+          onChange={(evt) => handleChange(evt, "primaryNumber")}
+        />
 
-            <TextField
-              label="Secondary Number"
-              type="text"
-              name="secondaryNumber"
-              value={contactInfo.secondaryNumber}
-              placeholder="SecondaryNumber"
-              onChange={(evt) => handleChange(evt, "secondaryNumber")}
-            />
+        <TextField
+          label="Secondary Number"
+          type="text"
+          name="secondaryNumber"
+          value={contactInfo.secondaryNumber}
+          placeholder="SecondaryNumber"
+          onChange={(evt) => handleChange(evt, "secondaryNumber")}
+        />
 
-            <TextField
-              select
-              label="Textable"
-              onChange={handleChange}
-            >
-            <MenuItem value={true}>Yes</MenuItem>
-            <MenuItem value={false}>No</MenuItem>
-          </TextField>
+        <TextField select label="Textable" onChange={handleChange}>
+          <MenuItem value={true}>Yes</MenuItem>
+          <MenuItem value={false}>No</MenuItem>
+        </TextField>
 
-            <TextField
-              label="Email"
-              type="email"
-              name="email"
-              value={contactInfo.email}
-              required
-              placeholder="Email"
-              onChange={(evt) => handleChange(evt, "email")}
-            />
+        <TextField
+          label="Email"
+          type="email"
+          name="email"
+          value={contactInfo.email}
+          required
+          placeholder="Email"
+          onChange={(evt) => handleChange(evt, "email")}
+        />
 
-            <TextField
-              label="Type"
-              type="text"
-              name="type"
-              value={contactInfo.type}
-              required
-              placeholder="Type"
-              onChange={(evt) => handleChange(evt, "type")}
-            />
+        <TextField
+          label="Type"
+          type="text"
+          name="type"
+          value={contactInfo.type}
+          required
+          placeholder="Type"
+          onChange={(evt) => handleChange(evt, "type")}
+        />
 
-            <TextField
-              label="Website"
-              type="text"
-              name="website"
-              value={contactInfo.website}
-              placeholder="Website"
-              onChange={(evt) => handleChange(evt, "website")}
-            />
+        <TextField
+          label="Website"
+          type="text"
+          name="website"
+          value={contactInfo.website}
+          placeholder="Website"
+          onChange={(evt) => handleChange(evt, "website")}
+        />
 
-            <TextField
-              label="Address"
-              type="text"
-              name="address"
-              value={contactInfo.address}
-              required
-              placeholder="Address"
-              onChange={(evt) => handleChange(evt, "address")}
-            />
+        <TextField
+          label="Address"
+          type="text"
+          name="address"
+          value={contactInfo.address}
+          required
+          placeholder="Address"
+          onChange={(evt) => handleChange(evt, "address")}
+        />
 
-            <TextField
-              label="Notes"
-              type="text"
-              name="notes"
-              value={contactInfo.notes}
-              placeholder="Notes"
-              onChange={(evt) => handleChange(evt, "notes")}
-            />
+        <TextField
+          label="Notes"
+          type="text"
+          name="notes"
+          value={contactInfo.notes}
+          placeholder="Notes"
+          onChange={(evt) => handleChange(evt, "notes")}
+        />
 
-          <Button color="primary" type="submit">Enter</Button>
+        <Button color="primary" type="submit">
+          Enter
+        </Button>
       </form>
     </>
   );

@@ -11,15 +11,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Input from '@mui/material/Input';
+import Input from "@mui/material/Input";
 import { useParams } from "react-router-dom";
 
 const ProjectGalleryForm = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  //reducers
-  //   const selectedProject = useSelector((store) => store.selectedProject);
-  //   const projectImages = useSelector((store) => store.projectImageReducer);
 
   // a local state to store the currently selected file.
   const [selectedFile, setSelectedFile] = useState(null);
@@ -33,7 +30,6 @@ const ProjectGalleryForm = () => {
   //handing submit of form and file upload
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log("SELECTED FILE IS", selectedFile);
     //appending id,description and file to form Data to be sent over in an object with selected project
     //form data will be req.file and selected project will be req.body
     const formData = new FormData();
@@ -55,7 +51,7 @@ const ProjectGalleryForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+        <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
           <Button
             id="photoSubmit"
             type="submit"
@@ -71,7 +67,6 @@ const ProjectGalleryForm = () => {
             onChange={handleFileSelect}
             required
           />
-
         </Stack>
       </form>
     </>

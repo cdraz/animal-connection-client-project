@@ -13,7 +13,7 @@ import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
 import JobSearchBar from "../../SearchBar/JobSearchBar";
 import Typography from "@mui/material/Typography";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 function JobPage() {
   // Dispatch hook, store access
@@ -46,10 +46,8 @@ function JobPage() {
   return (
     <div id="jobsPage">
       <Grid container spacing={8}>
-        <Grid item xs={12} >
-          <Typography variant="h1">
-            Jobs
-          </Typography>
+        <Grid item xs={12}>
+          <Typography variant="h1">Jobs</Typography>
           <Button
             variant="contained"
             size="small"
@@ -66,11 +64,7 @@ function JobPage() {
         {/* <div id="jobCardContainer"> */}
         <Grid item container spacing={2} xs={9}>
           <Box sx={{ flexGrow: 1 }}>
-            <Grid
-              container
-              spacing={3}
-              alignItems="left"
-            >
+            <Grid container spacing={3} alignItems="left">
               {Array.isArray(jobs) ? (
                 jobs.map((job) => <JobCard job={job} key={job.id} />)
               ) : (
@@ -84,9 +78,7 @@ function JobPage() {
       {/* </div> */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box sx={style}>
-          
-            <JobCreate />
-          
+          <JobCreate />
         </Box>
       </Modal>
     </div>

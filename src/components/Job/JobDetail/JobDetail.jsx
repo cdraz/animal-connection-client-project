@@ -40,17 +40,15 @@ function JobDetail() {
   }, []);
 
   return (
-    
     <Grid container spacing={5} id="AnimalDetailContainer">
       <Grid item xs={3}>
-      <JobEditDetail />
+        <JobEditDetail />
       </Grid>
-       <Grid item xs={9}>
-      <JobContacts />
+      <Grid item xs={9}>
+        <JobContacts />
       </Grid>
-      
-      <div>
-      </div>
+
+      <div></div>
       <br></br>
       <div id="jobCardContainer">
         <Box sx={{ flexGrow: 1 }}>
@@ -64,10 +62,8 @@ function JobDetail() {
             )}
           </Grid>
         </Box>
-        
       </div>
-      </Grid>
-    
+    </Grid>
   );
 }
 
