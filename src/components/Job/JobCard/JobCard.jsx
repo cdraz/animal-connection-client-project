@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useParams, Link } from "react-router-dom";
-import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
+import jacobsAwesomeDateFormatterVersion2 from "../../DateFormatter/dateFormatter";
 import "./JobCard.css";
 
 // React components
@@ -85,13 +85,12 @@ function JobCard({ job }) {
               <Typography gutterBottom noWrap variant="h6" component="div">
                 {jacobsAwesomeDateFormatterVersion2(job.date)}
               </Typography>
-              
-              <Typography   variant="h5" component="div">
-              {job.description}
+
+              <Typography variant="h5" component="div">
+                {job.description}
               </Typography>
             </CardContent>
-            <CardContent>
-            </CardContent>
+            <CardContent></CardContent>
           </CardActionArea>
         </Card>
       </Item>

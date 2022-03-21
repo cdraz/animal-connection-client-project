@@ -101,7 +101,7 @@ router.get("/selectedJob/:id", rejectUnauthenticated, (req, res) => {
   console.log("req.params of selected job details is", req.params.id);
 
   const queryText = `SELECT * FROM "jobs"
-  WHERE "id" = $1
+  WHERE "id" = $1 ORDER BY "id"
   `;
   pool
     .query(queryText, [req.params.id])
