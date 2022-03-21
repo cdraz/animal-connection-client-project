@@ -20,7 +20,7 @@ function AnimalAddToJobButton({ animal }) {
     let options = [];
     if (Array.isArray(activeJobs)) {
         options = activeJobs.map(job => (
-            { label: job.jobNumber, id: job.id }
+            { label: `${job.jobNumber} - ${job.client}`, id: job.id }
         ));
     }
 
