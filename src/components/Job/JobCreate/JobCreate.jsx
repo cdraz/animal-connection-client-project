@@ -78,11 +78,19 @@ const JobCreate = () => {
     })
   };
 
+  const autoJob = () => {
+    setClient("Target");
+    setJobNumber("AC-064587");
+    setJobDate("0332-10-00");
+    setNotes("Shampoo Commercial");
+    setDescription("Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger.");
+  }
+
   return (
     <div className="bodyContainer">
       <form className="newJobForm" onSubmit={saveJobInformation}>
         <Stack className= "jobStack" spacing={2}>
-          <h1 className="createTitle">Create New Job</h1>
+          <h1 onClick={autoJob} className="createTitle">Create New Job</h1>
           {/* date input */}
 
           <input
