@@ -33,6 +33,8 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Swal from "sweetalert2";
 
+import jacobsAwesomeDateFormatterVersion2 from '../../DateFormatter/dateFormatter';
+
 
 //MUI
 const Item = styled(Paper)(({ theme }) => ({
@@ -279,7 +281,7 @@ function JobPayEdit(prop) {
                       {/* newDate */}
                       <TextField
                         type="date"
-                        value={newCheckDate}
+                        value={jacobsAwesomeDateFormatterVersion2(newCheckDate, 'input')}
                         onChange={(evt) => {
                           setNewCheckDate(evt.target.value);
                         }}
