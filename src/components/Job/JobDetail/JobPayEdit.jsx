@@ -194,9 +194,9 @@ function JobPayEdit(prop) {
                       color="text.secondary"
                       gutterBottom
                     >
-                      owner: {payDetails.firstName}
+                      Owner: {payDetails.firstName}
                       <br></br>
-                      pet:{payDetails.name}
+                      Pet:{payDetails.name}
                       <br></br>
                     </Typography>
                     <Typography variant="h6" component="div">
