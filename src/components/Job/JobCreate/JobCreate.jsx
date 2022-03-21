@@ -15,7 +15,6 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 
-
 const JobCreate = () => {
   const dispatch = useDispatch();
   //local state to be updated and sent to saga on form submit
@@ -54,43 +53,47 @@ const JobCreate = () => {
     setNotes("");
     setDescription("");
     history.push("/jobs");
-    let timerInterval
+    let timerInterval;
     Swal.fire({
-        icon: 'success',
-      title: 'Job Added!',
+      icon: "success",
+      title: "Job Added!",
       timer: 1200,
       timerProgressBar: true,
       didOpen: () => {
-        Swal.showLoading()
-        const b = Swal.getHtmlContainer().querySelector('b')
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer().querySelector("b");
         timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft()
-        }, 100)
+          b.textContent = Swal.getTimerLeft();
+        }, 100);
       },
       willClose: () => {
-        clearInterval(timerInterval)
-      }
+        clearInterval(timerInterval);
+      },
     }).then((result) => {
       /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer')
+        console.log("I was closed by the timer");
       }
-    })
+    });
   };
 
   const autoJob = () => {
     setClient("Target");
     setJobNumber("AC-064587");
     setJobDate("0332-10-00");
-    setNotes("Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger.");
+    setNotes(
+      "Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger."
+    );
     setDescription("Shampoo Commercial");
-  }
+  };
 
   return (
     <div className="bodyContainer">
       <form className="newJobForm" onSubmit={saveJobInformation}>
-        <Stack className= "jobStack" spacing={2}>
-          <h1 onClick={autoJob} className="createTitle">Create New Job</h1>
+        <Stack className="jobStack" spacing={2}>
+          <h1 onClick={autoJob} className="createTitle">
+            Create New Job
+          </h1>
           {/* date input */}
 
           <input
@@ -132,7 +135,6 @@ const JobCreate = () => {
           </FormControl>
 
           {/* end Job Number input */}
-          
 
           {/* end date input */}
 
