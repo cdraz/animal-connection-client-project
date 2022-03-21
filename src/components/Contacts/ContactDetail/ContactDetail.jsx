@@ -265,17 +265,16 @@ function ContactDetail() {
         
         </Grid>
         <Grid item xs={6}>
-        <div>
+        <div id="workHistoryHeaderContacts">
         <h2>WORK HISTORY</h2>
-        <ContactAddToJobButton contact={selectedContact} id="contactDetailJobSelector"/>
-        </div>
+          <ContactAddToJobButton contact={selectedContact} id="contactDetailJobSelector"/></div>
         <AnimalWorkHistoryTable animal={selectedContact}/> 
         <div>
           <div id="animalCardsHeader">
             <h2>ANIMALS</h2>
             <Link to={`/animals/add/${id}`}>Add New Animal</Link>
           </div>
-          <div>
+          <div id="animalCardsContainerOnContactDetailPage">
               {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null 
                 ? selectedContact.animals.map( animal => (<AnimalCard key= {animal.id} animal={animal} />))
                 : <p>No animals on record.</p>
