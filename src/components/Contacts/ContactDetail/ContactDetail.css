@@ -34,3 +34,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.contactEditBtn{
+    margin-bottom: 20px;
+}
+.contactDeleteBtn{
+    margin-left: 20px;
+}
