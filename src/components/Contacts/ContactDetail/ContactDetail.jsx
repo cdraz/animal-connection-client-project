@@ -225,6 +225,8 @@ function ContactDetail() {
           <TextField
             name="notes"
             label="Notes"
+            multiline 
+            rows={4}
             value={selectedContact.notes}
             onChange={(event) => handleChange(event)}
             InputProps={{
