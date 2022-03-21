@@ -200,7 +200,7 @@ function JobPayEdit(prop) {
                       <br></br>
                     </Typography>
                     <Typography variant="h6" component="div">
-                      Paid: {payDetails.checkDate}
+                      Paid: {jacobsAwesomeDateFormatterVersion2(payDetails.checkDate)}
                       <br></br>
                       Amount: ${payDetails.checkAmount}
                     </Typography>

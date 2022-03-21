@@ -1,6 +1,6 @@
 export default function dateFormatter(date, format){
     if(date === undefined) return
-    if(format === 'input') return date.replace(/^(\d{4}-\d{2}-\d{2}).*/, '$1');
+    if(format === 'input') {console.log('aaaaaaHHHHHHHHHHHH'); return date.replace(/^(\d{4}-\d{2}-\d{2}).*/, '$1');}
     let formDate = date.replace(/^(\d{4})-0?(\d{1,2})-0?(\d{1,2}).*/, '$2 $3 $1').split(' ');
     let month = formDate[0];
     let day = formDate[1];
