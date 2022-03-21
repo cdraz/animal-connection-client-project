@@ -22,7 +22,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 // Delete on contact
-router.delete("/", rejectUnauthenticated, (req, res) => {
+router.delete("/:id", rejectUnauthenticated, (req, res) => {
     // endpoint functionality
     const queryText = "DELETE FROM contacts WHERE id=$1";
     pool

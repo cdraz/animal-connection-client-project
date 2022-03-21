@@ -114,9 +114,57 @@ function AnimalForm() {
         history.push(`/contacts/${id}`)
     }
 
+
+
+    const autoAnimal = () => {
+        console.log("hhhahahahahahahahahdsajkfhasdfhasdoadhshjjhhj");
+        setNewAnimal({
+            contactId: id, 
+            image: '', //needs an input box and setup with cloud server
+            name: 'Bear',
+            rating: 5,
+            animalType: 1,
+            otherTypeDetail: '',
+            breed: '',
+            birthday: '',
+            sex: 'Male',
+            weight: 17,
+            height: 12,
+            length: 23,
+            neckGirth: 10,
+            bellyGirth: 19,
+            color: 'Black/White',
+            active: 'True',
+            notes: 'Supper Derppy',
+            sitOnLeash: true,
+            sitOffLeash: false,
+            downOnLeash: true,
+            downOffLeash: false,
+            standOnLeash: true,
+            standOffLeash: false,
+            barkOnCommand: false,
+            holdItem: false,
+            mark: false,
+            loudNoiseLights: true,
+            silentCommands: true,
+            strangerHandle: true,
+            strangerDress: true,
+            offLeashTrained: false,
+            goodAroundChildren: true,
+            atDistanceFromTrainer: false,
+            otherDogs: true,
+            smallAnimals: true,
+            loudNoiseLights: true,
+            shortNotice: false,
+            overnight: false,
+            livesClose: true
+        });
+        console.log("new animal",newAnimal);
+      }
+
     return (
         <div id="animalForm">
-        <Typography variant='h1'>
+        <Typography onClick={autoAnimal} variant='h1'>
             Add New Animal
         </Typography>
         <form onSubmit={submitNewAnimal}>
@@ -135,6 +183,7 @@ function AnimalForm() {
                         sizeLarge
                         size="large"
                         sx={{ margin: 'auto'}}
+                        value={newAnimal.rating}
                     /></div>
                     <TextField
                         required
@@ -152,6 +201,7 @@ function AnimalForm() {
                         id="animal-name-input"
                         label="Animal Name"
                         onChange={event => handleChange(event)}
+                        value={newAnimal.name}
                     />
                     {/* <TextField
                         InputLabelProps={{
@@ -208,7 +258,7 @@ function AnimalForm() {
                                 getOptionLabel={(option) => option}
                                 filterSelectedOptions
                                 onChange={(evt, opt) => {
-                                    setNewAnimal({...newAnimal, breed: opt.toLowerCase()});
+                                    setNewAnimal({...newAnimal, breed: opt.toLowerCase()});                                   
                                 }}
                                 renderInput={(params) => (
                                     <TextField
@@ -246,6 +296,7 @@ function AnimalForm() {
                             id="animal-sex-input"
                             label="Sex"
                             onChange={event => handleChange(event)}
+                            value={newAnimal.sex}
                         />
                         <div style={{ display: 'inline-flex' }}>
                             <TextField
@@ -256,6 +307,7 @@ function AnimalForm() {
                                 id="animal-height-input"
                                 label="Height (in)"
                                 onChange={event => handleChange(event)}
+                                value={newAnimal.height}
                             />
                             <TextField
                             InputLabelProps={{
@@ -265,6 +317,7 @@ function AnimalForm() {
                                 id="animal-length-input"
                                 label="Length (in)"
                                 onChange={event => handleChange(event)}
+                                value={newAnimal.length}
                             />
                             <TextField
                             InputLabelProps={{
@@ -274,6 +327,7 @@ function AnimalForm() {
                                 id="animal-girth-input"
                                 label="Girth (in)"
                                 onChange={event => handleChange(event)}
+                                value={newAnimal.bellyGirth}
                             />
                             <TextField
                             InputLabelProps={{
@@ -283,6 +337,7 @@ function AnimalForm() {
                                 id="animal-neck-input"
                                 label="Neck (in)"
                                 onChange={event => handleChange(event)}
+                                value={newAnimal.neckGirth}
                             />
                         </div>
                         <TextField
@@ -293,6 +348,7 @@ function AnimalForm() {
                             id="animal-weight-input"
                             label="Weight (lbs)"
                             onChange={event => handleChange(event)}
+                            value={newAnimal.weight}
                         />
                         <TextField
                             InputLabelProps={{
@@ -302,6 +358,7 @@ function AnimalForm() {
                             id="animal-color-input"
                             label="Color"
                             onChange={event => handleChange(event)}
+                            value={newAnimal.color}
                         />
                         <TextField
                             InputLabelProps={{
@@ -312,6 +369,7 @@ function AnimalForm() {
                             id="animal-active-input"
                             label="Active"
                             onChange={event => handleChange(event)}
+                            value={newAnimal.active}
                         />
                         <TextField
                             InputLabelProps={{
@@ -321,6 +379,7 @@ function AnimalForm() {
                             id="animal-notes-input"
                             label="Notes"
                             onChange={event => handleChange(event)}
+                            value={newAnimal.notes}
                         />
                     </>}
                 </Stack>

@@ -63,9 +63,27 @@ function contactForm() {
     setContactInfo({ ...contactInfo, [property]: evt.target.value });
   };
 
+
+  const autoContact = () => {
+    setContactInfo({
+      firstName: "Diane",
+      lastName: "Martin",
+      primaryNumber: "6124578453",
+      secondaryNumber: "6129802435",
+      text: "True",
+      email: "DianeMartin@gmail.com",
+      type: "Pet Owner",
+      website: "http://AlaskanMalumute.meetup.com",
+      address: "123 Main street NE Minneapolis MN",
+      notes: "Met Diane at the Alaskan Malamute meet up and her puppy was very well trained and calm",
+    });
+  }
+
+
+
   return (
     <>
-    <Typography variant="h2">Add Contact</Typography>
+    <Typography onClick={autoContact} variant="h2">Add Contact</Typography>
       <form id="contactFormModal" onSubmit={createContactInfo}>
             <TextField
               label="First Name"
