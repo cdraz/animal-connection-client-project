@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+
 
 import './ContactForm.css'
 
@@ -37,7 +40,7 @@ function contactForm() {
     history.push("/contacts");
     let timerInterval
     Swal.fire({
-        icon: 'success',
+      icon: 'success',
       title: 'Contact Added!',
       timer: 1200,
       timerProgressBar: true,
@@ -125,14 +128,13 @@ function contactForm() {
             />
 
             <TextField
+              select
               label="Textable"
-              type="text"
-              name="text"
-              value={contactInfo.text}
-              required
-              placeholder="Text"
-              onChange={(evt) => handleChange(evt, "text")}
-            />
+              onChange={handleChange}
+            >
+            <MenuItem value={true}>Yes</MenuItem>
+            <MenuItem value={false}>No</MenuItem>
+          </TextField>
 
             <TextField
               label="Email"
