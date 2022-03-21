@@ -1,0 +1,36 @@
+#jobContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#animalCardsHeader{
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+}
+
+#animalCardsHeader a{
+    font-size: larger;
+    text-decoration: none;
+    margin-left: 15px;
+    background-color: #f2b705;
+    color: black;
+    padding: 8px;
+    border-radius: 8px;
+}
+#workHistoryHeaderContacts{
+    margin-bottom: 35px;
+}
+#contactDetailJobSelector{
+    width: 40%; }
+#addContactToJobSelectorAndButton{
+    display: flex; }
+#updateContactForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column; }
+#animalCardsContainerOnContactDetailPage{
+    display: flex;
+    flex-wrap: wrap;
+}

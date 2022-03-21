@@ -16,6 +16,7 @@ function AnimalWorkHistoryTable({ animal }) {
     const history = useHistory();
 
     const jobs = animal.jobs;
+    console.log('AAAAAHHHHHHHHHHHHHHHHHHH', jobs);
 
     return (
         <TableContainer component={Paper} id="workHistoryContainer">
@@ -30,6 +31,7 @@ function AnimalWorkHistoryTable({ animal }) {
                 </TableHead>
                 <TableBody>
                     {jobs ? jobs.map(job => (
+                        job &&   //another hacky fix
                         job.date ?
                             <TableRow key={job.id} className="jobRow" onClick={() => history.push(`/jobDetail/${job.id}`)}>
                                 <TableCell align="left">
@@ -39,7 +41,7 @@ function AnimalWorkHistoryTable({ animal }) {
                                     {job.client}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {job.number}
+                                    {job.number ? job.number : job.jobNumber} {/* Hacky fix for stolen component */}
                                 </TableCell>
                                 <TableCell align="left">
                                     {job.description}

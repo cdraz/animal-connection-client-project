@@ -65,34 +65,32 @@ function ContactAddToJobButton({ contact }) {//<<<<<<<<<<<<<<<contact needs to b
     }, []);
 
     return (
-        <>
-            <Typography variant="h5">
-                Add Contact to Job
-            </Typography>
-
-            {Array.isArray(options) ?
-                <Autocomplete
-                    options={options}
-                    isOptionEqualToValue={(option, value) => option.id === value.id}
-                    getOptionLabel={(option) => option.label}
-                    filterSelectedOptions
-                    onChange={(event, option) => setJobInput(option.id)}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Jobs"
-                            placeholder="Jobs"
-                        />
-                    )}
-                />
-                : <p>Loading jobs...</p>}
+        <div id="addContactToJobSelectorAndButton">
+            <div id="contactDetailJobSelector">
+                {Array.isArray(options) ?
+                    <Autocomplete
+                        options={options}
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
+                        getOptionLabel={(option) => option.label}
+                        filterSelectedOptions
+                        onChange={(event, option) => setJobInput(option.id)}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Add Contact To Job"
+                                placeholder="Jobs"
+                            />
+                        )}
+                    />
+                    : <p>Loading jobs...</p>}
+            </div>
             <Button
                 variant="contained"
                 onClick={addToJob}
             >
                 Add to Job
             </Button>
-        </>
+        </div>
     )
 }
 

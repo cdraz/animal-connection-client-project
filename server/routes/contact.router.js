@@ -38,20 +38,35 @@ router.delete("/", rejectUnauthenticated, (req, res) => {
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('******* GET CONTACTS DETAILS*******');
+    // let queryText = `
+    //     SELECT 
+    //         "contacts".*,
+    //         JSON_AGG(DISTINCT "animals".*) AS animals,
+    //         JSON_AGG(DISTINCT "jobs".*) AS jobs
+    //     FROM "contacts"
+    //     LEFT JOIN "animals"
+    //         ON "contacts"."id" = "animals"."contactsId"
+    //     LEFT JOIN "jobsJunction"
+    //         ON "jobsJunction"."animalsId" = "animals"."id"
+    //     LEFT JOIN "jobs"
+    //         ON "jobs"."id" = "jobsJunction"."jobId"
+    //     WHERE "contacts".id = $1
+    //     GROUP BY "contacts"."id";`
+
     let queryText = `
-    SELECT 
-        "contacts".*,
-        JSON_AGG(DISTINCT "animals".*) AS animals,
-        JSON_AGG(DISTINCT "jobs".*) AS jobs
-    FROM "contacts"
-    LEFT JOIN "animals"
-        ON "contacts"."id" = "animals"."contactsId"
-    LEFT JOIN "jobsJunction"
-        ON "jobsJunction"."animalsId" = "animals"."id"
-    LEFT JOIN "jobs"
-        ON "jobs"."id" = "jobsJunction"."jobId"
-    WHERE "contacts".id = $1
-    GROUP BY "contacts"."id";`
+        SELECT 
+            "contacts".*,
+            JSON_AGG(DISTINCT "animals".*) AS animals,
+            JSON_AGG(DISTINCT "jobs".*) AS jobs
+        FROM "contacts"
+        LEFT JOIN "animals"
+            ON "contacts"."id" = "animals"."contactsId"
+        LEFT JOIN "jobContacts"
+            ON "jobContacts"."contactId" = "contacts"."id"
+        LEFT JOIN "jobs"
+            ON "jobs"."id" = "jobContacts"."jobId"
+        WHERE "contacts".id = $1
+        GROUP BY "contacts"."id";`
 
     console.log(queryText);
     pool.query(queryText, [req.params.id])
@@ -116,13 +131,13 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
 //Edit contact 
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log('this is req.body in put', req.body);
-    const sqlText = `UPDATES "contacts"
+    const sqlText = `UPDATE "contacts"
                     SET
                     "type" = $1,
                     "firstName" = $2,
                     "lastName" = $3,
                     "primaryNumber" = $4,
-                    "secondaryNumber" $5,
+                    "secondaryNumber" = $5,
                     "text" = $6,
                     "email" = $7, 
                     "website" = $8,
@@ -134,7 +149,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     const sqlParams = [
         req.body.type,
         req.body.firstName,
-        req.body.lastNme,
+        req.body.lastName,
         req.body.primaryNumber,
         req.body.secondaryNumber,
         req.body.text,

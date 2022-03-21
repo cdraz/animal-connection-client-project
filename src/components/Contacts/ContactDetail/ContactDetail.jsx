@@ -14,14 +14,21 @@ import EditSharpIcon from '@mui/icons-material/EditSharp';
 import Grid from "@mui/material/Grid";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SaveIcon from '@mui/icons-material/Save';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+
+import './ContactDetail.css'
+import AnimalWorkHistoryTable from '../../Animals/AnimalWorkHistoryTable/AnimalWorkHistoryTable'
 
 
 function ContactDetail() {
   const dispatch = useDispatch();
   const history = useHistory();
   const selectedContact = useSelector((store) => store.contacts);
-  const [editPage, setEditPage] = useState(false);
+  const [edit, setEdit] = useState(false);
+  console.log(selectedContact);
 
   // Set id from URL parameters
   const { id } = useParams();
@@ -30,8 +37,45 @@ function ContactDetail() {
     dispatch({ type: 'FETCH_SELECTED_CONTACT', payload: { id: id } });
   }, []);
 
-
-
+  const handleChange = (evt) => {
+    dispatch({
+      type: 'UPDATE_ACTIVE_CONTACTS',
+      payload: {[event.target.name]: evt.target.value}
+    });
+  }
+  
+  
+  const saveEdit = (event) => {
+    event.preventDefault()
+    let timerInterval
+    Swal.fire({
+      icon: 'success',
+      title: 'Contact Added to Job!',
+      timer: 1200,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+    dispatch ({
+        type: 'SAVE_CONTACT_CHANGES',
+        payload: selectedContact
+    });
+    setEdit(!edit)
+    // history.push(`/contacts/${contacts.id}`)
+}
 
   //deletes entire selected job and all foreign keys associated with it after confirmation
   const deleteContact = () => {
@@ -54,56 +98,190 @@ function ContactDetail() {
     });
   };
   return (
-    <Grid container spacing={5} >
+    <Grid container spacing={5} sx={{marginLeft: '5px', marginRight: '5px'}}>
       <Grid item xs={4}>
-      {editPage
-        ? 
-          <ContactEdit editPage={editPage} setEditPage={setEditPage} />
-        : <>
-          <Typography variant="h3">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
-          <Typography>Number: {`${selectedContact.primaryNumber} ${selectedContact.secondaryNumber}`}</Typography>
-          <Typography>Text: {`${selectedContact.text}`}</Typography>
-          <Typography>Email: {`${selectedContact.email}`}</Typography>
-          <Typography>Address: {`${selectedContact.address}`}</Typography>
-          <Typography>Type: {`${selectedContact.type}`}</Typography>
-          <Typography>Website: {`${selectedContact.website}`}</Typography>
-          <Typography>Company: {`${selectedContact.company}`}</Typography>
-          <Typography>Notes: {`${selectedContact.notes}`}</Typography>
-        </>}
+          <Typography variant="h1">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
+      <Stack spacing={2}>
+        {edit &&
+          <><TextField
+          name='firstName'
+          label="First Name"
+          value={selectedContact.firstName}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='lastName'
+          label="Last Name"
+          value={selectedContact.lastName}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        /></>}
+        <TextField
+          name='primaryNumber'
+          label="Primary Number"
+          value={selectedContact.primaryNumber}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='secondaryNumber'
+          label="Secondary Number"
+          value={selectedContact.secondaryNumber}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='text'
+          label="Textable"
+          value={selectedContact.text}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='email'
+          label="Email"
+          value={selectedContact.email}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='address'
+          label="Address"
+          value={selectedContact.address}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='type'
+          label="Type"
+          value={selectedContact.type}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='website'
+          label="Website"
+          value={selectedContact.website}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='company'
+          label="Company"
+          value={selectedContact.company}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        <TextField
+          name='notes'
+          label="Notes"
+          value={selectedContact.notes}
+          onChange={event => handleChange(event)}
+          InputProps={{
+              readOnly: !edit,
+          }}
+          InputLabelProps={{
+              shrink: true
+          }}
+        />
+        </Stack>
+      {edit 
+        ? <>
+          <IconButton 
+            onClick={(event) => saveEdit(event)}
+            aria-label="edit" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
+          >
+            <SaveIcon />
+          </IconButton>
+        </>
+        :
+        <>
+            <IconButton 
+              onClick={() => setEdit(!edit)}
+              aria-label="edit" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
+            >
+              <EditSharpIcon />
+            </IconButton>
+
+            <IconButton
+              onClick={() => deleteContact()}
+              aria-label="delete" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
+            >
+              <DeleteIcon/>
+            </IconButton>
+          </>
+        }
         
-        <IconButton 
-          onClick={() => setEditPage(!editPage)}
-          aria-label="delete" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
-        >
-          <EditSharpIcon />
-        </IconButton>
-        <IconButton
-          onClick={() => deleteContact()}
-          aria-label="delete" size="large" color="primary" sx={{bgcolor: '#99d0f2'}}
-        >
-          <DeleteIcon/>
-        </IconButton>
         </Grid>
-        <Grid item xs={8}>
-
+        <Grid item xs={6}>
+        <div id="workHistoryHeaderContacts">
         <h2>WORK HISTORY</h2>
-        <ContactAddToJobButton contact={selectedContact}/>
-
-        {Array.isArray(selectedContact.jobs)
-          //not sure why im getting a null in array
-          ? (selectedContact.jobs.map((job) => job && <JobCard job={job} key={job.id} />)) 
-          : (<p>No work history on record.</p>)
-        }
+          <ContactAddToJobButton contact={selectedContact} id="contactDetailJobSelector"/></div>
+        <AnimalWorkHistoryTable animal={selectedContact}/> 
+        <div>
+          <div id="animalCardsHeader">
+            <h2>ANIMALS</h2>
+            <Link to={`/animals/add/${id}`}>Add New Animal</Link>
+          </div>
+          <div id="animalCardsContainerOnContactDetailPage">
+              {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null 
+                ? selectedContact.animals.map( animal => (<AnimalCard key= {animal.id} animal={animal} />))
+                : <p>No animals on record.</p>
+              }
+            </div>
+        </div>
       </Grid>
-      <Grid item xs={2}>
-        <h2>ANIMALS</h2><Link to={`/animals/add/${id}`}>Add New Animal</Link>
-      </Grid>
-        <Grid item xs={10} sx={{display: 'flex'}}>
-        {Array.isArray(selectedContact.animals) && selectedContact.animals[0] !== null 
-          ? selectedContact.animals.map( animal => (<AnimalCard key= {animal.id} animal={animal} />))
-          : <p>No animals on record.</p>
-        }
-        </Grid>
     </Grid>
   )
 };

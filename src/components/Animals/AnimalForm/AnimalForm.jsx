@@ -12,6 +12,7 @@ import Stack from '@mui/material/Stack';
 import Grid from "@mui/material/Grid";
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
 
 //master list of dog breeds
@@ -114,21 +115,27 @@ function AnimalForm() {
     }
 
     return (
-        <>
+        <div id="animalForm">
+        <Typography variant='h1'>
+            Add New Animal
+        </Typography>
         <form onSubmit={submitNewAnimal}>
-        <FormControl id="animalForm"  sx={{ minWidth: '60%' }}>
+        <FormControl   sx={{ minWidth: '60%' }}>
             <Paper sx={{ padding: 3 }}>
                 {/* <img
                     width="auto"
                     src={animal.image}
                 /> */}
                 <Stack spacing={2}>
+                    <div id="ratingLabel">
+                    <Typography variant="h6">Rating: </Typography>
                     <Rating
                         name='rating'
                         onChange={event => handleChange(event)}
+                        sizeLarge
                         size="large"
-                        sx={{ margin: 'auto' }}
-                    />
+                        sx={{ margin: 'auto'}}
+                    /></div>
                     <TextField
                         required
                         type="file"
@@ -402,7 +409,7 @@ function AnimalForm() {
             <Button type="submit">SUBMIT</Button>
         </FormControl>
         </form>
-        </>
+        </div>
     )
 }
 
