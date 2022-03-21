@@ -270,7 +270,7 @@ function AnimalSummary({ animal }) {
                         name='birthday'
                         id="animal-birthday-input"
                         label="Birthdate"
-                        defaultValue={jacobsAwesomeDateFormatterVersion2(animal.birthday, 'input')}
+                        value={jacobsAwesomeDateFormatterVersion2(animal.birthday, 'input')}
                         onChange={event => handleChange(event)}
                         // InputProps={{
                         //     readOnly: !edit,
