@@ -29,6 +29,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import Switch from '@mui/material/Switch';
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Swal from "sweetalert2";
@@ -165,7 +166,7 @@ function JobPayEdit(prop) {
                       className="penIcon"
                       icon={faPenToSquare}
                       flip="horizontal"
-                      // transform="grow-9 left-140 down-20"
+                    // transform="grow-9 left-140 down-20"
                     />
                   </IconButton>
                   <IconButton
@@ -178,7 +179,7 @@ function JobPayEdit(prop) {
                       className="faTrash"
                       icon={faTrash}
                       flip="horizontal"
-                      // transform="grow-9 right-21 down-20"
+                    // transform="grow-9 right-21 down-20"
                     />
                   </IconButton>
                   <CardMedia
@@ -195,19 +196,25 @@ function JobPayEdit(prop) {
                     >
                       Owner: {payDetails.firstName}
                       <br></br>
-                      Pet:{payDetails.name}
+                      Pet: {payDetails.name}
                       <br></br>
                     </Typography>
-                    <Typography variant="h6" component="div">
-                      Paid:{" "}
-                      {jacobsAwesomeDateFormatterVersion2(payDetails.checkDate)}
-                      <br></br>
-                      Amount: ${payDetails.checkAmount}
-                    </Typography>
-                    <Typography
-                      sx={{ mb: 1.5 }}
-                      color="text.secondary"
-                    ></Typography>
+                    {payDetails.paid ? <>
+                      <Typography variant="h6" component="div">
+                        Paid:{" "}
+                        {jacobsAwesomeDateFormatterVersion2(payDetails.checkDate)}
+                        <br></br>
+                        Amount: ${payDetails.checkAmount}
+                      </Typography>
+                      <Typography
+                        sx={{ mb: 1.5 }}
+                        color="text.secondary"
+                      ></Typography>
+                    </> :
+                      <Typography variant="h6" component="div">
+                        Unpaid
+                      </Typography>
+                    }
                   </CardContent>
                 </CardActionArea>
               </Card>
@@ -250,8 +257,18 @@ function JobPayEdit(prop) {
                 <CardContent>
                   <form onSubmit={editSelectedJob}>
                     {/* client input */}
-                    <Stack className="space" spacing={1}>
-                      <TextField
+                    <Stack className="space" spacing={2}>
+                      <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+                        <Switch
+                          defaultChecked={newPaid}
+                          onChange={(evt) => {
+                            setNewPaid(!newPaid);
+                          }}
+                          size="large"
+                        />
+                        <p>{newPaid ? 'Paid' : 'Unpaid'}</p>
+                      </div>
+                      {/* <TextField
                         required
                         type="text"
                         value={newPaid}
@@ -259,7 +276,7 @@ function JobPayEdit(prop) {
                         onChange={(evt) => {
                           setNewPaid(evt.target.value);
                         }}
-                      />
+                      /> */}
                       {/* check number */}
                       <TextField
                         required
