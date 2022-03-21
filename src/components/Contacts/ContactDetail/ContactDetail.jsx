@@ -50,7 +50,7 @@ function ContactDetail() {
     let timerInterval
     Swal.fire({
       icon: 'success',
-      title: 'Contact Added to Job!',
+      title: 'Contact Saved!',
       timer: 1200,
       timerProgressBar: true,
       didOpen: () => {
@@ -99,7 +99,7 @@ function ContactDetail() {
   };
   return (
     <Grid container spacing={5} sx={{marginLeft: '5px', marginRight: '5px'}}>
-      <Grid item xs={4}>
+      <Grid item xs={5}>
           <Typography variant="h1">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
       <Stack spacing={2}>
         {edit &&
