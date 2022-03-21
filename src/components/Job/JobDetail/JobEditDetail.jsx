@@ -179,22 +179,15 @@ function JobEditDetail() {
                 {/* newDate */}
                 <TextField
                   type="date"
+                  label="Date"
                   value={newDate}
                   onChange={(evt) => {
                     setNewDate(evt.target.value);
                   }}
                   placeholder={selectedJob.date}
-                />
-
-                {/* newNotes */}
-                <TextField
-                  type="text"
-                  value={newNotes}
-                  label="Notes"
-                  onChange={(evt) => {
-                    setNewNotes(evt.target.value);
+                  InputLabelProps={{
+                    shrink: true,
                   }}
-                  placeholder={selectedJob.notes}
                 />
 
                 {/* newJobNumber */}
@@ -206,6 +199,19 @@ function JobEditDetail() {
                     setNewJobNumber(evt.target.value);
                   }}
                   placeholder={selectedJob.jobNumber}
+                />
+
+                {/* newNotes */}
+                <TextField
+                  type="text"
+                  value={newNotes}
+                  label="Notes"
+                  multiline
+                  rows={6}
+                  onChange={(evt) => {
+                    setNewNotes(evt.target.value);
+                  }}
+                  placeholder={selectedJob.notes}
                 />
 
                 {/* {user.id === something.user_id && ( */}
