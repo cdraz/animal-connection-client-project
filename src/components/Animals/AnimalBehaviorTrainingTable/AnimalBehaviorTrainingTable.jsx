@@ -118,7 +118,7 @@ function AnimalBehaviorTrainingTable() {
                   name="sitOnLeash"
                   value={animal.sitOnLeash}
                   disabled={!edit}
-                  defaultChecked={animal.sitOnLeash}
+                  checked={animal.sitOnLeash}
                 />{" "}
                 Sit and stay on leash
               </div>
@@ -128,7 +128,7 @@ function AnimalBehaviorTrainingTable() {
                   name="sitOffLeash"
                   value={animal.sitOffLeash}
                   disabled={!edit}
-                  defaultChecked={animal.sitOffLeash}
+                  checked={animal.sitOffLeash}
                 />{" "}
                 Sit and stay off leash
               </div>
@@ -138,7 +138,7 @@ function AnimalBehaviorTrainingTable() {
                   name="downOnLeash"
                   value={animal.downOnLeash}
                   disabled={!edit}
-                  defaultChecked={animal.downOnLeash}
+                  checked={animal.downOnLeash}
                 />{" "}
                 Down and stay on leash
               </div>
@@ -148,7 +148,7 @@ function AnimalBehaviorTrainingTable() {
                   name="downOffLeash"
                   value={animal.downOffLeash}
                   disabled={!edit}
-                  defaultChecked={animal.downOffLeash}
+                  checked={animal.downOffLeash}
                 />{" "}
                 Down and stay off leash
               </div>
@@ -158,7 +158,7 @@ function AnimalBehaviorTrainingTable() {
                   name="standOnLeash"
                   value={animal.standOnLeash}
                   disabled={!edit}
-                  defaultChecked={animal.standOnLeash}
+                  checked={animal.standOnLeash}
                 />{" "}
                 Stand and stay on leash
               </div>
@@ -168,7 +168,7 @@ function AnimalBehaviorTrainingTable() {
                   name="standOffLeash"
                   value={animal.standOffLeash}
                   disabled={!edit}
-                  defaultChecked={animal.standOffLeash}
+                  checked={animal.standOffLeash}
                 />{" "}
                 Stand and stay off leash
               </div>
@@ -178,7 +178,7 @@ function AnimalBehaviorTrainingTable() {
                   name="barkOnCommand"
                   value={animal.barkOnCommand}
                   disabled={!edit}
-                  defaultChecked={animal.barkOnCommand}
+                  checked={animal.barkOnCommand}
                 />{" "}
                 Bark on cue
               </div>
@@ -188,7 +188,7 @@ function AnimalBehaviorTrainingTable() {
                   name="holdItem"
                   value={animal.holdItem}
                   disabled={!edit}
-                  defaultChecked={animal.holdItem}
+                  checked={animal.holdItem}
                 />{" "}
                 Hold and object
               </div>
@@ -198,7 +198,7 @@ function AnimalBehaviorTrainingTable() {
                   name="mark"
                   value={animal.mark}
                   disabled={!edit}
-                  defaultChecked={animal.mark}
+                  checked={animal.mark}
                 />{" "}
                 Move to a mark
               </div>
@@ -208,7 +208,7 @@ function AnimalBehaviorTrainingTable() {
                   name="silentCommands"
                   value={animal.silentCommands}
                   disabled={!edit}
-                  defaultChecked={animal.silentCommands}
+                  checked={animal.silentCommands}
                 />{" "}
                 Can use silent commands
               </div>
@@ -222,7 +222,7 @@ function AnimalBehaviorTrainingTable() {
                   name="strangerHandle"
                   value={animal.strangerHandle}
                   disabled={!edit}
-                  defaultChecked={animal.strangerHandle}
+                  checked={animal.strangerHandle}
                 />{" "}
                 Can be handled by stranger
               </div>
@@ -232,7 +232,7 @@ function AnimalBehaviorTrainingTable() {
                   name="strangerDress"
                   value={animal.strangerDress}
                   disabled={!edit}
-                  defaultChecked={animal.strangerDress}
+                  checked={animal.strangerDress}
                 />{" "}
                 Can be dressed by stranger
               </div>
@@ -242,7 +242,7 @@ function AnimalBehaviorTrainingTable() {
                   name="goodAroundChildren"
                   value={animal.goodAroundChildren}
                   disabled={!edit}
-                  defaultChecked={animal.goodAroundChildren}
+                  checked={animal.goodAroundChildren}
                 />{" "}
                 Works well with children
               </div>
@@ -252,7 +252,7 @@ function AnimalBehaviorTrainingTable() {
                   name="otherDogs"
                   value={animal.otherDogs}
                   disabled={!edit}
-                  defaultChecked={animal.otherDogs}
+                  checked={animal.otherDogs}
                 />{" "}
                 Works well with other dogs
               </div>
@@ -262,7 +262,7 @@ function AnimalBehaviorTrainingTable() {
                   name="smallAnimals"
                   value={animal.smallAnimals}
                   disabled={!edit}
-                  defaultChecked={animal.smallAnimals}
+                  checked={animal.smallAnimals}
                 />{" "}
                 Works well with other small animals
               </div>
@@ -272,7 +272,7 @@ function AnimalBehaviorTrainingTable() {
                   name="loudNoiseLights"
                   value={animal.loudNoiseLights}
                   disabled={!edit}
-                  defaultChecked={animal.loudNoiseLights}
+                  checked={animal.loudNoiseLights}
                 />{" "}
                 Afraid of strobes
               </div>
@@ -282,7 +282,7 @@ function AnimalBehaviorTrainingTable() {
                   name="shortNotice"
                   value={animal.shortNotice}
                   disabled={!edit}
-                  defaultChecked={animal.shortNotice}
+                  checked={animal.shortNotice}
                 />{" "}
                 Available at short notice
               </div>
@@ -292,7 +292,7 @@ function AnimalBehaviorTrainingTable() {
                   name="overnight"
                   value={animal.overnight}
                   disabled={!edit}
-                  defaultChecked={animal.overnight}
+                  checked={animal.overnight}
                 />{" "}
                 Available for overnight jobs
               </div>
