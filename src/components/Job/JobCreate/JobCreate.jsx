@@ -80,7 +80,7 @@ const JobCreate = () => {
   const autoJob = () => {
     setClient("Target");
     setJobNumber("AC-064587");
-    setJobDate("0332-10-00");
+    setJobDate("2022-04-22");
     setNotes(
       "Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger."
     );
@@ -160,6 +160,8 @@ const JobCreate = () => {
             </InputLabel>
             <OutlinedInput
               type="text"
+              multiline
+              rows={3}
               required
               value={notes}
               onChange={(evt) => setNotes(evt.target.value)}
