@@ -18,7 +18,6 @@ function ContactSearchBar() {
     })
     function filterContacts(event){
         event.preventDefault();
-        console.log(qFilter);
         dispatch({ type: 'FETCH_CONTACTS', payload: qFilter });
     };
 

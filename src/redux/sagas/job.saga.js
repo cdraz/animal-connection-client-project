@@ -27,9 +27,7 @@ function* fetchJobs() {
 
 function* addJob(action) {
   try {
-    console.log("job post action.payload", action.payload);
-
-    const response = yield axios.post(`/api/job`, action.payload);
+    yield axios.post(`/api/job`, action.payload);
     yield put({ type: "FETCH_JOBS" });
   } catch (error) {
     console.error("fetchJobs failed", error);
@@ -39,11 +37,6 @@ function* addJob(action) {
 function* fetchJobDetails(action) {
   try {
     const response = yield axios.get(`/api/job/${action.payload}`);
-    console.log(
-      "response.data for set selected job details is ",
-      response.data
-    );
-
     yield put({ type: "SET_SELECTED_JOB_DETAILS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   } catch (error) {
     console.error("fetchJobDetails failed", error);
@@ -53,14 +46,7 @@ function* fetchJobDetails(action) {
 function* fetchSelectedJobContacts(action) {
   //<<<<<<<<<<<<<<<<<<<<
   try {
-    console.log("@#@#@$$@$##fetch job Contacts", action.payload);
-
     const response = yield axios.get(`/api/job/contacts/${action.payload}`);
-    console.log(
-      "response.data for set selected job contacts is ",
-      response.data
-    );
-
     yield put({ type: "SET_SELECTED_JOB_CONTACTS", payload: response.data }); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   } catch (error) {
     console.error("fetchJobDetails failed", error);
@@ -152,11 +138,7 @@ function* fetchActiveJobs() {
 
 function* fetchSelectedJob(action) {
   try {
-    console.log("we are in fetchSelected saga", action.payload);
-
     const response = yield axios.get(`/api/job/selectedJob/${action.payload}`);
-    console.log("what is set selected job response.data", response.data);
-
     yield put({ type: "SET_SELECTED_JOB", payload: response.data[0] });
   } catch (error) {
     console.error("fetchJobs failed", error);
@@ -165,13 +147,6 @@ function* fetchSelectedJob(action) {
 
 function* deleteJobPet(action) {
   try {
-    console.log(
-      "deleteJob pet action",
-      action.payload.payDetail,
-      "from job",
-      action.payload.selectedJob
-    );
-
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
@@ -192,13 +167,6 @@ function* deleteJobPet(action) {
 
 function* deleteJobContact(action) {
   try {
-    console.log(
-      "deleteJob Contact action",
-      action.payload.contact,
-      "from job",
-      action.payload.id
-    );
-
     const config = {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,

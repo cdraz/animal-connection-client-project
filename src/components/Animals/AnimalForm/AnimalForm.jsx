@@ -82,7 +82,6 @@ function AnimalForm() {
 
   const handleChange = (event) => {
     setNewAnimal({ ...newAnimal, [event.target.name]: event.target.value });
-    console.log(newAnimal);
   };
   const handleBoolChange = (event) => {
     newAnimal[event.target.name] = event.target.checked;

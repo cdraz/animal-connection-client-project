@@ -26,7 +26,6 @@ function ContactDetail() {
   const history = useHistory();
   const selectedContact = useSelector((store) => store.contacts);
   const [edit, setEdit] = useState(false);
-  console.log(selectedContact);
 
   // Set id from URL parameters
   const { id } = useParams();

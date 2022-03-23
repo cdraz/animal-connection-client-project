@@ -28,7 +28,6 @@ function AnimalAddToJobButton({ animal }) {
 
   // Declare addToJob
   const addToJob = () => {
-    console.log("animal is", animal);
     dispatch({
       type: "ADD_ANIMAL_TO_JOB",
       payload: {

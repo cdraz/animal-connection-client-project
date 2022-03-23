@@ -65,7 +65,6 @@ function AnimalSummary({ animal }) {
       }
     });
     setEdit(false);
-    console.log("in updateAnimal", animal);
     dispatch({
       type: "UPDATE_ANIMAL_SUMMARY",
       payload: {
