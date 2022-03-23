@@ -43,8 +43,6 @@ function JobEditDetail() {
   const [newJobNumber, setNewJobNumber] = useState(`${selectedJob.jobNumber}`);
 
   useEffect(() => {
-    console.log("selected job is", selectedJob);
-    console.log("selected job  DETAILS is", selectedJobDetails);
     dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
     dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
   }, []);
@@ -101,17 +99,27 @@ function JobEditDetail() {
       }
     });
     let editJobToSend = {
-      newClient: newClient,
-      newDescription: newDescription,
-      newDate: newDate,
-      newNotes: newNotes,
-      newJobNumber: newJobNumber,
+      newClient: selectedJob.client,
+      newDescription: selectedJob.description,
+      newDate: selectedJob.date,
+      newNotes:selectedJob.notes,
+      newJobNumber: selectedJob.jobNumber,
       selectedJob: selectedJob.id,
       id: id,
     };
     dispatch({ type: "EDIT_SELECTED_JOB", payload: editJobToSend });
     setEditable(false);
   };
+
+    // Declare handleChange
+    const handleChange = (event) => {
+      console.log("event.target.name", event.target.name);
+      console.log("event.target.value", event.target.value);
+      dispatch({
+        type: "UPDATE_SELECTED_JOB",
+        payload: { [event.target.name]: event.target.value },
+      });
+    };
 
   return (
     <>
@@ -155,36 +163,38 @@ function JobEditDetail() {
                 >
                   <FontAwesomeIcon icon={faBan} transform="grow-15" />
                 </IconButton>
+
+                {/* Inputs start */}
+
                 {/* client input */}
                 <TextField
                   type="text"
-                  value={newClient}
+                  name="client"
+                  value={selectedJob.client}
                   label="Client Name"
-                  onChange={(evt) => {
-                    setNewClient(evt.target.value);
-                  }}
-                  placeholder={selectedJob.client}
+                  onChange={(event) => handleChange(event)}
+                
                 />
                 {/* description */}
                 <TextField
                   type="text"
-                  value={newDescription}
+                  name="description"
+                  multiline
+                  rows={2}
+                  value={selectedJob.description}
                   label="Description"
-                  onChange={(evt) => {
-                    setNewDescription(evt.target.value);
-                  }}
-                  placeholder={selectedJob.description}
+                  onChange={(event) => handleChange(event)}
+                  
                 />
 
                 {/* newDate */}
                 <TextField
                   type="date"
                   label="Date"
-                  value={newDate}
-                  onChange={(evt) => {
-                    setNewDate(evt.target.value);
-                  }}
-                  placeholder={selectedJob.date}
+                  name="date"
+                  value={selectedJob.date}
+                  onChange={(event) => handleChange(event)}
+                  
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -193,26 +203,26 @@ function JobEditDetail() {
                 {/* newJobNumber */}
                 <TextField
                   type="text"
-                  value={newJobNumber}
+                  name="jobNumber"
+                  value={selectedJob.jobNumber}
                   label="Job Number"
-                  onChange={(evt) => {
-                    setNewJobNumber(evt.target.value);
-                  }}
-                  placeholder={selectedJob.jobNumber}
+                  onChange={(event) => handleChange(event)}
+                  
                 />
 
                 {/* newNotes */}
                 <TextField
                   type="text"
-                  value={newNotes}
+                  name="notes"
+                  value={selectedJob.notes}
                   label="Notes"
                   multiline
                   rows={6}
-                  onChange={(evt) => {
-                    setNewNotes(evt.target.value);
-                  }}
-                  placeholder={selectedJob.notes}
+                  onChange={(event) => handleChange(event)}
+                  
                 />
+
+                {/* inputs end */}
 
                 {/* {user.id === something.user_id && ( */}
                 <Button type="submit" variant="contained">

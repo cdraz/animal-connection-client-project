@@ -97,6 +97,46 @@ function ContactDetail() {
     <Grid container spacing={5} sx={{ marginLeft: "5px", marginRight: "5px" }}>
       <Grid item xs={5}>
         <Typography variant="h1">{`${selectedContact.firstName} ${selectedContact.lastName}`}</Typography>
+
+<div className="contactEditBtn">
+        {edit ? (
+          <>
+            <IconButton
+              onClick={(event) => saveEdit(event)}
+              aria-label="edit"
+              size="large"
+              color="primary"
+              sx={{ bgcolor: "#99d0f2" }}
+            >
+              <SaveIcon />
+            </IconButton>
+          </>
+        ) : (
+          <>
+            <IconButton
+              onClick={() => setEdit(!edit)}
+              aria-label="edit"
+              size="large"
+              color="primary"
+              sx={{ bgcolor: "#99d0f2" }}
+            >
+              <EditSharpIcon />
+            </IconButton>
+<span className="contactDeleteBtn">
+            <IconButton
+              onClick={() => deleteContact()}
+              aria-label="delete"
+              size="large"
+              color="primary"
+              sx={{ bgcolor: "#99d0f2" }}
+            >
+              <DeleteIcon />
+            </IconButton>
+            </span>
+          </>
+        )}
+</div>
+
         <Stack spacing={2}>
           {edit && (
             <>
@@ -237,41 +277,7 @@ function ContactDetail() {
             }}
           />
         </Stack>
-        {edit ? (
-          <>
-            <IconButton
-              onClick={(event) => saveEdit(event)}
-              aria-label="edit"
-              size="large"
-              color="primary"
-              sx={{ bgcolor: "#99d0f2" }}
-            >
-              <SaveIcon />
-            </IconButton>
-          </>
-        ) : (
-          <>
-            <IconButton
-              onClick={() => setEdit(!edit)}
-              aria-label="edit"
-              size="large"
-              color="primary"
-              sx={{ bgcolor: "#99d0f2" }}
-            >
-              <EditSharpIcon />
-            </IconButton>
-
-            <IconButton
-              onClick={() => deleteContact()}
-              aria-label="delete"
-              size="large"
-              color="primary"
-              sx={{ bgcolor: "#99d0f2" }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </>
-        )}
+       
       </Grid>
       <Grid item xs={6}>
         <div id="workHistoryHeaderContacts">
