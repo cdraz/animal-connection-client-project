@@ -43,8 +43,6 @@ function JobEditDetail() {
   const [newJobNumber, setNewJobNumber] = useState(`${selectedJob.jobNumber}`);
 
   useEffect(() => {
-    console.log("selected job is", selectedJob);
-    console.log("selected job  DETAILS is", selectedJobDetails);
     dispatch({ type: "FETCH_JOB_DETAILS", payload: id });
     dispatch({ type: "FETCH_SELECTED_JOB", payload: id });
   }, []);
@@ -155,6 +153,9 @@ function JobEditDetail() {
                 >
                   <FontAwesomeIcon icon={faBan} transform="grow-15" />
                 </IconButton>
+
+                {/* Inputs start */}
+                
                 {/* client input */}
                 <TextField
                   type="text"
@@ -213,6 +214,8 @@ function JobEditDetail() {
                   }}
                   placeholder={selectedJob.notes}
                 />
+
+                {/* inputs end */}
 
                 {/* {user.id === something.user_id && ( */}
                 <Button type="submit" variant="contained">
