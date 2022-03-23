@@ -77,21 +77,11 @@ const JobCreate = () => {
     });
   };
 
-  const autoJob = () => {
-    setClient("Target");
-    setJobNumber("AC-064587");
-    setJobDate("0332-10-00");
-    setNotes(
-      "Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger."
-    );
-    setDescription("Shampoo Commercial");
-  };
-
   return (
     <div className="bodyContainer">
       <form className="newJobForm" onSubmit={saveJobInformation}>
         <Stack className="jobStack" spacing={2}>
-          <h1 onClick={autoJob} className="createTitle">
+          <h1 className="createTitle">
             Create New Job
           </h1>
           {/* date input */}
@@ -160,6 +150,8 @@ const JobCreate = () => {
             </InputLabel>
             <OutlinedInput
               type="text"
+              multiline
+              rows={3}
               required
               value={notes}
               onChange={(evt) => setNotes(evt.target.value)}

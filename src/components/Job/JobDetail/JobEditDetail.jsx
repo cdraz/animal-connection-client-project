@@ -158,33 +158,33 @@ function JobEditDetail() {
                 {/* client input */}
                 <TextField
                   type="text"
-                  value={newClient}
+                  value="Target"
                   label="Client Name"
                   onChange={(evt) => {
                     setNewClient(evt.target.value);
                   }}
-                  placeholder={selectedJob.client}
+                  
                 />
                 {/* description */}
                 <TextField
                   type="text"
-                  value={newDescription}
+                  value="Shampoo commercial"
                   label="Description"
                   onChange={(evt) => {
                     setNewDescription(evt.target.value);
                   }}
-                  placeholder={selectedJob.description}
+                  
                 />
 
                 {/* newDate */}
                 <TextField
                   type="date"
                   label="Date"
-                  value={newDate}
+                  value="2022-04-22"
                   onChange={(evt) => {
                     setNewDate(evt.target.value);
                   }}
-                  placeholder={selectedJob.date}
+                  
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -193,25 +193,25 @@ function JobEditDetail() {
                 {/* newJobNumber */}
                 <TextField
                   type="text"
-                  value={newJobNumber}
+                  value="AC-064587"
                   label="Job Number"
                   onChange={(evt) => {
                     setNewJobNumber(evt.target.value);
                   }}
-                  placeholder={selectedJob.jobNumber}
+                  
                 />
 
                 {/* newNotes */}
                 <TextField
                   type="text"
-                  value={newNotes}
+                  value="Need two adult dogs well trained for off leash and handled by stranger. 1 puppy can be handled and washed by stranger."
                   label="Notes"
                   multiline
                   rows={6}
                   onChange={(evt) => {
                     setNewNotes(evt.target.value);
                   }}
-                  placeholder={selectedJob.notes}
+                  
                 />
 
                 {/* {user.id === something.user_id && ( */}

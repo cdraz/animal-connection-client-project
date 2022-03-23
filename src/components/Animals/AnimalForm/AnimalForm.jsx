@@ -111,54 +111,9 @@ function AnimalForm() {
     history.push(`/contacts/${id}`);
   };
 
-  const autoAnimal = () => {
-    setNewAnimal({
-      contactId: id,
-      image: "", //needs an input box and setup with cloud server
-      name: "Bear",
-      rating: 5,
-      animalType: 1,
-      otherTypeDetail: "",
-      breed: "",
-      birthday: "",
-      sex: "Male",
-      weight: 17,
-      height: 12,
-      length: 23,
-      neckGirth: 10,
-      bellyGirth: 19,
-      color: "Black/White",
-      active: "True",
-      notes: "Supper Derppy",
-      sitOnLeash: true,
-      sitOffLeash: false,
-      downOnLeash: true,
-      downOffLeash: false,
-      standOnLeash: true,
-      standOffLeash: false,
-      barkOnCommand: false,
-      holdItem: false,
-      mark: false,
-      loudNoiseLights: true,
-      silentCommands: true,
-      strangerHandle: true,
-      strangerDress: true,
-      offLeashTrained: false,
-      goodAroundChildren: true,
-      atDistanceFromTrainer: false,
-      otherDogs: true,
-      smallAnimals: true,
-      loudNoiseLights: true,
-      shortNotice: false,
-      overnight: false,
-      livesClose: true,
-    });
-    console.log("new animal", newAnimal);
-  };
-
   return (
     <div id="animalForm">
-      <Typography onClick={autoAnimal} variant="h1">
+      <Typography variant="h1">
         Add New Animal
       </Typography>
       <form onSubmit={submitNewAnimal}>
