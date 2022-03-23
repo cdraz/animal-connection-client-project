@@ -28,8 +28,6 @@ const upload = multer({
 
 
 router.post("/", function (req, res) {
-    console.log(req.body.formData);
-    console.log(req.file);
     Papa.parse(req.body, {
         header: true,
         complete: function(results) {

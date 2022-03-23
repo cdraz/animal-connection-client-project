@@ -67,10 +67,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
             ON "jobs"."id" = "jobContacts"."jobId"
         WHERE "contacts".id = $1
         GROUP BY "contacts"."id";`
-
-    console.log(queryText);
     pool.query(queryText, [req.params.id])
-        .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
+        .then(dbRes => { res.send(dbRes.rows); })
         .catch((err) => {
             console.log('User registration failed: ', err);
             res.sendStatus(500);
@@ -79,7 +77,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/job', rejectUnauthenticated, async (req, res) => {
     // POST contact to jobsContacts table
-    console.log('******* POST /contact/job *******',req.body)
+    console.log('******* POST /contact/job *******')
     try {
         // Write SQL query
         const queryText = `
@@ -102,7 +100,7 @@ router.post('/job', rejectUnauthenticated, async (req, res) => {
 
 //POST New contact
 router.post('/', rejectUnauthenticated, (req, res, next) => {
-    console.log('contact detail req.body', req.body);
+    console.log('contact detail req.body');
     const sqlText = `
     INSERT INTO "contacts"
     ("type", "firstName", "lastName", "primaryNumber", "secondaryNumber", "text", "email", "website", "address", "notes")
@@ -130,7 +128,7 @@ router.post('/', rejectUnauthenticated, (req, res, next) => {
 
 //Edit contact 
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('this is req.body in put', req.body);
+    console.log('this is req.body in put');
     const sqlText = `UPDATE "contacts"
                     SET
                     "type" = $1,
@@ -196,6 +194,5 @@ function queryGen(qFilter){
         sqlQuery.sqlParams.push(qFilter.type);
         paramNumber++;
     }
-    console.log(sqlQuery);
     return sqlQuery
 }

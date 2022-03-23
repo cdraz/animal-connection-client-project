@@ -15,7 +15,6 @@ const {
     pool
       .query(queryText)
       .then((dbRes) => {
-        console.log(dbRes);
         res.send(dbRes.rows);
       })
       .catch((err) => {
