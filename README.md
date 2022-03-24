@@ -88,4 +88,3 @@ There are a few videos linked below that show a walkthrough the client and sever
 1. Comment out the route back in VSCode
 1. Push changes
 1. Redeploy
-- There is probably a better way to do this, but that's what 
