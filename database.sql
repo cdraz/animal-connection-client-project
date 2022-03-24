@@ -11,7 +11,7 @@ CREATE TABLE "user" (
 
 CREATE TABLE "contacts" (
     "id" SERIAL PRIMARY KEY,
-    "type" VARCHAR(255), -- Animal Owner, Client, Crew
+    "type" VARCHAR(255), -- Animal Owner, Client
     "firstName" VARCHAR(255),
     "lastName" VARCHAR(255),
     "company" VARCHAR(255),
