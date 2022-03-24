@@ -1,6 +1,6 @@
 ![Repo Size](https://img.shields.io/github/languages/code-size/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/TheAnimalConnection/star-pet.svg?style=for-the-badge&social) 
 
-# Zoetrope Gallery
+# Star Pet
 
 ## Table of Contents
 
