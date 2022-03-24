@@ -57,11 +57,6 @@ Once everything is installed and running it should open in your default browser 
 
 Video walkthrough of application usage: https://www.youtube.com/watch?v=HRonNTkScl0
 
-## Lay of the Land
-
-
-
-
 ## Deployment
 - Login Credentials for Heroku have been provided in the hand off document.
 - If you need make changes you wish to push to the deployed app, you must login, go into the pet-star section, go to the deploy tab, and then manually deploy. You can reconfigure this to redeploy automatically if you wish, which is on the same page.
