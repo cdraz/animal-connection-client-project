@@ -113,8 +113,6 @@ function JobEditDetail() {
 
     // Declare handleChange
     const handleChange = (event) => {
-      console.log("event.target.name", event.target.name);
-      console.log("event.target.value", event.target.value);
       dispatch({
         type: "UPDATE_SELECTED_JOB",
         payload: { [event.target.name]: event.target.value },
@@ -192,7 +190,7 @@ function JobEditDetail() {
                   type="date"
                   label="Date"
                   name="date"
-                  value={selectedJob.date}
+                  value={jacobsAwesomeDateFormatterVersion2(selectedJob.date, 'input')}
                   onChange={(event) => handleChange(event)}
                   
                   InputLabelProps={{

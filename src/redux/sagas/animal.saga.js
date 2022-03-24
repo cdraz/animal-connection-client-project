@@ -26,9 +26,7 @@ function* fetchAnimals() {
 
 function* fetchSelectedAnimal(action) {
   try {
-    console.log("ACTION.PAYLOAD IS:", action.payload);
     const response = yield axios.get(`/api/animal/${action.payload.id}`);
-    console.log("RESPONSE FOR SELECTED ANIMAL IS:", response);
     yield put({ type: "SET_SELECTED_ANIMAL", payload: response.data });
   } catch (error) {
     console.error("fetchSelectedAnimal failed", error);
@@ -38,8 +36,7 @@ function* fetchSelectedAnimal(action) {
 // Add an animal to a job
 function* addAnimalToJob(action) {
   try {
-    const reponse = yield axios.post(`/api/animal/job`, action.payload);
-    console.log("addAnimal to job action.payload is:", action.payload);
+    yield axios.post(`/api/animal/job`, action.payload);
     yield put({
       type: "FETCH_SELECTED_ANIMAL",
       payload: { id: action.payload.animalId },
@@ -83,7 +80,6 @@ function* updateAnimalSummary(action) {
 
 function* addNewAnimal(action) {
   try {
-    console.log("!$!$!PHOTO on create animal is", action.payload.id);
     yield axios.post(`/api/animal`, action.payload.formData);
     yield put({ type: 'FETCH_SELECTED_CONTACT', payload: action.payload.id });
   } catch (error) {

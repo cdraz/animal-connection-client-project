@@ -1,5 +1,4 @@
 export default function dateFormatter(date, format){
-    console.log(date);
     if(!date) return
     if(format === 'input') return date.replace(/^(\d{4}-\d{2}-\d{2}).*/, '$1');
     let formDate = date.replace(/^(\d{4})-0?(\d{1,2})-0?(\d{1,2}).*/, '$2 $3 $1').split(' ');
@@ -32,19 +31,3 @@ export default function dateFormatter(date, format){
     }
     return `${month} ${day}, ${year}`
 }
-
-/**
-function takes in three arguments (date, format, time)
-    The date, which needs to be formatted like 2012-04-23T18:25:43.511Z
-
-    The format, 
-    in => out 
-    '-' => 1-1-2022
-    '.' => 1.1.2022
-    '/' => 1/1/2022
-    'a' => Jan, 1st, 2022
-
-    The time, needs to be passed a boolean
-        if true, it will return the time with 'at 00:00' behind the date.
-
- */

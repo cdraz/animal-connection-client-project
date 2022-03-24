@@ -12,27 +12,24 @@ const multerS3 = require("multer-s3");
 const aws = require("aws-sdk");
 const app = express();
 const s3 = new aws.S3({
-  accessKeyID: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyID: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 // const upload = multer({ dest: 'public/uploads/' })
 
 //Multer s3 upload
 const upload = multer({
-  storage: multerS3({
+    storage: multerS3({
     s3: s3,
     bucket: "starpet-prime",
     metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname });
-      
+        cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      console.log("Multer file is ", file);
-
-      cb(null, Date.now() + `--` + file.originalname)
+        cb(null, Date.now() + `--` + file.originalname)
     },
-  }),
+    }),
 });
 
 
@@ -52,7 +49,7 @@ router.get('/',  rejectUnauthenticated,(req, res) => {
 
         ${sqlQuery.sqlString};`
     pool.query(queryText, sqlQuery.sqlParams)
-        .then(dbRes => { res.send(dbRes.rows); console.log(dbRes.rows) })
+        .then(dbRes => { res.send(dbRes.rows)})
         .catch((err) => {
             console.log('User registration failed: ', err);
             res.sendStatus(500);
@@ -163,11 +160,6 @@ router.get('/:id', rejectUnauthenticated, async (req, res) => {
 
 router.post('/',upload.single("selectedFile"),rejectUnauthenticated, async (req, res, next) => {
     try {
-        console.log('#######################################', req.body);
-        console.log("req.body.name is", req.body.name);
-        console.log("req.file is", req.file);
-    
-        
         // Write SQL query
         const queryText = `
         INSERT INTO "animals"
@@ -334,7 +326,6 @@ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
 });
 
 function queryGen(qFilter) {
-    console.log('#####################', qFilter);
     let paramNumber = 1;
     let sqlQuery = { // will contain sqlString, plus params
         sqlString: '',
@@ -433,7 +424,6 @@ function queryGen(qFilter) {
         sqlQuery.sqlParams.push(qFilter.maxW);
         paramNumber++;
     }
-    console.log(sqlQuery);
     return sqlQuery
 }
 

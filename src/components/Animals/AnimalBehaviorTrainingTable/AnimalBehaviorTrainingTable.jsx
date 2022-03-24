@@ -58,7 +58,6 @@ function AnimalBehaviorTrainingTable() {
         console.log("I was closed by the timer");
       }
     });
-    console.log("in updateAnimal");
     dispatch({
       type: "UPDATE_ANIMAL_TRAINING",
       payload: {

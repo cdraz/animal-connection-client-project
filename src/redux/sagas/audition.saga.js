@@ -15,7 +15,6 @@ function* addAudition(action) {
 // Delete an audition
 function* deleteAudition(action) {
     try {
-        console.log('IN DELETE AUDITION');
         const response = yield axios.delete(`/api/audition/${action.payload.id}`);
         yield put({ type: 'FETCH_SELECTED_ANIMAL', payload: {id: action.payload.animalsId }});
     }

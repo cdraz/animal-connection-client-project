@@ -22,7 +22,6 @@ function JobSearchBar() {
     })
     function filterAnimals(event){
         event.preventDefault();
-        console.log(qFilter);
         dispatch({ type: 'FILTER_JOBS', payload: qFilter });
     }
     return (
