@@ -110,7 +110,7 @@ function contactForm() {
           onChange={(evt) => handleChange(evt, "secondaryNumber")}
         />
 
-        <TextField select label="Textable" onChange={handleChange}>
+        <TextField select label="Textable" onChange={(evt) => handleChange(evt, "text")}>
           <MenuItem value={true}>Yes</MenuItem>
           <MenuItem value={false}>No</MenuItem>
         </TextField>
