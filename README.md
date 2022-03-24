@@ -35,8 +35,6 @@ This project should be able to run in your favorite IDE. I used VS code while bu
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
 
 ### Installation
 
@@ -57,9 +55,7 @@ If you would like to name your database something else, you will need to change 
 
 Once everything is installed and running it should open in your default browser - if not, navigate to http://localhost:3000/#/.
 
-This app was designed to be easy to use.
-
-
+Video walkthrough of application usage: https://www.youtube.com/watch?v=HRonNTkScl0
 
 ## Lay of the Land
 
