@@ -59,7 +59,7 @@ Video walkthrough of application usage: https://www.youtube.com/watch?v=HRonNTkS
 
 ## Lay of the Land
 
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
+
 
 
 ## Deployment
