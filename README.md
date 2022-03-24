@@ -13,8 +13,7 @@
 
 ## Description
 
-
-
+Star Pet is a searchable database that seemlessly links animal actors, their owners, other contacts, and current and former animal acting jobs. This was developed to be used internally by The Animal Connection, which is a full service animal actor casting company that has providing trained animal actors to the Midwest's film, television, and advertising communities since 1984.
 
 ## Built With
 
