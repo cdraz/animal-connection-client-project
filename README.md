@@ -1,4 +1,4 @@
-![Repo Size](https://img.shields.io/github/languages/code-size/JustinVanderSchaaf/star-pet.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/JustinVanderSchaaf/star-pet.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/JustinVanderSchaaf/star-pet.svg?style=for-the-badge&social) ![Stars](https://img.shields.io/github/stars/JustinVanderSchaaf/star-pet.svg?style=for-the-badge)
+![Repo Size](https://img.shields.io/github/languages/code-size/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/TheAnimalConnection/star-pet.svg?style=for-the-badge&social) 
 
 # Star Pet
 
