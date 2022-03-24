@@ -1,4 +1,4 @@
-![Repo Size](https://img.shields.io/github/languages/code-size/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/TheAnimalConnection/star-pet.svg?style=for-the-badge&social) 
+![Repo Size](https://img.shields.io/github/languages/code-size/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/TheAnimalConnection/star-pet.svg?style=for-the-badge)
 
 # Star Pet
 
@@ -59,14 +59,7 @@ If you would like to name your database something else, you will need to change 
 Once everything is installed and running it should open in your default browser - if not, navigate to http://localhost:3000/#/.
 
 This app was designed to be easy to use.
-- once inside you will see a list off every project in the application
-- toggle the projects to before and after as well as filter the projects by username and category
-- clicking create new project will bring you to a form to start the creation event.
-- when you click submit for new project you will be redirected to the main page with the newest project at the top.
-- you can click into the projects from main page to view others or view/edit your own
-- inside the project you have the ability to upload new photos, delete photos, set your before/after pics or delete the entire project
-- There is also tabs at the top of the project page that lets you navigate between pages to look at you summary page just click the tab
-- In the summary tab you can view or edit you own table that hold the information on the materials needed for the project
+
 
 
 ## Lay of the Land
