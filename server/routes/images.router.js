@@ -27,7 +27,6 @@ const upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     key: function (req, file, cb) {
-      console.log("Multer file is ", file);
 
       cb(null, Date.now() + `--` + file.originalname)
     },
@@ -60,9 +59,6 @@ router.put(
   upload.single("selectedFile"),
   rejectUnauthenticated,
   (req, res, next) => {
-    console.log("req.body is", req.body);
-    console.log("req.file is", req.file);
-
     const queryText = `UPDATE "animals"
       SET image = $1
       WHERE id = $2

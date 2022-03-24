@@ -15,9 +15,7 @@ function* fetchContacts(action) {
 
 function* addContacts(action) {
     try {
-        console.log('contact post action.payload', action.payload);
-        
-        const response = yield axios.post(`/api/contact`, action.payload);
+        yield axios.post(`/api/contact`, action.payload);
         yield put({ type: 'FETCH_CONTACTS',});
     }
     catch (error) {
@@ -47,7 +45,6 @@ function* deleteContact(action) {
 
 function* saveChanges(action){
     try{
-        
     yield axios.put(`/api/contact`, action.payload);
     } catch (error) {
         console.log('UPDATE contact failed', error);
@@ -57,8 +54,7 @@ function* saveChanges(action){
 // Add an contact to a job
 function* addContactToJob(action) {
     try {
-        const response = yield axios.post(`/api/contact/job`, action.payload);
-        console.log('addContact to job action.payload is:', action.payload);
+        yield axios.post(`/api/contact/job`, action.payload);
         yield put({ type: 'FETCH_SELECTED_CONTACT', payload: { id: action.payload.contactId }});
     }
     catch (error) {

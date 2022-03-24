@@ -44,7 +44,6 @@ function AnimalSearchBar() {
     })
     function filterAnimals(event){
         event.preventDefault();
-        console.log(qFilter);
         dispatch({
             type: "FILTER_ANIMALS",
             payload: qFilter,
@@ -108,7 +107,6 @@ function AnimalSearchBar() {
                         filterSelectedOptions 
                         onChange={(evt, opt) => {
                             setqFilter({...qFilter, type: opt.id});
-                            console.log(qFilter);
                         }}
                         renderInput={(params) => (
                             <TextField
@@ -127,7 +125,6 @@ function AnimalSearchBar() {
                             filterSelectedOptions
                             onChange={(evt, opt) => {
                                 setqFilter({...qFilter, breed: opt.toLowerCase()});
-                                console.log(qFilter);
                             }}
                             renderInput={(params) => (
                                 <TextField

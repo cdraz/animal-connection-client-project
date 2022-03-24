@@ -13,14 +13,12 @@ function InfoPage() {
   //Event handlers
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
-    console.log();
   };
 
 
   //handing submit of form and file upload
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log("SELECTED FILE IS", selectedFile);
     const formData = new FormData();
     formData.append("selectedFile", selectedFile);
 

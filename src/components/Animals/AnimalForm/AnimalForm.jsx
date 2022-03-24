@@ -14,6 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
+import MenuItem from '@mui/material/MenuItem';
 
 //master list of dog breeds
 import dogBreeds from "../DogBreedList";
@@ -82,7 +83,6 @@ function AnimalForm() {
 
   const handleChange = (event) => {
     setNewAnimal({ ...newAnimal, [event.target.name]: event.target.value });
-    console.log(newAnimal);
   };
   const handleBoolChange = (event) => {
     newAnimal[event.target.name] = event.target.checked;
@@ -224,8 +224,12 @@ function AnimalForm() {
                     id="animal-sex-input"
                     label="Sex"
                     onChange={(event) => handleChange(event)}
-                    value={newAnimal.sex}
-                  />
+                    // value={newAnimal.sex}
+                    select
+                  >
+                    <MenuItem value='male'>Male</MenuItem>
+                    <MenuItem value='female'>Female</MenuItem>
+                  </TextField>
                   <div style={{ display: "inline-flex" }}>
                     <TextField
                       InputLabelProps={{

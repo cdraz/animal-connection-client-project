@@ -14,9 +14,7 @@ function* fetchContacts() {
 
 function* addContacts(action) {
     try {
-        console.log('contact post action.payload',action.payload);
-        
-        const response = yield axios.post(`/api/contact`, action.payload);
+        yield axios.post(`/api/contact`, action.payload);
         yield put({ type: 'FETCH_CONTACTS',});
     }
     catch (error) {

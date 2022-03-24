@@ -41,7 +41,6 @@ const {
     const queryParams = [
         req.params.id
     ];
-    console.log('in delete audition', req.body, req.params);
     pool
       .query(queryText, queryParams)
       .then((dbRes) => {

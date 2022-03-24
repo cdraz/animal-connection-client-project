@@ -13,7 +13,6 @@ router.get("/", rejectUnauthenticated,(req, res) => {
   let queryText = `
         SELECT * FROM "jobs"
         ${sqlQuery.sqlString};`;  
-  console.log(queryText);
   pool
     .query(queryText, sqlQuery.sqlParams)
     .then((dbRes) => res.send(dbRes.rows))
@@ -49,9 +48,6 @@ router.post("/", rejectUnauthenticated, (req, res, next) => {
  */
 
 router.get("/:id", rejectUnauthenticated, (req, res) => {
-  console.log("req.params is", req.params);
-
-
   const queryText = `SELECT "jobsJunction".*, animals.image,animals."name" ,contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber",contacts.email
       FROM "jobsJunction"
     JOIN "animals" 
@@ -67,7 +63,6 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
     })
     .catch((err) => {
       console.error("err in get jobDetails selected job cards", err);
-      console.log("req.params.id", req.params);
     });
 });
 
@@ -75,8 +70,6 @@ router.get("/:id", rejectUnauthenticated, (req, res) => {
  * Get Job contacts for jobcontacts table by id of job
  */
 router.get("/contacts/:id", rejectUnauthenticated, (req, res) => {
-  console.log("req.params of get job contacts by  id", req.params);
-
   const queryText = `SELECT "jobContacts".*, contacts."firstName",contacts."lastName",contacts."primaryNumber",contacts."secondaryNumber"
       FROM "jobContacts"
     JOIN "contacts" 
@@ -90,7 +83,6 @@ router.get("/contacts/:id", rejectUnauthenticated, (req, res) => {
     })
     .catch((err) => {
       console.error("err in get jobDetails selected job cards", err);
-      console.log("req.params.id", req.params);
     });
 });
 
@@ -98,8 +90,6 @@ router.get("/contacts/:id", rejectUnauthenticated, (req, res) => {
  * Get  get selected job details by job ID for top of selected job page
  */
 router.get("/selectedJob/:id", rejectUnauthenticated, (req, res) => {
-  console.log("req.params of selected job details is", req.params.id);
-
   const queryText = `SELECT * FROM "jobs"
   WHERE "id" = $1 ORDER BY "id"
   `;
@@ -111,7 +101,6 @@ router.get("/selectedJob/:id", rejectUnauthenticated, (req, res) => {
     })
     .catch((err) => {
       console.error("err in get jobDetails selected job top of page ", err);
-      console.log("req.params.id", req.params);
     });
 });
 
@@ -240,7 +229,7 @@ router.delete("/pet/:id", rejectUnauthenticated, (req, res) => {
 module.exports = router;
 
 function queryGen(qFilter) {
-  console.log("#####################", qFilter);
+  console.log("#####################");
   let paramNumber = 1;
 
   let sqlQuery = {
@@ -281,6 +270,5 @@ function queryGen(qFilter) {
     sqlQuery.sqlParams.push(qFilter.maxD);
     paramNumber++;
   }
-  console.log(sqlQuery);
   return sqlQuery;
 }
