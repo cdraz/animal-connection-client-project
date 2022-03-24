@@ -1,6 +1,6 @@
 ![Repo Size](https://img.shields.io/github/languages/code-size/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/TheAnimalConnection/star-pet.svg?style=for-the-badge) ![FORKS](https://img.shields.io/github/forks/TheAnimalConnection/star-pet.svg?style=for-the-badge&social) 
 
-# Zoetrope Gallery
+# Star Pet
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@
 
 ## Description
 
-_Duration: 10 Day Sprint_
+
 
 
 ## Built With
@@ -48,13 +48,9 @@ Before you get started, make sure you have the following software installed on y
 5. Open VS Code (or editor of your choice) and open the folder
 6. In the terminal of VS Code run `npm install` to install all dependencies
 7.  Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
 8. Create a database named `animal_connections` in PostgresSQL
 If you would like to name your database something else, you will need to change `animal_connections` to the name of your new database name in `server/modules/pool.js`
-9. The queries in the database.sql file are set up to create all the necessary tables that you need. Copy and paste those queries in the SQL query of the database
+9. The queries in the database.sql file are set up to create all the necessary tables that you need, as well as a dummy data table to test the app. Copy and paste those queries in the SQL query of the database. If this is going to production, leave out the dummy data.
 10. Run `npm run server` in your VS Code terminal
 11. Open a second terminal and run `npm run client`
 
@@ -63,7 +59,6 @@ If you would like to name your database something else, you will need to change 
 Once everything is installed and running it should open in your default browser - if not, navigate to http://localhost:3000/#/.
 
 This app was designed to be easy to use.
-- log in or register as a new user to enter the application
 - once inside you will see a list off every project in the application
 - toggle the projects to before and after as well as filter the projects by username and category
 - clicking create new project will bring you to a form to start the creation event.
@@ -80,64 +75,17 @@ There are a few videos linked below that show a walkthrough the client and sever
 
 
 ## Deployment
+- Login Credentials for Heroku have been provided in the hand off document.
+- If you need make changes you wish to push to the deployed app, you must login, go into the pet-star section, go to the deploy tab, and then manually deploy. You can reconfigure this to redeploy automatically if you wish, which is on the same page.
+- Environment variables are kept on Heroku in the Settings tab, just click the Reveal Config Vars button
+- To set up the DB, we used Postico, just plug the information from Heroku into a new favorite. The Information for this can be found in the Resources tab, by clicking the Postgres add on. From there it will bring you to a new page where you will go into the settings tab and click view credentials. 
 
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- If you'd like to create new users (also a hacky way to change password) you must:
+1. Go into the user router
+1. Uncomment the route
+1. Push changes and redeploy app
+1. Register User
+1. Comment out the route back in VSCode
+1. Push changes
+1. Redeploy
+- There is probably a better way to do this, but that's what 
